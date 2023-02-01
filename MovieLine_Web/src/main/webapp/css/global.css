@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300&display=swap');
+
+body {
+	margin: 0;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+footer{
+	text-align:center;
+}
+article{
+	margin: 0;
+	margin-top: 98px;
+	/* 將footer擠到下方 */
+	min-height: 75vh;
+}
+
+.menu {
+	background-color: #8a00fc;
+	height: 46px;
+	width: 100%;
+	/* 讓menu停在最上方*/
+	position: fixed;
+	top: 0px;
+	left: 0;
+	z-index: 1;
+}
+
+.menu_dark_mode_button {
+	width: 24px;
+	height: 24px;
+	float: right;
+	margin: 11px;
+	cursor: pointer;
+}
+
+.nav{
+	top: 46px;
+	left: 0;
+	height: 52px;
+	width: 100%;
+	background-color: #313235;
+	position: fixed;
+	border-bottom-color: rgb(220, 219, 230);
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	z-index: 1;
+}
+
+.nav_list_a{
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.nav_list{
+	margin: 0;
+	list-style: none;
+}
+
+.nav_list_item{
+	
+	/* background-color: #1175b4; */
+	float: left;
+	margin: 9px 0px;
+	padding: 5px;
+	border-left: 1px solid white;
+	/* cursor: pointer; */
+}
+
+.nav_list_last_item{
+	border-right: 1px solid white;
+}
+
+.form_input--lightmode {
+	width: 269px;
+	height: 25px;
+	border: 1px solid #DADCE0;
+	border-radius: 6px;
+	padding: 13px 15px;
+	font-size: 18px;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+.form_input_box_show_password_button{
+    width: 23px;
+    height: 23px;
+    padding: 15px;
+    position: absolute;
+    top: 0;
+    right: 0;
+	border-radius: 6px;
+}
+.form_select--lightmode {
+	width: 301px;
+	height: 53px;
+	padding: 13px 15px;
+	border: 1px solid #DADCE0;
+	border-radius: 6px;
+	font-size: 18px;
+}
+
+.clear {
+	clear: both;
+}

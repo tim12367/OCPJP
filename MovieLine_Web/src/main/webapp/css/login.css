@@ -1,0 +1,115 @@
+@charset "UTF-8";
+form {
+	border: 1px solid #E8E9EC;
+	width: 370px;
+	height: 518px;
+	margin: 150px auto auto auto;
+	border-radius: 6px;
+	padding: 48px 40px 36px 40px;
+}
+
+.form_input_box {
+	width: 100%;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.form_input_password_box{
+    /* 讓showpassword定位 */
+    position: relative;
+}
+.form_input_box_capcha_image{
+    width: 160px;
+    height: 75px;
+}
+
+h1, h3 {
+	text-align: center;
+}
+
+.forget_and_remember_box {
+	margin-bottom: 40px;
+}
+
+.forget_and_remember_box_elememt {
+	display: inline-block;
+	cursor: pointer;
+	height: 1em;
+}
+
+.forget_and_remember_button {
+	border: 0px;
+	background-color: #ffffff;
+	color: #4056e7;
+	float: right;
+    height: 2em;
+}
+
+.forget_and_remember_hint {
+	width: 58%;
+	cursor: default;
+	color: #d54616;
+	text-align: center;
+}
+
+.submit_button {
+	width: 368px;
+	height: 44px;
+	font-size: 1.5em;
+	background-color: #693ce0;
+	border-radius: 6px;
+	cursor: pointer;
+	border: 0px;
+	color: #ffffff;
+	font-family: 'gotham ssm';
+	margin: auto;
+}
+
+.submit_button:hover {
+	transform: scale(1.1, 1.1);
+	transition: transform 1s;
+	opacity: 1;
+}
+
+
+
+@media ( max-width : 1200px) {
+	form {
+		border: 0px;
+		margin: 46px auto auto auto;
+	}
+}
+
+@media ( max-width : 370px) {
+	form {
+		border: 0px;
+		width: 100%;
+		height: 100%;
+		margin: 0px auto;
+		padding: 0px;
+        
+	}
+	.form_input--lightmode {
+		width: 80%;
+		padding: 13px 15px;
+	}
+	.submit_button {
+		width: 100%;
+		margin: auto;
+	}
+	.submit_button:hover {
+		transform: scale(1, 1);
+	}
+	.forget_and_remember_hint {
+		width: 55%;
+		height: 1em;
+	}
+    .form_input_password_box{
+		width: calc(80% + 32px);;
+    }
+    .form_input--moblie{
+        width: 80vw;
+    }
+}

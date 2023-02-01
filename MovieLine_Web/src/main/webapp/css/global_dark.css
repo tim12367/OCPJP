@@ -1,0 +1,16 @@
+@charset "UTF-8";
+.body--darkmode {
+	background-color: #282a36;
+	color: #e8eaed;
+}
+
+.form_select--darkmode {
+	background-color: #353535;
+	color: #e8eaed;
+	border-color: #6271a1;
+}
+.form_input--darkmode {
+	background-color: #353535;
+	color: #e8eaed;
+	border-color: #6271a1;
+}
