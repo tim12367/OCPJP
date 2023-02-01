@@ -31,27 +31,25 @@ h1, h3 {
 
 .forget_and_remember_box {
 	margin-bottom: 40px;
+	display: flex;
 }
 
 .forget_and_remember_box_elememt {
-	display: inline-block;
 	cursor: pointer;
-	height: 1em;
+	text-align: center;
+	margin: auto 0;
+}
+
+.forget_and_remember_hint {
+	cursor: default;
+	color: #d54616;
+	margin: auto;
 }
 
 .forget_and_remember_button {
 	border: 0px;
 	background-color: #ffffff;
 	color: #4056e7;
-	float: right;
-    height: 2em;
-}
-
-.forget_and_remember_hint {
-	width: 58%;
-	cursor: default;
-	color: #d54616;
-	text-align: center;
 }
 
 .submit_button {
@@ -104,7 +102,6 @@ h1, h3 {
 	}
 	.forget_and_remember_hint {
 		width: 55%;
-		height: 1em;
 	}
     .form_input_password_box{
 		width: calc(80% + 32px);;
