@@ -29,19 +29,24 @@ article{
 	display: flex;
 	align-items: center;
 }
-.menu_logo_img{
-	margin-left: 10px;
-	width: 30px;
-}
+
 .menu_search_form{
 	margin: 0 auto;
 }
 .menu_search_form_items{
 	font-family: 'Noto Sans TC', sans-serif;
 }
+
+.menu_logo_img{
+	margin-left: 10px;
+	width: 30px;
+}
+
 .menu_search_input{
 	background-color: #494851;
+	border-radius: 10px;
 }
+
 .menu_dark_mode_button {
 	width: 24px;
 	height: 24px;
