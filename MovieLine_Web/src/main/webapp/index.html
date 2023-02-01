@@ -1,47 +1,95 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">		
-		<title>一線影院 HOME</title>	
-		<meta name="viewport" content="width=device-width, initial-scale=0.9">
-		<link href='./css/global.css' rel="stylesheet">		
-		<style>
-			
-		</style>
-	</head>
-	<body>
-		<header>
-			<h1>
-				<a href='#'>一線影院</a> 
-				<sub>歡迎光臨</sub>
-			</h1>
-			<form id='searchForm'>
-				<input type='search' placeholder='請輸入查詢關鍵字'>
-				<input type='submit' value='搜尋'>			
-			</form>
-			<hr>
-		</header>
-		<nav>		
-			<a href='products_list.html'>逛書店</a> |
-			<a href='login.html'>登入</a> |
-			<a href='./register.html'>註冊</a> |
-			<hr>
-		</nav>
-		<article>			
-			<blockquote>-引述 -
-				XXXXXXXXX
-			</blockquote>
-			<p>
-			int i = 1;
-			</p>
-			<code>
-			int i = 1;<br>
-			int j = 1;
-			</code>
-		</article>
-		<footer>
-			<hr>
-			<div class='copyRightDiv'>非常好書&copy;版權所有 2023-01~</div>
-		</footer>
-	</body>
+<head>
+<meta charset="UTF-8">
+<title>一線影院 HOME</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/global.css" type="text/css" rel="stylesheet">
+<link href="css/home.css" type="text/css" rel="stylesheet">
+<style>
+
+</style>
+<link href="css/global_dark.css" type="text/css" rel="stylesheet">
+<script src="./jquery.js"></script>
+<script>
+	// for test
+	var InputPassword = 123456;
+	var InputUserName = "F123456789";
+	// for test
+	var darkModeFlag = true;
+	$(document).ready(init);
+	function init() {
+		if (localStorage) {
+			restoreData();
+			$("#submitBtn").click(saveHandler);
+			$("#dark_mode_button").click(darkModeHandler);
+		} else {
+			alert("不支援的瀏覽器!");
+			$("#hint").text("不支援的瀏覽器!");
+		}
+	}
+	function saveHandler() {
+		if ($("#remembermypassword")[0].checked) {
+			var username = $("#username").val();
+			localStorage.setItem("username", username);
+		} else {
+			localStorage.removeItem("username");
+		}
+	}
+	function restoreData() {
+		var getDarkModeFlag = localStorage.getItem("darkModeFlag");
+		//記住深色模式
+		if (getDarkModeFlag == "true") {
+			darkModeFlag = getDarkModeFlag;
+			darkModeHandler();
+		}
+	}
+
+	function darkModeHandler() {
+		if (darkModeFlag) {
+			$("body").addClass("body--darkmode");
+			$("#main_form :input:not([type=submit])").addClass("form_input--darkmode");
+			$("#dark_mode_button").attr("src",
+					"source/light_mode_FILL0_wght400_GRAD0_opsz48.svg");
+		} else {
+			$("body").removeClass("body--darkmode");
+			$("#main_form :input:not([type=submit])").removeClass("form_input--darkmode");
+			$("#dark_mode_button").attr("src",
+					"source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg");
+		}
+		localStorage.setItem("darkModeFlag", darkModeFlag);
+		darkModeFlag = !darkModeFlag;
+	}
+</script>
+</head>
+
+<body>
+	<header id="menu" class="menu">
+		<img class="menu_logo_img" src="source/movie_FILL0_wght400_GRAD0_opsz48.svg" alt="Movie_Line_Logo">
+		<form class='menu_search_form'>
+			<input type='search' class="menu_search_input menu_search_form_items" placeholder='請輸入查詢關鍵字'>
+			<input type='submit' class="menu_search_form_items" value='搜尋'>			
+		</form>
+		<img id=dark_mode_button class="menu_dark_mode_button"
+			src="source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg"
+			alt="dark_mode_button" draggable="false">
+	</header>
+	<nav class="nav">
+		<ul class="nav_list">
+			<li class="nav_list_item"><a href=# class="nav_list_a">Home</a></li>
+			<li class="nav_list_item"><a href="login.html" class="nav_list_a">登入</a></li>
+			<li class="nav_list_item"><a href="register.html" class="nav_list_a">註冊</a></li>
+			<li class="nav_list_item nav_list_last_item"><a href=# class="nav_list_a">Support</a></li>
+		</ul>
+	</nav>
+	<article>
+		
+	</article>
+	<footer>
+		<hr>
+			<div class='copyRightDiv'>一線影院&copy;2023-01~</div>
+	</footer>
+	
+</body>
+
 </html>
