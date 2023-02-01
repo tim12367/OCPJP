@@ -51,10 +51,13 @@ article{
 }
 .menu_search_input:hover{
 	border-radius: 5px;
+	box-shadow: 2px 2px 5px black;
 }
 .menu_search_input:focus{
 	border-radius: 5px;
+	box-shadow: 2px 2px 5px black;
 }
+
 .menu_dark_mode_button {
 	width: 24px;
 	height: 24px;
