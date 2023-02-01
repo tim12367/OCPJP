@@ -39,8 +39,8 @@ public class Product {
 			this.id = id;
 		} else {
 //			System.err.println("產品編號要大於0" + id + "不正確");
-			// TODO: 第13章後要改成throw RuntimeException
-			String msg = String.format("產品編號必須大於0 : %d 不正確",id);
+			//  第13章後要改成throw RuntimeException
+			String msg = String.format("產品編號必須大於0:%s 不正確",id);
 			throw new MLInvalidDataException(msg);
 		}
 
@@ -54,8 +54,10 @@ public class Product {
 		if (name != null && name.length() > 0) {
 			this.name = name;
 		} else {
-			System.err.println("產品名稱必須大於一個字元");
-			// TODO: 第13章後要改成throw RuntimeException
+//			System.err.println("產品名稱必須大於一個字元");
+			// 第13章後要改成throw RuntimeException
+			String msg = String.format("產品名稱必須大於一個字元:%s 不正確",name);
+			throw new MLInvalidDataException(msg);
 		}
 
 	}
@@ -73,8 +75,10 @@ public class Product {
 		if (unitPrice >= 0) {
 			this.unitPrice = unitPrice;
 		} else {
-			System.err.println("產品定價必須>=0 " + unitPrice + "不正確");
-			// TODO: 第13章後要改成throw RuntimeException
+//			System.err.println("產品定價必須>=0 " + unitPrice + "不正確");
+			//  第13章後要改成throw RuntimeException
+			String msg = String.format("產品定價必須>=0 : %s 不正確",unitPrice);
+			throw new MLInvalidDataException(msg);
 		}
 
 	}
@@ -88,7 +92,9 @@ public class Product {
 			this.stock = stock;
 		} else {
 			System.err.println("庫存必須大於0");
-			// TODO: 第13章後要改成throw RuntimeException
+			//第13章後要改成throw RuntimeException
+			String msg = String.format("庫存必須大於0 : %s 不正確",stock);
+			throw new MLInvalidDataException(msg);
 		}
 
 	}
