@@ -7,10 +7,10 @@ public class TestProduct {
 
 	public static void main(String[] args) {
 		Product p = new Product();
-		Customer c;
+//		Customer c;
 		p.setId(-1);
-		p.setName("JAVA 7 教學手冊第五版");
-		p.setUnitPrice(650);
+		p.setName(null);
+		p.setUnitPrice(-1);
 		
 		System.out.println(p);
 		System.out.println("*************以下為p2**************");
