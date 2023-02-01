@@ -36,6 +36,12 @@ article{
 .menu_search_form{
 	margin: 0 auto;
 }
+.menu_search_form_items{
+	font-family: 'Noto Sans TC', sans-serif;
+}
+.menu_search_input{
+	background-color: #494851;
+}
 .menu_dark_mode_button {
 	width: 24px;
 	height: 24px;
