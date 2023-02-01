@@ -258,7 +258,7 @@ public class Customer {
 	private static final int MIN_AGE = 12;
 
 	public void setBirthday(LocalDate birthday) {
-		if (birthday != null && getAge(birthday) >= 12) {
+		if (birthday != null && getAge(birthday) >= MIN_AGE) {
 			this.birthday = birthday;
 		} else {
 			String msg = String.format("年齡必須大於:%d歲 你輸入的生日:%s\n", MIN_AGE, birthday);
