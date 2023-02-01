@@ -11,7 +11,7 @@ footer{
 }
 article{
 	margin: 0;
-	margin-top: 98px;
+	padding-top: 99px;
 	/* 將footer擠到下方 */
 	min-height: 75vh;
 }
