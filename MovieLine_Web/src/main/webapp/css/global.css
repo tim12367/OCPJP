@@ -13,7 +13,7 @@ article{
 	margin: 0;
 	padding-top: 99px;
 	/* 將footer擠到下方 */
-	min-height: 75vh;
+	min-height: 85vh;
 }
 
 .menu {
@@ -44,9 +44,17 @@ article{
 
 .menu_search_input{
 	background-color: #494851;
-	border-radius: 10px;
+	border-radius: 20px;
+	border: 0;
+    padding: 5px;
+    width: 20vw;
 }
-
+.menu_search_input:hover{
+	border-radius: 5px;
+}
+.menu_search_input:focus{
+	border-radius: 5px;
+}
 .menu_dark_mode_button {
 	width: 24px;
 	height: 24px;
@@ -78,13 +86,10 @@ article{
 }
 
 .nav_list_item{
-	
-	/* background-color: #1175b4; */
 	float: left;
 	margin: 9px 0px;
 	padding: 5px;
 	border-left: 1px solid white;
-	/* cursor: pointer; */
 }
 
 .nav_list_last_item{
