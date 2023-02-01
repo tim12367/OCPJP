@@ -2,7 +2,7 @@
 /* article{
 	margin: 0;
 } */
-form {
+.register_form {
 	margin: 46px auto auto auto;
 	width: 410px;
 	display: flex;
