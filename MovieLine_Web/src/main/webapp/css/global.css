@@ -25,12 +25,20 @@ article{
 	top: 0px;
 	left: 0;
 	z-index: 1;
+	/* flex */
+	display: flex;
+	align-items: center;
 }
-
+.menu_logo_img{
+	margin-left: 10px;
+	width: 30px;
+}
+.menu_search_form{
+	margin: 0 auto;
+}
 .menu_dark_mode_button {
 	width: 24px;
 	height: 24px;
-	float: right;
 	margin: 11px;
 	cursor: pointer;
 }
