@@ -66,9 +66,7 @@ h1, h3 {
 }
 
 .submit_button:hover {
-	transform: scale(1.1, 1.1);
-	transition: transform 1s;
-	opacity: 1;
+	box-shadow: 2px 2px 5px black;
 }
 
 
@@ -96,9 +94,6 @@ h1, h3 {
 	.submit_button {
 		width: 100%;
 		margin: auto;
-	}
-	.submit_button:hover {
-		transform: scale(1, 1);
 	}
 	.forget_and_remember_hint {
 		width: 55%;
