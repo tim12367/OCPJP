@@ -24,8 +24,8 @@
 		}
 		// TODO:兩次密碼打對才能送出
 
-		//設定生日最小值
-		minBirthdaySetting();
+		//設定生日最大值
+		maxBirthdaySetting();
 		// 查看密碼按鈕
 		$("#show_password_button").mousedown(showPasswordHandler);
 		$("#show_password_button").mouseup(hidePasswordHandler);
@@ -66,13 +66,15 @@
 		$("#show_password_button").attr("src","./source/visibility_off_FILL0_wght400_GRAD0_opsz48.svg");
 		$("#password").attr("type","password");
 	}
-	function minBirthdaySetting(){
+	function maxBirthdaySetting(){
 		var today = new Date();
 		var year_birthday = (today.getFullYear() - 12);
-		// if <10 加零在前面
-		var month_birthday = (((today.getMonth() + 1) < 10) ? ("0" + (today
-				.getMonth() + 1)) : (today.getMonth() + 1));
-		var day_birthday = (today.getDate());
+		// if 幾月日期 <10 加零在前面
+		var month_birthday = (((today.getMonth() + 1) < 10) ? 
+		("0" + (today.getMonth() + 1)) : (today.getMonth() + 1));
+		var day_birthday = ((today.getDate()) < 10) ? 
+		("0" + today.getDate()) : (today.getDay);
+
 		console.log("12歲的生日：" + year_birthday + "-" + month_birthday + "-"
 				+ day_birthday);
 		$("#birthday").attr("max",
@@ -101,7 +103,7 @@
 	</nav>
 	<!-- id, email, password, name, birthday, gender, address, phone, subscribed -->
 	<article>
-		<form id="main_form" class="register_form">
+		<form id="main_form" class="register_form" action="register_ok.html" method="POST">
 			<h1>建立帳號</h1>
 	
 			<!-- id -->
@@ -109,7 +111,7 @@
 				<label for="roc_id"><span class="required_mark"><b>*</b></span>身分證：</label>
 				<input type="text" id="roc_id" class="form_input--lightmode"
 					name="id" placeholder="請輸入中華民國身分證" required="required"
-					pattern="[a-zA-Z][1289][0-9]{8}">
+					pattern="[a-zA-Z][1289][0-9]{8}" maxlength="10">
 			</div>
 	
 			<!-- email -->
