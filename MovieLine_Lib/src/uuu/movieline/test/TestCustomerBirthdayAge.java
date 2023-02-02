@@ -26,7 +26,7 @@ public class TestCustomerBirthdayAge {
 //		int age = customer.getAge(bDate);
 //		
 //		if (age>=12) {
-			customer.setBirthday("2000-02-15");
+			customer.setBirthday("2000-2-15");
 //		}else{
 //			System.err.println("客戶生日必須輸入且須符合限制規則:必須年滿12歲");
 //		}
