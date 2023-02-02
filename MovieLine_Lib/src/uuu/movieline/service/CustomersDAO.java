@@ -59,7 +59,7 @@ class CustomersDAO {
 			pstmt.setString(3, c.getPassword());
 			pstmt.setString(4, c.getName());
 			pstmt.setString(5, c.getBirthday().toString());
-			pstmt.setString(6, String.valueOf(c.getBirthday()));
+			pstmt.setString(6, String.valueOf(c.getGender()));
 			
 			pstmt.setString(7, c.getAddress());
 			pstmt.setString(8, c.getPhone());

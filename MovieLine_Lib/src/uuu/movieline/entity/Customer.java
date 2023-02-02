@@ -89,7 +89,7 @@ public class Customer {
 		return email;
 	}
 
-	private static final String EMALL_PATTERN = "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$";
+	private static final String EMALL_PATTERN = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
 
 	public void setEmail(String email) {
 		if (email != null && email.matches(EMALL_PATTERN)) {
