@@ -39,4 +39,8 @@ birthday,gender,address,phone,blood_type,subscribed)
 	VALUES ('G177224855','test05@uuu.com','12345;lkj'
     ,'tom','1999-03-03','M','新北市中和區中山路','0912334444','O',0);
 
+INSERT INTO customers (id,email,password,name,
+birthday,gender,address,phone,blood_type,subscribed) 
+	VALUES (?,?,?,?,?,?,   ?,?,?,?);
+
 DELETE FROM customers WHERE id='A123123123';
