@@ -200,7 +200,11 @@ public class Customer {
 	public String getAddress() {
 		return address;
 	}
-
+/**
+ * 設定地址
+ *@param address
+ * 如果給null轉換成空字串
+ */
 	public void setAddress(String address) {
 		if (address != null) {
 			this.address = address;
@@ -222,12 +226,12 @@ public class Customer {
 	}
 
 	/**
-	 * allow null
-	 * 
+	 * not allow null
+	 * 若收到null改成空字串
 	 * @param phone
 	 */
 	public void setPhone(String phone) {
-		this.phone = phone;
+		this.phone = (phone==null)?"":phone;
 	}
 
 	/**
