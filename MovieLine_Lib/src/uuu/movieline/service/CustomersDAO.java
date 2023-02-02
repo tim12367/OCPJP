@@ -3,12 +3,13 @@ package uuu.movieline.service;
 import java.sql.*;
 
 import uuu.movieline.entity.Customer;
+import uuu.movieline.exception.MLException;
 
 class CustomersDAO {
 	private static final String SELECT_CUSTOMER_BY_ID = "SELECT id, email, password, name, birthday, gender, "
 			+ "address, phone, subscribed" + " FROM customers " + "WHERE id = ? OR email = ?";
 
-	Customer selectCustomerById(String idOrEmail) {
+	Customer selectCustomerById(String idOrEmail) throws MLException {
 		Customer c = null;
 
 		try (
@@ -40,7 +41,7 @@ class CustomersDAO {
 			}
 
 		} catch (SQLException e) {
-			throw new RuntimeException("查詢客戶時執行SQL失敗", e);
+			throw new MLException("查詢客戶時執行SQL失敗", e);
 		}
 		return c;
 	}
@@ -48,7 +49,7 @@ class CustomersDAO {
 	private static final String INSERT_CUSTOMER="INSERT INTO customers (id,email,password,name,"
 	+ "birthday,gender,address,phone,subscribed)"
 	+ " VALUES (?,?,?,?,?,?,   ?,?,?);";
-	void insert(Customer c){
+	void insert(Customer c) throws MLException{
 		try(
 				Connection connection = MySQLConnection.getConnection();//自己寫的 1,2
 				PreparedStatement pstmt = connection.prepareStatement(INSERT_CUSTOMER);
@@ -70,7 +71,7 @@ class CustomersDAO {
 			pstmt.executeUpdate();//沒有回傳結果的execute
 			
 		} catch (Exception e) {
-			throw new RuntimeException("新增客戶SQL失敗",e);
+			throw new MLException("新增客戶SQL失敗",e);
 		}
 	}
 }
