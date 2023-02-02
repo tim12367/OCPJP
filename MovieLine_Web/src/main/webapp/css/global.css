@@ -67,9 +67,15 @@ article{
 .menu_dark_mode_button {
 	width: 24px;
 	height: 24px;
-	margin: 11px;
+	padding: 8px;
+	margin: 3px;
 	cursor: pointer;
 	flex-shrink: 0;
+	border-radius: 50%;
+}
+
+.menu_dark_mode_button:hover {
+	box-shadow: 2px 2px 5px black;
 }
 
 .nav{
