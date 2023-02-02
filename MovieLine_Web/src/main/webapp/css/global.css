@@ -31,7 +31,8 @@ article{
 }
 
 .menu_search_form{
-	display: flex;
+	margin: 0 auto;
+	max-width: 342.67px;
 	align-items: center;
 	justify-content: center;
 	flex-shrink: 1;
@@ -48,12 +49,11 @@ article{
 }
 
 .menu_search_input{
+	width: calc(100% - 47px);
 	background-color: #494851;
 	border-radius: 20px;
 	border: 0;
     padding: 5px;
-    max-width: 300px;
-	flex-grow: 1;
 }
 .menu_search_input:hover{
 	border-radius: 5px;
