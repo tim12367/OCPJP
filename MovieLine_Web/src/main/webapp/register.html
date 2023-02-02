@@ -12,6 +12,7 @@
 <link href="css/global_dark.css" type="text/css" rel="stylesheet">
 <script src="./jquery.js"></script>
 <script>
+	var darkModeFlag = true;
 	$(document).ready(init);
 	function init() {
 		//從localStorage獲得資料
@@ -30,7 +31,7 @@
 		$("#show_password_button").mouseup(hidePasswordHandler);
 		$("#show_password_button").mouseleave(hidePasswordHandler);
 	}
-	var darkModeFlag = true;
+	
 	function restoreData() {
 		var getDarkModeFlag = localStorage.getItem("darkModeFlag");
 
