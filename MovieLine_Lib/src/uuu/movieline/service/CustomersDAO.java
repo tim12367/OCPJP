@@ -6,7 +6,7 @@ import uuu.movieline.entity.Customer;
 
 class CustomersDAO {
 	private static final String SELECT_CUSTOMER_BY_ID = "SELECT id, email, password, name, birthday, gender, "
-			+ "address, phone, blood_type, subscribed" + " FROM customers " + "WHERE id = ? OR email = ?";
+			+ "address, phone, subscribed" + " FROM customers " + "WHERE id = ? OR email = ?";
 
 	Customer selectCustomerById(String idOrEmail) {
 		Customer c = null;
@@ -46,8 +46,8 @@ class CustomersDAO {
 	}
 
 	private static final String INSERT_CUSTOMER="INSERT INTO customers (id,email,password,name,"
-	+ "birthday,gender,address,phone,blood_type,subscribed)"
-	+ " VALUES (?,?,?,?,?,?,   ?,?,?,?);";
+	+ "birthday,gender,address,phone,subscribed)"
+	+ " VALUES (?,?,?,?,?,?,   ?,?,?);";
 	void insert(Customer c){
 		try(
 				Connection connection = MySQLConnection.getConnection();//自己寫的 1,2
@@ -63,8 +63,8 @@ class CustomersDAO {
 			
 			pstmt.setString(7, c.getAddress());
 			pstmt.setString(8, c.getPhone());
-			pstmt.setString(9, null);//沒寫血型
-			pstmt.setBoolean(10,c.isSubscribed());
+//			pstmt.setString(9, null);//沒寫血型
+			pstmt.setBoolean(9,c.isSubscribed());
 			
 			//4.執行insert指令
 			pstmt.executeUpdate();//沒有回傳結果的execute
