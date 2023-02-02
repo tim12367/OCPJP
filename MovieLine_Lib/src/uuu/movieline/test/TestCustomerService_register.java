@@ -7,17 +7,23 @@ public class TestCustomerService_register {
 
 	public static void main(String[] args) {
 		Customer c = new Customer();
-		c.setId("A123456770");
-		c.setEmail("test770@uuu.com.tw");
-		c.setName("碧螺春");
+		c.setId("G177224855");
+		c.setEmail("test05@uuu.com");
+		c.setName("湯米");
 		c.setPassword("12345;lkj");
-		c.setBirthday("2000-05-05");
-		c.setGender('M');
+		c.setBirthday("2005-07-07");
+		c.setGender(Customer.UNKNOW);
 		
-//		System.out.println(c);//for test
+		c.setAddress("新北市中和區中山路信義路4段5號");
+		c.setPhone(null);
+		c.setSubscribed(false);
+		
 		CustomerService service = new CustomerService();
 		
 		service.register(c);
+		
+		c = service.login("G177224855", "12345;lkj");
+		System.out.println(c);
 	}
 
 }
