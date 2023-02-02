@@ -18,4 +18,12 @@ public class CustomerService {
 		
 		throw new RuntimeException("登入失敗!帳號或密碼不正確");
 	}
+
+	public void register(Customer c){
+		if(c==null){
+			throw new IllegalArgumentException("註冊會員時Customer物件不得為null");
+		}
+
+		dao.insert(c);
+	}
 }

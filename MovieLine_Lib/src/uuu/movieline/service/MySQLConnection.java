@@ -20,7 +20,7 @@ class MySQLConnection {
 				//2.建立Connection
 				Connection connection = 
 						DriverManager.getConnection(url, userid, pwd);
-				return connection;
+				return connection;//回傳connection
 			} catch (SQLException e) {
 				throw new RuntimeException("建立Database連線失敗",e);
 			}
