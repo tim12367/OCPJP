@@ -3,6 +3,7 @@ package uuu.movieline.test;
 import java.util.Scanner;
 
 import uuu.movieline.entity.Customer;
+import uuu.movieline.exception.MLException;
 import uuu.movieline.service.CustomerService;
 
 public class TestCustomerService_login {
@@ -17,8 +18,15 @@ public class TestCustomerService_login {
 		
 		//2.呼叫商業邏輯
 		CustomerService service = new CustomerService();
-		Customer c = service.login(id, password);
-		System.out.printf("%s登入成功\n",c);
+		Customer c;
+		try {
+			c = service.login(id, password);
+			
+			System.out.printf("%s登入成功\n",c);
+		} catch (MLException e) {
+			System.out.println("登入失敗");
+		}
+		
 	}
 
 }
