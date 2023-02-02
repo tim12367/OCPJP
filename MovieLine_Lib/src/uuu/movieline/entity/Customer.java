@@ -1,6 +1,7 @@
 package uuu.movieline.entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 
 import uuu.movieline.exception.MLInvalidDataException;
 
@@ -241,9 +242,19 @@ public class Customer {
 	 * @param birthDayString
 	 */
 	public void setBirthday(String birthDayString) {
-		LocalDate birthDate = LocalDate.parse(birthDayString);
-		// 2.呼叫this.setBirthday(轉換後的物件)集中檢查年齡限制
-		this.setBirthday(birthDate);
+		if(birthDayString == null || birthDayString.length() == 0 ) {
+			throw new IllegalArgumentException("客戶生日字串必須有值"+birthDayString);
+		}
+		birthDayString = birthDayString.replace("/", "-");//若有"/"換成"-"
+		try {//資料不符合ISO-8601會出錯
+			LocalDate birthDate = LocalDate.parse(birthDayString);
+			// 2.呼叫this.setBirthday(轉換後的物件)集中檢查年齡限制
+			this.setBirthday(birthDate);
+		} catch (DateTimeParseException ex) {
+			String msg = String.format("客戶生日日期不符合iso8601 :%s",birthDayString)  ;
+			throw new MLInvalidDataException(msg,ex);
+		}
+		
 	}
 
 	/**
