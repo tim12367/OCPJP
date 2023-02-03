@@ -35,6 +35,7 @@ public class TestPolymorphism {
 		}
 //		p = new Product(2,"java程式語言",650,21,"書本");
 //		System.out.println(p.getListPrice());//X getListPrice()在Product類別沒有定義
+		System.out.println(p instanceof Outlet?((Outlet)p).getListPrice():p.getUnitPrice());
 		System.out.println(((Outlet)p).getListPrice());//因為沒有檢查 當p參考到Product物件就會發生執行時期錯誤
 //		System.out.println(p.getDiscount());//X
 	}
