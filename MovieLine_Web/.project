@@ -3,6 +3,7 @@
 	<name>MovieLine_Web</name>
 	<comment></comment>
 	<projects>
+		<project>MovieLine_Lib</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
