@@ -149,7 +149,8 @@ public class Product {
 			return true;
 		if (obj == null) // 防止傳入null
 			return false;
-		if (this.getClass() != obj.getClass()) // 若原始型別相等才能比較
+		// 若原始型別相等才能比較 例如加入購物車 同商品但折扣不同
+		if (this.getClass() != obj.getClass()) 
 			return false;
 		Product other = (Product) obj; // 轉型
 		return id == other.id; // 比較id
