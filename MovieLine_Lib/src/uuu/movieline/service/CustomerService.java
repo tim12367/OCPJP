@@ -1,6 +1,7 @@
 package uuu.movieline.service;
 
 import uuu.movieline.entity.Customer;
+import uuu.movieline.exception.LoginFailException;
 import uuu.movieline.exception.MLException;
 
 public class CustomerService {
@@ -17,7 +18,7 @@ public class CustomerService {
 			return c;
 		}
 		
-		throw new MLException("登入失敗!帳號或密碼不正確");
+		throw new LoginFailException("登入失敗!帳號或密碼不正確");
 	}
 
 	public void register(Customer c) throws MLException{
