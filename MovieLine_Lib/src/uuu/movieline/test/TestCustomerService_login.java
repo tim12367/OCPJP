@@ -27,11 +27,24 @@ public class TestCustomerService_login {
 			System.out.printf("%s登入成功\n",c);
 		} catch (LoginFailException e) {
 			System.out.println("登入失敗");
+			Logger.getLogger("測試會員登入").log(
+					Level.SEVERE,e.getMessage()
+					);
 		} catch (MLException e) {
+			//三參數錯誤較詳細
+//			Logger.getLogger("測試會員登入").log(
+//					Level.SEVERE,e.getMessage()
+//					);
 			Logger.getLogger("測試會員登入").log(
 					Level.SEVERE,e.getMessage(),e
 					);
-		} 
+		} catch (Exception e) {
+//			只能抓到Exception 不能抓 Throwable 會抓到Error
+			System.out.println("系統錯誤!");
+			Logger.getLogger("測試會員登入").log(
+					Level.SEVERE,e.getMessage(),e
+					);
+		}
 		
 	}
 
