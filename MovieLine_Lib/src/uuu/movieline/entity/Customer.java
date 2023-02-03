@@ -240,6 +240,7 @@ public class Customer {
 	 * 2.呼叫this.setBirthday(轉換後的物件)集中檢查年齡限制
 	 * 
 	 * @param birthDayString
+	 * @exception 客戶生日日期不符合iso8601拋出 MLInvalidDataException
 	 */
 	public void setBirthday(String birthDayString) {
 		if(birthDayString == null || birthDayString.length() == 0 ) {
@@ -251,6 +252,7 @@ public class Customer {
 			// 2.呼叫this.setBirthday(轉換後的物件)集中檢查年齡限制
 			this.setBirthday(birthDate);
 		} catch (DateTimeParseException ex) {
+			//因為若用正則表達式處理複雜 且底層已經做好檢查 直接拋出錯誤即可
 			String msg = String.format("客戶生日日期不符合iso8601 :%s",birthDayString)  ;
 			throw new MLInvalidDataException(msg,ex);
 		}
