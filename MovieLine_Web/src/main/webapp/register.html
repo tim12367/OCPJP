@@ -44,13 +44,13 @@
 	function darkModeHandler() {
 		if (darkModeFlag) {
 			$("body").addClass("body--darkmode");
-			$("#main_form :input:not([type=submit])").addClass("form_input--darkmode");
+			$("#register_form :input:not([type=submit])").addClass("form_input--darkmode");
 			$("select").addClass("form_select--darkmode");
 			$("#dark_mode_button").attr("src",
 					"source/light_mode_FILL0_wght400_GRAD0_opsz48.svg");
 		} else {
 			$("body").removeClass("body--darkmode");
-			$("#main_form :input:not([type=submit])").removeClass("form_input--darkmode");
+			$("#register_form :input:not([type=submit])").removeClass("form_input--darkmode");
 			$("select").removeClass("form_select--darkmode");
 			$("#dark_mode_button").attr("src",
 					"source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg");
@@ -103,7 +103,7 @@
 	</nav>
 	<!-- id, email, password, name, birthday, gender, address, phone, subscribed -->
 	<article>
-		<form id="main_form" class="register_form" action="register_ok.html" method="POST">
+		<form id="register_form" class="register_form" action="register_ok.html" method="POST">
 			<h1>建立帳號</h1>
 	
 			<!-- id -->

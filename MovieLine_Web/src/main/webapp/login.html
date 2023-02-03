@@ -57,12 +57,12 @@
 	function darkModeHandler() {
 		if (darkModeFlag) {
 			$("body").addClass("body--darkmode");
-			$("#main_form :input:not([type=submit])").addClass("form_input--darkmode");
+			$("#login_form :input:not([type=submit])").addClass("form_input--darkmode");
 			$("#dark_mode_button").attr("src",
 					"source/light_mode_FILL0_wght400_GRAD0_opsz48.svg");
 		} else {
 			$("body").removeClass("body--darkmode");
-			$("#main_form :input:not([type=submit])").removeClass("form_input--darkmode");
+			$("#login_form :input:not([type=submit])").removeClass("form_input--darkmode");
 			$("#dark_mode_button").attr("src",
 					"source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg");
 		}
@@ -100,7 +100,7 @@
 		</ul>
 	</nav>
 	<article>
-		<form id="main_form" class="login_form" action="login_ok.html" method="POST">
+		<form id="login_form" class="login_form" action="login_ok.html" method="POST">
 	
 			<h1>登入</h1>
 			<h3>歡迎光臨一線影院</h3>
