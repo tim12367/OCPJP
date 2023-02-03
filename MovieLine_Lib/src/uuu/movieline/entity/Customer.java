@@ -51,7 +51,8 @@ public class Customer {
 		} else {
 			//System.err.println("客戶ID必須符合ROC ID規則" + id);
 			//第13章後要改成throw RuntimeException
-			throw new MLInvalidDataException("客戶ID必須符合ROC ID規則" + id);
+			String msg = String.format("客戶ID必須符合ROC ID規則: %s" ,id);
+			throw new MLInvalidDataException(msg);
 		}
 
 	}
