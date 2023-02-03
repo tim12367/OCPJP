@@ -1,6 +1,8 @@
 package uuu.movieline.test;
 
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import uuu.movieline.entity.Customer;
 import uuu.movieline.exception.MLException;
@@ -25,6 +27,9 @@ public class TestCustomerService_login {
 			System.out.printf("%s登入成功\n",c);
 		} catch (MLException e) {
 			System.out.println("登入失敗");
+			Logger.getLogger("測試會員登入").log(
+					Level.SEVERE,e.getMessage(),e
+					);
 		}
 		
 	}
