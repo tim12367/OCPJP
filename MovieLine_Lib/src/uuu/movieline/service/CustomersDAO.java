@@ -24,6 +24,7 @@ class CustomersDAO {
 			) {
 				// 5.處理rs
 				while (rs.next()) {
+					//!使用c前要建立物件 初始化在上方
 					c = new Customer();
 					c.setId(rs.getString("id"));
 					c.setEmail(rs.getString("email"));
