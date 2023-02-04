@@ -16,6 +16,8 @@
 	$(document).ready(init);
 	function init() {
 		if (localStorage) {
+			//偵測localStorage變化 同步darkMode
+			window.addEventListener('storage',darkModeHandler); 
 			restoreData();
 			$("#submitBtn").click(saveHandler);
 			$("#dark_mode_button").click(darkModeHandler);

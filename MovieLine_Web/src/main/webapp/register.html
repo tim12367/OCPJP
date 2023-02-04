@@ -17,6 +17,8 @@
 	function init() {
 		//從localStorage獲得資料
 		if (localStorage) {
+			//偵測localStorage變化 同步darkMode
+			window.addEventListener('storage',darkModeHandler); 
 			restoreData();
 			$("#dark_mode_button").click(darkModeHandler);
 		} else {
