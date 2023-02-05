@@ -32,6 +32,7 @@
 		$("#show_password_button").mousedown(showPasswordHandler);
 		$("#show_password_button").mouseup(hidePasswordHandler);
 		$("#show_password_button").mouseleave(hidePasswordHandler);
+		$("#show_password_button").on("touchstart",showPasswordHandler);//手機版按下
 	}
 	
 	function restoreData() {
