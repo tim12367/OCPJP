@@ -30,7 +30,8 @@
 		$("#show_password_button").mouseup(hidePasswordHandler);
 		$("#show_password_button").mouseleave(hidePasswordHandler);
 		$("#show_password_button").on("touchstart",showPasswordHandler);//手機版按下
-	}
+		$("#show_password_button").on("touchend",hidePasswordHandler);//手機版放開
+		}
 	function saveHandler() {
 		if ($("#remembermypassword")[0].checked) {
 			var username = $("#username").val();
