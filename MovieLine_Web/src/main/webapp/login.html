@@ -72,13 +72,15 @@
 		localStorage.setItem("darkModeFlag", darkModeFlag);
 		darkModeFlag = !darkModeFlag;
 	}
-	function showPasswordHandler(){
+	function showPasswordHandler(e){
 		$("#show_password_button").attr("src","source/visibility_FILL0_wght400_GRAD0_opsz48.svg");
 		$("#password").attr("type","text");
+		console.log(e.type);//for test
 	}
-	function hidePasswordHandler(){
+	function hidePasswordHandler(e){
 		$("#show_password_button").attr("src","./source/visibility_off_FILL0_wght400_GRAD0_opsz48.svg");
 		$("#password").attr("type","password");
+		console.log(e.type);//for test
 	}
 </script>
 </head>
