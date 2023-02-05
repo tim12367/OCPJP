@@ -57,7 +57,7 @@
 		}
 	}
 
-	function darkModeHandler() {
+	function darkModeHandler(e) {
 		if (darkModeFlag) {
 			$("body").addClass("body--darkmode");
 			$("#login_form :input:not([type=submit])").addClass("form_input--darkmode");
@@ -71,6 +71,8 @@
 		}
 		localStorage.setItem("darkModeFlag", darkModeFlag);
 		darkModeFlag = !darkModeFlag;
+		try {console.log(e.type);}//for test
+		catch(e){console.log("err");}
 	}
 	function showPasswordHandler(e){
 		$("#show_password_button").attr("src","source/visibility_FILL0_wght400_GRAD0_opsz48.svg");
