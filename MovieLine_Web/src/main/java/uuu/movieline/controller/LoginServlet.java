@@ -65,9 +65,10 @@ public class LoginServlet extends HttpServlet {
 			try {
 				Customer c = service.login(username, password);
 				//3.1 產生成功的html 回應 ,第九章
-				response.setContentType("text/html");
+				response.setContentType("text/html");//ContentType 或稱 MIME type 要依格式
 				response.setCharacterEncoding("UTF-8");
-				try (PrintWriter out = response.getWriter()) {
+				//若在getWriter前沒設定會變預設
+				try (PrintWriter out = response.getWriter()) {//defalt ISO-8859-1
 					out.println("<!DOCTYPE html>");
 					out.println("<html>");
 					out.println("<head>");
