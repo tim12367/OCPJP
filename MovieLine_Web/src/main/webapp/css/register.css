@@ -38,6 +38,11 @@ label {
 	margin-right: 200px;
 }
 
+.form_input_box_capcha_image{
+	height:53px;
+	width:149px;
+}
+
 .submit_button {
 	width: 400px;
 	height: 44px;
