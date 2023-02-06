@@ -69,9 +69,10 @@ class CustomersDAO {
 			pstmt.setBoolean(9,c.isSubscribed());
 			
 			//4.執行insert指令
-			pstmt.executeUpdate();//沒有回傳結果的execute
+			pstmt.executeUpdate();
+			//executeUpdate:沒有回傳結果的execute
 			
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			throw new MLException("新增客戶SQL失敗",e);
 		}
 	}
