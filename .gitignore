@@ -1,4 +1,5 @@
 MovieLine_Lib/bin/
 .vscode/
 MovieLine_Web/.vscode
-MovieLine_Web/build/classes/uuu/movieline/controller/LoginServlet.class
+MovieLine_Web/build/classes/uuu/movieline/controller/
+MovieLine_Web/build/classes/uuu/movieline/view/
