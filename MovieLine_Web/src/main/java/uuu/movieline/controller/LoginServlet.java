@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
     	//錯誤清單 宣告成上層型別較靈活 之後可改
     	List<String> errors = new ArrayList<String>();
     	
-    	//1.取得request中的form data(username,password,captcha)
+    	//1.取得request中的form data(username,password,captcha),第十章
     	String username = request.getParameter("username");
     	String password = request.getParameter("password");
     	String captcha = request.getParameter("captcha");
@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
 			CustomerService service = new CustomerService();
 			try {
 				Customer c = service.login(username, password);
-				//3.1 產生成功的html 回應
+				//3.1 產生成功的html 回應 ,第九章
 				response.setContentType("text/html");
 				response.setCharacterEncoding("UTF-8");
 				try (PrintWriter out = response.getWriter()) {
@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet {
 					out.println("<meta http-equiv=\"refresh\" content=\"5; url=./\">");
 					out.println("</head>");
 					out.println("<body>");
-					out.println("<h1>登入成功," + c.getName() + "</h1>");
+					out.println("<h1>登入成功," + c.getName() + ", 5秒後回登入畫面"+ "</h1>");
 					out.println("</body>");
 					out.println("</html>");
 				}
