@@ -112,7 +112,7 @@
 	</nav>
 	<!-- id, email, password, name, birthday, gender, address, phone, subscribed -->
 	<article>
-		<form id="register_form" class="register_form" action="register_ok.html" method="POST">
+		<form id="register_form" class="register_form" action="register.do" method="POST" autocomplete="on">
 			<h1>建立帳號</h1>
 	
 			<!-- id -->
@@ -192,7 +192,7 @@
 					class="form_input--lightmode"
 					placeholder="請輸入驗證碼(不分大小寫)"
 					autocomplete="off" required="required">
-					<img src="images/captcha.jpg" id=captcha_image class="form_input_box_capcha_image" draggable="false">
+				<img src="images/captcha.jpg" id=captcha_image class="form_input_box_capcha_image" draggable="false">
 			</div>
 			<!-- 送出按鈕 -->
 			<input type="submit" class="submit_button" value="註冊">
