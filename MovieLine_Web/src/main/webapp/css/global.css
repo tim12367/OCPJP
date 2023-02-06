@@ -65,7 +65,18 @@ article{
 	border-radius: 5px;
 	box-shadow: 2px 2px 5px black;
 }
-
+/*TODO:更改搜尋按鈕樣式*/
+.menu_search_form_button{
+	cursor: pointer;
+	/*width: 25px;
+	height: 25px;
+	margin: auto;
+	border: none;
+	padding: 5px;
+	background-size: cover;
+	background-color: transparent;
+	background-image:url("../source/search_FILL0_wght400_GRAD0_opsz48.svg") ;*/
+}
 .menu_dark_mode_button {
 	width: 24px;
 	height: 24px;
