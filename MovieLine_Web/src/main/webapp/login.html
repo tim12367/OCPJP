@@ -56,6 +56,8 @@
 			darkModeFlag = getDarkModeFlag;
 			darkModeHandler();
 		}
+		//點選驗證圖片更新
+		$("#captcha_image").click(refreshCaptcha);
 	}
 
 	function darkModeHandler(e) {
@@ -84,6 +86,9 @@
 		$("#show_password_button").attr("src","./source/visibility_off_FILL0_wght400_GRAD0_opsz48.svg");
 		$("#password").attr("type","password");
 		console.log(e.type);//for test
+	}
+	function refreshCaptcha() {
+		$("#captcha_image").attr("src","images/captcha.jpg?refresh=" + new Date());
 	}
 </script>
 </head>
@@ -131,7 +136,7 @@
 				<input type="text" id="captcha" name="captcha"
 					class="form_input--lightmode"
 					placeholder="請輸入驗證碼(不分大小寫)" autocomplete="off" required="required">
-				<img src="./source/captcha_login.png" class="form_input_box_capcha_image">
+				<img src="images/captcha.jpg" id=captcha_image class="form_input_box_capcha_image">
 			</div>
 	
 	
