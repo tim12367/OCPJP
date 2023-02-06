@@ -1,5 +1,6 @@
 package uuu.movieline.controller;
 
+import java.io.Console;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -42,12 +43,15 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
     	//錯誤清單 宣告成上層型別較靈活 之後可改
     	List<String> errors = new ArrayList<String>();
-    	
+    	//這邊欄位剛好都沒有中文編碼 若要獲得中文 需要設定這行
+    	//request.setCharacterEncoding("utf-8");
     	//1.取得request中的form data(username,password,captcha),第十章
     	String username = request.getParameter("username");
     	String password = request.getParameter("password");
     	String captcha = request.getParameter("captcha");
-    	
+    	System.out.println(captcha);//for test
+    	//去頭尾
+    	username = username.trim();
     	//檢查有無錯誤 可能網頁form沒給name
     	if(username==null ||username.length()==0) {
     		errors.add("必須輸入帳號或email");
