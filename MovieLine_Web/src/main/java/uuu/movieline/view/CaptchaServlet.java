@@ -45,10 +45,10 @@ public class CaptchaServlet extends HttpServlet {
         }
 
         //畫出認證文字
-        g.setFont(new Font("Arial", Font.PLAIN, 18));//設定字體
+        g.setFont(new Font("Arial Black", Font.PLAIN, 18));//設定字體
         g.setColor(getRandomColor(20, 140));
         //將認證文字畫到image中
-        g.drawString(rand, 16, 16);
+        g.drawString(rand, 10, 16);
         g.dispose();
         return image;
     } 
@@ -83,11 +83,12 @@ public class CaptchaServlet extends HttpServlet {
 		String captcha = "";
         Random random = new Random(); //import java.util.Random;
         for(int i=0;i<len;i++) {
-            int data = random.nextInt(36);
+            int data = random.nextInt(36);//0~35
+            //(0~9)+字碼0 : (10~35)-10+字碼A
             char ch = (char)(data<10?(data+'0'):(data-10+'A'));
             captcha+=ch;
         }
-        //System.out.println("captcha:" + captcha);
+        System.out.println("captcha:" + captcha);
 		
 //        HttpSession session = request.getSession();
 //        session.setAttribute(this.getServletName(), captcha);
