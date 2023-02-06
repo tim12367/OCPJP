@@ -102,10 +102,10 @@ public class LoginServlet extends HttpServlet {
 			out.println("<html>");
 			out.println("<head>");
 			out.println("<title>登入失敗</title>");
-			out.println("<meta http-equiv=\"refresh\" content=\"5; url=./login.html\">");
+			out.println("<meta http-equiv=\"refresh\" content=\"15; url=./login.html\">");
 			out.println("</head>");
 			out.println("<body>");
-			out.println("<h1>"+ errors +", 5秒後回登入畫面"+"</h1>");
+			out.println("<h1>"+ errors +", 15秒後回登入畫面"+"</h1>");
 			out.println("</body>");
 			out.println("</html>");
 		}
