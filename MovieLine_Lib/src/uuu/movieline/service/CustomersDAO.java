@@ -4,6 +4,7 @@ import java.sql.*;
 
 import uuu.movieline.entity.Customer;
 import uuu.movieline.exception.MLException;
+import uuu.movieline.exception.MLInvalidDataException;
 
 class CustomersDAO {
 	private static final String SELECT_CUSTOMER_BY_ID = "SELECT id, email, password, name, birthday, gender, "
@@ -59,6 +60,7 @@ class CustomersDAO {
 			pstmt.setString(1, c.getId());
 			pstmt.setString(2, c.getEmail());
 			pstmt.setString(3, c.getPassword());
+//			pstmt.setString(4, null);//fortest
 			pstmt.setString(4, c.getName());
 			pstmt.setString(5, c.getBirthday().toString());
 			pstmt.setString(6, String.valueOf(c.getGender()));
@@ -72,8 +74,16 @@ class CustomersDAO {
 			pstmt.executeUpdate();
 			//executeUpdate:沒有回傳結果的execute
 			
+		} catch (SQLIntegrityConstraintViolationException e) {//Duplicate key ,Not null給null值
+			if(e.getMessage().indexOf("customers.PRIMARY")>0) {
+				throw new MLInvalidDataException("新增客戶失敗,帳號已經重複註冊",e);				
+			}else if (e.getMessage().indexOf("customers.email_UNIQUE")>0) {
+				throw new MLInvalidDataException("新增客戶失敗,email已經重複註冊",e);
+			}else {
+				throw new MLInvalidDataException("新增客戶時執行SQL失敗",e);
+			}
 		} catch (SQLException e) {
-			throw new MLException("新增客戶SQL失敗",e);
+			throw new MLException("新增客戶時執行SQL失敗",e);
 		}
 	}
 }
