@@ -42,6 +42,7 @@ public class LoginServlet extends HttpServlet {
 			throws ServletException, IOException {
     	//錯誤清單 宣告成上層型別較靈活 之後可改
     	List<String> errors = new ArrayList<String>();
+    	
     	//這邊欄位剛好都沒有中文編碼 若要獲得中文 需要設定這行
     	//request.setCharacterEncoding("utf-8");
     	//1.取得request中的form data(username,password,captcha),第十章
