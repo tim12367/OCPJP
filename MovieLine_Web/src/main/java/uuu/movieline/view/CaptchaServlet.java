@@ -18,7 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class CaptchaServlet
  */
-@WebServlet("/images/captcha.jpg")
+//在DD檔設定不可以與檔案衝突
+//@WebServlet("/images/captcha.jpg")
 public class CaptchaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private int len = 6,  width = 16 * 2 + 12 * len,  height = 20;

@@ -8,6 +8,19 @@
 >
   <display-name>MovieLine_Web</display-name>
   <description>這是MovieLine的描述檔</description>
+  <!-- 1.定義物件 -->
+  <servlet>
+  	<servlet-name>LoginCaptchaServlet</servlet-name>
+  	<servlet-class>uuu.movieline.view.CaptchaServlet</servlet-class>
+  </servlet>
+  
+  <!-- 2.將物件對應到網址 -->
+  <servlet-mapping>
+  	<servlet-name>LoginCaptchaServlet</servlet-name>
+  	<url-pattern>/images/captcha.jpg</url-pattern>
+  	<url-pattern>/images/captcha.JPG</url-pattern>
+  </servlet-mapping>
+  
   <!-- 首頁尋找順序 -->
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
