@@ -209,7 +209,7 @@ public class Customer {
  */
 	public void setAddress(String address) {
 		if (address != null) {
-			this.address = address;
+			this.address = address.trim();
 		} else {
 			this.address = "";
 		}
@@ -233,7 +233,7 @@ public class Customer {
 	 * @param phone
 	 */
 	public void setPhone(String phone) {
-		this.phone = (phone==null)?"":phone;
+		this.phone = (phone==null)?"":phone.trim();
 	}
 
 	/**
