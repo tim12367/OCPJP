@@ -8,18 +8,42 @@
 >
   <display-name>MovieLine_Web</display-name>
   <description>這是MovieLine的描述檔</description>
+  <!-- 登入畫面用的驗證碼 -->
   <!-- 1.定義物件 -->
   <servlet>
+  	<description>login畫面用的驗證碼</description>
   	<servlet-name>LoginCaptchaServlet</servlet-name>
   	<servlet-class>uuu.movieline.view.CaptchaServlet</servlet-class>
+  	<init-param>
+  		<param-name>len</param-name>
+  		<param-value>4</param-value>
+  	</init-param>
   </servlet>
   
   <!-- 2.將物件對應到網址 -->
   <servlet-mapping>
   	<servlet-name>LoginCaptchaServlet</servlet-name>
   	<url-pattern>/images/captcha.jpg</url-pattern>
-  	<url-pattern>/images/captcha.JPG</url-pattern>
   </servlet-mapping>
+  
+  <!-- 註冊畫面用的驗證碼 -->
+  <!-- 1.定義物件 -->
+  <servlet>
+  	<description>register畫面用的驗證碼</description>
+  	<servlet-name>RegisterCaptchaServlet</servlet-name>
+  	<servlet-class>uuu.movieline.view.CaptchaServlet</servlet-class>
+  	<init-param>
+  		<param-name>len</param-name>
+  		<param-value>7</param-value>
+  	</init-param>
+  </servlet>
+  
+  <!-- 2.將物件對應到網址 -->
+  <servlet-mapping>
+  	<servlet-name>RegisterCaptchaServlet</servlet-name>
+  	<url-pattern>/images/register_captcha.jpg</url-pattern>
+  </servlet-mapping>
+  
   
   <!-- 首頁尋找順序 -->
   <welcome-file-list>
