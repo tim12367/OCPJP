@@ -46,7 +46,7 @@ public class CaptchaServlet extends HttpServlet {
         }
 
         //畫出認證文字
-        g.setFont(new Font("Arial Black", Font.PLAIN, 18));//設定字體
+        g.setFont(new Font("arial black", Font.PLAIN, 18));//設定字體
         g.setColor(getRandomColor(20, 140));
         //將認證文字畫到image中
         g.drawString(rand, 10, 16);
@@ -64,13 +64,24 @@ public class CaptchaServlet extends HttpServlet {
         int b = fc + random.nextInt(bc - fc);
         return new Color(r, g, b);
     }
-    /**
+
+	/**
      * @see HttpServlet#HttpServlet()
      */
+
     public CaptchaServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
+    @Override
+    public void init() {
+    	String len = this.getInitParameter("len");
+    	if(len!=null && len.matches("\\d+")) {
+    		this.len = Integer.parseInt(len);
+    		this.width = 16 * 2 + 12 * this.len;  
+    	}
+//    	若沒有則預設值
+    }
+    
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
