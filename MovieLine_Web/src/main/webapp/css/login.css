@@ -23,6 +23,7 @@
 .form_input_box_capcha_image{
     width: 160px;
     height: 75px;
+    cursor: pointer;
 }
 
 h1, h3 {

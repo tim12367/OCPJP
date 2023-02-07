@@ -41,6 +41,7 @@ label {
 .form_input_box_capcha_image{
 	height:53px;
 	width:149px;
+	cursor: pointer;
 }
 
 .submit_button {
