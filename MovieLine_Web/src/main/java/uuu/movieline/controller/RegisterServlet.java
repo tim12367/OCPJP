@@ -91,7 +91,7 @@ public class RegisterServlet extends HttpServlet {
 				//TODO:captcha,address,phone,subscribed
 				c.setAddress(address);
 				c.setPhone(phone);
-				c.setSubscribed(subscribed!=null?true:false);//boolean
+				c.setSubscribed(subscribed!=null);//boolean
 				
 				CustomerService service = new CustomerService();
 				service.register(c);
