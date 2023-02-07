@@ -87,7 +87,7 @@
 				(year_birthday + "-" + month_birthday + "-" + day_birthday));
 	}
 	function refreshCaptcha() {
-		$("#captcha_image").attr("src","images/captcha.jpg?refresh=" + new Date());
+		$("#captcha_image").attr("src","images/register_captcha.jpg?refresh=" + new Date());
 	}
 </script>
 </head>
@@ -192,7 +192,7 @@
 					class="form_input--lightmode"
 					placeholder="請輸入驗證碼(不分大小寫)"
 					autocomplete="off" required="required">
-				<img src="images/captcha.jpg" id=captcha_image class="form_input_box_capcha_image" draggable="false">
+				<img src="images/register_captcha.jpg" id=captcha_image class="form_input_box_capcha_image" draggable="false">
 			</div>
 			<!-- 送出按鈕 -->
 			<input type="submit" class="submit_button" value="註冊">
