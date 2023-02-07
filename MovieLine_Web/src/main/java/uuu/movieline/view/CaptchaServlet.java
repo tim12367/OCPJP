@@ -88,7 +88,7 @@ public class CaptchaServlet extends HttpServlet {
             char ch = (char)(data<10?(data+'0'):(data-10+'A'));
             captcha+=ch;
         }
-        System.out.println("captcha:" + captcha);
+//        System.out.println("captcha:" + captcha);//for test
 		
 //        HttpSession session = request.getSession();
 //        session.setAttribute(this.getServletName(), captcha);
