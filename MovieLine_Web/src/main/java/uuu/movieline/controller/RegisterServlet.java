@@ -34,10 +34,13 @@ public class RegisterServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		List<String> errors = new ArrayList<>();
+		
 		//!設定編碼一定要在request.getParameter之前
 		request.setCharacterEncoding("UTF-8");//欄位有中文必加
+		
 		//1.讀取request中的FormData資料,並檢查
 		//id,email,password,name,birthday,gender,captcha
 		//address,phone,subscribed
@@ -71,25 +74,24 @@ public class RegisterServlet extends HttpServlet {
 		if(gender == null || (gender=gender.trim()).length()!=1) {
 			errors.add("請輸入性別");
 		}
+		//TODO:確定驗證碼
 		if(captcha == null || (captcha=captcha.trim()).length()==0) {
 			errors.add("請輸入驗證碼");
 		}
 		//2.若無誤，呼叫商業邏輯
 		if(errors.isEmpty()) {
-			
 			Customer c = new Customer();
-			
 			try {
 				c.setId(id);
 				c.setEmail(email);
 				c.setPassword(password);
 				c.setName(name);
 				c.setBirthday(birthday);
-				c.setGender(gender.charAt(0));
+				c.setGender(gender.charAt(0));//char
 				//TODO:captcha,address,phone,subscribed
 				c.setAddress(address);
 				c.setPhone(phone);
-				c.setSubscribed(subscribed!=null?true:false);
+				c.setSubscribed(subscribed!=null?true:false);//boolean
 				
 				CustomerService service = new CustomerService();
 				service.register(c);
