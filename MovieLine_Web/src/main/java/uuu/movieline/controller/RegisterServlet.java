@@ -36,6 +36,7 @@ public class RegisterServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<String> errors = new ArrayList<>();
+		//!設定編碼一定要在request.getParameter之前
 		request.setCharacterEncoding("UTF-8");//欄位有中文必加
 		//1.讀取request中的FormData資料,並檢查
 		//id,email,password,name,birthday,gender,captcha
