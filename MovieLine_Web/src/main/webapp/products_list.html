@@ -24,17 +24,21 @@
 			alert("不支援的瀏覽器!");
 		}
 	}
+	function restoreData() {
+		var getDarkModeFlag = localStorage.getItem("darkModeFlag");
+		//記住深色模式
+		if (getDarkModeFlag == "true") {
+			darkModeFlag = getDarkModeFlag;
+			darkModeHandler();
+		}
+	}
 	function darkModeHandler() {
 		if (darkModeFlag) {
 			$("body").addClass("body--darkmode");
-			$("#register_form :input:not([type=submit])").addClass("form_input--darkmode");
-			$("select").addClass("form_select--darkmode");
 			$("#dark_mode_button").attr("src",
 					"source/light_mode_FILL0_wght400_GRAD0_opsz48.svg");
 		} else {
 			$("body").removeClass("body--darkmode");
-			$("#register_form :input:not([type=submit])").removeClass("form_input--darkmode");
-			$("select").removeClass("form_select--darkmode");
 			$("#dark_mode_button").attr("src",
 					"source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg");
 		}
@@ -64,18 +68,48 @@
 		</ul>
 	</nav>
 	<article>
-		<div>
-			<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230116003.jpg" alt="預覽圖">
-			蟻人與黃蜂女：量子狂熱
-		</div>
-		<div>
-			<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230113009.jpg" alt="預覽圖">
-			寶塚歌劇 星組東京寶塚劇場公演『德米特里～在曙光下飄落的紫之花～』『JAGUAR BEAT』千秋樂 現場直播
-		</div>
-		<div>
-			<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230110014.jpg" alt="預覽圖">
-			灌籃高手 THE FIRST SLAM DUNK
-		</div>
+		<a>
+			<div>
+				<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230116003.jpg" alt="預覽圖">
+				<div>
+					<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg">
+					<div>100萬</div>
+				</div>
+			</div>
+			
+			<div>
+				<div>蟻人與黃蜂女：量子狂熱</div>
+				<div>2023-02-15</div>
+			</div>
+		</a>
+		<a>
+			<div>
+				<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230113009.jpg" alt="預覽圖">
+				<div>
+					<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg">
+					<div>20萬</div>
+				</div>
+			</div>
+			
+			<div>
+				<div>寶塚歌劇 星組東京寶塚劇場公演『德米特里～在曙光下飄落的紫之花～』『JAGUAR BEAT』千秋樂 現場直播</div>
+				<div>2023-02-12</div>
+			</div>
+		</a>
+		<a>
+			<div>
+				<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230110014.jpg" alt="預覽圖">
+				<div>
+					<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg">
+					<div>2000萬</div>
+				</div>
+			</div>
+			
+			<div>
+				<div>灌籃高手 THE FIRST SLAM DUNK</div>
+				<div>2023-01-13</div>
+			</div>
+		</a>
 	</article>
 	<footer>
 		<hr>
