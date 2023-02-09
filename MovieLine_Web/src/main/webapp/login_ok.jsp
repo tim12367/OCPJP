@@ -1,12 +1,24 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
+<%@page import="uuu.movieline.entity.Customer"%>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<title>會員登入成功</title>
 	<link rel="stylesheet" href="css/vgb.css">
-	<meta http-equiv="refresh" content="5; url=./">	
+	<meta http-equiv="refresh" content="5; url=./">
+	<script src = "./jquery.js"></script>
+	<script>
+		$(document).ready(init);
+		function init() {
+			$("#count_down").html("test");
+		}
+		function countdownHandlr(){
+			var countNumber = 5;
+			
+		}
+	</script>
 </head>
 <body>
 	<header>
@@ -18,9 +30,12 @@
 	<nav>
 		<hr>
 	</nav>
+	<% 
+		Customer member = (Customer)request.getAttribute("member");
+	%>
 	<article>		
-		<h2><%= "XXX" %> 登入成功</h2>
-		<p>5秒後將自動跳轉<a href='index.html'>首頁</a></p>
+		<h2><%= member.getName() %> 登入成功</h2>
+		<p><span id="count_down">5</span>秒後將自動跳轉<a href='index.html'>首頁</a></p>
 	</article>
 	<footer>
 		<hr>
