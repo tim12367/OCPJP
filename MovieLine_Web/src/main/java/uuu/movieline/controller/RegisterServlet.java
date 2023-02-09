@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -95,22 +96,14 @@ public class RegisterServlet extends HttpServlet {
 				
 				CustomerService service = new CustomerService();
 				service.register(c);
-				//TODO:3.1 顯示註冊成功畫面
-				response.setContentType("text/html");
-				response.setCharacterEncoding("UTF-8");
-				//若在getWriter前沒設定會變預設
-				try (PrintWriter out = response.getWriter()) {//defalt ISO-8859-1
-					out.println("<!DOCTYPE html>");
-					out.println("<html>");
-					out.println("<head>");
-					out.println("<title>註冊成功</title>");
-					out.println("<meta http-equiv=\"refresh\" content=\"5; url=./\">");
-					out.println("</head>");
-					out.println("<body>");
-					out.println("<h1>註冊成功," + c.getName() + ", 5秒後回登入畫面"+ "</h1>");
-					out.println("</body>");
-					out.println("</html>");
-				}
+				
+				//3.1 註冊成功:內部轉交(forward)/register_ok.jsp
+				RequestDispatcher dispatcher = //請求派遣器
+						request.getRequestDispatcher("register_ok.jsp");
+				request.setAttribute("member",c);
+				request.setAttribute("msg","註冊成功");
+				dispatcher.forward(request, response);
+				return;
 			} catch (MLInvalidDataException ex) {
 				errors.add(ex.getMessage());//for user
 			} catch (MLException ex) {
@@ -124,20 +117,10 @@ public class RegisterServlet extends HttpServlet {
 		
 		
 		//3.2 顯示註冊失敗畫面
-		response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		try (PrintWriter out = response.getWriter()) {
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>註冊失敗</title>");
-			out.println("<meta http-equiv=\"refresh\" content=\"15; url=./register.html\">");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>"+ errors +", 15秒後回登入畫面"+"</h1>");
-			out.println("</body>");
-			out.println("</html>");
-		}
+		RequestDispatcher dispatcher = //請求派遣器
+				request.getRequestDispatcher("register_ok.jsp");
+		request.setAttribute("errors",errors);
+		dispatcher.forward(request, response);
 	}
 
 }
