@@ -1,4 +1,4 @@
-<%@ page pageEncoding="UTF-8"%>
+<!--<%@ page pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
 <%@page import="uuu.movieline.entity.Customer"%>
 <html>
