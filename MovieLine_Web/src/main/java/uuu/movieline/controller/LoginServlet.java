@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -68,24 +69,13 @@ public class LoginServlet extends HttpServlet {
 			CustomerService service = new CustomerService();
 			try {
 				Customer c = service.login(username, password);
-				//3.1 產生成功的html 回應 ,第九章
-				response.setContentType("text/html");//ContentType 或稱 MIME type 要依格式
-				response.setCharacterEncoding("UTF-8");
-				//若在getWriter前沒設定會變預設
-				try (PrintWriter out = response.getWriter()) {//defalt ISO-8859-1
-					out.println("<!DOCTYPE html>");
-					out.println("<html>");
-					out.println("<head>");
-					out.println("<title>登入成功</title>");
-					out.println("<meta http-equiv=\"refresh\" content=\"5; url=./\">");
-					out.println("</head>");
-					out.println("<body>");
-					out.println("<h1>登入成功," + c.getName() + ", 5秒後回登入畫面"+ "</h1>");
-					out.println("</body>");
-					out.println("</html>");
-				}
-
-				return;
+				//3.1 內部轉交(forward)login.jsp
+				RequestDispatcher dispatcher = //請求派遣器
+						request.getRequestDispatcher("login_ok.jsp");
+				request.setAttribute("member",c);
+				dispatcher.forward(request, response);
+				
+				return;//成功就跳掉，失敗繼續向下執行
 			} catch (LoginFailException e) {
 				this.log(e.getMessage());
 				errors.add(e.getMessage());//for user
