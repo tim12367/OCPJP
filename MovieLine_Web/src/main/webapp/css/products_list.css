@@ -60,6 +60,7 @@
 .viewers_icon{
     height: 16px;
     margin-right: 5px;
+    filter: invert(98%) sepia(10%) saturate(200%) hue-rotate(205deg) brightness(117%) contrast(100%);
 }
 .viewers_number{
     text-overflow: ellipsis;
