@@ -1,5 +1,6 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
+<%@page import="java.util.List"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -113,8 +114,9 @@
 			<li class="nav_list_item nav_list_last_item"><a href="products_list.html" class="nav_list_a">全部電影</a></li>
 		</ul>
 	</nav>
-	<!-- http://localhost:8080/ML/login.html -->
+	<!-- http://localhost:8080/ML/login.do -->
 	<article>
+	
 		<form id="login_form" class="login_form" action="login.do" method="POST" autocomplete="on">
 	
 			<h1>登入</h1>
@@ -147,8 +149,11 @@
 					class="forget_and_remember_box_elememt" type="checkbox" value="yes">
 				<label for="remembermypassword"
 					class="forget_and_remember_box_elememt">記住我</label>
+				<%
+					List<String> errors = (List<String>)request.getAttribute("errors");
+				%>
 				<div id="hint"
-					class="forget_and_remember_box_elememt forget_and_remember_hint">輸入的帳號或密碼不正確</div>
+					class="forget_and_remember_box_elememt forget_and_remember_hint"><%=errors==null?"":errors%></div>
 				<!-- 給button設置一個類型type="button" 才不會觸發表單-->
 				<button
 					type="button"
