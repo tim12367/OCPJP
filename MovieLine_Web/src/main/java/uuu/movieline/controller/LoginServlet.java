@@ -50,7 +50,6 @@ public class LoginServlet extends HttpServlet {
     	String username = request.getParameter("username");
     	String password = request.getParameter("password");
     	String captcha = request.getParameter("captcha");
-    	System.out.println(captcha);//for test
     	//去頭尾
     	username = username.trim();
     	//檢查有無錯誤 可能網頁form沒給name
