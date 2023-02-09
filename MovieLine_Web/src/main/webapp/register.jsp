@@ -2,9 +2,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>註冊畫面</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>註冊畫面</title>
 <link href="css/global.css" type="text/css" rel="stylesheet">
 <link href="css/register.css" type="text/css" rel="stylesheet">
 <style>
