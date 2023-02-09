@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
 			CustomerService service = new CustomerService();
 			try {
 				Customer c = service.login(username, password);
-				//3.1 內部轉交(forward)login.jsp
+				//3.1 登入成功:內部轉交(forward)/login.jsp
 				RequestDispatcher dispatcher = //請求派遣器
 						request.getRequestDispatcher("login_ok.jsp");
 				request.setAttribute("member",c);
@@ -88,21 +88,12 @@ public class LoginServlet extends HttpServlet {
 			} 
 		}
     	
-    	//3.2 產生失敗的 html
-    	response.setContentType("text/html");
-		response.setCharacterEncoding("UTF-8");
-		try (PrintWriter out = response.getWriter()) {
-			out.println("<!DOCTYPE html>");
-			out.println("<html>");
-			out.println("<head>");
-			out.println("<title>登入失敗</title>");
-			out.println("<meta http-equiv=\"refresh\" content=\"15; url=./login.html\">");
-			out.println("</head>");
-			out.println("<body>");
-			out.println("<h1>"+ errors +", 15秒後回登入畫面"+"</h1>");
-			out.println("</body>");
-			out.println("</html>");
-		}
+    	//3.2 登入失敗:內部轉交(forward)/login.jsp
+    	RequestDispatcher dispatcher = 
+    			request.getRequestDispatcher("login.jsp");
+    	request.setAttribute("errors", errors);
+    	dispatcher.forward(request, response);
+    	//結束
 	}
 
 }
