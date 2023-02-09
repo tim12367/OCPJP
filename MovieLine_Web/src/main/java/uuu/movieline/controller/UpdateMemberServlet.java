@@ -131,7 +131,7 @@ public class UpdateMemberServlet extends HttpServlet {
 			out.println("<html>");
 			out.println("<head>");
 			out.println("<title>註冊失敗</title>");
-			out.println("<meta http-equiv=\"refresh\" content=\"15; url=./register.html\">");
+			out.println("<meta http-equiv=\"refresh\" content=\"15; url=./register.jsp\">");
 			out.println("</head>");
 			out.println("<body>");
 			out.println("<h1>"+ errors +", 15秒後回登入畫面"+"</h1>");
