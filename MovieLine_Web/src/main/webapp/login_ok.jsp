@@ -12,13 +12,16 @@
 	<script>
 		$(document).ready(init);
 		function init() {
-			setInterval(countdownHandlr,1000);
+			countdownHandlr();
 		}
 		var countNumber = 6;
 		function countdownHandlr(){
+			if (countNumber==0){
+				return;
+			}
 			countNumber--;
 			$("#count_down").html(countNumber);
-			
+			setTimeout(countdownHandlr,1000);
 		}
 	</script>
 </head>
