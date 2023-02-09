@@ -1,4 +1,4 @@
-<!--<%@ page pageEncoding="UTF-8"%>-->
+<%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page import="uuu.movieline.entity.Customer"%>
 <html>
@@ -12,10 +12,12 @@
 	<script>
 		$(document).ready(init);
 		function init() {
-			$("#count_down").html("test");
+			setInterval(countdownHandlr,1000);
 		}
+		var countNumber = 6;
 		function countdownHandlr(){
-			var countNumber = 5;
+			countNumber--;
+			$("#count_down").html(countNumber);
 			
 		}
 	</script>
@@ -34,7 +36,7 @@
 		Customer member = (Customer)request.getAttribute("member");
 	%>
 	<article>		
-		<h2><%= member.getName() %> 登入成功</h2>
+		<h2><%= member==null?"尚未登入":member.getName() %> 登入成功</h2>
 		<p><span id="count_down">5</span>秒後將自動跳轉<a href='index.html'>首頁</a></p>
 	</article>
 	<footer>
