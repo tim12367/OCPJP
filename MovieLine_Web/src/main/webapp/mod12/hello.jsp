@@ -31,8 +31,20 @@
 	</style>
 	</head>
 	<body>
+		<% int a = 1;//_jspService方法中的 local variable 
+			out.println(this.getClass().getName());
+		%>
+		<%! int b = 1;//member variable 類別中方法外不可宣告建構式 因為編譯前不知道類別名稱
+			private String welcomeStr = "Hi";
+			public void jspInit(){
+				String welcomeString = this.getInitParameter("welcomeString");
+				if(welcomeString!=null){
+					this.welcomeStr = welcomeString;
+				}
+			}
+		%>
 		<header>
-			<h1>Hello<sub>JSP練習</sub></h1>
+			<h1>Hello<sub>JSP練習,<%=welcomeStr%></sub></h1>
 		</header>
 		<article>
 			<table>
@@ -41,6 +53,7 @@
 						九九乘法表
 					</th>
 				</tr>
+				
 				<% 
 				for(int x = 1;x<10;x++){%>
 				<tr><% 
