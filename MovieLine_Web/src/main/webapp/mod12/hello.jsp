@@ -36,14 +36,22 @@
 		</header>
 		<article>
 			<table>
-			<tr><th colspan="9">九九乘法表</th></tr>
-			<% 
-			for(int x = 1;x<10;x++){%>
+				<tr>
+					<th colspan="9">
+						九九乘法表
+					</th>
+				</tr>
+				<% 
+				for(int x = 1;x<10;x++){%>
 				<tr><% 
-				for(int y = 1; y<10;y++){
-				%><td><%=x%> * <%=y%> = <%=x*y%></td><% 
-				}%></tr><% 
-			}%>
+					for(int y = 1; y<10;y++){
+					%>
+					<td>
+							<%=x%> * <%=y%> = <%=x*y%>
+					</td><% 
+					}%>
+				</tr><% 
+				}%>
 			</table>
 		
 		</article>
