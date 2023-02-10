@@ -68,7 +68,7 @@ public class LoginServlet extends HttpServlet {
 			CustomerService service = new CustomerService();
 			try {
 				Customer c = service.login(username, password);
-				//3.1 登入成功:內部轉交(forward)/login.jsp
+				//3.1 登入成功:內部轉交(forward)/login_ok.jsp
 				RequestDispatcher dispatcher = //請求派遣器
 						request.getRequestDispatcher("login_ok.jsp");
 				request.setAttribute("member",c);
