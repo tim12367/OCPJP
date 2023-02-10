@@ -72,6 +72,7 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher dispatcher = //請求派遣器
 						request.getRequestDispatcher("login_ok.jsp");
 				request.setAttribute("member",c);
+				request.setAttribute("msg","登入成功");
 				dispatcher.forward(request, response);
 				
 				return;//成功就跳掉，失敗繼續向下執行
