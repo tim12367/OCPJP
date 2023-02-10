@@ -35,7 +35,7 @@
 			out.println(this.getClass().getName());
 		%>
 		<%! int b = 1;//member variable 類別中方法外不可宣告建構式 因為編譯前不知道類別名稱
-			private String welcomeStr = "Hi";
+			private String welcomeStr = "Hi";//宣告成static會變成唯一且共用?
 			public void jspInit(){
 				String welcomeString = this.getInitParameter("welcomeString");
 				if(welcomeString!=null){
