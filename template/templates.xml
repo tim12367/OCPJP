@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="true" context="jsp_new" deleted="false" description="JSP with html 5 markup" enabled="true" id="org.eclipse.jst.jsp.ui.templates.jsphtml5" name="New JSP File (html 5)">&lt;%@ page pageEncoding="${encoding}"%&gt;
+&lt;!DOCTYPE html&gt;
+	&lt;html&gt;
+	&lt;head&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+	&lt;title&gt;Insert title here&lt;/title&gt;
+	&lt;/head&gt;
+	&lt;body&gt;
+		${cursor}
+	&lt;/body&gt;
+&lt;/html&gt;</template></templates>
