@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>全部電影</title>
+<link rel="icon" type="image/x-icon" href="source/title_icon.png" />
 <link href="css/global.css" type="text/css" rel="stylesheet">
 <link href="css/products_list.css" type="text/css" rel="stylesheet">
 <style>

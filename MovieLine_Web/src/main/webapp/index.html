@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>一線影院 HOME</title>
+<link rel="icon" type="image/x-icon" href="source/title_icon.png" />
 <link href="css/global.css" type="text/css" rel="stylesheet">
 <link href="css/home.css" type="text/css" rel="stylesheet">
 <style>
@@ -22,14 +23,6 @@
 		} else {
 			alert("不支援的瀏覽器!");
 			$("#hint").text("不支援的瀏覽器!");
-		}
-	}
-	function saveHandler() {
-		if ($("#remembermypassword")[0].checked) {
-			var username = $("#username").val();
-			localStorage.setItem("username", username);
-		} else {
-			localStorage.removeItem("username");
 		}
 	}
 	function restoreData() {

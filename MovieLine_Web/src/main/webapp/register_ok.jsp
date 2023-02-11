@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta charset="UTF-8">
 	<title>會員註冊結果</title>
+	<link rel="icon" type="image/x-icon" href="source/title_icon.png" />
 	<link rel="stylesheet" href="css/vgb.css">
 	<meta http-equiv="refresh" content="10; url=./">	
 </head>
