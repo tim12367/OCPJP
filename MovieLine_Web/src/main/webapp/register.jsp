@@ -1,5 +1,6 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
+<%@page import="java.util.List"%>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,7 +81,7 @@
 		var month_birthday = (((today.getMonth() + 1) < 10) ? 
 		("0" + (today.getMonth() + 1)) : (today.getMonth() + 1));
 		var day_birthday = ((today.getDate()) < 10) ? 
-		("0" + today.getDate()) : (today.getDay);
+		("0" + today.getDate()) : (today.getDate());
 
 		console.log("12歲的生日：" + year_birthday + "-" + month_birthday + "-"
 				+ day_birthday);
@@ -195,6 +196,8 @@
 					autocomplete="off" required="required">
 				<img src="images/register_captcha.jpg" id=captcha_image class="form_input_box_capcha_image" draggable="false">
 			</div>
+			<%List<String> errors = (List<String>)request.getAttribute("errors");%>
+			<p><%=errors==null?"":errors%></p>
 			<!-- 送出按鈕 -->
 			<input type="submit" class="submit_button" value="註冊">
 		</form>
