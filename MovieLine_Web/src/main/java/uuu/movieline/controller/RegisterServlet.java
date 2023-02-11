@@ -118,7 +118,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		//3.2 顯示註冊失敗畫面
 		RequestDispatcher dispatcher = //請求派遣器
-				request.getRequestDispatcher("register_ok.jsp");
+				request.getRequestDispatcher("register.jsp");
 		request.setAttribute("errors",errors);
 		dispatcher.forward(request, response);
 	}
