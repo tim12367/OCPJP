@@ -28,7 +28,7 @@
 	List<String> errors = (List<String>)request.getAttribute("errors");
 	%>	
 		<h2><%=member == null?"註冊失敗":member.getName() %><%=msg==null?"":msg %><%=errors==null?"":errors %></h2>
-		<p>10秒後將自動跳轉<a href='index.html'>首頁</a></p>
+		<p>10秒後將自動跳轉<a href='register.jsp'>首頁</a></p>
 	</article>
 	<footer>
 		<hr>

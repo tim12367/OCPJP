@@ -36,12 +36,12 @@
 		<hr>
 	</nav>
 	<% 
-		Customer member = (Customer)request.getAttribute("member");
+		Customer member = (Customer)session.getAttribute("member");
 		String msg = (String)request.getAttribute("msg");
 	%>
 	<article>		
 		<h2><%= member==null?"尚未登入":member.getName() %><%=msg==null?"":msg %></h2>
-		<p><span id="count_down">5</span>秒後將自動跳轉<a href='index.html'>首頁</a></p>
+		<p><span id="count_down">5</span>秒後將自動跳轉<a href='index.jsp'>首頁</a></p>
 	</article>
 	<footer>
 		<hr>
