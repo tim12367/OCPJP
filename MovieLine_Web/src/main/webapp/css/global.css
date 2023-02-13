@@ -96,6 +96,7 @@ article{
 	left: 0;
 	height: 52px;
 	width: 100%;
+	display: flex;
 	background-color: #313235;
 	position: fixed;
 	border-bottom-color: rgb(220, 219, 230);
@@ -104,14 +105,14 @@ article{
 	z-index: 1;
 }
 
-.nav_list_a{
-	color: #ffffff;
-	text-decoration: none;
-}
-
 .nav_list{
 	margin: 0;
 	list-style: none;
+}
+
+.nav_list_a{
+	color: #ffffff;
+	text-decoration: none;
 }
 
 .nav_list_item{
@@ -126,6 +127,11 @@ article{
 	border-right: 1px solid white;
 }
 
+.nav_user{
+	margin:9px 0 9px auto;
+	padding: 5px;
+	color: #ffffff;
+}
 .form_input--lightmode {
 	width: 269px;
 	height: 25px;
