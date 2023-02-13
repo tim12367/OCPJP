@@ -128,9 +128,24 @@ article{
 }
 
 .nav_user{
-	margin:9px 0 9px auto;
-	padding: 5px;
+	margin:0;
+	margin-left:auto;
+	padding: 14px 5px;
 	color: #ffffff;
+	
+}
+.nav_user_item{
+	padding:5px 0;
+	display:block;
+	display:none;
+	text-align: center;
+	background-color: #313235;
+}
+.nav_user_item_first{
+	padding:19px 0 5px 0;
+}
+ul.nav_user:hover >.nav_user_item{
+	display:block;
 }
 .form_input--lightmode {
 	width: 269px;
