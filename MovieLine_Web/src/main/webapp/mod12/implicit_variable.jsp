@@ -1,4 +1,7 @@
-<%@ page pageEncoding="UTF-8"%>
+<%@page import="java.util.Random"%>
+<%@ page pageEncoding="UTF-8" buffer="8kb" autoFlush="true" %>
+<%@page import="java.util.Date"%>
+<%@page import="org.apache.naming.java.javaURLContextFactory"%>
 <!DOCTYPE html>
 	<html>
 	<head>
@@ -16,6 +19,8 @@
 			<hr>
 		</header>
 			<div>
+			<%Random r = new Random(); %>
+			<%out.flush(); %>
 				<h2>request<sup>***</sup></h2>
 				<p>method type(<span>request.getMethod()</span>) : <%=request.getMethod() %></p>
 				<p>URL(<span>request.getRequestURL()</span>) :<%=request.getRequestURL() %></p>
@@ -25,7 +30,9 @@
 				<p><span>PortName(埠號)</span> :<%=request.getLocalPort() %></p>
 				<p><span>本機IP</span> :<%=request.getLocalAddr() %></p>
 				<p><span>QueryString</span> :<%=request.getQueryString() %></p>
-				
+				<%out.flush(); 
+// 				Thread.sleep(300 + r.nextInt(7500));
+				%>
 				<h2>request headers</h2>
 				<p>Header(<span>request.getHeader("accept-language")</span>):<%=request.getHeader("accept-language")%></p>
 				<p>Header(<span>request.getHeader("user-agent")</span>) :<%=request.getHeader("user-agent")%></p>
@@ -47,6 +54,23 @@
 				<h2>session<sup>**</sup></h2>
 				<!-- 若開同一個瀏覽器則同一個連線 隱私視窗也是一個 -->
 				<p>session id(<span>session.getId()</span>)<%=session.getId() %></p>
+				<p>session 建立時間(<span>session.getCreationTime()</span>)<br><%=session.getCreationTime()%> -> 日期時間 <%=new Date(session.getCreationTime()) %><br></p>
+				<p>session 建立時間(<span>session.getLastAccessedTime()</span>)<br><%=session.getLastAccessedTime()%> -> 日期時間 <%=new Date(session.getLastAccessedTime()) %><br></p>
+				<p>session 是否為新連線(<span>session.isNew()</span>)<br><%=session.isNew()%><br></p>
+				<p>session 連線逾時上限(<span>session.getMaxInactiveInterval()</span>)<br><%=session.getMaxInactiveInterval()%><br></p>
+			</div>
+			<div>
+				<hr>
+				<h2>out<sup>*</sup>,response</h2>
+				<!-- 存到多少才送出封包buffer="8kb"-->
+				<!-- 滿了自動送出封包 autoFlush="true"-->
+				<p>out的資料站存區(<span>out.getBufferSize()</span>)<%=out.getBufferSize()%><br></p>
+				<p>response的第三部分的暫存區大小(<span>response.getBufferSize()</span>)<%=response.getBufferSize()%><br></p>
+			</div>
+			<div>
+				<hr>
+				<h2>application(this.getServletContext)<sup>*</sup></h2>
+				<p>application的:(<span>application.getRealPath("/")</span>)<br><%=application.getRealPath("/")%><br></p>
 			</div>
 		<article>
 		</article>

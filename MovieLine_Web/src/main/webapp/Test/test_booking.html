@@ -2,9 +2,51 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Test Booking</title>
+<script type="text/javascript" src="../jquery.js"></script>
+<script>
+	$(document).ready(init);
+	function init() {
+		for(var i = 1; i < 6 ; i++){
+			var seatClassName ="class = " + "'"+ "seat_list_item" + i + "'";
+			$("#seat_list").append("<li "+ seatClassName +">"+"<p>"+i+"號位"+"</p>"+"</li>");		
+		}
+		var booked = [1,2,4];
+		for(var i in booked){
+			console.log(booked[i]);
+		}
+	}
+</script>
+<style>
+.seat_list{
+	margin:0;
+	list-style-type: none;
+	display: flex;
+	justify-content: space-around;
+}
+.seat_list>li{
+	flex-grow : 1;
+	display: flex;
+	justify-content:center;
+	align-items: center;
+	height: 300px;
+	max-width: 300px;
+}
+.seat_list>li>p{
+	margin:0;
+	width: fit-content;
+	height:fit-content;
+	display: block;
+}
+.booked{
+	background-color: rgb(231, 103, 103);
+}
+</style>
 </head>
 <body>
-
+	<h1>Test Booking System</h1>
+	<ul id=seat_list class="seat_list">
+		
+	</ul>
 </body>
 </html>
