@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import uuu.movieline.entity.Customer;
 import uuu.movieline.exception.LoginFailException;
@@ -42,8 +43,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
     	//錯誤清單 宣告成上層型別較靈活 之後可改
-    	List<String> errors = new ArrayList<String>();
-    	
+    	List<String> errors = new ArrayList<>();
+    	HttpSession session = request.getSession();
     	//這邊欄位剛好都沒有中文編碼 若要獲得中文 需要設定這行
     	//request.setCharacterEncoding("utf-8");
     	//1.取得request中的form data(username,password,captcha),第十章
@@ -71,7 +72,7 @@ public class LoginServlet extends HttpServlet {
 				//3.1 登入成功:內部轉交(forward)/login_ok.jsp
 				RequestDispatcher dispatcher = //請求派遣器
 						request.getRequestDispatcher("login_ok.jsp");
-				request.setAttribute("member",c);
+				session.setAttribute("member",c);
 				request.setAttribute("msg","登入成功");
 				dispatcher.forward(request, response);
 				
