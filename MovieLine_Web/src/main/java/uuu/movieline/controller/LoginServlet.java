@@ -62,8 +62,14 @@ public class LoginServlet extends HttpServlet {
     	}
     	if(captcha==null ||captcha.length()==0) {
     		errors.add("必須輸入驗證碼");
+    	}else {
+    		String oldCaptcha = (String)session.getAttribute("LoginCaptchaServlet");
+    		if(!captcha.equalsIgnoreCase(oldCaptcha)) {
+    			errors.add("驗證碼不正確");
+    		}
     	}
-    	
+    	//清除驗證碼
+    	session.removeAttribute("LoginCaptchaServlet");
     	//2.若檢查無誤，則呼叫商業邏輯
     	if (errors.isEmpty()) {
 			CustomerService service = new CustomerService();

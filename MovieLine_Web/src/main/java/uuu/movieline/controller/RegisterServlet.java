@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import uuu.movieline.entity.Customer;
 import uuu.movieline.exception.MLException;
@@ -38,7 +39,7 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 			throws ServletException, IOException {
 		List<String> errors = new ArrayList<>();
-		
+		HttpSession session = request.getSession();
 		//!設定編碼一定要在request.getParameter之前
 		request.setCharacterEncoding("UTF-8");//欄位有中文必加
 		
@@ -75,10 +76,17 @@ public class RegisterServlet extends HttpServlet {
 		if(gender == null || (gender=gender.trim()).length()!=1) {
 			errors.add("請輸入性別");
 		}
-		//TODO:確定驗證碼
+
 		if(captcha == null || (captcha=captcha.trim()).length()==0) {
 			errors.add("請輸入驗證碼");
+		} else {
+			String oldCaptcha = (String)session.getAttribute("RegisterCaptchaServlet");
+			if(!captcha.equalsIgnoreCase(oldCaptcha)) {
+				errors.add("驗證碼不正確");
+			}
 		}
+		//清除驗證碼
+    	session.removeAttribute("RegisterCaptchaServlet");
 		//2.若無誤，呼叫商業邏輯
 		if(errors.isEmpty()) {
 			Customer c = new Customer();
