@@ -19,6 +19,7 @@ article{
 
 .menu {
 	background-color: #8a00fc;
+	background-color: #2660a9;
 	height: 46px;
 	width: 100%;
 	/* 讓menu停在最上方*/
@@ -98,6 +99,7 @@ article{
 	width: 100%;
 	display: flex;
 	background-color: #313235;
+	background-color: #2798de;
 	position: fixed;
 	border-bottom-color: rgb(220, 219, 230);
 	border-bottom-width: 1px;
@@ -121,6 +123,7 @@ article{
 	padding: 5px;
 	border-left: 1px solid white;
 	background-color: #313235;
+	background-color: #2798de;
 }
 
 .nav_list_last_item{
@@ -132,20 +135,37 @@ article{
 	margin-left:auto;
 	padding: 14px 5px;
 	color: #ffffff;
-	
+	cursor: pointer;
 }
 .nav_user_item{
-	padding:5px 0;
-	display:block;
+	height:34px;
+	/*test*/
+	display:flex;
+	/*test*/
 	display:none;
+	flex-direction:column;
+	justify-content:center;
+	align-items:center;
 	text-align: center;
 	background-color: #313235;
 }
+.nav_user_a{
+	color: #ffffff;
+	text-decoration: none;
+	display:block;
+	width:100%;
+	background-color:transparent;
+}
+.nav_user_item:hover{
+	background-color: red;
+	background-color: #2660a9;
+}
 .nav_user_item_first{
-	padding:19px 0 5px 0;
+	border-top:1px solid rgb(220, 219, 230);
+	margin-top:14px;
 }
 ul.nav_user:hover >.nav_user_item{
-	display:block;
+	display:flex;
 }
 .form_input--lightmode {
 	width: 269px;
