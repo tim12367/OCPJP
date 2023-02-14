@@ -57,7 +57,9 @@
 				<p>session 建立時間(<span>session.getCreationTime()</span>)<br><%=session.getCreationTime()%> -> 日期時間 <%=new Date(session.getCreationTime()) %><br></p>
 				<p>session 建立時間(<span>session.getLastAccessedTime()</span>)<br><%=session.getLastAccessedTime()%> -> 日期時間 <%=new Date(session.getLastAccessedTime()) %><br></p>
 				<p>session 是否為新連線(<span>session.isNew()</span>)<br><%=session.isNew()%><br></p>
-				<p>session 連線逾時上限(<span>session.getMaxInactiveInterval()</span>)<br><%=session.getMaxInactiveInterval()%><br></p>
+				<p>session 連線逾時上限(<span>session.getMaxInactiveInterval()</span>)<br><%=session.getMaxInactiveInterval()%>秒<br></p>
+				<%session.setMaxInactiveInterval(10); %>
+				<p>session 連線逾時上限(<span>session.getMaxInactiveInterval()</span>)<br><%=session.getMaxInactiveInterval()%>秒<br></p>
 			</div>
 			<div>
 				<hr>
