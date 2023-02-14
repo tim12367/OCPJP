@@ -21,7 +21,7 @@ public class TestProductService_getAll {
 //		}
 		//用名子查詢
 		try {
-			List<Product> list = service.getProductsByKeyword("先生");
+			List<Product> list = service.getProductsByKeyword("水");
 			System.out.println(list);
 		} catch (Exception e) {
 			Logger.getLogger("測試[查詢產品]").log(
