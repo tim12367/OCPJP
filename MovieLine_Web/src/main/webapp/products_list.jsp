@@ -1,5 +1,8 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
+<%@page import="uuu.movieline.service.ProductService"%>
+<%@page import="uuu.movieline.entity.Product"%>
+<%@page import="java.util.List"%>
 <%@page import="uuu.movieline.entity.Customer"%>
 <html>
 <head>
@@ -53,7 +56,7 @@
 <body>
 	<header id="menu" class="menu">
 		<img class="menu_logo_img" src="source/movie_FILL0_wght400_GRAD0_opsz48.svg" alt="Movie_Line_Logo" draggable="false">
-		<form class='menu_search_form'>
+		<form id="search_form" action="" method="get" class='menu_search_form'>
 			<input type='search' name="search" class="menu_search_input menu_search_form_items" placeholder='請輸入查詢關鍵字'>
 			<input type='submit' class="menu_search_form_button menu_search_form_items" value='搜尋'>			
 		</form>
@@ -85,226 +88,49 @@
 			<%}%>
 		</ul>
 	</nav>
+	<%
+		String keyword = (String)request.getParameter("search");
+		List<Product> list;
+		
+		ProductService service = new ProductService();
+		//判斷是所有結果 or 查詢結果
+		if(keyword!=null && keyword.length()>0){
+			list = service.getProductsByKeyword(keyword);
+		}else{
+			list = service.getAllProducts();
+		}
+		
+	%>
 	<article>
+		<% if(list==null || list.size()==0 ){%>
+			<p>查無資料</p>
+		<%}else{ %>
+		
 		<ul class="products_list">
+			<%for(int i=0; i<list.size();i++ ){
+				Product p = list.get(i);
+			%>
 			<li class="products_list_item">
 				<a class="product_box">
 					<div class="image_view_box">
-						<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230116003.jpg" 
+						<img src="<%=p.getPhotoUrl()%>" 
 						class="image_view_preview_pic" alt="預覽圖">
 						<div class = "image_view_viewers">
 							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
 							class="viewers_icon">
-							<div class="viewers_number">100萬</div>
+							<div class="viewers_number"><%=p.getBoxOffice()%>萬</div>
 						</div>
 					</div>
 					
 					<div class="title_release_date_box">
-						<div class="vedioname">蟻人與黃蜂女：量子狂熱</div>
-						<div class="release_date">2023-02-15</div>
+						<div class="vedioname"><%=p.getName() %></div>
+						<div class="release_date"><%=p.getLaunchDate() %></div>
 					</div>
 				</a>
 			</li>
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230110014.jpg" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">2000萬</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">灌籃高手 THE FIRST SLAM DUNK</div>
-						<div class="release_date">2023-01-13</div>
-					</div>
-				</a>
-			</li>
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20221121003.jpg" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">10000000000000000000000000000000000000000000000</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">阿凡達：水之道</div>
-						<div class="release_date">2022-12-14</div>
-					</div>
-				</a>
-			</li>
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230109019.jpg" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">2000萬</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">迫降危機</div>
-						<div class="release_date">2023-01-25</div>
-					</div>
-				</a>
-			</li>
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230131004.jpg" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">2000萬</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">火線交涉</div>
-						<div class="release_date">2023-02-03</div>
-					</div>
-				</a>
-			</li>
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230106008.jpg" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">2000萬</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">玩命特攻：武演行動</div>
-						<div class="release_date">2023-01-19</div>
-					</div>
-				</a>
-			</li>
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230113009.jpg" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">2000萬</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">寶塚歌劇 星組東京寶塚劇場公演『德米特里～在曙光下飄落的紫之花～』『JAGUAR BEAT』千秋樂 現場直播</div>
-						<div class="release_date">2023-02-12</div>
-					</div>
-				</a>
-			</li>
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230113002.jpg" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">2000萬</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">Francis Tsai 法蘭 《Time's Up》戲院演唱會台北場</div>
-						<div class="release_date">2023-02-08</div>
-					</div>
-				</a>
-			</li>
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20220705016.jpg" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">2000萬</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">角落小夥伴電影版：藍色月夜的魔法之子</div>
-						<div class="release_date">2022-08-05</div>
-					</div>
-				</a>
-			</li>
-			
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230103022.jpg" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">2000萬</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">新世紀福音戰士新劇場版 : 終</div>
-						<div class="release_date">2023-02-03</div>
-					</div>
-				</a>
-			</li>
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://mrmad.com.tw/wp-content/uploads/2021/11/bigjpg.jpg" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">2000萬</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">新世紀福音戰士新劇場版 : 終</div>
-						<div class="release_date">2023-02-03</div>
-					</div>
-				</a>
-			</li>
-			<li class="products_list_item">
-				<a class="product_box">
-					<div class="image_view_box">
-						<img src="https://p2.bahamut.com.tw/B/ACG/c/74/0000106374.JPG" 
-						class="image_view_preview_pic" alt="預覽圖">
-						<div class = "image_view_viewers">
-							<img src="./source/visibility_FILL1_wght400_GRAD0_opsz48.svg"
-							class="viewers_icon">
-							<div class="viewers_number">99.6萬</div>
-						</div>
-					</div>
-					
-					<div class="title_release_date_box">
-						<div class="vedioname">進擊的巨人 The Final Season</div>
-						<div class="release_date">2020-12-07</div>
-					</div>
-				</a>
-			</li>
+			<%}%>
 		</ul>
+		<%}%>
 	</article>
 	<%@ include file="/subviews/footer.jsp" %>
 </body>
