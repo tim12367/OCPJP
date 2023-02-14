@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class CaptchaServlet
@@ -101,10 +102,9 @@ public class CaptchaServlet extends HttpServlet {
             captcha+=ch;
         }
 //        System.out.println("captcha:" + captcha);//for test
-		
-//        HttpSession session = request.getSession();
-//        session.setAttribute(this.getServletName(), captcha);
-		
+		//將captcha加進session 才能從login獲得
+        HttpSession session = request.getSession();
+        session.setAttribute(this.getServletName(), captcha);
 		
         //繪製圖片(Draw image)		
         BufferedImage image = generateImage(captcha, width, height);
