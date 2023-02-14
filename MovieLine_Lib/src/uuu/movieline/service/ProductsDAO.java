@@ -49,6 +49,7 @@ class ProductsDAO {
 					p.setPhotoUrl(rs.getString("photo_url"));
 					p.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
 					p.setCategory(rs.getString("category"));
+					p.setBoxOffice(rs.getInt("box_office"));
 					
 					list.add(p);//!!要記得加入查詢清單
 				}
@@ -95,6 +96,7 @@ class ProductsDAO {
 					p.setPhotoUrl(rs.getString("photo_url"));
 					p.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
 					p.setCategory(rs.getString("category"));
+					p.setBoxOffice(rs.getInt("box_office"));
 					
 					list.add(p);//!!要記得加入查詢清單
 				}

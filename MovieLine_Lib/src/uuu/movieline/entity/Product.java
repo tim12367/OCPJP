@@ -14,7 +14,7 @@ public class Product {
 	private String photoUrl;
 	private LocalDate launchDate;
 	private String category; // 必要
-
+	private int boxOffice; //非必要
 	public Product() {
 	} // 無參數建構式
 
@@ -131,11 +131,19 @@ public class Product {
 		this.category = category;
 	}
 
+	public int getBoxOffice() {
+		return boxOffice;
+	}
+
+	public void setBoxOffice(int boxOffice) {
+		this.boxOffice = boxOffice;
+	}
+
 	@Override
 	public String toString() {
 		return this.getClass().getName() + "\n [產品編號 = " + id + ", 產品名稱 = " + name + ", 售價 = " + unitPrice + ", 庫存 = "
 				+ stock + "\n, 產品敘述 = " + description + ", 圖片網址 = " + photoUrl + ", 發售日期 = " + launchDate + ", 分類 = "
-				+ category + "]";
+				+ category +"\n, 票房 = "+ boxOffice +"]";
 	}
 
 	@Override
