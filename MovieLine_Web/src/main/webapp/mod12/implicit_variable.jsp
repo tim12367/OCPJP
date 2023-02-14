@@ -9,6 +9,9 @@
 	<title>JSP隱含變數</title>
 	<link type="text/css" rel="stylesheet" href="../css/global.css">
 	<style>
+		body{
+		margin: 14px;
+		}
 		div>h2>sup{color: red;}
 		div>p>span {color: blue;font-weight: bold;}
 	</style>
