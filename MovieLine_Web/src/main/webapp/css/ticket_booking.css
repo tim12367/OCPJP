@@ -1,0 +1,40 @@
+@charset "UTF-8";
+.seating_box{
+	width:434px;
+}
+.screan_img{
+	width: 100%;
+}
+.seating_area{
+	left: 0%;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	table-layout: fixed;
+}
+tr{
+	line-height: 25px;
+}
+td{
+	width: 25px;
+	height: 25px;
+	padding: 0px;
+    margin: 0px;
+    border: 0;
+	position: relative;
+}
+td>p{
+	font-size: small;
+	text-align: center;
+	margin: 0;
+	display: block;
+	width: 25px;
+	height: 25px;
+}
+td>img{
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 25px;
+	height: 25px;
+}
