@@ -1,1 +1,73 @@
 @charset "UTF-8";
+h1{
+    margin: 15px auto 0 auto;
+    font-size: 31.2px;
+    line-height: 1.2em;
+}
+h2{
+    margin: 0;
+    font-size: 18px;
+    color: #2f96ee;
+}
+
+p{
+    font-family: "Microsoft JhengHei",Arial,Helvetica,sans-serif;
+}
+.article_content{
+    margin: 30px auto;
+    display: flex;
+    flex-direction: row;
+    max-width: 1140px;
+}
+.detail_box{
+    width:calc(30% - 92px);
+    padding-right: 92px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+}
+
+.detail_box_booking_btn{
+    line-height: 44px;
+    height: 44px;
+    width: 80%;
+    text-align: center;
+    border-radius: 6px;
+    background-color: #2660a9;
+    color: white;
+    align-self: center;
+    cursor: pointer;
+}
+
+.detail_box_preview_pic{
+    width: 100%;
+}
+.detail_box_subtitle{
+    font-weight: bold;
+}
+.detail_box_font{
+    color:#b3b1b1;
+}
+.trailer_describe_box{
+    width: 70%;
+}
+.describe_title{
+    font-size: 26px;
+    line-height: 31.2px;
+    font-weight: 400;
+    color: #2f96ee;
+    margin: 20px 0;
+}
+.youtube_vediobox{
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    padding-bottom: 56.25%;
+}
+.youtube{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
