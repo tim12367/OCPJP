@@ -30,6 +30,7 @@ td>p{
 	display: block;
 	width: 25px;
 	height: 25px;
+	user-select: none;
 }
 td>img{
 	position: absolute;
@@ -37,4 +38,6 @@ td>img{
 	left: 0;
 	width: 25px;
 	height: 25px;
+	z-index: -1;
+	cursor: pointer;
 }

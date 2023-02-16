@@ -16,6 +16,7 @@
       var darkModeFlag = true;
       $(document).ready(init);
       function init() {
+		
         if (localStorage) {
           restoreData();
           $("#dark_mode_button").click(darkModeHandler);
@@ -23,6 +24,9 @@
           alert("不支援的瀏覽器!");
           $("#hint").text("不支援的瀏覽器!");
         }
+		// TODO:從資料庫放資料上去初始化位子
+		seatInitHandlr(); //初始化位子
+		$("td").click(seatSelectHandlr); //點到的格子
       }
       function restoreData() {
         var getDarkModeFlag = localStorage.getItem("darkModeFlag");
@@ -50,6 +54,44 @@
         localStorage.setItem("darkModeFlag", darkModeFlag);
         darkModeFlag = !darkModeFlag;
       }
+	  function seatSelectHandlr(e){
+		var seatNumber = $(this).children("p").html();
+		if((!isNaN(seatNumber))&&(seatNumber!==undefined)&&(seatNumber!==null)){
+			console.log($(this).parent().attr("id"));
+			console.log(seatNumber);
+			console.log(typeof seatNumber);
+			console.log($(this).children("img").attr("src"));
+
+			if(($(this).children("img").attr("src")).indexOf("standard_available.png")>=0){
+				$(this).children("img").attr("src","./source/standard_selected.png");
+			}else if(($(this).children("img").attr("src")).indexOf("standard_selected.png")>=0){
+				$(this).children("img").attr("src","./source/standard_available.png");
+			}
+		}
+	  }
+	  function seatInitHandlr(){
+		$()
+		seatDisplayAllLine("#seating_area");
+	  }
+	  function seatDisplayAllLine(id){
+		var seatLineNumber;
+		for(var i=0; i < ($(id).children().children().length) ; i++){
+			seatLineNumber = $(id).children().children().eq(i).attr("id");
+			console.log(seatLineNumber);
+			seatDisplay("#"+seatLineNumber);
+		}
+	  }
+	  function seatDisplay(id){
+		// var seatNumber = $(id).children()[0];
+		// console.log(seatNumber);
+		var seatNumber ;
+		for(var i=0; i < ($(id).children().length) ; i++){
+			seatNumber = $(id).children().eq(i).children("p").html();
+			if((!isNaN(seatNumber))&&(seatNumber!==undefined)&&(seatNumber!==null)){
+				console.log(seatNumber);
+			}
+		}
+	  }
     </script>
   </head>
 
@@ -104,9 +146,9 @@
 		<div class="seating_box">
 			<img class="screan_img" src="source/SeatScreen.png" alt="">
 		
-      <table class="seating_area">
+      <table id = "seating_area" class="seating_area">
         <tbody>
-			<tr>
+			<tr id = "A">
 				<td>
 					<p>A</p>
 				</td>
@@ -158,7 +200,7 @@
 				</td>
 				
 			</tr>
-			<tr>
+			<tr id = "B">
 				<td>
 					<p>B</p>
 				</td>
@@ -210,7 +252,7 @@
 				</td>
 				
 			</tr>
-			<tr>
+			<tr id = "C">
 				<td>
 					<p>C</p>
 				</td>
@@ -262,7 +304,7 @@
 				</td>
 				
 			</tr>
-			<tr>
+			<tr id = "D">
 				<td>
 					<p>D</p>
 				</td>
@@ -314,7 +356,7 @@
 				</td>
 				
 			</tr>
-			<tr>
+			<tr id="E">
 				<td>
 					<p>E</p>
 				</td>
@@ -366,7 +408,7 @@
 				</td>
 				
 			</tr>
-			<tr>
+			<tr id = "F">
 				<td>
 					<p>F</p>
 				</td>
@@ -418,7 +460,7 @@
 				</td>
 				
 			</tr>
-			<tr>
+			<tr id = "G">
 				<td>
 					<p>G</p>
 				</td>
@@ -470,7 +512,7 @@
 				</td>
 				
 			</tr>
-			<tr>
+			<tr id = "H">
 				<td>
 					<p>H</p>
 				</td>
@@ -522,7 +564,7 @@
 				</td>
 				
 			</tr>
-			<tr>
+			<tr id = "I">
 				<td>
 					<p>I</p>
 				</td>
