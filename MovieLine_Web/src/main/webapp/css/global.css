@@ -53,6 +53,7 @@ article{
 .menu_search_input{
 	width: calc(100% - 47px);
 	color: #ffffff;
+	color: black;
 	background-color: #494851;
 	background-color: #f5faff;
 	border-radius: 20px;
