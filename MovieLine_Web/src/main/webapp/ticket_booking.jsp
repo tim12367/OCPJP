@@ -25,6 +25,7 @@
         }
 		// TODO:從資料庫放資料上去初始化位子
 		seatInitHandlr(); //初始化位子
+		$("td>img").attr("draggable","false");//disable draggable
 		$("td").click(seatSelectHandlr); //點到的格子
       }
       function restoreData() {
