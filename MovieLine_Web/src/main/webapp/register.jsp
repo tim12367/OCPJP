@@ -49,9 +49,6 @@ crossorigin="anonymous"></script>
 		<%}%>
 		
 		//init check rule
-		$("#email").attr("pattern","<%=Customer.EMALL_PATTERN%>");
-		
-		$("#roc_id").attr("pattern","<%=Customer.ID_PATTERN%>");
 		$("#roc_id").attr("maxlength","<%=Customer.MAX_ID_LENGTH%>");
 		
 		$("#password").attr("maxlength","<%=Customer.MAX_PASSWORD_LENGTH%>");
@@ -151,7 +148,8 @@ crossorigin="anonymous"></script>
 			<div class="form_label_input_box">
 				<label for="roc_id"><span class="required_mark"><b>*</b></span>身分證：</label>
 				<input type="text" id="roc_id" class="form_input--lightmode"
-					name="id" placeholder="請輸入中華民國身分證" required="required">
+					name="id" placeholder="請輸入中華民國身分證" required="required"
+					pattern="<%=Customer.ID_PATTERN%>">
 			</div>
 	
 			<!-- email -->
