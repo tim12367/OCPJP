@@ -65,6 +65,7 @@ class ProductsDAO {
 	private static final String SELECT_PRODUCTS_BY_KEYWORD = SELECT_ALL_PRODUCTS
 			+" WHERE name LIKE ?";
 	List<Product> selectProductsByKeyword(String keyword) throws MLException{
+		//查詢清單
 		List<Product> list = new ArrayList<>();
 		//connection
 		try(
