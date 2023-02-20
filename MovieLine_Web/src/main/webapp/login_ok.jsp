@@ -7,7 +7,9 @@
 	<title>會員登入成功</title>
 	<link rel="icon" type="image/x-icon" href="source/title_icon.png" />
 	<meta http-equiv="refresh" content="5; url=./">
-	<script src = "./jquery.js"></script>
+	<script src="https://code.jquery.com/jquery-3.0.0.js" 
+integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
+crossorigin="anonymous"></script>
 	<script>
 		$(document).ready(init);
 		function init() {
