@@ -2,7 +2,6 @@ package uuu.movieline.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +41,7 @@ public class LogoutServlet extends HttpServlet {
 		//3.作法二:外部轉址(會讓轉交之後會browser看到首頁網址是/)
 		//網址傳給瀏覽器 瀏覽器再請求
 		//所以不可以寫絕對路徑"/"
-		response.sendRedirect("./");
+		response.sendRedirect(request.getContextPath()); //or ./
 	}
 
 }
