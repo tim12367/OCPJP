@@ -1,8 +1,4 @@
 @charset "UTF-8";
-a{
-	text-decoration:none;
-	color:inherit;
-}
 .products_list{
     max-width: 1075px ;
     justify-content: start;

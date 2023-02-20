@@ -16,7 +16,10 @@ article{
 	/* 將footer擠到下方 */
 	min-height: 82vh;
 }
-
+a{
+	text-decoration:none;
+	color:inherit;
+}
 .menu {
 	background-color: #8a00fc;
 	background-color: #2660a9;
