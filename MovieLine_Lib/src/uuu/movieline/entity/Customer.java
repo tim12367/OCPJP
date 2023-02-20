@@ -57,7 +57,7 @@ public class Customer {
 
 	}
 
-	private static final String ID_PATTERN = "[A-Z][1289]\\d{8}";
+	public static final String ID_PATTERN = "[A-Z][1289]\\d{8}";
 
 	/**
 	 * 傳入身分證判斷是否符合ROC ID規則
@@ -91,7 +91,7 @@ public class Customer {
 		return email;
 	}
 
-	private static final String EMALL_PATTERN = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+	public static final String EMALL_PATTERN = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
 
 	public void setEmail(String email) {
 		if (email != null && email.matches(EMALL_PATTERN)) {
@@ -104,8 +104,8 @@ public class Customer {
 
 	}
 
-	private static final int MIN_PASSWORD_LENGTH = 6;
-	private static final int MAX_PASSWORD_LENGTH = 20;
+	public static final int MIN_PASSWORD_LENGTH = 6;
+	public static final int MAX_PASSWORD_LENGTH = 20;
 
 	/**
 	 * 設定密碼
@@ -125,8 +125,8 @@ public class Customer {
 		return this.password;
 	}
 
-	private static final int MIN_NAME_LENGTH = 2;
-	private static final int MAX_NAME_LENGTH = 20;
+	public static final int MIN_NAME_LENGTH = 2;
+	public static final int MAX_NAME_LENGTH = 20;
 
 	public void setName(String n) {
 		if (n != null && n.length() >= MIN_NAME_LENGTH && n.length() <= MAX_NAME_LENGTH) {
@@ -273,7 +273,7 @@ public class Customer {
 		this.setBirthday(birthDate);
 	}
 
-	private static final int MIN_AGE = 12;
+	public static final int MIN_AGE = 12;
 
 	public void setBirthday(LocalDate birthday) {
 		if (birthday != null && getAge(birthday) >= MIN_AGE) {
