@@ -16,7 +16,6 @@
       var darkModeFlag = true;
       $(document).ready(init);
       function init() {
-		
         if (localStorage) {
           restoreData();
           $("#dark_mode_button").click(darkModeHandler);
@@ -63,14 +62,18 @@
 			console.log($(this).children("img").attr("src"));
 
 			if(($(this).children("img").attr("src")).indexOf("standard_available.png")>=0){
+				//每按一個座位將數量加一
+				$("#quantity").val(Number($("#quantity").val()) + 1);
 				$(this).children("img").attr("src","./source/standard_selected.png");
 			}else if(($(this).children("img").attr("src")).indexOf("standard_selected.png")>=0){
+				//每按一個座位將數量減一
+				$("#quantity").val(Number($("#quantity").val()) - 1);
 				$(this).children("img").attr("src","./source/standard_available.png");
 			}
+			
 		}
 	  }
 	  function seatInitHandlr(){
-		$()
 		seatDisplayAllLine("#seating_area");
 	  }
 	  function seatDisplayAllLine(id){
@@ -608,6 +611,21 @@
 			</tr>
         </tbody>
       </table>
+      <!-- TODO:假輸入 -->
+      <!-- For test input -->
+      <form action="">
+      	<label>
+      		目前產品id
+      		<input type="text" name="productId" value="<%=request.getParameter("productId")%>">
+      	</label>
+      	<br>
+      	<label>
+      		目前產品數量
+      		<input id="quantity" type="number" name="quantity" min="1" max="20" value="0">
+      	</label>
+      	<input type="submit">
+      </form>
+      <!-- For test input -->
 	</div>
     </article>
   </body>
