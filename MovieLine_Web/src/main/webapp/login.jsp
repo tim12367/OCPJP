@@ -145,6 +145,7 @@ crossorigin="anonymous"></script>
 			<h3>歡迎光臨一線影院</h3>
 	
 			<div id="input_box" class="form_input_box">
+			<!-- TODO:Fix pattern caught SyntaxError:  -->
 				<input type="text" id="username" name="username"
 					class="form_input--lightmode" required="required"
 					placeholder="請輸入電子郵件或身分證"
