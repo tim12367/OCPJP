@@ -38,7 +38,11 @@ crossorigin="anonymous"></script>
 		$("#show_password_button").on("touchstart",showPasswordHandler);//手機版按下
 		$("#show_password_button").on("touchend",hidePasswordHandler);//手機版放開
 		//點選驗證圖片更新
-		$("#captcha_image").click(refreshCaptcha);	
+		$("#captcha_image").click(refreshCaptcha);
+		<%if("POST".equalsIgnoreCase(request.getMethod())){%>
+		//表單帶回
+		repopulateFormData();
+		<%}%>
 	}
 	function saveHandler() {
 		if ($("#remembermypassword")[0].checked) {
@@ -96,6 +100,12 @@ crossorigin="anonymous"></script>
 	function refreshCaptcha() {
 		$("#captcha_image").attr("src","images/captcha.jpg?refresh=" + new Date());
 	}
+	<%if("POST".equalsIgnoreCase(request.getMethod())){%>
+	function repopulateFormData() {
+		$("#username").val("<%=request.getParameter("username")%>");
+		$("#password").val("<%=request.getParameter("password")%>");
+	}
+	<%}%>
 </script>
 </head>
 
