@@ -13,7 +13,9 @@
 
 </style>
 <link href="css/global_dark.css" type="text/css" rel="stylesheet">
-<script src="./jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.js" 
+integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
+crossorigin="anonymous"></script>
 <script>
 	var darkModeFlag = true;
 	$(document).ready(init);
@@ -39,6 +41,11 @@
 		$("#show_password_button").on("touchend",hidePasswordHandler);//手機版放開
 		//點選驗證圖片更新
 		$("#captcha_image").click(refreshCaptcha);
+		
+		<%if("POST".equals(request.getMethod())){%>
+		//表單帶回
+		repopulateFormData();
+		<%}%>
 	}
 	
 	function restoreData() {
@@ -91,6 +98,18 @@
 	}
 	function refreshCaptcha() {
 		$("#captcha_image").attr("src","images/register_captcha.jpg?refresh=" + new Date());
+	}
+	function repopulateFormData() {
+		$("#roc_id").val("<%=request.getParameter("id")%>");
+		$("#email").val("<%=request.getParameter("email")%>");
+		$("#password").val("<%=request.getParameter("password")%>");
+		$("#name").val("<%=request.getParameter("name")%>");
+		$("#birthday").val("<%=request.getParameter("birthday")%>");
+		$("#gender").val("<%=request.getParameter("gender")%>");
+		$("#address").val("<%=request.getParameter("address")%>");
+		$("#phone").val("<%=request.getParameter("phone")%>");
+		<%String oldSubscribed = request.getParameter("subscribed");%>
+		$("#subscribed").prop("checked",<%=(oldSubscribed!=null?oldSubscribed:"").equals("1")%>);
 	}
 </script>
 </head>
