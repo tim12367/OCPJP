@@ -1,5 +1,6 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
+<%@page import="java.time.LocalDate"%>
 <%@page import="uuu.movieline.entity.Customer"%>
 <%@page import="java.util.List"%>
 <html>
@@ -32,7 +33,7 @@ crossorigin="anonymous"></script>
 		// TODO:兩次密碼打對才能送出
 
 		//設定生日最大值
-		maxBirthdaySetting();
+		$("#birthday").attr("max","<%=LocalDate.now().minusYears(Customer.MIN_AGE)%>");
 		// 查看密碼按鈕
 		$("#show_password_button").mousedown(showPasswordHandler);
 		$("#show_password_button").mouseup(hidePasswordHandler);
@@ -46,6 +47,8 @@ crossorigin="anonymous"></script>
 		//表單帶回
 		repopulateFormData();
 		<%}%>
+		
+		//
 	}
 	
 	function restoreData() {
@@ -82,23 +85,11 @@ crossorigin="anonymous"></script>
 		$("#show_password_button").attr("src","./source/visibility_off_FILL0_wght400_GRAD0_opsz48.svg");
 		$("#password").attr("type","password");
 	}
-	function maxBirthdaySetting(){
-		var today = new Date();
-		var year_birthday = (today.getFullYear() - 12);
-		// if 幾月日期 <10 加零在前面
-		var month_birthday = (((today.getMonth() + 1) < 10) ? 
-		("0" + (today.getMonth() + 1)) : (today.getMonth() + 1));
-		var day_birthday = ((today.getDate()) < 10) ? 
-		("0" + today.getDate()) : (today.getDate());
-
-		console.log("12歲的生日：" + year_birthday + "-" + month_birthday + "-"
-				+ day_birthday);
-		$("#birthday").attr("max",
-				(year_birthday + "-" + month_birthday + "-" + day_birthday));
-	}
+	
 	function refreshCaptcha() {
 		$("#captcha_image").attr("src","images/register_captcha.jpg?refresh=" + new Date());
 	}
+	<%if("POST".equals(request.getMethod())){%>
 	function repopulateFormData() {
 		$("#roc_id").val("<%=request.getParameter("id")%>");
 		$("#email").val("<%=request.getParameter("email")%>");
@@ -111,6 +102,7 @@ crossorigin="anonymous"></script>
 		<%String oldSubscribed = request.getParameter("subscribed");%>
 		$("#subscribed").prop("checked",<%=(oldSubscribed!=null?oldSubscribed:"").equals("1")%>);
 	}
+	<%}%>
 </script>
 </head>
 <body>
