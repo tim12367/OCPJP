@@ -84,18 +84,18 @@ crossorigin="anonymous"></script>
 		}
 		localStorage.setItem("darkModeFlag", darkModeFlag);
 		darkModeFlag = !darkModeFlag;
-		try {console.log(e.type);}//for test
-		catch(e){console.log("err");}
+		//try {console.log(e.type);}//for test
+		//catch(e){console.log("err");}
 	}
 	function showPasswordHandler(e){
 		$("#show_password_button").attr("src","source/visibility_FILL0_wght400_GRAD0_opsz48.svg");
 		$("#password").attr("type","text");
-		console.log(e.type);//for test
+		//console.log(e.type);//for test
 	}
 	function hidePasswordHandler(e){
 		$("#show_password_button").attr("src","./source/visibility_off_FILL0_wght400_GRAD0_opsz48.svg");
 		$("#password").attr("type","password");
-		console.log(e.type);//for test
+		//console.log(e.type);//for test
 	}
 	function refreshCaptcha() {
 		$("#captcha_image").attr("src","images/captcha.jpg?refresh=" + new Date());
@@ -148,7 +148,7 @@ crossorigin="anonymous"></script>
 				<input type="text" id="username" name="username"
 					class="form_input--lightmode" required="required"
 					placeholder="請輸入電子郵件或身分證"
-					pattern="(^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$)|([a-zA-Z][1289][0-9]{8})">
+					pattern="([a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$)|([a-zA-Z][1289][0-9]{8})">
 				
 				<div class="form_input_password_box">
 					<input type="password" id="password" name="password"

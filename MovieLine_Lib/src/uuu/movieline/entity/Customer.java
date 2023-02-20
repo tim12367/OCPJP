@@ -57,7 +57,7 @@ public class Customer {
 
 	}
 
-	public static final String ID_PATTERN = "[A-Z][1289]\\d{8}";
+	public static final String ID_PATTERN = "[A-Z][1289][0-9]{8}";
 	public static final int MAX_ID_LENGTH = 10;
 	
 	/**
