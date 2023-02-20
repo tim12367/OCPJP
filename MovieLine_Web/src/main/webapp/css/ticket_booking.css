@@ -25,6 +25,9 @@ td{
 	position: relative;
 }
 td>p{
+	position: absolute;
+	top:0;
+	left: 0;
 	font-size: small;
 	text-align: center;
 	margin: 0;
@@ -32,6 +35,7 @@ td>p{
 	width: 25px;
 	height: 25px;
 	user-select: none;
+	z-index: 1;
 }
 td>img{
 	position: absolute;
@@ -39,6 +43,5 @@ td>img{
 	left: 0;
 	width: 25px;
 	height: 25px;
-	z-index: -1;
 	cursor: pointer;
 }

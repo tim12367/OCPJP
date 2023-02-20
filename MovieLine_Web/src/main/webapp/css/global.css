@@ -29,7 +29,7 @@ a{
 	position: fixed;
 	top: 0px;
 	left: 0;
-	z-index: 1;
+	z-index: 2;
 	/* flex */
 	display: flex;
 	align-items: center;
@@ -109,7 +109,7 @@ a{
 	border-bottom-color: rgb(220, 219, 230);
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-	z-index: 1;
+	z-index: 2;
 }
 
 .nav_list{
