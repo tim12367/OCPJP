@@ -110,16 +110,8 @@ crossorigin="anonymous"></script>
 </head>
 
 <body>
-	<header id="menu" class="menu">
-		<img class="menu_logo_img" src="source/movie_FILL0_wght400_GRAD0_opsz48.svg" alt="Movie_Line_Logo" draggable="false">
-		<form class='menu_search_form'>
-			<input type='search' name="search" class="menu_search_input menu_search_form_items" placeholder='請輸入查詢關鍵字'>
-			<input type='submit' class="menu_search_form_button menu_search_form_items" value='搜尋'>			
-		</form>
-		<img id=dark_mode_button class="menu_dark_mode_button"
-			src="source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg"
-			alt="dark_mode_button" draggable="false">
-	</header>
+	<!-- 後端標籤 -->
+	<jsp:include page="/subviews/header.jsp"/>
 	<%
 		Customer member = (Customer)session.getAttribute("member");
 	%>
@@ -156,7 +148,7 @@ crossorigin="anonymous"></script>
 				<input type="text" id="username" name="username"
 					class="form_input--lightmode" required="required"
 					placeholder="請輸入電子郵件或身分證"
-					pattern="(^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)|([a-zA-Z][1289][0-9]{8})">
+					pattern="(^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$)|([a-zA-Z][1289][0-9]{8})">
 				
 				<div class="form_input_password_box">
 					<input type="password" id="password" name="password"
