@@ -13,7 +13,9 @@
 
 </style>
 <link href="css/global_dark.css" type="text/css" rel="stylesheet">
-<script src="./jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.0.0.js" 
+integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
+crossorigin="anonymous"></script>
 <script>
 	var darkModeFlag = true;
 	$(document).ready(init);
@@ -80,7 +82,7 @@
 		<div class="article_content">
 			<div class="detail_box">
 				<img class="detail_box_preview_pic" src="https://www.miranewcinemas.com/MiramarApp/Resource/8db039cc9cfe630_S.jpg">
-				<a class="detail_box_booking_btn">前往訂票</a>
+				<a class="detail_box_booking_btn" href="ticket_booking.jsp?productId=<%=request.getParameter("productId")%>">前往訂票</a>
 				
 				<div>
 					<div class="detail_box_subtitle">上映 RELEASE DATE</div>
