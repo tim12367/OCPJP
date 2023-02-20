@@ -48,7 +48,17 @@ crossorigin="anonymous"></script>
 		repopulateFormData();
 		<%}%>
 		
-		//
+		//init check rule
+		$("#email").attr("pattern","<%=Customer.EMALL_PATTERN%>");
+		
+		$("#roc_id").attr("pattern","<%=Customer.ID_PATTERN%>");
+		$("#roc_id").attr("maxlength","<%=Customer.MAX_ID_LENGTH%>");
+		
+		$("#password").attr("maxlength","<%=Customer.MAX_PASSWORD_LENGTH%>");
+		$("#password").attr("minlength","<%=Customer.MIN_PASSWORD_LENGTH%>");
+		
+		$("#name").attr("minlength","<%=Customer.MIN_NAME_LENGTH%>");
+		$("#name").attr("maxlength","<%=Customer.MAX_NAME_LENGTH%>");
 	}
 	
 	function restoreData() {
@@ -149,24 +159,21 @@ crossorigin="anonymous"></script>
 			<div class="form_label_input_box">
 				<label for="roc_id"><span class="required_mark"><b>*</b></span>身分證：</label>
 				<input type="text" id="roc_id" class="form_input--lightmode"
-					name="id" placeholder="請輸入中華民國身分證" required="required"
-					pattern="[a-zA-Z][1289][0-9]{8}" maxlength="10">
+					name="id" placeholder="請輸入中華民國身分證" required="required">
 			</div>
 	
 			<!-- email -->
 			<div class="form_label_input_box">
 				<label for="email"><span class="required_mark"><b>*</b></span>email：</label>
 				<input type="email" id="email" class="form_input--lightmode"
-					name="email" placeholder="請輸入電子郵件" required="required"
-					pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$)">
+					name="email" placeholder="請輸入電子郵件" required="required">
 			</div>
 	
 			<!-- password -->
 			<div class="form_label_input_box password_div">
 				<label for="password"><span class="required_mark"><b>*</b></span>密碼：</label>
 				<input type="password" id="password" class="form_input--lightmode"
-					name="password" placeholder="請輸入密碼6~20個字" minlength="6"
-					maxlength="20" required="required">
+					name="password" placeholder="請輸入密碼6~20個字" required="required">
 				<img src="./source/visibility_off_FILL0_wght400_GRAD0_opsz48.svg" 
 					id="show_password_button" class="form_input_box_show_password_button"
 					draggable="false">
@@ -176,8 +183,7 @@ crossorigin="anonymous"></script>
 			<div class="form_label_input_box">
 				<label for="name"><span class="required_mark"><b>*</b></span>姓名：</label>
 				<input type="text" id="name" class="form_input--lightmode "
-					name="name" placeholder="請輸入姓名2~20個字" minlength="2" maxlength="20"
-					required="required">
+					name="name" placeholder="請輸入姓名2~20個字" required="required">
 			</div>
 	
 			<!-- birthday -->

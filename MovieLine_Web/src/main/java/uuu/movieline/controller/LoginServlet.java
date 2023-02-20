@@ -1,7 +1,6 @@
 package uuu.movieline.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +76,7 @@ public class LoginServlet extends HttpServlet {
 				Customer c = service.login(username, password);
 				//3.1 登入成功:內部轉交(forward)/login_ok.jsp
 				RequestDispatcher dispatcher = //請求派遣器
-						request.getRequestDispatcher("login_ok.jsp");
+						request.getRequestDispatcher("/login_ok.jsp");
 				session.setAttribute("member",c);
 				request.setAttribute("msg","登入成功");
 				dispatcher.forward(request, response);
@@ -97,7 +96,7 @@ public class LoginServlet extends HttpServlet {
     	
     	//3.2 登入失敗:內部轉交(forward)/login.jsp
     	RequestDispatcher dispatcher = 
-    			request.getRequestDispatcher("login.jsp");
+    			request.getRequestDispatcher("/login.jsp");
     	request.setAttribute("errors", errors);
     	dispatcher.forward(request, response);
     	//結束
