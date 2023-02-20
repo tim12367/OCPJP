@@ -57,7 +57,9 @@ crossorigin="anonymous"></script>
 </head>
 <body>
 	<!-- 後端標籤 -->
-	<jsp:include page="/subviews/header.jsp"/>
+	<jsp:include page="/subviews/header.jsp">
+		<jsp:param value="/source/movie_list_icon.png" name="iconUrl"/>
+	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp"/>
 	<%
 		String keyword = (String)request.getParameter("search");
