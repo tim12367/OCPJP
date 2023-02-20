@@ -6,7 +6,7 @@
 	%>
 	<nav class="nav">
 		<ul class="nav_list">
-			<li class="nav_list_item"><a href=# class="nav_list_a">Home</a></li>
+			<li class="nav_list_item"><a href="./" class="nav_list_a">Home</a></li>
 			<li class="nav_list_item nav_list_last_item"><a href="products_list.jsp" class="nav_list_a">全部電影</a></li>
 		</ul>
 		<ul class = "nav_user">
