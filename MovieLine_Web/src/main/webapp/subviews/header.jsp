@@ -2,7 +2,7 @@
 <!-- header.jsp start -->
 	<%
 		String iconUrl = request.getParameter("iconUrl");
-		if(iconUrl==null) iconUrl = "/source/movie_FILL0_wght400_GRAD0_opsz48.svg";
+		if(iconUrl==null) iconUrl = "/source/movie_list_icon.png";
 	%>
 	<header id="menu" class="menu">
 		<img class="menu_logo_img" src=<%=request.getContextPath()%><%=iconUrl%> alt="Movie_Line_Logo" draggable="false">
@@ -11,7 +11,7 @@
 			<input type='submit' class="menu_search_form_button menu_search_form_items" value='搜尋'>			
 		</form>
 		<img id=dark_mode_button class="menu_dark_mode_button"
-			src="source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg"
+			src="<%=request.getContextPath()%>/source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg"
 			alt="dark_mode_button" draggable="false">
 	</header>
 <!-- header.jsp end -->
