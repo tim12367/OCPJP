@@ -7,7 +7,17 @@
 	<nav class="nav">
 		<ul class="nav_list">
 			<li class="nav_list_item"><a href="<%=request.getContextPath()%>" class="nav_list_a">Home</a></li>
-			<li class="nav_list_item nav_list_last_item"><a href="<%=request.getContextPath()%>/products_list.jsp" class="nav_list_a">全部電影</a></li>
+			<li class="nav_list_item"><a href="<%=request.getContextPath()%>/products_list.jsp" class="nav_list_a">全部電影</a></li>
+			<li class="nav_list_item nav_list_last_item">
+				<ul class = "nav_list_category_list">
+				分類清單
+					<li class="nav_list_category_list_item nav_list_category_list_item_first"><a href=# class="nav_user_a">會員修改</a></li>
+					<li class="nav_list_category_list_item"><a href=# class="nav_user_a">歷史訂單</a></li>
+					<!-- http://localhost:8080/ML/ -->
+					<li class="nav_list_category_list_item"><a href="<%=request.getContextPath()%>/logout.do" class="nav_user_a">登出</a></li>
+					
+				</ul>
+			</li>
 		</ul>
 		<a class="nav_booking_a" href="<%=request.getContextPath()%>/member/ticket_booking.jsp">
 			<img class="nav_booking_icon" alt="booking" src="<%=request.getContextPath()%>/source/ticket.png">
