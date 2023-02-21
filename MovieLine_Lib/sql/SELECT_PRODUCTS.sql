@@ -19,3 +19,14 @@ SELECT id, name, unit_price, stock, description,
 FROM products
 /*WHERE launch_date <= curdate()*/
 ORDER BY launch_date DESC limit 3;
+
+/* 產品分類清單 */
+SELECT DISTINCT category FROM products;
+
+SELECT category,COUNT(category) AS category_counter FROM products
+GROUP BY category;
+
+/*用id查詢*/ 
+SELECT id, name, unit_price, stock, description, 
+	photo_url, launch_date, category, discount, box_office 
+FROM products WHERE id=1;
