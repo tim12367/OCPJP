@@ -9,6 +9,9 @@
 			<li class="nav_list_item"><a href="<%=request.getContextPath()%>" class="nav_list_a">Home</a></li>
 			<li class="nav_list_item nav_list_last_item"><a href="<%=request.getContextPath()%>/products_list.jsp" class="nav_list_a">全部電影</a></li>
 		</ul>
+		<a class="nav_booking_a" href="<%=request.getContextPath()%>/member/ticket_booking.jsp">
+			<img class="nav_booking_icon" alt="booking" src="<%=request.getContextPath()%>/source/ticket.png">
+		</a>
 		<ul class = "nav_user">
 			<%=member!=null?(member.getName()+" 你好"):"尚未登入" %>
 			<%if(member==null){%>

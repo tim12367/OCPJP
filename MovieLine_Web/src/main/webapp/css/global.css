@@ -134,10 +134,18 @@ a{
 .nav_list_last_item{
 	border-right: 1px solid white;
 }
-
+.nav_booking_a{
+	margin-left:auto;
+	height:100%;
+}
+.nav_booking_icon{
+	width:100%;
+	height:100%;
+	filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(305deg) brightness(104%) contrast(102%);
+}
 .nav_user{
 	margin:0;
-	margin-left:auto;
+	/*margin-left:auto;*/
 	padding: 14px 5px;
 	color: #ffffff;
 	cursor: pointer;
