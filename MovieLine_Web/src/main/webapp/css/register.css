@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+.nav_user {
+    margin-left: auto;
+}
 .form_input--lightmode{
 	width: 70%;
 	padding: 6px 4px;

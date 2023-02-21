@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.nav_user {
+    margin-left: auto;
+}
 .login_form {
 	border: 1px solid #E8E9EC;
 	width: 370px;
