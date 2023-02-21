@@ -14,4 +14,10 @@ public class ProductService {
 	public List<Product> getProductsByKeyword(String keyword) throws MLException{
 		return dao.selectProductsByKeyword(keyword);
 	}
+	public List<Product> getProductsByCategory(String category) throws MLException{
+		return dao.selectProductsByCategory(category);
+	}
+	public Product getProductById(String id) throws MLException{
+		return dao.selectProductById(id);
+	}
 }

@@ -62,13 +62,17 @@ crossorigin="anonymous"></script>
 	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp"/>
 	<%
-		String keyword = (String)request.getParameter("search");
+		//1.取得request中的formdata
+		String keyword = (String)request.getParameter("keyword");
+		String category = (String)request.getParameter("category");
 		List<Product> list;
 		
 		ProductService service = new ProductService();
-		//判斷是所有結果 or 查詢結果
+		//2.呼叫商業邏輯
 		if(keyword!=null && keyword.length()>0){
 			list = service.getProductsByKeyword(keyword);
+		}else if(category!=null && category.length()>0){
+			list = service.getProductsByCategory(category);
 		}else{
 			list = service.getAllProducts();
 		}

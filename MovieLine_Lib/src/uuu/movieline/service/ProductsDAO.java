@@ -110,4 +110,98 @@ class ProductsDAO {
 		
 		return list;
 	}
+	private static final String SELECT_PRODUCTS_BY_CATEGORY = SELECT_ALL_PRODUCTS
+			+" WHERE category = ?";
+	List<Product> selectProductsByCategory(String category) throws MLException {
+		//查詢清單
+				List<Product> list = new ArrayList<>();
+				//connection
+				try(
+						Connection connection = MySQLConnection.getConnection();
+						PreparedStatement pstmt = connection.prepareStatement(SELECT_PRODUCTS_BY_CATEGORY);
+					) {
+					//3.1 傳入?的值
+					pstmt.setString(1, category);
+					try(
+							//4 執行指令
+							ResultSet rs = pstmt.executeQuery();
+						){
+						//5.處理rs
+						while (rs.next()) {
+							Product p;
+							int discount = rs.getInt("discount");
+							if(discount>0) {
+								p = new Outlet();
+								((Outlet)p).setDiscount(discount);
+							}else{
+								p = new Product();
+							}
+							
+							p.setId(rs.getInt("id"));
+							p.setName(rs.getString("name"));
+							p.setUnitPrice(rs.getDouble("unit_price"));
+							p.setStock(rs.getInt("stock"));
+							p.setDescription(rs.getString("description"));
+							p.setPhotoUrl(rs.getString("photo_url"));
+							p.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
+							p.setCategory(rs.getString("category"));
+							p.setBoxOffice(rs.getInt("box_office"));
+							
+							list.add(p);//!!要記得加入查詢清單
+						}
+					}
+				} catch (SQLException e) {
+					
+					throw new MLException("[查詢全部產品]失敗",e);
+				}
+				
+				
+				return list;
+	}
+	private static final String SELECT_PRODUCT_BY_ID = 
+			"SELECT id, name, unit_price, stock, description,"
+			+ "	photo_url, launch_date, category, discount, box_office "
+			+ "FROM products WHERE id=?";
+	Product selectProductById(String id) throws MLException{
+		Product p =null;
+		try(	//connection
+				Connection connection = MySQLConnection.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_PRODUCT_BY_ID);
+			) {
+			//3.1 傳入?的值
+			pstmt.setString(1, id);
+			
+			try(
+					//4 執行指令
+					ResultSet rs = pstmt.executeQuery();
+				){
+				//5.處理rs
+				while (rs.next()) {
+					int discount = rs.getInt("discount");
+					if(discount>0) {
+						p = new Outlet();
+						((Outlet)p).setDiscount(discount);
+					}else{
+						p = new Product();
+					}
+					
+					p.setId(rs.getInt("id"));
+					p.setName(rs.getString("name"));
+					p.setUnitPrice(rs.getDouble("unit_price"));
+					p.setStock(rs.getInt("stock"));
+					p.setDescription(rs.getString("description"));
+					p.setPhotoUrl(rs.getString("photo_url"));
+					p.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
+					p.setCategory(rs.getString("category"));
+					p.setBoxOffice(rs.getInt("box_office"));
+					
+				}
+			}
+		} catch (SQLException e) {
+			throw new MLException("[用id查詢產品失敗]");
+		}
+		return p;
+		
+		
+	}
 }
