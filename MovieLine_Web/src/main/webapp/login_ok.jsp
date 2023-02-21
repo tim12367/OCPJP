@@ -8,8 +8,8 @@
 	<link rel="icon" type="image/x-icon" href="source/title_icon.png" />
 	<meta http-equiv="refresh" content="5; url=./">
 	<script src="https://code.jquery.com/jquery-3.0.0.js" 
-integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
-crossorigin="anonymous"></script>
+	integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
+	crossorigin="anonymous"></script>
 	<script>
 		$(document).ready(init);
 		function init() {
