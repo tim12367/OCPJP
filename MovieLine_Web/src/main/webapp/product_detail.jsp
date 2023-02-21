@@ -82,7 +82,7 @@ crossorigin="anonymous"></script>
 		<div class="article_content">
 			<div class="detail_box">
 				<img class="detail_box_preview_pic" src="https://www.miranewcinemas.com/MiramarApp/Resource/8db039cc9cfe630_S.jpg">
-				<a class="detail_box_booking_btn" href="ticket_booking.jsp?productId=<%=request.getParameter("productId")%>">前往訂票</a>
+				<a class="detail_box_booking_btn" href="<%=request.getContextPath()%>/member/ticket_booking.jsp?productId=<%=request.getParameter("productId")%>">前往訂票</a>
 				
 				<div>
 					<div class="detail_box_subtitle">上映 RELEASE DATE</div>
