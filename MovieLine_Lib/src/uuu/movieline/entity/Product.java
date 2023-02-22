@@ -15,6 +15,10 @@ public class Product {
 	private LocalDate launchDate;
 	private String category; // 必要
 	private int boxOffice; //非必要
+	private String director;//非必要
+	private String cast;//非必要
+	private String subtitle;//非必要
+	private String trailerUrl;//非必要
 	public Product() {
 	} // 無參數建構式
 
@@ -139,11 +143,44 @@ public class Product {
 		this.boxOffice = boxOffice;
 	}
 
+	public String getDirector() {
+		return director;
+	}
+
+	public void setDirector(String director) {
+		this.director = director;
+	}
+
+	public String getCast() {
+		return cast;
+	}
+
+	public void setCast(String cast) {
+		this.cast = cast;
+	}
+
+	public String getSubtitle() {
+		return subtitle;
+	}
+
+	public void setSubtitle(String subtitle) {
+		this.subtitle = subtitle;
+	}
+
+	public String getTrailerUrl() {
+		return trailerUrl;
+	}
+
+	public void setTrailerUrl(String trailerUrl) {
+		this.trailerUrl = trailerUrl;
+	}
+
 	@Override
 	public String toString() {
-		return this.getClass().getName() + "\n [產品編號 = " + id + ", 產品名稱 = " + name + ", 售價 = " + unitPrice + ", 庫存 = "
-				+ stock + "\n, 產品敘述 = " + description + ", 圖片網址 = " + photoUrl + ", 發售日期 = " + launchDate + ", 分類 = "
-				+ category +"\n, 票房 = "+ boxOffice +"]";
+		return this.getClass().getName() + "\n [產品編號 = " + id + ", 產品名稱 = " + name +", 副標題 = " + subtitle + 
+				"\n, 售價 = " + unitPrice + ", 庫存 = "+ stock + ", 產品敘述 = " + description + ", 圖片網址 = " + photoUrl +
+				"\n, 發售日期 = " + launchDate + ", 分類 = "
+				+ category +", 票房 = "+ boxOffice +", 導演 = "+ director +", 演員 = "+ cast + ", 預告片 = "+ trailerUrl +"]";
 	}
 
 	@Override

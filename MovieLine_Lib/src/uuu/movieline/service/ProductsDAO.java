@@ -159,8 +159,8 @@ class ProductsDAO {
 				return list;
 	}
 	private static final String SELECT_PRODUCT_BY_ID = 
-			"SELECT id, name, unit_price, stock, description,"
-			+ "	photo_url, launch_date, category, discount, box_office "
+			"SELECT id, name, subtitle, unit_price, stock, description, "
+			+ "photo_url, trailer_url, launch_date, category, discount, box_office, director, cast "
 			+ "FROM products WHERE id=?";
 	Product selectProductById(String id) throws MLException{
 		Product p =null;
@@ -194,7 +194,10 @@ class ProductsDAO {
 					p.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
 					p.setCategory(rs.getString("category"));
 					p.setBoxOffice(rs.getInt("box_office"));
-					
+					p.setDirector(rs.getString("director"));
+					p.setCast(rs.getString("cast"));
+					p.setSubtitle(rs.getString("subtitle"));
+					p.setTrailerUrl(rs.getString("trailer_url"));
 				}
 			}
 		} catch (SQLException e) {
