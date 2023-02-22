@@ -5,6 +5,8 @@
 body {
 	margin: 0;
 	font-family: 'Noto Sans TC', sans-serif;
+	color:#333333;
+/*     background-color: rgb(237 237 237); */
 }
 footer{
 	text-align:center;
@@ -15,6 +17,7 @@ article{
 	padding-top: 99px;
 	/* 將footer擠到下方 */
 	min-height: 82vh;
+	
 }
 a{
 	text-decoration:none;
