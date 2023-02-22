@@ -30,7 +30,7 @@
 			<li class="nav_user_item"><a href="<%=request.getContextPath()%>/register.jsp" class="nav_user_a">註冊</a></li>
 			<%}else{%>
 			<!-- 已經登入 -->
-			<li class="nav_user_item nav_user_item_first"><a href=# class="nav_user_a">會員修改</a></li>
+			<li class="nav_user_item nav_user_item_first"><a href="<%=request.getContextPath()%>/member/update_member.jsp" class="nav_user_a">會員修改</a></li>
 			<li class="nav_user_item"><a href=# class="nav_user_a">歷史訂單</a></li>
 			<!-- http://localhost:8080/ML/ -->
 			<li class="nav_user_item"><a href="<%=request.getContextPath()%>/logout.do" class="nav_user_a">登出</a></li>
