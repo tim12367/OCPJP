@@ -65,19 +65,11 @@ crossorigin="anonymous"></script>
 			alt="dark_mode_button" draggable="false">
 	</header>
 	
-	<nav class="nav">
-		<ul class="nav_list">
-			<li class="nav_list_item"><a href=# class="nav_list_a">Home</a></li>
-			<li class="nav_list_item nav_list_last_item"><a href="products_list.jsp" class="nav_list_a">全部電影</a></li>
-		</ul>
-		<ul class = "nav_user">
-			
-			尚未登入
-			<li class="nav_user_item nav_user_item_first"><a href="login.jsp" class="nav_user_a">登入</a></li>
-			<li class="nav_user_item"><a href="register.jsp" class="nav_user_a">註冊</a></li>
-		
-		</ul>
-	</nav>
+	<!-- Insert icon here! -->
+	<jsp:include page="/subviews/header.jsp">
+		<jsp:param value="/source/movie_list_icon.png" name="iconUrl"/>
+	</jsp:include>
+	<jsp:include page="/subviews/nav.jsp"/>
 	<article>
 		<div class="article_content">
 			<div class="detail_box">
