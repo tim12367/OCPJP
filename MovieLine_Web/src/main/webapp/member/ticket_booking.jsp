@@ -1,4 +1,7 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
+<%@page import="uuu.movieline.service.ProductService"%>
+<%@page import="uuu.movieline.entity.Product"%>
+<%@page import="java.util.List"%>
 <!DOCTYPE html>
 
 <html>
@@ -37,6 +40,12 @@
 			darkModeFlag = getDarkModeFlag;
 			darkModeHandler();
 		}
+		<%	//若有產品 選取選項
+			if(request.getParameter("productId")!=null){
+		%>
+		
+			$("#productId").val("<%=request.getParameter("productId")%>");
+		<%}%>
 	}
 
 	function darkModeHandler() {
@@ -54,23 +63,32 @@
 	}
 	function seatSelectHandlr(e) {
 		var seatNumber = $(this).children("p").html();
+		var searRow = $(this).parent().attr("id");
 		if ((!isNaN(seatNumber)) && (seatNumber !== undefined)
 				&& (seatNumber !== null)) {
-			console.log($(this).parent().attr("id"));
-			console.log(seatNumber);
-			console.log(typeof seatNumber);
+			console.log(searRow);//A排
+			console.log(seatNumber);//1位
 			console.log($(this).children("img").attr("src"));
 
 			if (($(this).children("img").attr("src"))
 					.indexOf("standard_available.png") >= 0) {
 				//每按一個座位將數量加一
 				$("#quantity").val(Number($("#quantity").val()) + 1);
+				
+				//每按一個座位多一行詳情
+				$("#booking_detail_body").append("<div>"+searRow+"排"+seatNumber+"位"+"</div>");
+				
 				$(this).children("img").attr("src",
 						"../source/standard_selected.png");
 			} else if (($(this).children("img").attr("src"))
 					.indexOf("standard_selected.png") >= 0) {
 				//每按一個座位將數量減一
 				$("#quantity").val(Number($("#quantity").val()) - 1);
+				//取消選取↓
+				var rmtag = searRow+"排"+seatNumber+"位";
+				console.log(rmtag);
+				$("#booking_detail_body> :contains("+rmtag+")").remove();
+				//取消選取↑
 				$(this).children("img").attr("src",
 						"../source/standard_available.png");
 			}
@@ -78,28 +96,17 @@
 		}
 	}
 	function seatInitHandlr() {
-		seatDisplayAllLine("#seating_area");
+		$("#rowA").val("0000000000");
+		$("#rowB").val("0000000000");
+		$("#rowC").val("0000000000");
+		$("#rowD").val("0000000000");
+		$("#rowE").val("0000000000");
+		$("#rowF").val("0000000000");
+		$("#rowG").val("0000000000");
+		$("#rowH").val("0000000000");
+		$("#rowI").val("0000000000");
 	}
-	function seatDisplayAllLine(id) {
-		var seatLineNumber;
-		for (var i = 0; i < ($(id).children().children().length); i++) {
-			seatLineNumber = $(id).children().children().eq(i).attr("id");
-			console.log(seatLineNumber);
-			seatDisplay("#" + seatLineNumber);
-		}
-	}
-	function seatDisplay(id) {
-		// var seatNumber = $(id).children()[0];
-		// console.log(seatNumber);
-		var seatNumber;
-		for (var i = 0; i < ($(id).children().length); i++) {
-			seatNumber = $(id).children().eq(i).children("p").html();
-			if ((!isNaN(seatNumber)) && (seatNumber !== undefined)
-					&& (seatNumber !== null)) {
-				console.log(seatNumber);
-			}
-		}
-	}
+	
 </script>
 </head>
 
@@ -504,12 +511,59 @@
 				</table>
 				<!-- TODO:假輸入 -->
 				<!-- For test input -->
-				<form action="">
-					<label> 目前產品id <input type="text" name="productId"
-						value="<%=request.getParameter("productId")%>">
-					</label> <br> <label> 目前產品數量 <input id="quantity"
+				<form action="" method="POST">
+				
+				<label for="rowA">A</label>
+				<input id="rowA" type="text" readonly="readonly"><br>
+				
+				<label for="rowB">B</label>
+				<input id="rowB" type="text" readonly="readonly"><br>
+				
+				<label for="rowC">C</label>
+				<input id="rowC" type="text" readonly="readonly"><br>
+				
+				<label for="rowD">D</label>
+				<input id="rowD" type="text" readonly="readonly"><br>
+				
+				<label for="rowE">E</label>
+				<input id="rowE" type="text" readonly="readonly"><br>
+				
+				<label for="rowF">F</label>
+				<input id="rowF" type="text" readonly="readonly"><br>
+				
+				<label for="rowG">G</label>
+				<input id="rowG" type="text" readonly="readonly"><br>
+				
+				<label for="rowH">H</label>
+				<input id="rowH" type="text" readonly="readonly"><br>
+				
+				<label for="rowI">I</label>
+				<input id="rowI" type="text" readonly="readonly"><br>
+				
+					<label for="productId">目前產品id</label>
+					<select required="required" id="productId" name="productId">
+						<%
+						//1.取得所有商品
+							List<Product> list;
+							ProductService service = new ProductService();
+							list = service.getAllProducts();
+						%>
+						<option value="">請選擇電影</option>
+						<%if(list==null || list.size()==0){ %>
+						<option>查無電影</option>
+						<%}else{ %>
+						<%for(int i=0; i<list.size();i++){
+							Product p = list.get(i);%>
+						<option value="<%=p.getId()%>"><%=p.getName() %></option>
+						<%}%>
+						<%}%>
+						
+					</select>
+					<br>
+					<label for="quantity"> 目前購票數量 </label>
+					<input id="quantity" readonly="readonly"
 						type="number" name="quantity" min="1" max="20" value="0">
-					</label> <input type="submit">
+					 <input type="submit">
 				</form>
 				<!-- For test input -->
 			</div>
@@ -517,14 +571,14 @@
 
 				<div class="panel">
 					<div class="panel_title">
-						<img class="panel_title_icon" alt="" src="">
+						<img class="panel_title_icon" alt="" src="../source/ticket_title.png">
 						<div class="panel_title_text">訂票詳情</div>
 					</div>
-					<div class=panel_body></div>
+					<div id="booking_detail_body" class=panel_body></div>
 				</div>
 				<div class="panel">
 					<div class="panel_title">
-						<img class="panel_title_icon" alt="" src="">
+						<img class="panel_title_icon" alt="" src="../source/ticket_title.png">
 						<div class="panel_title_text">購物清單</div>
 					</div>
 					<div class=panel_body>

@@ -118,6 +118,7 @@ crossorigin="anonymous"></script>
 				</div>
 				<hr>
 				<h2 class="describe_title">劇情簡介</h2>
+				
 				<%=p.getDescription() %>
 			</div>
 		</div>
