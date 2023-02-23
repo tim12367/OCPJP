@@ -11,10 +11,10 @@
 			<li class="nav_list_item nav_list_last_item">
 				<ul class = "nav_list_category_list">
 				分類清單
-					<li class="nav_list_category_list_item nav_list_category_list_item_first"><a href=# class="nav_user_a">會員修改</a></li>
-					<li class="nav_list_category_list_item"><a href=# class="nav_user_a">歷史訂單</a></li>
+					<li class="nav_list_category_list_item nav_list_category_list_item_first"><a href=# class="nav_user_a">分類1</a></li>
+					<li class="nav_list_category_list_item"><a href=# class="nav_user_a">分類2</a></li>
 					<!-- http://localhost:8080/ML/ -->
-					<li class="nav_list_category_list_item"><a href="<%=request.getContextPath()%>/logout.do" class="nav_user_a">登出</a></li>
+					<li class="nav_list_category_list_item"><a href=# class="nav_user_a">分類3</a></li>
 					
 				</ul>
 			</li>
