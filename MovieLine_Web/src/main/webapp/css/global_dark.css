@@ -14,3 +14,6 @@
 	color: #e8eaed;
 	border-color: #6271a1;
 }
+.form_input_box_show_password_button--darkmode {
+    filter: invert(86%) sepia(62%) saturate(5722%) hue-rotate(180deg) brightness(106%) contrast(116%);
+}
