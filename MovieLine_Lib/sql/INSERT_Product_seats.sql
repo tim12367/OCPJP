@@ -1,0 +1,9 @@
+INSERT INTO product_seats (product_id,row_name,seats_booked) VALUES (10,'A',0);
+INSERT INTO product_seats (product_id,row_name,seats_booked) VALUES (10,'B',0);
+INSERT INTO product_seats (product_id,row_name,seats_booked) VALUES (10,'C',0);
+INSERT INTO product_seats (product_id,row_name,seats_booked) VALUES (10,'D',0);
+INSERT INTO product_seats (product_id,row_name,seats_booked) VALUES (10,'E',0);
+INSERT INTO product_seats (product_id,row_name,seats_booked) VALUES (10,'F',0);
+INSERT INTO product_seats (product_id,row_name,seats_booked) VALUES (10,'G',0);
+INSERT INTO product_seats (product_id,row_name,seats_booked) VALUES (10,'H',0);
+INSERT INTO product_seats (product_id,row_name,seats_booked) VALUES (10,'I',134);
