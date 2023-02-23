@@ -25,6 +25,7 @@ p{
     display: flex;
     flex-direction: column;
     justify-content:space-between;
+    min-height: 860px;
 }
 
 .detail_box_booking_btn{
@@ -50,6 +51,7 @@ p{
 }
 .trailer_describe_box{
     width: 70%;
+    letter-spacing: 3px;
 }
 .describe_title{
     font-size: 26px;
