@@ -74,9 +74,10 @@ td>img{
 }
 .panel_title_icon{
 	height: 100%;
-	
+	margin-right: 0.5em;
 }
 .panel_title_text{
+	color:white;
 	line-height: 20px;
 }
 .panel_body{

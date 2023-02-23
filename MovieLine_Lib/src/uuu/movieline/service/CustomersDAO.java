@@ -3,12 +3,13 @@ package uuu.movieline.service;
 import java.sql.*;
 
 import uuu.movieline.entity.Customer;
+import uuu.movieline.entity.VIP;
 import uuu.movieline.exception.MLException;
 import uuu.movieline.exception.MLInvalidDataException;
 
 class CustomersDAO {
 	private static final String SELECT_CUSTOMER_BY_ID = "SELECT id, email, password, name, birthday, gender, "
-			+ "address, phone, subscribed" + " FROM customers " + "WHERE id = ? OR email = ?";
+			+ "address, phone, subscribed, discount" + " FROM customers " + "WHERE id = ? OR email = ?";
 
 	Customer selectCustomerById(String idOrEmail) throws MLException {
 		Customer c = null;
@@ -26,7 +27,14 @@ class CustomersDAO {
 				// 5.處理rs
 				while (rs.next()) {
 					//!使用c前要建立物件 初始化在上方
-					c = new Customer();
+					int discount = rs.getInt("discount");
+					if(discount>0) {
+						c = new VIP();
+						((VIP)c).setDiscount(rs.getInt("discount"));
+					}else {
+						c = new Customer();
+					}
+					
 					c.setId(rs.getString("id"));
 					c.setEmail(rs.getString("email"));
 					c.setName(rs.getString("name"));
@@ -84,6 +92,44 @@ class CustomersDAO {
 			}
 		} catch (SQLException e) {
 			throw new MLException("新增客戶時執行SQL失敗",e);
+		}
+	}
+	private static final String UPDATE_CUSTOMER="UPDATE customers SET "
+			+ " email = '?', password ='?', name ='?', "
+			+ " birthday ='?', gender ='?',"
+			+ " address ='?', phone ='?', subscribed ='?'"
+			+ " WHERE id ='?';";
+	void update(Customer c) throws MLException{
+		try(
+				Connection connection = MySQLConnection.getConnection();//自己寫的 1,2
+				PreparedStatement pstmt = connection.prepareStatement(UPDATE_CUSTOMER);
+				) {
+			//3-1傳入?的值
+			
+			pstmt.setString(1, c.getEmail());
+			pstmt.setString(2, c.getPassword());
+
+			pstmt.setString(3, c.getName());
+			pstmt.setString(4, c.getBirthday().toString());
+			pstmt.setString(5, String.valueOf(c.getGender()));
+			
+			pstmt.setString(6, c.getAddress());
+			pstmt.setString(7, c.getPhone());
+
+			pstmt.setBoolean(8,c.isSubscribed());
+			pstmt.setString(9, c.getId());
+			//4.執行insert指令
+			pstmt.executeUpdate();
+			//executeUpdate:沒有回傳結果的execute
+			
+		} catch (SQLIntegrityConstraintViolationException e) {//Duplicate key ,Not null給null值
+			if (e.getMessage().indexOf("customers.email_UNIQUE")>0) {
+				throw new MLInvalidDataException("修改客戶失敗,email已經重複註冊",e);
+			}else {
+				throw new MLInvalidDataException("修改客戶時執行SQL失敗",e);
+			}
+		} catch (SQLException e) {
+			throw new MLException("修改客戶時執行SQL失敗",e);
 		}
 	}
 }

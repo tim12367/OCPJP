@@ -1,5 +1,6 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
+<%@page import="uuu.movieline.entity.VIP"%>
 <%@page import="java.time.LocalDate"%>
 <%@page import="uuu.movieline.entity.Customer"%>
 <%@page import="java.util.List"%>
@@ -7,15 +8,19 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>修改會員資料</title>
-<link rel="icon" type="image/x-icon" href="../sourcece/title_icon.png" />
+<link rel="icon" type="image/x-icon" href="../source/title_icon.png" />
 <link href="../css/global.css" type="text/css" rel="stylesheet">
 <link href="../css/register.css" type="text/css" rel="stylesheet">
 <style type="text/css">
 .nav_user {
     margin-left: 0;
 }
+.menu_logo_img{
+	filter: invert(86%) sepia(62%) saturate(5722%) hue-rotate(180deg) brightness(106%) contrast(116%);
+}
 </style>
 <link href="../css/global_dark.css" type="text/css" rel="stylesheet">
+<%Customer member = (Customer)session.getAttribute("member"); %>
 <script src="https://code.jquery.com/jquery-3.0.0.js" 
 integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
 crossorigin="anonymous"></script>
@@ -43,11 +48,8 @@ crossorigin="anonymous"></script>
 		$("#show_password_button,#show_newpassword_button").on("touchstart",showPasswordHandler);//手機版按下
 		$("#show_password_button,#show_newpassword_button").on("touchend",hidePasswordHandler);//手機版放開
 		
-		
-		<%if("POST".equals(request.getMethod())){%>
 		//表單帶回
 		repopulateFormData();
-		<%}%>
 		
 		//init check rule
 		$("#roc_id").attr("maxlength","<%=Customer.MAX_ID_LENGTH%>");
@@ -73,12 +75,14 @@ crossorigin="anonymous"></script>
 			$("body").addClass("body--darkmode");
 			$("#register_form :input:not([type=submit])").addClass("form_input--darkmode");
 			$("select").addClass("form_select--darkmode");
+			$(".form_input_box_show_password_button").addClass("form_input_box_show_password_button--darkmode");
 			$("#dark_mode_button").attr("src",
 					"../source/light_mode_FILL0_wght400_GRAD0_opsz48.svg");
 		} else {
 			$("body").removeClass("body--darkmode");
 			$("#register_form :input:not([type=submit])").removeClass("form_input--darkmode");
 			$("select").removeClass("form_select--darkmode");
+			$(".form_input_box_show_password_button").removeClass("form_input_box_show_password_button--darkmode");
 			$("#dark_mode_button").attr("src",
 					"../source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg");
 		}
@@ -107,40 +111,61 @@ crossorigin="anonymous"></script>
 		<%String oldSubscribed = request.getParameter("subscribed");%>
 		$("#subscribed").prop("checked",<%=(oldSubscribed!=null?oldSubscribed:"").equals("1")%>);
 	}
+		alert("資料錯誤請修改錯誤欄位再修改");
+	<%}else if(member==null){%>
+		alert("請先登入後再修改");
+	<%}else{%>
+	function repopulateFormData() {
+		$("#roc_id").val("<%=member.getId()%>");
+		$("#email").val("<%=member.getEmail()%>");
+		
+		$("#name").val("<%=member.getName()%>");
+		$("#birthday").val("<%=member.getBirthday()%>");
+		$("#gender").val("<%=member.getGender()%>");
+		$("#address").val("<%=member.getAddress()%>");
+		$("#phone").val("<%=member.getPhone()%>");
+		
+		$("#subscribed").prop("checked",<%=member.isSubscribed()%>);
+	}
 	<%}%>
+	
 </script>
 </head>
 <body>
-	<!-- 後端標籤 -->
-	<!-- 後端標籤 -->
-	<jsp:include page="/subviews/header.jsp"/>
+	<jsp:include page="/subviews/header.jsp">
+		<jsp:param value="/source/customer_setting.png" name="iconUrl"/>
+	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp"/>
 	<!-- id, email, password, name, birthday, gender, address, phone, subscribed -->
 	<article>
-		<form id="register_form" class="register_form" action="register.do" method="POST" autocomplete="on">
+		<form id="register_form" class="register_form" action="./update.do" method="POST" autocomplete="on">
 			<h1>修改會員資料</h1>
-	
+			
+			<%if(member instanceof VIP){ %>
+			<p>VIP會員可享<%=((VIP)member).getDiscountString()%></p>
+			
+			<%}%>
 			<!-- id 不可修改-->
 			<div class="form_label_input_box">
 				<label for="roc_id">身分證：</label>
-				<input disabled="disabled" type="text" id="roc_id" class="form_input--lightmode"
-					name="id" placeholder="身分證" required="required"
+				<input disabled="disabled" readonly="readonly" type="text" id="roc_id" class="form_input--lightmode"
+					name="id" placeholder="身分證"
 					pattern="<%=Customer.ID_PATTERN%>"
 					value="F999999999">
 			</div>
 	
 			<!-- email -->
 			<div class="form_label_input_box">
-				<label for="email"><span class="required_mark"><b>*</b></span>email：</label>
+				<label for="email">email：</label>
 				<input type="email" id="email" class="form_input--lightmode"
-					name="email" placeholder="請輸入電子郵件" required="required">
+					name="email" placeholder="請輸入電子郵件">
 			</div>
 	
 			<!-- oldPassword -->
 			<div class="form_label_input_box password_div">
 				<label for="password"><span class="required_mark"><b>*</b></span>輸入舊密碼：</label>
 				<input type="password" id="password" class="form_input--lightmode"
-					name="password" placeholder="請輸入舊密碼6~20個字" required="required">
+					name="password" placeholder="請輸入舊密碼6~20個字">
 				<img src="../source/visibility_off_FILL0_wght400_GRAD0_opsz48.svg" 
 					id="show_password_button" class="form_input_box_show_password_button"
 					draggable="false">
@@ -148,9 +173,9 @@ crossorigin="anonymous"></script>
 			
 			<!-- newPassword -->
 			<div class="form_label_input_box password_div">
-				<label for="password"><span class="required_mark"><b>*</b></span>輸入新密碼：</label>
+				<label for="password">輸入新密碼：</label>
 				<input type="password" id="newpassword" class="form_input--lightmode"
-					name="password" placeholder="請輸入密碼6~20個字" required="required">
+					name="newpassword" placeholder="若要改密碼請輸入">
 				<img src="../source/visibility_off_FILL0_wght400_GRAD0_opsz48.svg" 
 					id="show_newpassword_button" class="form_input_box_show_password_button"
 					draggable="false">
@@ -158,24 +183,24 @@ crossorigin="anonymous"></script>
 			
 			<!-- name -->
 			<div class="form_label_input_box">
-				<label for="name"><span class="required_mark"><b>*</b></span>姓名：</label>
+				<label for="name">姓名：</label>
 				<input type="text" id="name" class="form_input--lightmode "
-					name="name" placeholder="請輸入姓名2~20個字" required="required">
+					name="name" placeholder="請輸入姓名2~20個字">
 			</div>
 	
 			<!-- birthday 不可修改-->
 			<div class="form_label_input_box">
 				<label for="birthday">生日：</label>
-				<input disabled="disabled" type="date" id="birthday" class="form_input--lightmode"
-					name="birthday" required="required" pattern="\d{4}-\d{2}-\d{2}"
+				<input disabled="disabled" readonly="readonly" type="date" id="birthday" class="form_input--lightmode"
+					name="birthday" pattern="\d{4}-\d{2}-\d{2}"
 					value="9999-09-09">
 			</div>
 	
 			<!-- gender -->
 			<div class="form_label_input_box">
-				<label for="gender"><span class="required_mark"><b>*</b></span>性別：</label>
+				<label for="gender">性別：</label>
 				<select type="text" id="gender" class="form_select--lightmode"
-					name="gender" required="required">
+					name="gender">
 					<option value="">請選擇性別</option>
 					<option value="M">男</option>
 					<option value="F">女</option>
@@ -203,6 +228,7 @@ crossorigin="anonymous"></script>
 			
 			<%List<String> errors = (List<String>)request.getAttribute("errors");%>
 			<p><%=errors==null?"":errors%></p>
+			
 			<!-- 送出按鈕 -->
 			<input type="submit" class="submit_button" value="更新會員資料">
 		</form>

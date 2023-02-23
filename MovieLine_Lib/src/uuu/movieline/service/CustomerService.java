@@ -28,4 +28,12 @@ public class CustomerService {
 
 		dao.insert(c);
 	}
+
+	public void update(Customer c) throws MLException {
+		if(c==null) {
+			throw new IllegalArgumentException("修改會員時Customer物件不得為null");
+		}
+		
+		dao.update(c);
+	}
 }
