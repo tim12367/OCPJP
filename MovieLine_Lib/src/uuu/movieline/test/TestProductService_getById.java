@@ -20,7 +20,7 @@ public class TestProductService_getById {
 //		}
 		//用名子查詢
 		try {
-			Product p = service.getProductById("dfghjk");
+			Product p = service.getProductById("1");
 			System.out.println(p);
 		} catch (Exception e) {
 			Logger.getLogger("測試[id查詢]").log(
