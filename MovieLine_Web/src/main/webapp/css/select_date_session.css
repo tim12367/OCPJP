@@ -1,0 +1,41 @@
+@charset "UTF-8";
+.select_session_form{
+	width:470px;
+	min-height:300px;
+	display:flex;
+	flex-direction:column;
+	justify-content:space-around;
+	margin: 60px auto auto auto;
+	padding: 48px 40px 36px 40px;
+	border: 1px solid #E8E9EC;
+	border-radius: 6px;
+	background-color: #2660a9;
+}
+.select_session_form_input_box{
+	display:flex;
+	height:33px;
+}
+.select_session_form_input{
+	height:100%;
+	padding: 0px 5px;
+	flex-grow:1;
+	box-sizing:border-box;
+	border: 1px solid #DADCE0;
+	border-radius: 6px;
+}
+.select_session_form_input_icon{
+	height:100%;
+	padding:7px;
+	box-sizing:border-box;
+	filter: invert(97%) sepia(98%) saturate(0%) hue-rotate(86deg) brightness(104%) contrast(100%);
+}
+.submit_button{
+	height: 44px;
+	border:0;
+	font-size: 1.2em;
+	font-family: 'gotham ssm';
+	border-radius: 6px;
+	background-color: #2f96ee;
+	color:white;
+	cursor: pointer;
+}
