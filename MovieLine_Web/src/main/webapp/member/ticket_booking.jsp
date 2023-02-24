@@ -78,6 +78,9 @@
 				//每按一個座位多一行詳情
 				$("#booking_detail_body").append("<div>"+searRow+"排"+seatNumber+"位"+"</div>");
 				
+				//座位輸出加一
+				seatInputAdd(searRow,seatNumber);
+				
 				$(this).children("img").attr("src",
 						"../source/standard_selected.png");
 			} else if (($(this).children("img").attr("src"))
@@ -89,6 +92,10 @@
 				console.log(rmtag);
 				$("#booking_detail_body> :contains("+rmtag+")").remove();
 				//取消選取↑
+				
+				//座位輸出減一
+				seatInputRemove(searRow,seatNumber);
+				
 				$(this).children("img").attr("src",
 						"../source/standard_available.png");
 			}
@@ -96,17 +103,30 @@
 		}
 	}
 	function seatInitHandlr() {
-		$("#rowA").val("0000000000");
-		$("#rowB").val("0000000000");
-		$("#rowC").val("0000000000");
-		$("#rowD").val("0000000000");
-		$("#rowE").val("0000000000");
-		$("#rowF").val("0000000000");
-		$("#rowG").val("0000000000");
-		$("#rowH").val("0000000000");
-		$("#rowI").val("0000000000");
+		$("#rowA").val(0);
+		$("#rowB").val(0);
+		$("#rowC").val(0);
+		$("#rowD").val(0);
+		$("#rowE").val(0);
+		$("#rowF").val(0);
+		$("#rowG").val(0);
+		$("#rowH").val(0);
+		$("#rowI").val(0);
 	}
-	
+	function seatInputAdd(searRow,seatNumber) {
+		console.log("seatInputAdd"+searRow+seatNumber);
+		var jqueryString = "#row" + searRow;
+		var oldSeatNumber = Number($(jqueryString).val());
+		var newSeatNumber = oldSeatNumber | (1<<(Number(seatNumber)-1));
+		$(jqueryString).val(newSeatNumber);
+	}
+	function seatInputRemove(searRow,seatNumber) {
+		console.log("seatInputRemove"+searRow+seatNumber);
+		var jqueryString = "#row" + searRow;
+		var oldSeatNumber = Number($(jqueryString).val());
+		var newSeatNumber = oldSeatNumber & (~(1<<(Number(seatNumber)-1)));
+		$(jqueryString).val(newSeatNumber);
+	}
 </script>
 </head>
 
@@ -514,31 +534,31 @@
 				<form action="" method="POST">
 				
 				<label for="rowA">A</label>
-				<input id="rowA" type="text" readonly="readonly"><br>
+				<input id="rowA" name="rowA" type="number" readonly="readonly"><br>
 				
 				<label for="rowB">B</label>
-				<input id="rowB" type="text" readonly="readonly"><br>
+				<input id="rowB" name="rowB" type="number" readonly="readonly"><br>
 				
 				<label for="rowC">C</label>
-				<input id="rowC" type="text" readonly="readonly"><br>
+				<input id="rowC" name="rowC" type="number" readonly="readonly"><br>
 				
 				<label for="rowD">D</label>
-				<input id="rowD" type="text" readonly="readonly"><br>
+				<input id="rowD" name="rowD" type="number" readonly="readonly"><br>
 				
 				<label for="rowE">E</label>
-				<input id="rowE" type="text" readonly="readonly"><br>
+				<input id="rowE" name="rowE" type="number" readonly="readonly"><br>
 				
 				<label for="rowF">F</label>
-				<input id="rowF" type="text" readonly="readonly"><br>
+				<input id="rowF" name="rowF" type="number" readonly="readonly"><br>
 				
 				<label for="rowG">G</label>
-				<input id="rowG" type="text" readonly="readonly"><br>
+				<input id="rowG" name="rowG" type="number" readonly="readonly"><br>
 				
 				<label for="rowH">H</label>
-				<input id="rowH" type="text" readonly="readonly"><br>
+				<input id="rowH" name="rowH" type="number" readonly="readonly"><br>
 				
 				<label for="rowI">I</label>
-				<input id="rowI" type="text" readonly="readonly"><br>
+				<input id="rowI" name="rowI" type="number" readonly="readonly"><br>
 				
 					<label for="productId">目前產品id</label>
 					<select required="required" id="productId" name="productId">
