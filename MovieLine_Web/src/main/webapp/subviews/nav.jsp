@@ -11,6 +11,7 @@
 			<li class="nav_list_item nav_list_last_item">
 				<ul class = "nav_list_category_list">
 				分類清單
+				<!-- TODO:從資料庫撈選項 -->
 					<li class="nav_list_category_list_item nav_list_category_list_item_first"><a href=# class="nav_user_a">分類1</a></li>
 					<li class="nav_list_category_list_item"><a href=# class="nav_user_a">分類2</a></li>
 					<!-- http://localhost:8080/ML/ -->
@@ -19,7 +20,7 @@
 				</ul>
 			</li>
 		</ul>
-		<a class="nav_booking_a" href="<%=request.getContextPath()%>/member/ticket_booking.jsp">
+		<a class="nav_booking_a" href="<%=request.getContextPath()%>/member/select_date_session.jsp">
 			<img class="nav_booking_icon" alt="booking" src="<%=request.getContextPath()%>/source/ticket.png">
 		</a>
 		<ul class = "nav_user">
