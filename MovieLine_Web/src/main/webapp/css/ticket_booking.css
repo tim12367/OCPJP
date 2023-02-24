@@ -81,6 +81,7 @@ td>img{
 	line-height: 20px;
 }
 .panel_body{
+	padding: 5px 10px;
 	min-height: 100px;
 }
 .product_box{
