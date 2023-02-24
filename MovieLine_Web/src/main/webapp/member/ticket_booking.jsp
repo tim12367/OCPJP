@@ -66,9 +66,9 @@
 		var searRow = $(this).parent().attr("id");
 		if ((!isNaN(seatNumber)) && (seatNumber !== undefined)
 				&& (seatNumber !== null)) {
-			console.log(searRow);//A排
-			console.log(seatNumber);//1位
-			console.log($(this).children("img").attr("src"));
+			//console.log(searRow);//A排
+			//console.log(seatNumber);//1位
+			//console.log($(this).children("img").attr("src"));//圖片網址
 
 			if (($(this).children("img").attr("src"))
 					.indexOf("standard_available.png") >= 0) {
