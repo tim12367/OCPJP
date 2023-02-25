@@ -14,18 +14,19 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * Servlet Filter implementation class PerformanceFilter
  */
-@WebFilter(urlPatterns = {"*.jsp", "*.do"})
-public class PerformanceFilter extends HttpFilter 
-	implements Filter {	    
+
+//從這裡開啟測試功能
+//@WebFilter(urlPatterns = {"*.jsp", "*.do"})
+public class PerformanceFilter extends HttpFilter implements Filter {
 	private FilterConfig config;
-	
-    /**
-     * @see HttpFilter#HttpFilter()
-     */
-    public PerformanceFilter() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpFilter#HttpFilter()
+	 */
+	public PerformanceFilter() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -37,18 +38,18 @@ public class PerformanceFilter extends HttpFilter
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
+//		開始記錄
 		long begin = System.currentTimeMillis();
+//		filter結束 轉交請求	
+		chain.doFilter(request, response);
+//		紀錄結束時間 並且傳送log
+		long end = System.currentTimeMillis();
 
-	     chain.doFilter(request, response);
+		String logMessage = ((HttpServletRequest) request).getRequestURL() + ": " + (end - begin) + " ms";
 
-	     long end = System.currentTimeMillis();
-	 
-
-	     String logMessage = ((HttpServletRequest)request).getRequestURL()
-	                       + ": " + (end - begin) + " ms";
-
-	     config.getServletContext().log(logMessage.toString());
+		config.getServletContext().log(logMessage.toString());
 	}
 
 	/**
