@@ -110,7 +110,7 @@ public class RegisterServlet extends HttpServlet {
 				request.setAttribute("member",c);
 				request.setAttribute("msg","註冊成功");
 				dispatcher.forward(request, response);
-				return;
+				return;//若失敗會繼續向下
 			} catch (MLInvalidDataException ex) {
 				errors.add(ex.getMessage());//for user
 			} catch (MLException ex) {
@@ -121,7 +121,6 @@ public class RegisterServlet extends HttpServlet {
 				this.log("註冊失敗，系統發生非預期錯誤",ex);//for admin, developer, tester
 			}
 		}
-		
 		
 		//3.2 顯示註冊失敗畫面
 		RequestDispatcher dispatcher = //請求派遣器
