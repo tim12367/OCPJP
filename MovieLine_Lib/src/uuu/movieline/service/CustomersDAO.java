@@ -95,10 +95,10 @@ class CustomersDAO {
 		}
 	}
 	private static final String UPDATE_CUSTOMER="UPDATE customers SET "
-			+ " email = '?', password ='?', name ='?', "
-			+ " birthday ='?', gender ='?',"
-			+ " address ='?', phone ='?', subscribed ='?'"
-			+ " WHERE id ='?';";
+			+ " email = ?, password =?, name =?, "
+			+ " birthday =?, gender =?,"
+			+ " address =?, phone =?, subscribed =?"
+			+ " WHERE id =?;";
 	void update(Customer c) throws MLException{
 		try(
 				Connection connection = MySQLConnection.getConnection();//自己寫的 1,2
