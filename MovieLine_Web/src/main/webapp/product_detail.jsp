@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 
 <%@page import="java.util.List"%>
-<%@page import="uuu.movieline.entity.Product"%>
+<%@page import="uuu.movieline.entity.Movie"%>
 <%@page import="uuu.movieline.service.ProductService"%>
 <html>
 <head>
@@ -63,12 +63,12 @@ crossorigin="anonymous"></script>
 	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp"/>
 	<%
-		String productId = request.getParameter("productId");
-		ProductService service = new ProductService();
-		Product p =null;
-		if(productId!=null && productId.length()>0){
-			p = service.getProductById(productId);
-		}
+	String productId = request.getParameter("productId");
+			ProductService service = new ProductService();
+			Movie p =null;
+			if(productId!=null && productId.length()>0){
+		p = service.getProductById(productId);
+			}
 	%>
 	<article>
 	<%if(p==null){ %>

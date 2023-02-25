@@ -1,7 +1,7 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
 <%@page import="uuu.movieline.service.ProductService"%>
-<%@page import="uuu.movieline.entity.Product"%>
+<%@page import="uuu.movieline.entity.Movie"%>
 <%@page import="java.util.List"%>
 <%@page import="uuu.movieline.entity.Customer"%>
 <html>
@@ -62,30 +62,34 @@ crossorigin="anonymous"></script>
 	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp"/>
 	<%
-		//1.取得request中的formdata
-		String keyword = (String)request.getParameter("keyword");
-		String category = (String)request.getParameter("category");
-		List<Product> list;
-		
-		ProductService service = new ProductService();
-		//2.呼叫商業邏輯
-		if(keyword!=null && keyword.length()>0){
-			list = service.getProductsByKeyword(keyword);
-		}else if(category!=null && category.length()>0){
-			list = service.getProductsByCategory(category);
-		}else{
-			list = service.getAllProducts();
-		}
-		
+	//1.取得request中的formdata
+			String keyword = (String)request.getParameter("keyword");
+			String category = (String)request.getParameter("category");
+			List<Movie> list;
+			
+			ProductService service = new ProductService();
+			//2.呼叫商業邏輯
+			if(keyword!=null && keyword.length()>0){
+		list = service.getProductsByKeyword(keyword);
+			}else if(category!=null && category.length()>0){
+		list = service.getProductsByCategory(category);
+			}else{
+		list = service.getAllProducts();
+			}
 	%>
 	<article>
-		<% if(list==null || list.size()==0 ){%>
+		<%
+		if(list==null || list.size()==0 ){
+		%>
 			<p>查無資料</p>
-		<%}else{ %>
+		<%
+		}else{
+		%>
 		
 		<ul class="products_list">
-			<%for(int i=0; i<list.size();i++ ){
-				Product p = list.get(i);
+			<%
+			for(int i=0; i<list.size();i++ ){
+					Movie p = list.get(i);
 			%>
 			<li class="products_list_item">
 				<a class="product_box" href="product_detail.jsp?productId=<%= p.getId()%>">
