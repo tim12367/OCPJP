@@ -1,6 +1,6 @@
 <%@ page pageEncoding="UTF-8"%>
 <%@page import="uuu.movieline.service.ProductService"%>
-<%@page import="uuu.movieline.entity.Product"%>
+<%@page import="uuu.movieline.entity.Movie"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 	<html>
@@ -65,17 +65,23 @@
 					</label>
 					<select id="movie" class="select_session_form_input" name="movie" required="required">
 					<%
-						//1.取得所有商品
-							List<Product> list;
-							ProductService service = new ProductService();
-							list = service.getAllProducts();
-						%>
+					//1.取得所有商品
+										List<Movie> list;
+										ProductService service = new ProductService();
+										list = service.getAllProducts();
+					%>
 						<option value="">請選擇電影</option>
-						<%if(list==null || list.size()==0){ %>
+						<%
+						if(list==null || list.size()==0){
+						%>
 						<option>查無電影</option>
-						<%}else{ %>
-						<%for(int i=0; i<list.size();i++){
-							Product p = list.get(i);%>
+						<%
+						}else{
+						%>
+						<%
+						for(int i=0; i<list.size();i++){
+											Movie p = list.get(i);
+						%>
 						<option value="<%=p.getId()%>"><%=p.getName() %></option>
 						<%}%>
 						<%}%>

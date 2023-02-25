@@ -1,34 +1,60 @@
 package uuu.movieline.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import uuu.movieline.exception.MLInvalidDataException;
 
-public class Product {
+public class Movie {
 	private int id; // 必要,Pkey,Auto-Increment
 	private String name; // 必要,1~?字元
 	private double unitPrice; // 必要, >0,定價(售價)
 	private int stock;// 必要, >0
-	private String description = "";
-	private String photoUrl;
-	private LocalDate launchDate;
 	private String category; // 必要
+	private String description = "";//非必要
+	private String photoUrl;//非必要
+	private LocalDate launchDate;//非必要
 	private int boxOffice; //非必要
 	private String director;//非必要
 	private String cast;//非必要
 	private String subtitle;//非必要
 	private String trailerUrl;//非必要
-	public Product() {
+	//private Map<String,Seat> seatsMap = new HashMap<>();//預設沒有
+	
+	//集合型態的Attribute,getter不可直接回傳正本
+//	public List<Seat> getSeatsList() {
+//		//排序要實作 Comparable 介面跟 compareTo方法
+//		List<Seat> list = new ArrayList<>(seatsMap.values());
+//		Collections.sort(list);
+//		return list;
+//	}
+	
+//	public int seatCount() {
+//		return seatsMap.size();
+//	}
+//	
+//	
+//	//集合型態的Attribute,setter必須改為addColor
+//	public void addSeats(Seat seat){
+//		if(seat==null) throw new IllegalArgumentException("加入座位集合的seat物件不得為null");
+//		seatsMap.put(seat.getRow(), seat);
+//	}
+	
+	public Movie() {
 	} // 無參數建構式
 
-	public Product(int id, String name, double price) {
+	public Movie(int id, String name, double price) {
 		this.setId(id);
 		this.setName(name);
 		this.setUnitPrice(price);
 	}
 
-	public Product(int id, String name, double unitPrice, int stock, String category) {
+	public Movie(int id, String name, double unitPrice, int stock, String category) {
 		this(id, name, unitPrice);
 		this.setStock(stock);
 		this.setCategory(category);
@@ -180,7 +206,9 @@ public class Product {
 		return this.getClass().getName() + "\n [產品編號 = " + id + ", 產品名稱 = " + name +", 副標題 = " + subtitle + 
 				"\n, 售價 = " + unitPrice + ", 庫存 = "+ stock + ", 產品敘述 = " + description + ", 圖片網址 = " + photoUrl +
 				"\n, 發售日期 = " + launchDate + ", 分類 = "
-				+ category +", 票房 = "+ boxOffice +", 導演 = "+ director +", 演員 = "+ cast + ", 預告片 = "+ trailerUrl +"]";
+				+ category +", 票房 = "+ boxOffice +", 導演 = "+ director +", 演員 = "+ cast + ", 預告片 = "+ trailerUrl 
+//				+"\n, SeatMap ="+this.getSeatsList()
+				+"]";
 	}
 
 	@Override
@@ -197,7 +225,7 @@ public class Product {
 		// 若原始型別相等才能比較 例如加入購物車 同商品但折扣不同
 		if (this.getClass() != obj.getClass()) 
 			return false;
-		Product other = (Product) obj; // 轉型
+		Movie other = (Movie) obj; // 轉型
 		return id == other.id; // 比較id
 	}
 

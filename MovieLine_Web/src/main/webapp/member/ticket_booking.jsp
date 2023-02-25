@@ -1,6 +1,6 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
 <%@page import="uuu.movieline.service.ProductService"%>
-<%@page import="uuu.movieline.entity.Product"%>
+<%@page import="uuu.movieline.entity.Movie"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
 
@@ -40,7 +40,7 @@
 			darkModeFlag = getDarkModeFlag;
 			darkModeHandler();
 		}
-		<%	//若有產品 選取選項
+		<%  //若有產品 選取選項
 			if(request.getParameter("productId")!=null){
 		%>
 		
@@ -564,16 +564,22 @@
 					<select required="required" id="productId" name="productId">
 						<%
 						//1.取得所有商品
-							List<Product> list;
-							ProductService service = new ProductService();
-							list = service.getAllProducts();
+											List<Movie> list;
+											ProductService service = new ProductService();
+											list = service.getAllProducts();
 						%>
 						<option value="">請選擇電影</option>
-						<%if(list==null || list.size()==0){ %>
+						<%
+						if(list==null || list.size()==0){
+						%>
 						<option>查無電影</option>
-						<%}else{ %>
-						<%for(int i=0; i<list.size();i++){
-							Product p = list.get(i);%>
+						<%
+						}else{
+						%>
+						<%
+						for(int i=0; i<list.size();i++){
+											Movie p = list.get(i);
+						%>
 						<option value="<%=p.getId()%>"><%=p.getName() %></option>
 						<%}%>
 						<%}%>
