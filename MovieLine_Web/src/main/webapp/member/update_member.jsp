@@ -8,6 +8,9 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>修改會員資料</title>
+<!-- 帶回會員資料 -->
+<%Customer member = (Customer)session.getAttribute("member"); %>
+
 <link rel="icon" type="image/x-icon" href="../source/title_icon.png" />
 <link href="../css/global.css" type="text/css" rel="stylesheet">
 <link href="../css/register.css" type="text/css" rel="stylesheet">
@@ -18,9 +21,11 @@
 .menu_logo_img{
 	filter: invert(86%) sepia(62%) saturate(5722%) hue-rotate(180deg) brightness(106%) contrast(116%);
 }
+.hint{
+	color: red;
+}
 </style>
 <link href="../css/global_dark.css" type="text/css" rel="stylesheet">
-<%Customer member = (Customer)session.getAttribute("member"); %>
 <script src="https://code.jquery.com/jquery-3.0.0.js" 
 integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
 crossorigin="anonymous"></script>
@@ -52,10 +57,14 @@ crossorigin="anonymous"></script>
 		repopulateFormData();
 		
 		//init check rule
+		$("#roc_id").attr("pattern","<%=Customer.ID_PATTERN%>");
 		$("#roc_id").attr("maxlength","<%=Customer.MAX_ID_LENGTH%>");
 		
 		$("#password").attr("maxlength","<%=Customer.MAX_PASSWORD_LENGTH%>");
 		$("#password").attr("minlength","<%=Customer.MIN_PASSWORD_LENGTH%>");
+		
+		$("#newpassword").attr("maxlength","<%=Customer.MAX_PASSWORD_LENGTH%>");
+		$("#newpassword").attr("minlength","<%=Customer.MIN_PASSWORD_LENGTH%>");
 		
 		$("#name").attr("minlength","<%=Customer.MIN_NAME_LENGTH%>");
 		$("#name").attr("maxlength","<%=Customer.MAX_NAME_LENGTH%>");
@@ -98,7 +107,8 @@ crossorigin="anonymous"></script>
 		$($(this).prev()).attr("type","password");
 	}
 	
-	<%if("POST".equals(request.getMethod())){%>
+	<%if("POST".equalsIgnoreCase(request.getMethod())){%>
+	//若打錯帶回資料
 	function repopulateFormData() {
 		$("#roc_id").val("<%=request.getParameter("id")%>");
 		$("#email").val("<%=request.getParameter("email")%>");
@@ -111,10 +121,16 @@ crossorigin="anonymous"></script>
 		<%String oldSubscribed = request.getParameter("subscribed");%>
 		$("#subscribed").prop("checked",<%=(oldSubscribed!=null?oldSubscribed:"").equals("1")%>);
 	}
-		alert("資料錯誤請修改錯誤欄位再修改");
+		//alert("資料錯誤請修改錯誤欄位再修改");
 	<%}else if(member==null){%>
 		alert("請先登入後再修改");
+		<%	
+			//TODO:返回登入畫面
+			//Thread.sleep(5000);
+			//response.sendRedirect(request.getContextPath()+"/login.jsp");
+		%>
 	<%}else{%>
+	//第一次請求帶入除了密碼的基本資料
 	function repopulateFormData() {
 		$("#roc_id").val("<%=member.getId()%>");
 		$("#email").val("<%=member.getEmail()%>");
@@ -147,10 +163,9 @@ crossorigin="anonymous"></script>
 			<%}%>
 			<!-- id 不可修改-->
 			<div class="form_label_input_box">
-				<label for="roc_id">身分證：</label>
-				<input disabled="disabled" readonly="readonly" type="text" id="roc_id" class="form_input--lightmode"
+				<label for="roc_id">身分證：<br><span class="required_mark"><b>(不可修改)</b></span></label>
+				<input readonly="readonly" type="text" id="roc_id" class="form_input--lightmode"
 					name="id" placeholder="身分證"
-					pattern="<%=Customer.ID_PATTERN%>"
 					value="F999999999">
 			</div>
 	
@@ -162,10 +177,11 @@ crossorigin="anonymous"></script>
 			</div>
 	
 			<!-- oldPassword -->
+			<!-- 必要欄位! -->
 			<div class="form_label_input_box password_div">
 				<label for="password"><span class="required_mark"><b>*</b></span>輸入舊密碼：</label>
 				<input type="password" id="password" class="form_input--lightmode"
-					name="password" placeholder="請輸入舊密碼6~20個字">
+					name="password" required="required" placeholder="必須輸入密碼才可修改會員資料">
 				<img src="../source/visibility_off_FILL0_wght400_GRAD0_opsz48.svg" 
 					id="show_password_button" class="form_input_box_show_password_button"
 					draggable="false">
@@ -190,16 +206,15 @@ crossorigin="anonymous"></script>
 	
 			<!-- birthday 不可修改-->
 			<div class="form_label_input_box">
-				<label for="birthday">生日：</label>
-				<input disabled="disabled" readonly="readonly" type="date" id="birthday" class="form_input--lightmode"
-					name="birthday" pattern="\d{4}-\d{2}-\d{2}"
-					value="9999-09-09">
+				<label for="birthday">生日：<br><span class="required_mark"><b>(不可修改)</b></span></label>
+				<input readonly="readonly" type="date" id="birthday" class="form_input--lightmode"
+					name="birthday" value="9999-09-09">
 			</div>
 	
 			<!-- gender -->
 			<div class="form_label_input_box">
 				<label for="gender">性別：</label>
-				<select type="text" id="gender" class="form_select--lightmode"
+				<select id="gender" class="form_select--lightmode"
 					name="gender">
 					<option value="">請選擇性別</option>
 					<option value="M">男</option>
@@ -227,7 +242,7 @@ crossorigin="anonymous"></script>
 			</div>
 			
 			<%List<String> errors = (List<String>)request.getAttribute("errors");%>
-			<p><%=errors==null?"":errors%></p>
+			<p class="hint"><%=errors==null?"":errors%></p>
 			
 			<!-- 送出按鈕 -->
 			<input type="submit" class="submit_button" value="更新會員資料">
