@@ -1,12 +1,12 @@
 package uuu.movieline.test;
 
 import uuu.movieline.entity.Customer;
-import uuu.movieline.entity.Product;
+import uuu.movieline.entity.Movie;
 
 public class TestProduct {
 
 	public static void main(String[] args) {
-		Product p = new Product();
+		Movie p = new Movie();
 //		Customer c;
 		p.setId(-1);
 		p.setName(null);

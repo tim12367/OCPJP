@@ -2,7 +2,7 @@ package uuu.movieline.test;
 
 import uuu.movieline.entity.Customer;
 import uuu.movieline.entity.Outlet;
-import uuu.movieline.entity.Product;
+import uuu.movieline.entity.Movie;
 
 public class TestPolymorphism {
 	/**
@@ -25,7 +25,7 @@ public class TestPolymorphism {
 		System.out.println(obj3.toString());//O
 //		System.out.println(obj3.getAge());//X  getAge()在Object類別沒有定義
 		
-		Product p = new Outlet(2,"java程式語言",650,21);//polymorphic local variable
+		Movie p = new Outlet(2,"java程式語言",650,21);//polymorphic local variable
 		System.out.println(p.toString());//O
 		System.out.println(p.getName());//O
 		System.out.println(p.getUnitPrice());//售價

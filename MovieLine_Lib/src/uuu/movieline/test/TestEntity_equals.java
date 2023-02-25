@@ -2,7 +2,7 @@ package uuu.movieline.test;
 
 import uuu.movieline.entity.Customer;
 import uuu.movieline.entity.Outlet;
-import uuu.movieline.entity.Product;
+import uuu.movieline.entity.Movie;
 import uuu.movieline.entity.VIP;
 
 public class TestEntity_equals {
@@ -33,8 +33,8 @@ public class TestEntity_equals {
 		System.out.println(s);
 		System.out.println(s1);
 		
-		Product p = new Product(1,"java",650);
-		Product p2 = new Product(1,"java",650);
+		Movie p = new Movie(1,"java",650);
+		Movie p2 = new Movie(1,"java",650);
 		Outlet o = new Outlet(1,"java",650,21);
 		Outlet o2 = new Outlet(1,"java",650,65);
 		

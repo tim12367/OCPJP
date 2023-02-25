@@ -3,7 +3,7 @@ package uuu.movieline.test;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import uuu.movieline.entity.Product;
+import uuu.movieline.entity.Movie;
 import uuu.movieline.service.ProductService;
 
 public class TestProductService_getById {
@@ -20,7 +20,7 @@ public class TestProductService_getById {
 //		}
 		//用名子查詢
 		try {
-			Product p = service.getProductById("1");
+			Movie p = service.getProductById("1");
 			System.out.println(p);
 		} catch (Exception e) {
 			Logger.getLogger("測試[id查詢]").log(

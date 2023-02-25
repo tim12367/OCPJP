@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import uuu.movieline.entity.Product;
+import uuu.movieline.entity.Movie;
 import uuu.movieline.service.ProductService;
 
 public class TestProductService_getByCategory {
@@ -21,7 +21,7 @@ public class TestProductService_getByCategory {
 //		}
 		//用名子查詢
 		try {
-			List<Product> list = service.getProductsByCategory("愛情");
+			List<Movie> list = service.getProductsByCategory("愛情");
 			System.out.println(list);
 		} catch (Exception e) {
 			Logger.getLogger("測試[分類查詢]").log(
