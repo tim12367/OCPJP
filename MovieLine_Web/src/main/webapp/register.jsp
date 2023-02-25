@@ -50,6 +50,7 @@ crossorigin="anonymous"></script>
 		
 		//init check rule
 		$("#roc_id").attr("maxlength","<%=Customer.MAX_ID_LENGTH%>");
+		$("#roc_id").attr("pattern","<%=Customer.ID_PATTERN%>");		
 		
 		$("#password").attr("maxlength","<%=Customer.MAX_PASSWORD_LENGTH%>");
 		$("#password").attr("minlength","<%=Customer.MIN_PASSWORD_LENGTH%>");
@@ -149,7 +150,7 @@ crossorigin="anonymous"></script>
 				<label for="roc_id"><span class="required_mark"><b>*</b></span>身分證：</label>
 				<input type="text" id="roc_id" class="form_input--lightmode"
 					name="id" placeholder="請輸入中華民國身分證" required="required"
-					pattern="<%=Customer.ID_PATTERN%>">
+					>
 			</div>
 	
 			<!-- email -->
@@ -186,7 +187,7 @@ crossorigin="anonymous"></script>
 			<!-- gender -->
 			<div class="form_label_input_box">
 				<label for="gender"><span class="required_mark"><b>*</b></span>性別：</label>
-				<select type="text" id="gender" class="form_select--lightmode"
+				<select id="gender" class="form_select--lightmode"
 					name="gender" required="required">
 					<option value="">請選擇性別</option>
 					<option value="M">男</option>
