@@ -1,12 +1,22 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
-<!DOCTYPE html>
+<%@page import="java.util.List"%>
 <%@page import="uuu.movieline.entity.Customer"%>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>會員登入成功</title>
 	<link rel="icon" type="image/x-icon" href="source/title_icon.png" />
 	<meta http-equiv="refresh" content="5; url=./">
+	<style type="text/css">
+		body {
+			background-color: #282a36;
+    		color: #e8eaed;
+		}
+		a{
+			color: #e8eaed;
+		}
+	</style>
 	<script src="https://code.jquery.com/jquery-3.0.0.js" 
 	integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
 	crossorigin="anonymous"></script>
@@ -39,9 +49,10 @@
 	<% 
 		Customer member = (Customer)session.getAttribute("member");
 		String msg = (String)request.getAttribute("msg");
+		List<String> errors = (List<String>)request.getAttribute("errors");
 	%>
 	<article>		
-		<h2><%= member==null?"尚未登入":member.getName() %><%=msg==null?"":msg %></h2>
+		<h2><%= member==null?"尚未登入":member.getName() %><%=msg==null?"":msg %><%=errors==null?"":errors %></h2>
 		<p><span id="count_down">5</span>秒後將自動跳轉<a href='index.jsp'>首頁</a></p>
 	</article>
 	<footer>
