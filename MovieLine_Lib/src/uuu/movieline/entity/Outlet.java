@@ -1,6 +1,6 @@
 package uuu.movieline.entity;
 
-public class Outlet extends Product {
+public class Outlet extends Movie {
 	private int discount; // 必要欄位
 
 	public Outlet() {
