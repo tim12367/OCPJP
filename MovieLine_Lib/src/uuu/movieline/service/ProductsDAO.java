@@ -16,16 +16,16 @@ import uuu.movieline.entity.Seat;
 import uuu.movieline.exception.MLException;
 
 class ProductsDAO {
-	private static final String SELECT_ALL_PRODUCTS = 
+	private static final String SELECT_ALL_MOVIES = 
 			"SELECT id, name, unit_price, stock, description, "
 			+ "photo_url, launch_date, category, discount, box_office "
-			+ "FROM products";
+			+ "FROM movies";
 	List<Movie> selectAllProducts() throws MLException{
 		List<Movie> list = new ArrayList<>();
 		//connection
 		try(
 				Connection connection = MySQLConnection.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(SELECT_ALL_PRODUCTS);
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_ALL_MOVIES);
 			) {
 			//3.1 傳入?(無)的值
 			
@@ -66,7 +66,7 @@ class ProductsDAO {
 		
 		return list;
 	}
-	private static final String SELECT_PRODUCTS_BY_KEYWORD = SELECT_ALL_PRODUCTS
+	private static final String SELECT_MOVIES_BY_KEYWORD = SELECT_ALL_MOVIES
 			+" WHERE name LIKE ?";
 	List<Movie> selectProductsByKeyword(String keyword) throws MLException{
 		//查詢清單
@@ -74,7 +74,7 @@ class ProductsDAO {
 		//connection
 		try(
 				Connection connection = MySQLConnection.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(SELECT_PRODUCTS_BY_KEYWORD);
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_MOVIES_BY_KEYWORD);
 			) {
 			//3.1 傳入?的值
 			pstmt.setString(1, "%"+keyword+"%");
@@ -114,7 +114,40 @@ class ProductsDAO {
 		
 		return list;
 	}
-	private static final String SELECT_PRODUCTS_BY_CATEGORY = SELECT_ALL_PRODUCTS
+	private static final String SELECT_MOVIE_CATEGORY_GROUP_BY_CATEGORY =
+			"SELECT category,COUNT(category) AS category_counter"
+			+ " FROM movies "
+			+ " GROUP BY category ";
+	List<String[]> selectMovieCategoryGroupByCategory() throws MLException{
+		List<String[]> list = new ArrayList<>();
+		//connection
+		try(
+				Connection connection = MySQLConnection.getConnection();
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_MOVIE_CATEGORY_GROUP_BY_CATEGORY);
+			) {
+			//3.1 傳入?(無)的值
+			
+			try(
+					//4 執行指令
+					ResultSet rs = pstmt.executeQuery();
+				){
+				
+				//5.處理rs
+				while (rs.next()) {
+					String[] tempArray = new String[2];
+					tempArray[0] = rs.getString("category");
+					tempArray[1] = rs.getString("category_counter");
+					
+					list.add(tempArray);//!!要記得加入查詢清單
+				}
+			}
+		} catch (SQLException e) {
+			
+			throw new MLException("[獲得全部分類]失敗",e);
+		}
+		return list;
+	}
+	private static final String SELECT_MOVIES_BY_CATEGORY = SELECT_ALL_MOVIES
 			+" WHERE category = ?";
 	List<Movie> selectProductsByCategory(String category) throws MLException {
 		//查詢清單
@@ -122,7 +155,7 @@ class ProductsDAO {
 				//connection
 				try(
 						Connection connection = MySQLConnection.getConnection();
-						PreparedStatement pstmt = connection.prepareStatement(SELECT_PRODUCTS_BY_CATEGORY);
+						PreparedStatement pstmt = connection.prepareStatement(SELECT_MOVIES_BY_CATEGORY);
 					) {
 					//3.1 傳入?的值
 					pstmt.setString(1, category);
@@ -162,15 +195,12 @@ class ProductsDAO {
 				
 				return list;
 	}
-//	private static final String SELECT_PRODUCT_BY_ID = 
-//			"SELECT id, name, subtitle, unit_price, stock, description, "
-//			+ "photo_url, trailer_url, launch_date, category, discount, box_office, director, cast "
-//			+ "FROM products WHERE id=?";
-	private static final String SELECT_PRODUCT_BY_ID = 
-			 "SELECT id, name, subtitle, unit_price, products.stock , description,"
+
+	private static final String SELECT_MOVIES_BY_ID = 
+			 "SELECT id, name, subtitle, unit_price, movies.stock , description,"
 			+ "	photo_url, trailer_url, launch_date, category, discount, box_office,director, cast, "
 			+ " row_name, seats_booked, product_seats.stock AS row_stock ,showing ,date "
-			+ " FROM products LEFT OUTER JOIN product_seats "
+			+ " FROM movies LEFT OUTER JOIN product_seats "
 			+ "	on id = product_id "
 			+ " where id = ? "
 			+ " order by id,showing;";
@@ -179,7 +209,7 @@ class ProductsDAO {
 		Movie p =null;
 		try(	//connection
 				Connection connection = MySQLConnection.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(SELECT_PRODUCT_BY_ID);
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_MOVIES_BY_ID);
 			) {
 			//3.1 傳入?的值
 			pstmt.setString(1, id);

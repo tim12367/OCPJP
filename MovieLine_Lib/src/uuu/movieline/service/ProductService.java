@@ -20,4 +20,7 @@ public class ProductService {
 	public Movie getProductById(String id) throws MLException{
 		return dao.selectProductById(id);
 	}
+	public List<String[]> getMovieCategoryGroupByCategory() throws MLException {
+		return dao.selectMovieCategoryGroupByCategory();
+	}
 }
