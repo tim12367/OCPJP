@@ -129,7 +129,9 @@ a{
 
 .nav_list_item{
 	margin: 9px 0px;
+	min-width: 5em;
 	padding: 5px;
+    text-align: center;
 	border-left: 1px solid white;
 	background-color: #313235;
 	background-color: #2798de;

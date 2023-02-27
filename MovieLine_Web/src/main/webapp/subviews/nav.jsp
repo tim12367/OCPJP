@@ -1,8 +1,12 @@
+<%@page import="java.util.List"%>
+<%@page import="uuu.movieline.service.ProductService"%>
 <%@ page pageEncoding="UTF-8"%>
 <%@page import="uuu.movieline.entity.Customer"%>
 <!-- nav.jsp start -->
 	<%
 		Customer member = (Customer)session.getAttribute("member");
+		ProductService service = new ProductService();
+		List<String[]> categoryList = service.getMovieCategoryGroupByCategory();
 	%>
 	<nav class="nav">
 		<ul class="nav_list">
@@ -11,12 +15,25 @@
 			<li class="nav_list_item nav_list_last_item">
 				<ul class = "nav_list_category_list">
 				分類清單
+				<%if(categoryList == null || categoryList.size()==0){ %>
+					<li class="nav_list_category_list_item nav_list_category_list_item_first">
+						<a href=# class="nav_user_a">查詢分類失敗</a>
+					</li>
+				<%}else{%>
 				<!-- TODO:從資料庫撈選項 -->
-					<li class="nav_list_category_list_item nav_list_category_list_item_first"><a href=# class="nav_user_a">分類1</a></li>
-					<li class="nav_list_category_list_item"><a href=# class="nav_user_a">分類2</a></li>
-					<!-- http://localhost:8080/ML/ -->
-					<li class="nav_list_category_list_item"><a href=# class="nav_user_a">分類3</a></li>
-					
+					<li class="nav_list_category_list_item nav_list_category_list_item_first">
+						<a href="<%=request.getContextPath()%>/products_list.jsp?category=<%=categoryList.get(0)[0]%>" class="nav_user_a">
+							<%= categoryList.get(0)[0] %>
+						</a>
+					</li>
+					<%for(int i = 1; i<categoryList.size();i++){ %>
+					<li class="nav_list_category_list_item">
+						<a href="<%=request.getContextPath()%>/products_list.jsp?category=<%=categoryList.get(i)[0]%>" class="nav_user_a">
+							<%= categoryList.get(i)[0] %>
+						</a>
+					</li>
+					<%} %>
+				<%} %>
 				</ul>
 			</li>
 		</ul>
