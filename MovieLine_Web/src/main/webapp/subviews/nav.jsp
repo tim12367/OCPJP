@@ -20,9 +20,12 @@
 				</ul>
 			</li>
 		</ul>
+		<%if(member!=null){ %>
 		<a class="nav_booking_a" href="<%=request.getContextPath()%>/member/select_date_session.jsp">
-			<img class="nav_booking_icon" alt="booking" src="<%=request.getContextPath()%>/source/ticket.png">
+			<span class="nav_booking_text">線上訂票</span>
+<%-- 			<img class="nav_booking_icon" alt="booking" src="<%=request.getContextPath()%>/source/ticket.png"> --%>
 		</a>
+		<% }%>
 		<ul class = "nav_user">
 			<%=member!=null?(member.getName()+" 你好"):"尚未登入" %>
 			<%if(member==null){%>
