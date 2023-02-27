@@ -72,26 +72,29 @@
 					%>
 						<option value="">請選擇電影</option>
 						<%
-						if(list==null || list.size()==0){
+							if(list==null || list.size()==0){
 						%>
 						<option>查無電影</option>
 						<%
-						}else{
+							}else{
 						%>
-						<%
-						for(int i=0; i<list.size();i++){
-											Movie p = list.get(i);
-						%>
+							<%
+								for(int i=0; i<list.size();i++){
+									Movie p = list.get(i);
+							%>
 						<option value="<%=p.getId()%>"><%=p.getName() %></option>
-						<%}%>
-						<%}%>
+								<%}%>
+						<%	}%>
 					</select>
 				</div>
 				<div class="select_session_form_input_box">
 					<label for="date">
 						<img class="select_session_form_input_icon" alt="calendar.png" src="../source/calendar.png">
 					</label>
-					<input id="date" class="select_session_form_input" name="date" type="date" required="required">				
+					<select id="date" class="select_session_form_input" name="date" required="required">
+						<option value="">請選擇場次</option>
+						<option>2023-02-27</option>
+					</select>			
 				</div>
 				
 				<div class="select_session_form_input_box">
