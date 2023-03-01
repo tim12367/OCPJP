@@ -1,3 +1,10 @@
+<%@page import="java.util.Set"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.LocalTime"%>
+<%@page import="java.util.LinkedHashSet"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="uuu.movieline.entity.MovieSession"%>
 <%@ page pageEncoding="UTF-8"%>
 <%@page import="uuu.movieline.service.ProductService"%>
 <%@page import="uuu.movieline.entity.Movie"%>
@@ -7,6 +14,11 @@
 	<head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>電影場次選擇</title>
+	<%
+		ProductService service = new ProductService();
+		String movieId = request.getParameter("movieId");
+		String date = request.getParameter("date");
+	%>
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/source/title_icon.png" />
 	<link href="<%=request.getContextPath()%>/css/global.css" type="text/css" rel="stylesheet">
 	<link href="<%=request.getContextPath()%>/css/select_date_session.css" type="text/css" rel="stylesheet">
@@ -25,7 +37,15 @@
 				alert("不支援的瀏覽器!");
 				$("#hint").text("不支援的瀏覽器!");
 			}
-			$("#movie").val(<%=request.getParameter("productId")==null?"":request.getParameter("productId")%>);
+			//若網址有電影代號 帶入選項
+			movieSelectorInitHandlr();
+			//若網址有日期 帶入選項
+			dateSelectorInitHandlr();
+			
+			//若選擇電影 則查詢場次
+			$("#movie").change(movieSelectorChangeHandlr);
+			//若選擇日期 則顯示時間
+			$("#date").change(dateSelectorChangeHandlr);
 		}
 		function restoreData() {
 			var getDarkModeFlag = localStorage.getItem("darkModeFlag");
@@ -49,6 +69,24 @@
 			localStorage.setItem("darkModeFlag", darkModeFlag);
 			darkModeFlag = !darkModeFlag;
 		}
+		function movieSelectorInitHandlr() {
+			$("#movie").val("<%=request.getParameter("movieId")==null?"":request.getParameter("movieId")%>");
+		}
+		function movieSelectorChangeHandlr() {
+			console.log($("#movie").val());
+			location.href="?movieId=" + $("#movie").val();
+		}
+		function dateSelectorInitHandlr() {
+			//若movie selector有值
+			if ($("#movie").val()!=""){
+				$("#date").val("<%=request.getParameter("date")==null?"":request.getParameter("date")%>");
+			}
+			console.log("<%=request.getParameter("date")%>");
+		}
+		function dateSelectorChangeHandlr() {
+			console.log($("#date").val());
+			location.href="?movieId=" + $("#movie").val() + "&date=" + $("#date").val();
+		}
 	</script>
 	</head>
 	<body>
@@ -65,10 +103,9 @@
 					</label>
 					<select id="movie" class="select_session_form_input" name="movie" required="required">
 					<%
-					//1.取得所有商品
-										List<Movie> list;
-										ProductService service = new ProductService();
-										list = service.getAllProducts();
+					//1.取得所有電影
+						List<Movie> list;
+						list = service.getAllProducts();
 					%>
 						<option value="">請選擇電影</option>
 						<%
@@ -87,13 +124,40 @@
 						<%	}%>
 					</select>
 				</div>
+				<%
+				//獲取場次
+				List<MovieSession> allSessions = null;
+				if(movieId!=null&&movieId.length()>0){
+					allSessions = service.getSessionsByMovieId(movieId);
+				}
+				//獲取日期
+				Set<LocalDate> sessionDates = null;
+				if(allSessions!=null&&!allSessions.isEmpty()){
+					sessionDates = new LinkedHashSet<>();
+					for(MovieSession s:allSessions){
+						sessionDates.add(s.getDate());
+					}
+				}
+				//獲取時間表
+				List<MovieSession> SessionTimes =null;
+				if(movieId!=null&&movieId.length()>0&&date!=null&&date.length()>0){
+					SessionTimes = service.getSessionsByMovieIdDate(movieId, date);
+				}
+				%>
+				
 				<div class="select_session_form_input_box">
 					<label for="date">
 						<img class="select_session_form_input_icon" alt="calendar.png" src="../source/calendar.png">
 					</label>
 					<select id="date" class="select_session_form_input" name="date" required="required">
-						<option value="">請選擇場次</option>
-						<option>2023-02-27</option>
+						<%if(sessionDates==null || sessionDates.isEmpty()){ %>
+						<option value="">查無場次</option>
+						<%}else{ %>
+						<option value="">請選擇日期</option>
+							<%for(LocalDate d:sessionDates){ %>
+							<option value="<%=d%>"><%=d%></option>
+							<%} %>
+						<%} %>
 					</select>			
 				</div>
 				
@@ -102,8 +166,16 @@
 						<img class="select_session_form_input_icon" alt="time.png" src="../source/time.png">
 					</label>
 					<select id="session" class="select_session_form_input" name="session" required="required">
-						<option value="">請選擇場次</option>
-						<option>16:45</option>
+					<%if(sessionDates==null || sessionDates.isEmpty()){ %>
+						<option value="">查無場次</option>
+					<%}else if(SessionTimes==null || SessionTimes.isEmpty()){ %>
+						<option value="">↑請先選擇日期↑</option>
+					<%}else{ %>
+						<option value="">請選擇時間</option>
+						<%for(MovieSession s:SessionTimes){ %>
+						<option value="<%=s.getTime()%>"><%=s.getTime()%></option>
+						<%} %>
+					<%} %>
 					</select>
 				</div>
 				<input type="submit" class="submit_button" value="前往劃位">
