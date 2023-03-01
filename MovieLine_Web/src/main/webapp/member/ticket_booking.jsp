@@ -9,6 +9,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>一線影院 訂票系統</title>
+<%
+	String movieId = request.getParameter("movieId");
+	String date = request.getParameter("date");
+	String time = request.getParameter("time");
+%>
 <link rel="icon" type="image/x-icon" href="../source/title_icon.png" />
 <link href="../css/global.css" type="text/css" rel="stylesheet" />
 <link href="../css/ticket_booking.css" type="text/css" rel="stylesheet" />
@@ -41,10 +46,10 @@
 			darkModeHandler();
 		}
 		<%  //若有產品 選取選項
-			if(request.getParameter("productId")!=null){
+			if(request.getParameter("movie")!=null){
 		%>
 		
-			$("#productId").val("<%=request.getParameter("productId")%>");
+			$("#productId").val("<%=request.getParameter("movie")%>");
 		<%}%>
 	}
 
@@ -600,7 +605,13 @@
 						<img class="panel_title_icon" alt="" src="../source/ticket_title.png">
 						<div class="panel_title_text">訂票詳情</div>
 					</div>
-					<div id="booking_detail_body" class=panel_body></div>
+					<div id="booking_detail_body" class=panel_body>
+						<div>
+							電影編號:<%=movieId%><br>
+							日期:<%=date%><br>
+							時間:<%=time%><br>
+						</div>
+					</div>
 				</div>
 				<div class="panel">
 					<div class="panel_title">

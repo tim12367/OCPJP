@@ -70,21 +70,20 @@
 			darkModeFlag = !darkModeFlag;
 		}
 		function movieSelectorInitHandlr() {
-			$("#movie").val("<%=request.getParameter("movieId")==null?"":request.getParameter("movieId")%>");
+			<%if(movieId!=null && movieId.length()>0){%>
+				$("#movie").val("<%=movieId%>");
+			<%}%>
 		}
 		function movieSelectorChangeHandlr() {
-			console.log($("#movie").val());
 			location.href="?movieId=" + $("#movie").val();
 		}
 		function dateSelectorInitHandlr() {
 			//若movie selector有值
-			if ($("#movie").val()!=""){
-				$("#date").val("<%=request.getParameter("date")==null?"":request.getParameter("date")%>");
-			}
-			console.log("<%=request.getParameter("date")%>");
+			<%if(movieId!=null && movieId.length()>0 && date!=null && date.length()>0){%>
+				$("#date").val("<%=date%>");
+			<%}%>
 		}
 		function dateSelectorChangeHandlr() {
-			console.log($("#date").val());
 			location.href="?movieId=" + $("#movie").val() + "&date=" + $("#date").val();
 		}
 	</script>
@@ -96,32 +95,25 @@
 		</jsp:include>
 		<jsp:include page="/subviews/nav.jsp"/>
 		<article>
-			<form id=select_session_form class="select_session_form" action="ticket_booking.jsp" method="POST">
+			<form id=select_session_form class="select_session_form" action="ticket_booking.jsp" method="GET">
 				<div class="select_session_form_input_box">
 					<label for="movie">
 						<img class="select_session_form_input_icon" alt="vedio_cam.png" src="../source/vedio_cam.png">
 					</label>
-					<select id="movie" class="select_session_form_input" name="movie" required="required">
+					<select id="movie" class="select_session_form_input" name="movieId" required="required">
 					<%
 					//1.取得所有電影
 						List<Movie> list;
 						list = service.getAllProducts();
 					%>
 						<option value="">請選擇電影</option>
-						<%
-							if(list==null || list.size()==0){
-						%>
+					<%if(list==null || list.size()==0){%>
 						<option>查無電影</option>
-						<%
-							}else{
-						%>
-							<%
-								for(int i=0; i<list.size();i++){
-									Movie p = list.get(i);
-							%>
-						<option value="<%=p.getId()%>"><%=p.getName() %></option>
-								<%}%>
-						<%	}%>
+					<%}else{%>
+						<%for(Movie m:list){%>
+						<option value="<%=m.getId()%>"><%=m.getName() %></option>
+						<%}%>
+					<%}%>
 					</select>
 				</div>
 				<%
@@ -165,7 +157,7 @@
 					<label for="session">
 						<img class="select_session_form_input_icon" alt="time.png" src="../source/time.png">
 					</label>
-					<select id="session" class="select_session_form_input" name="session" required="required">
+					<select id="session" class="select_session_form_input" name="time" required="required">
 					<%if(sessionDates==null || sessionDates.isEmpty()){ %>
 						<option value="">查無場次</option>
 					<%}else if(SessionTimes==null || SessionTimes.isEmpty()){ %>
