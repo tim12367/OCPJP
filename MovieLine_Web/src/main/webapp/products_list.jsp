@@ -92,7 +92,7 @@ crossorigin="anonymous"></script>
 					Movie p = list.get(i);
 			%>
 			<li class="products_list_item">
-				<a class="product_box" href="product_detail.jsp?productId=<%= p.getId()%>">
+				<a class="product_box" href="product_detail.jsp?movieId=<%= p.getId()%>">
 					<div class="image_view_box">
 						<img src="<%=p.getPhotoUrl()%>" 
 						class="image_view_preview_pic" alt="預覽圖">

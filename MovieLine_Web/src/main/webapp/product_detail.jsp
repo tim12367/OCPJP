@@ -63,7 +63,7 @@ crossorigin="anonymous"></script>
 	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp"/>
 	<%
-	String productId = request.getParameter("productId");
+	String productId = request.getParameter("movieId");
 			ProductService service = new ProductService();
 			Movie p =null;
 			if(productId!=null && productId.length()>0){
@@ -80,8 +80,8 @@ crossorigin="anonymous"></script>
 				<img class="detail_box_preview_pic" src="<%=p.getPhotoUrl()%>">
 				<a class="detail_box_booking_btn" 
 					href="<%=request.getContextPath()%>
-					/member/select_date_session.jsp?productId=
-					<%=request.getParameter("productId")%>">
+					/member/select_date_session.jsp?movieId=
+					<%=request.getParameter("movieId")%>">
 					前往訂票
 				</a>
 				
