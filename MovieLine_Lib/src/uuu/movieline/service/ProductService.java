@@ -3,6 +3,7 @@ package uuu.movieline.service;
 import java.util.List;
 
 import uuu.movieline.entity.Movie;
+import uuu.movieline.entity.MovieSession;
 import uuu.movieline.exception.MLException;
 
 public class ProductService {
@@ -22,5 +23,8 @@ public class ProductService {
 	}
 	public List<String[]> getMovieCategoryGroupByCategory() throws MLException {
 		return dao.selectMovieCategoryGroupByCategory();
+	}
+	public List<MovieSession> getSessionsByMovieId(String id) throws MLException{
+		return dao.selectSessionsByMovieId(id);
 	}
 }

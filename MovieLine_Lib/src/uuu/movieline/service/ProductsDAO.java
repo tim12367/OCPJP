@@ -8,11 +8,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.util.DnsSrv.SrvRecord;
-
 import uuu.movieline.entity.Outlet;
 import uuu.movieline.entity.Movie;
-import uuu.movieline.entity.Seat;
+import uuu.movieline.entity.MovieSession;
 import uuu.movieline.exception.MLException;
 
 class ProductsDAO {
@@ -36,26 +34,26 @@ class ProductsDAO {
 				
 				//5.處理rs
 				while (rs.next()) {
-					Movie p;
+					Movie m;
 					int discount = rs.getInt("discount");
 					if(discount>0) {
-						p = new Outlet();
-						((Outlet)p).setDiscount(discount);
+						m = new Outlet();
+						((Outlet)m).setDiscount(discount);
 					}else{
-						p = new Movie();
+						m = new Movie();
 					}
 					
-					p.setId(rs.getInt("id"));
-					p.setName(rs.getString("name"));
-					p.setUnitPrice(rs.getDouble("unit_price"));
-					p.setStock(rs.getInt("stock"));
-					p.setDescription(rs.getString("description"));
-					p.setPhotoUrl(rs.getString("photo_url"));
-					p.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
-					p.setCategory(rs.getString("category"));
-					p.setBoxOffice(rs.getInt("box_office"));
+					m.setId(rs.getInt("id"));
+					m.setName(rs.getString("name"));
+					m.setUnitPrice(rs.getDouble("unit_price"));
+					m.setStock(rs.getInt("stock"));
+					m.setDescription(rs.getString("description"));
+					m.setPhotoUrl(rs.getString("photo_url"));
+					m.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
+					m.setCategory(rs.getString("category"));
+					m.setBoxOffice(rs.getInt("box_office"));
 					
-					list.add(p);//!!要記得加入查詢清單
+					list.add(m);//!!要記得加入查詢清單
 				}
 			}
 		} catch (SQLException e) {
@@ -84,26 +82,26 @@ class ProductsDAO {
 				){
 				//5.處理rs
 				while (rs.next()) {
-					Movie p;
+					Movie m;
 					int discount = rs.getInt("discount");
 					if(discount>0) {
-						p = new Outlet();
-						((Outlet)p).setDiscount(discount);
+						m = new Outlet();
+						((Outlet)m).setDiscount(discount);
 					}else{
-						p = new Movie();
+						m = new Movie();
 					}
 					
-					p.setId(rs.getInt("id"));
-					p.setName(rs.getString("name"));
-					p.setUnitPrice(rs.getDouble("unit_price"));
-					p.setStock(rs.getInt("stock"));
-					p.setDescription(rs.getString("description"));
-					p.setPhotoUrl(rs.getString("photo_url"));
-					p.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
-					p.setCategory(rs.getString("category"));
-					p.setBoxOffice(rs.getInt("box_office"));
+					m.setId(rs.getInt("id"));
+					m.setName(rs.getString("name"));
+					m.setUnitPrice(rs.getDouble("unit_price"));
+					m.setStock(rs.getInt("stock"));
+					m.setDescription(rs.getString("description"));
+					m.setPhotoUrl(rs.getString("photo_url"));
+					m.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
+					m.setCategory(rs.getString("category"));
+					m.setBoxOffice(rs.getInt("box_office"));
 					
-					list.add(p);//!!要記得加入查詢清單
+					list.add(m);//!!要記得加入查詢清單
 				}
 			}
 		} catch (SQLException e) {
@@ -165,26 +163,26 @@ class ProductsDAO {
 						){
 						//5.處理rs
 						while (rs.next()) {
-							Movie p;
+							Movie m;
 							int discount = rs.getInt("discount");
 							if(discount>0) {
-								p = new Outlet();
-								((Outlet)p).setDiscount(discount);
+								m = new Outlet();
+								((Outlet)m).setDiscount(discount);
 							}else{
-								p = new Movie();
+								m = new Movie();
 							}
 							
-							p.setId(rs.getInt("id"));
-							p.setName(rs.getString("name"));
-							p.setUnitPrice(rs.getDouble("unit_price"));
-							p.setStock(rs.getInt("stock"));
-							p.setDescription(rs.getString("description"));
-							p.setPhotoUrl(rs.getString("photo_url"));
-							p.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
-							p.setCategory(rs.getString("category"));
-							p.setBoxOffice(rs.getInt("box_office"));
+							m.setId(rs.getInt("id"));
+							m.setName(rs.getString("name"));
+							m.setUnitPrice(rs.getDouble("unit_price"));
+							m.setStock(rs.getInt("stock"));
+							m.setDescription(rs.getString("description"));
+							m.setPhotoUrl(rs.getString("photo_url"));
+							m.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
+							m.setCategory(rs.getString("category"));
+							m.setBoxOffice(rs.getInt("box_office"));
 							
-							list.add(p);//!!要記得加入查詢清單
+							list.add(m);//!!要記得加入查詢清單
 						}
 					}
 				} catch (SQLException e) {
@@ -206,7 +204,7 @@ class ProductsDAO {
 			+ " order by id,showing;";
 	
 	Movie selectProductById(String id) throws MLException{
-		Movie p =null;
+		Movie m =null;
 		try(	//connection
 				Connection connection = MySQLConnection.getConnection();
 				PreparedStatement pstmt = connection.prepareStatement(SELECT_MOVIES_BY_ID);
@@ -221,55 +219,100 @@ class ProductsDAO {
 				//5.處理rs
 				while (rs.next()) {
 					//只建立一次p物件
-					if(p==null) {
+					if(m==null) {
 						int discount = rs.getInt("discount");
 						if(discount>0) {
-							p = new Outlet();
-							((Outlet)p).setDiscount(discount);
+							m = new Outlet();
+							((Outlet)m).setDiscount(discount);
 						}else{
-							p = new Movie();
+							m = new Movie();
 						}
 						
-						p.setId(rs.getInt("id"));
-						p.setName(rs.getString("name"));
-						p.setUnitPrice(rs.getDouble("unit_price"));
-						p.setStock(rs.getInt("stock"));
-						p.setDescription(rs.getString("description"));
-						p.setPhotoUrl(rs.getString("photo_url"));
-						p.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
-						p.setCategory(rs.getString("category"));
-						p.setBoxOffice(rs.getInt("box_office"));
-						p.setDirector(rs.getString("director"));
-						p.setCast(rs.getString("cast"));
-						p.setSubtitle(rs.getString("subtitle"));
-						p.setTrailerUrl(rs.getString("trailer_url"));
+						m.setId(rs.getInt("id"));
+						m.setName(rs.getString("name"));
+						m.setUnitPrice(rs.getDouble("unit_price"));
+						m.setStock(rs.getInt("stock"));
+						m.setCategory(rs.getString("category"));
+						m.setDescription(rs.getString("description"));
+						m.setPhotoUrl(rs.getString("photo_url"));
+						m.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
+						m.setBoxOffice(rs.getInt("box_office"));
+						m.setDirector(rs.getString("director"));
+						m.setCast(rs.getString("cast"));
+						m.setSubtitle(rs.getString("subtitle"));
+						m.setTrailerUrl(rs.getString("trailer_url"));
 					}
-					//fortest
-//					System.out.println(p);
-//					System.out.printf("資訊%s %s %s %s",
-//							rs.getString("row_name"),
-//							rs.getInt("seats_booked"),
-//							rs.getInt("row_stock"),
-//							rs.getInt("showing")
-//							);
-					
-					//檢查是否有位子
-//					String rowName = rs.getString("row_name");
-//					if (rowName!=null) {
-//						Seat seat = new Seat();
-//						seat.setDate(rs.getString("date"));
-//						seat.setRow(rowName);
-//						seat.setBooked(rs.getInt("seats_booked"));
-//						seat.setStock(rs.getInt("row_stock"));
-//						seat.setShowing(rs.getInt("showing"));
-//						p.addSeats(seat);
-//					}
 				}
 			}
 		} catch (SQLException e) {
-			throw new MLException("[用id查詢產品失敗]",e);
+			throw new MLException("[用id查詢電影失敗]",e);
 		}
-		return p;
+		return m;
+		
+		
+	}
+	private static final String SELECT_SESSIONS_BY_MOVIE_ID =
+			"SELECT date, time, thread, movie_id, sessions.stock ,"
+			+ "id, name, subtitle, "
+			+ "unit_price, movies.stock, description, "
+			+ "photo_url, trailer_url, launch_date, "
+			+ "category, discount, box_office, director, cast "
+			+ " FROM sessions "
+			+ " LEFT JOIN movies "
+			+ " ON id=movie_id "
+			+ " WHERE movie_id = ? "
+			+ " ORDER BY date,time ";
+	List<MovieSession> selectSessionsByMovieId(String id) throws MLException{
+		List<MovieSession> list= new ArrayList<>();//查詢list
+		try (
+			Connection connection = MySQLConnection.getConnection();//1,2
+			PreparedStatement pstmt = connection.prepareStatement(SELECT_SESSIONS_BY_MOVIE_ID);//3
+			){
+			//3.1 傳入?的值
+			pstmt.setString(1, id);
+			try(
+				//4.執行指令
+				ResultSet rs = pstmt.executeQuery();
+				){
+				//5.處理rs
+				while (rs.next()) {
+					MovieSession s = new MovieSession();
+					s.setDate(rs.getString("date"));
+					s.setTime(rs.getString("time"));
+					s.setThread(rs.getInt("thread"));
+					s.setStock(rs.getInt("stock"));
+					//MOVIE
+					Movie m = null;
+					int discount = rs.getInt("discount");
+					if(discount>0) {
+						m = new Outlet();
+						((Outlet)m).setDiscount(discount);
+					}else{
+						m = new Movie();
+					}
+					m.setId(rs.getInt("id"));
+					m.setName(rs.getString("name"));
+					m.setUnitPrice(rs.getDouble("unit_price"));
+					m.setStock(rs.getInt("stock"));
+					m.setCategory(rs.getString("category"));
+					m.setDescription(rs.getString("description"));
+					m.setPhotoUrl(rs.getString("photo_url"));
+					m.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
+					m.setBoxOffice(rs.getInt("box_office"));
+					m.setDirector(rs.getString("director"));
+					m.setCast(rs.getString("cast"));
+					m.setSubtitle(rs.getString("subtitle"));
+					m.setTrailerUrl(rs.getString("trailer_url"));
+					//加入MovieSession
+					s.setMovie(m);
+					//加入查詢清單
+					list.add(s);
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			throw new MLException("[用電影編號查詢session]失敗",e);
+		}
 		
 		
 	}
