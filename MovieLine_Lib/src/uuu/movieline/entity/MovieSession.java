@@ -63,13 +63,12 @@ public class MovieSession {
 	}
 	@Override
 	public String toString() {
-		return "MovieSession "
-				+ "[date=" + date + 
-				", time=" + time + 
-				", thread=" + thread + 
-				", movie=" + movie + 
-				", stock="
-				+ stock + "]";
+		return this.getClass().getName()
+				+ "\n[場次日期=" + date + 
+				", 場次時間=" + time + 
+				", 影廳=" + thread + 
+				"\n, 電影=" + movie + 
+				"\n, 庫存=" + stock + "]\n";
 	}
 	
 }
