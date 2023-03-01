@@ -27,4 +27,7 @@ public class ProductService {
 	public List<MovieSession> getSessionsByMovieId(String id) throws MLException{
 		return dao.selectSessionsByMovieId(id);
 	}
+	public List<MovieSession> getSessionsByMovieIdDate(String id,String date) throws MLException{
+		return dao.selectSessionsByMovieIdDate(id,date);
+	}
 }

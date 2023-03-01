@@ -276,6 +276,10 @@ class ProductsDAO {
 				){
 				//5.處理rs
 				while (rs.next()) {
+					//沒庫存就不要查到
+					if(rs.getInt("stock")==0) {
+						continue;
+					}
 					MovieSession s = new MovieSession();
 					s.setDate(rs.getString("date"));
 					s.setTime(rs.getString("time"));
@@ -315,5 +319,74 @@ class ProductsDAO {
 		}
 		
 		
+	}
+	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATE =
+			"SELECT date, time, thread, movie_id, sessions.stock ,"
+			+ "id, name, subtitle, "
+			+ "unit_price, movies.stock, description, "
+			+ "photo_url, trailer_url, launch_date, "
+			+ "category, discount, box_office, director, cast "
+			+ " FROM sessions "
+			+ " LEFT JOIN movies "
+			+ " ON id=movie_id "
+			+ " WHERE movie_id = ? AND date = ? "
+			+ " ORDER BY date,time ";
+	public List<MovieSession> selectSessionsByMovieIdDate(String id, String date) throws MLException {
+		List<MovieSession> list= new ArrayList<>();//查詢list
+		try (
+			Connection connection = MySQLConnection.getConnection();//1,2
+			PreparedStatement pstmt = connection.prepareStatement(SELECT_SESSIONS_BY_MOVIE_ID_AND_DATE);//3
+			){
+			//3.1 傳入?的值
+			pstmt.setString(1, id);
+			pstmt.setString(2, date);
+			
+			try(
+				//4.執行指令
+				ResultSet rs = pstmt.executeQuery();
+				){
+				//5.處理rs
+				while (rs.next()) {
+					//沒庫存就不要查到
+					if(rs.getInt("stock")==0) {
+						continue;
+					}
+					MovieSession s = new MovieSession();
+					s.setDate(rs.getString("date"));
+					s.setTime(rs.getString("time"));
+					s.setThread(rs.getInt("thread"));
+					s.setStock(rs.getInt("stock"));
+					//MOVIE
+					Movie m = null;
+					int discount = rs.getInt("discount");
+					if(discount>0) {
+						m = new Outlet();
+						((Outlet)m).setDiscount(discount);
+					}else{
+						m = new Movie();
+					}
+					m.setId(rs.getInt("id"));
+					m.setName(rs.getString("name"));
+					m.setUnitPrice(rs.getDouble("unit_price"));
+					m.setStock(rs.getInt("stock"));
+					m.setCategory(rs.getString("category"));
+					m.setDescription(rs.getString("description"));
+					m.setPhotoUrl(rs.getString("photo_url"));
+					m.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
+					m.setBoxOffice(rs.getInt("box_office"));
+					m.setDirector(rs.getString("director"));
+					m.setCast(rs.getString("cast"));
+					m.setSubtitle(rs.getString("subtitle"));
+					m.setTrailerUrl(rs.getString("trailer_url"));
+					//加入MovieSession
+					s.setMovie(m);
+					//加入查詢清單
+					list.add(s);
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			throw new MLException("[用電影編號日期查詢session]失敗",e);
+		}
 	}
 }
