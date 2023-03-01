@@ -101,8 +101,9 @@
 						<img class="select_session_form_input_icon" alt="vedio_cam.png" src="../source/vedio_cam.png">
 					</label>
 					<select id="movie" class="select_session_form_input" name="movieId" required="required">
+					
 					<%
-					//1.取得所有電影
+					//取得所有電影
 						List<Movie> list;
 						list = service.getAllProducts();
 					%>
@@ -117,26 +118,25 @@
 					</select>
 				</div>
 				<%
-				//獲取場次
-				List<MovieSession> allSessions = null;
-				if(movieId!=null&&movieId.length()>0){
-					allSessions = service.getSessionsByMovieId(movieId);
-				}
-				//獲取日期
-				Set<LocalDate> sessionDates = null;
-				if(allSessions!=null&&!allSessions.isEmpty()){
-					sessionDates = new LinkedHashSet<>();
-					for(MovieSession s:allSessions){
-						sessionDates.add(s.getDate());
+					//獲取場次
+					List<MovieSession> allSessions = null;
+					if(movieId!=null&&movieId.length()>0){
+						allSessions = service.getSessionsByMovieId(movieId);
 					}
-				}
-				//獲取時間表
-				List<MovieSession> SessionTimes =null;
-				if(movieId!=null&&movieId.length()>0&&date!=null&&date.length()>0){
-					SessionTimes = service.getSessionsByMovieIdDate(movieId, date);
-				}
+					//獲取日期
+					Set<LocalDate> sessionDates = null;
+					if(allSessions!=null&&!allSessions.isEmpty()){
+						sessionDates = new LinkedHashSet<>();
+						for(MovieSession s:allSessions){
+							sessionDates.add(s.getDate());
+						}
+					}
+					//獲取時間表
+					List<MovieSession> SessionTimes =null;
+					if(movieId!=null&&movieId.length()>0&&date!=null&&date.length()>0){
+						SessionTimes = service.getSessionsByMovieIdDate(movieId, date);
+					}
 				%>
-				
 				<div class="select_session_form_input_box">
 					<label for="date">
 						<img class="select_session_form_input_icon" alt="calendar.png" src="../source/calendar.png">
