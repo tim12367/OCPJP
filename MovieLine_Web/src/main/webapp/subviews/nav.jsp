@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="uuu.movieline.service.ProductService"%>
-<%@ page pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
 <%@page import="uuu.movieline.entity.Customer"%>
 <!-- nav.jsp start -->
 	<%
