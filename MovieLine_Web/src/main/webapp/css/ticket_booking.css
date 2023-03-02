@@ -8,10 +8,13 @@
 }
 .seating_box{
 	width:434px;
+	display: flex;
+    flex-direction: column;
 }
 .screan_img{
 	background-color: white;
 	width: 100%;
+	margin-bottom: 20px;
 }
 .seating_area{
 	left: 0%;
@@ -86,7 +89,7 @@ td>img{
 }
 .product_box{
 	padding:10px;
-	height:161px;
+	min-height:161px;
 	display:flex;
 	justify-content:space-between;
 	flex-direction: column;
