@@ -1,3 +1,5 @@
+
+
 /*cross join*/ 
 SELECT id, name, subtitle, unit_price, products.stock, 
 	description, photo_url, trailer_url, 
