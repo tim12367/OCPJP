@@ -5,7 +5,7 @@
 <%@page import="java.util.LinkedHashSet"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="uuu.movieline.entity.MovieSession"%>
-<%@ page pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8"%>
 <%@page import="uuu.movieline.service.ProductService"%>
 <%@page import="uuu.movieline.entity.Movie"%>
 <%@page import="java.util.List"%>
