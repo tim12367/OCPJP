@@ -15,7 +15,9 @@ import uuu.movieline.exception.MLException;
 
 class ProductsDAO {
 	private static final String SELECT_ALL_MOVIES = 
-			"SELECT id, name, unit_price, stock, description, "
+			"SELECT id, name, unit_price, "
+//			+ "stock, "
+			+ "description, "
 			+ "photo_url, launch_date, category, discount, box_office "
 			+ "FROM movies";
 	List<Movie> selectAllProducts() throws MLException{
@@ -46,7 +48,7 @@ class ProductsDAO {
 					m.setId(rs.getInt("id"));
 					m.setName(rs.getString("name"));
 					m.setUnitPrice(rs.getDouble("unit_price"));
-					m.setStock(rs.getInt("stock"));
+//					m.setStock(rs.getInt("stock"));
 					m.setDescription(rs.getString("description"));
 					m.setPhotoUrl(rs.getString("photo_url"));
 					m.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
@@ -94,7 +96,7 @@ class ProductsDAO {
 					m.setId(rs.getInt("id"));
 					m.setName(rs.getString("name"));
 					m.setUnitPrice(rs.getDouble("unit_price"));
-					m.setStock(rs.getInt("stock"));
+//					m.setStock(rs.getInt("stock"));
 					m.setDescription(rs.getString("description"));
 					m.setPhotoUrl(rs.getString("photo_url"));
 					m.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
@@ -175,7 +177,7 @@ class ProductsDAO {
 							m.setId(rs.getInt("id"));
 							m.setName(rs.getString("name"));
 							m.setUnitPrice(rs.getDouble("unit_price"));
-							m.setStock(rs.getInt("stock"));
+//							m.setStock(rs.getInt("stock"));
 							m.setDescription(rs.getString("description"));
 							m.setPhotoUrl(rs.getString("photo_url"));
 							m.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
@@ -195,7 +197,9 @@ class ProductsDAO {
 	}
 
 	private static final String SELECT_MOVIES_BY_ID = 
-			 "SELECT id, name, subtitle, unit_price, movies.stock , description,"
+			 "SELECT id, name, subtitle, unit_price"
+//			 + ", movies.stock "
+			 + ", description,"
 			+ "	photo_url, trailer_url, launch_date, category, discount, box_office,director, cast, "
 			+ " row_name, seats_booked, product_seats.stock AS row_stock ,showing ,date "
 			+ " FROM movies LEFT OUTER JOIN product_seats "
@@ -231,7 +235,7 @@ class ProductsDAO {
 						m.setId(rs.getInt("id"));
 						m.setName(rs.getString("name"));
 						m.setUnitPrice(rs.getDouble("unit_price"));
-						m.setStock(rs.getInt("stock"));
+//						m.setStock(rs.getInt("stock"));
 						m.setCategory(rs.getString("category"));
 						m.setDescription(rs.getString("description"));
 						m.setPhotoUrl(rs.getString("photo_url"));
@@ -254,7 +258,9 @@ class ProductsDAO {
 	private static final String SELECT_SESSIONS_BY_MOVIE_ID =
 			"SELECT date, time, thread, movie_id, sessions.stock ,"
 			+ "id, name, subtitle, "
-			+ "unit_price, movies.stock, description, "
+			+ "unit_price"
+//			+ ", movies.stock"
+			+ ", description, "
 			+ "photo_url, trailer_url, launch_date, "
 			+ "category, discount, box_office, director, cast "
 			+ " FROM sessions "
@@ -297,7 +303,7 @@ class ProductsDAO {
 					m.setId(rs.getInt("id"));
 					m.setName(rs.getString("name"));
 					m.setUnitPrice(rs.getDouble("unit_price"));
-					m.setStock(rs.getInt("stock"));
+//					m.setStock(rs.getInt("stock"));
 					m.setCategory(rs.getString("category"));
 					m.setDescription(rs.getString("description"));
 					m.setPhotoUrl(rs.getString("photo_url"));
@@ -323,7 +329,9 @@ class ProductsDAO {
 	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATE =
 			"SELECT date, time, thread, movie_id, sessions.stock ,"
 			+ "id, name, subtitle, "
-			+ "unit_price, movies.stock, description, "
+			+ "unit_price"
+//			+ ", movies.stock"
+			+ ", description, "
 			+ "photo_url, trailer_url, launch_date, "
 			+ "category, discount, box_office, director, cast "
 			+ " FROM sessions "
@@ -368,7 +376,7 @@ class ProductsDAO {
 					m.setId(rs.getInt("id"));
 					m.setName(rs.getString("name"));
 					m.setUnitPrice(rs.getDouble("unit_price"));
-					m.setStock(rs.getInt("stock"));
+//					m.setStock(rs.getInt("stock"));
 					m.setCategory(rs.getString("category"));
 					m.setDescription(rs.getString("description"));
 					m.setPhotoUrl(rs.getString("photo_url"));

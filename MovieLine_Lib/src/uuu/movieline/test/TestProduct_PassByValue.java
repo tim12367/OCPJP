@@ -16,7 +16,7 @@ public class TestProduct_PassByValue {
 		System.out.printf("id:%d \n",p.getId());
 		System.out.printf("name:%s \n",p.getName());
 		System.out.printf("uniprice:%f \n",p.getUnitPrice());
-		System.out.printf("stock:%d \n",p.getStock());
+//		System.out.printf("stock:%d \n",p.getStock());
 		System.out.printf("description:%s \n",p.getDescription());
 		System.out.printf("photoUrl:%s \n",p.getPhotoUrl());
 		System.out.printf("launchDate:%s \n",p.getLaunchDate());
@@ -28,7 +28,7 @@ public class TestProduct_PassByValue {
 		System.out.printf("id:%d \n",p2.getId());
 		System.out.printf("name:%s \n",p2.getName());
 		System.out.printf("uniprice:%f \n",p2.getUnitPrice());
-		System.out.printf("stock:%d \n",p2.getStock());
+//		System.out.printf("stock:%d \n",p2.getStock());
 		System.out.printf("description:%s \n",p2.getDescription());
 		System.out.printf("photoUrl:%s \n",p2.getPhotoUrl());
 		System.out.printf("launchDate:%s \n",p2.getLaunchDate());

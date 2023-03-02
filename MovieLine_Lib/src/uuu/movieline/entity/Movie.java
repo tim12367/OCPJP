@@ -14,7 +14,7 @@ public class Movie {
 	private int id; // 必要,Pkey,Auto-Increment
 	private String name; // 必要,1~?字元
 	private double unitPrice; // 必要, >0,定價(售價)
-	private int stock;// 必要, >0
+	//private int stock;// 必要, >0
 	private String category; // 必要
 	private String description = "";//非必要
 	private String photoUrl;//非必要
@@ -54,9 +54,11 @@ public class Movie {
 		this.setUnitPrice(price);
 	}
 
-	public Movie(int id, String name, double unitPrice, int stock, String category) {
+	public Movie(int id, String name, double unitPrice, 
+//			int stock,
+			String category) {
 		this(id, name, unitPrice);
-		this.setStock(stock);
+//		this.setStock(stock);
 		this.setCategory(category);
 	}
 
@@ -113,21 +115,21 @@ public class Movie {
 
 	}
 
-	public int getStock() {
-		return stock;
-	}
+//	public int getStock() {
+//		return stock;
+//	}
 
-	public void setStock(int stock) {
-		if (stock > 0) {
-			this.stock = stock;
-		} else {
-			System.err.println("庫存必須大於0");
-			//第13章後要改成throw RuntimeException
-			String msg = String.format("庫存必須大於0 : %s 不正確",stock);
-			throw new MLInvalidDataException(msg);
-		}
-
-	}
+//	public void setStock(int stock) {
+//		if (stock > 0) {
+//			this.stock = stock;
+//		} else {
+//			System.err.println("庫存必須大於0");
+//			//第13章後要改成throw RuntimeException
+//			String msg = String.format("庫存必須大於0 : %s 不正確",stock);
+//			throw new MLInvalidDataException(msg);
+//		}
+//
+//	}
 
 	public String getDescription() {
 		return description;
@@ -204,7 +206,9 @@ public class Movie {
 	@Override
 	public String toString() {
 		return this.getClass().getName() + "\n [產品編號 = " + id + ", 產品名稱 = " + name +", 副標題 = " + subtitle + 
-				"\n, 售價 = " + unitPrice + ", 庫存 = "+ stock + ", 產品敘述 = " + description + ", 圖片網址 = " + photoUrl +
+				"\n, 售價 = " + unitPrice + 
+//				", 庫存 = "+ stock + 
+				", 產品敘述 = " + description + ", 圖片網址 = " + photoUrl +
 				"\n, 發售日期 = " + launchDate + ", 分類 = "
 				+ category +", 票房 = "+ boxOffice +", 導演 = "+ director +", 演員 = "+ cast + ", 預告片 = "+ trailerUrl 
 //				+"\n, SeatMap ="+this.getSeatsList()
