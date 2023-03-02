@@ -621,11 +621,27 @@
 					<div class=panel_body>
 						<hr>
 						<div class="product_box">
+						<!-- 一筆購物 -->
 							<div class="product_name">MUCROWN單人套票2022</div>
 							<div class="product_quantity">
 								<span>X</span> 2 <span>=</span> 2,200
 							</div>
 							<hr>
+						<!-- 一筆購物 -->
+						<!-- 一筆購物 -->
+							<div class="product_name">MUCROWN單人套票2022</div>
+							<div class="product_quantity">
+								<span>X</span> 2 <span>=</span> 2,200
+							</div>
+							<hr>
+						<!-- 一筆購物 -->
+						<!-- 一筆購物 -->
+							<div class="product_name">MUCROWN單人套票2022</div>
+							<div class="product_quantity">
+								<span>X</span> 2 <span>=</span> 2,200
+							</div>
+							<hr>
+						<!-- 一筆購物 -->
 							<div class="total_price">
 								<span>合計</span> 2,200
 							</div>
