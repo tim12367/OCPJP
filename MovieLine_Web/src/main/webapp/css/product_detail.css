@@ -39,7 +39,9 @@ p{
     align-self: center;
     cursor: pointer;
 }
-
+.detail_box_booking_btn:hover{
+	box-shadow: 2px 2px 5px black;
+}
 .detail_box_preview_pic{
     width: 100%;
 }
