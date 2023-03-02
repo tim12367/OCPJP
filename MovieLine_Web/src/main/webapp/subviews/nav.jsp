@@ -39,7 +39,7 @@
 		</ul>
 		<%if(member!=null){ %>
 		<a class="nav_booking_a" href="<%=request.getContextPath()%>/member/select_date_session.jsp">
-			<span class="nav_booking_text">線上訂票</span>
+			<span class="nav_booking_text">快速訂票</span>
 <%-- 			<img class="nav_booking_icon" alt="booking" src="<%=request.getContextPath()%>/source/ticket.png"> --%>
 		</a>
 		<% }%>

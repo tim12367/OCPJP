@@ -145,8 +145,8 @@ a{
 	height:100%;
 	align-items: center;
 }
-nav_booking_text{
-	
+.nav_booking_text{
+	color:white;
 }
 .nav_booking_icon{
 /* 	width:100%; */
