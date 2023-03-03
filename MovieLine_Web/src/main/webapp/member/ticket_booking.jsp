@@ -68,10 +68,10 @@
 	}
 	function seatSelectHandlr(e) {
 		var seatNumber = $(this).children("p").html();
-		var searRow = $(this).parent().attr("id");
+		var seatRow = $(this).parent().attr("id");
 		if ((!isNaN(seatNumber)) && (seatNumber !== undefined)
 				&& (seatNumber !== null)) {
-			//console.log(searRow);//A排
+			//console.log(seatRow);//A排
 			//console.log(seatNumber);//1位
 			//console.log($(this).children("img").attr("src"));//圖片網址
 
@@ -81,10 +81,10 @@
 				$("#quantity").val(Number($("#quantity").val()) + 1);
 				
 				//每按一個座位多一行詳情
-				$("#booking_detail_body").append("<div>"+searRow+"排"+seatNumber+"位"+"</div>");
+				$("#booking_detail_body").append("<div>"+seatRow+"排"+seatNumber+"位"+"</div>");
 				
 				//座位輸出加一
-				seatInputAdd(searRow,seatNumber);
+				seatInputAdd(seatRow,seatNumber);
 				
 				$(this).children("img").attr("src",
 						"../source/standard_selected.png");
@@ -93,13 +93,13 @@
 				//每按一個座位將數量減一
 				$("#quantity").val(Number($("#quantity").val()) - 1);
 				//取消選取↓
-				var rmtag = searRow+"排"+seatNumber+"位";
+				var rmtag = seatRow+"排"+seatNumber+"號";
 				console.log(rmtag);
 				$("#booking_detail_body> :contains("+rmtag+")").remove();
 				//取消選取↑
 				
 				//座位輸出減一
-				seatInputRemove(searRow,seatNumber);
+				seatInputRemove(seatRow,seatNumber);
 				
 				$(this).children("img").attr("src",
 						"../source/standard_available.png");
@@ -117,20 +117,51 @@
 		$("#rowG").val(0);
 		$("#rowH").val(0);
 		$("#rowI").val(0);
+		//TODO:從資料庫帶資料
+		seatRestoreByRow("I",388);//fortest
 	}
-	function seatInputAdd(searRow,seatNumber) {
-		console.log("seatInputAdd"+searRow+seatNumber);
-		var jqueryString = "#row" + searRow;
+	function seatInputAdd(seatRow,seatNumber) {
+		console.log("seatInputAdd"+seatRow+seatNumber);
+		var jqueryString = "#row" + seatRow;
 		var oldSeatNumber = Number($(jqueryString).val());
 		var newSeatNumber = oldSeatNumber | (1<<(Number(seatNumber)-1));
 		$(jqueryString).val(newSeatNumber);
 	}
-	function seatInputRemove(searRow,seatNumber) {
-		console.log("seatInputRemove"+searRow+seatNumber);
-		var jqueryString = "#row" + searRow;
+	function seatInputRemove(seatRow,seatNumber) {
+		console.log("seatInputRemove"+seatRow+seatNumber);
+		var jqueryString = "#row" + seatRow;
 		var oldSeatNumber = Number($(jqueryString).val());
 		var newSeatNumber = oldSeatNumber & (~(1<<(Number(seatNumber)-1)));
 		$(jqueryString).val(newSeatNumber);
+	}
+
+	function seatRestoreByRow(rowName,rowBinary){
+		//輸入測試
+		console.log("第"+rowName+"行:"+rowBinary);
+		//數字to二進位字串轉換
+		var binarySeatString = rowBinary.toString(2);
+		console.log("二進位字串"+binarySeatString);
+		//切分成字元陣列
+		var binarySeatCharList = binarySeatString.split('');
+		//將字元字串變成座位位置陣列
+		var seatNumber = [];
+		for (var i in binarySeatCharList){
+			if(binarySeatCharList[i]=="1"){
+				seatNumber.push(binarySeatCharList.length-i);
+			}
+		}
+		console.log("座位號碼為:"+seatNumber);
+		//將座位陣列帶上畫面 function seatSold()
+		for(var i in seatNumber){
+			seatSold(rowName,seatNumber[i]);
+		}
+	}	
+	function seatSold(seatRow,seatNumber){
+		seatNumber = String(seatNumber);//toString 輸入可能是數字
+		//selector 選擇完全符合的文字in p 再選擇兄弟img
+		$("#"+seatRow+" >td >p:contains('"+seatNumber+"')").filter(function() {
+	        return $.trim($(this).text()) === seatNumber;
+	      }).siblings("img").attr("src","../source/sold.png");
 	}
 </script>
 </head>
