@@ -33,3 +33,9 @@ ON id=movie_id
 WHERE movie_id = 2
 ORDER BY date,time ;
 
+/*每一筆session 一個座位表*/
+SELECT id, date, time, thread, movie_id, stock, name, subtitle, unit_price, 
+description, photo_url, trailer_url, launch_date, 
+category, discount, box_office, director, cast 
+FROM sessions LEFT JOIN movies 
+ON  movie_id = movies.id;
