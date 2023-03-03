@@ -1,6 +1,5 @@
 package uuu.movieline.test;
 
-import uuu.movieline.entity.BloodType;
 import uuu.movieline.entity.Customer;
 
 public class TestCustomerBloodType {
