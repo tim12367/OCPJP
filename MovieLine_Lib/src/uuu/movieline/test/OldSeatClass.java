@@ -1,4 +1,4 @@
-package uuu.movieline.entity;
+package uuu.movieline.test;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import uuu.movieline.exception.MLInvalidDataException;
 
-public class Seat implements Comparable<Seat> {
+public class OldSeatClass implements Comparable<OldSeatClass> {
 	private LocalDate date;
 	private int showing;
 	private String row;
@@ -65,7 +65,7 @@ public class Seat implements Comparable<Seat> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Seat other = (Seat) obj;
+		OldSeatClass other = (OldSeatClass) obj;
 		return Objects.equals(date, other.date) && Objects.equals(row, other.row) && showing == other.showing;
 	}
 	@Override
@@ -79,7 +79,7 @@ public class Seat implements Comparable<Seat> {
 				", 第幾場=" + showing + "]";
 	}
 	@Override
-	public int compareTo(Seat otherSeat) {
+	public int compareTo(OldSeatClass otherSeat) {
 		int thisOrd = this.row.charAt(0)-'A';
 		int otherOrd = otherSeat.row.charAt(0)-'A';
 		return thisOrd-otherOrd;
