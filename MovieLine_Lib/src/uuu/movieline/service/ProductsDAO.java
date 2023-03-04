@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uuu.movieline.entity.Outlet;
+import uuu.movieline.entity.Seat;
 import uuu.movieline.entity.Movie;
 import uuu.movieline.entity.MovieSession;
 import uuu.movieline.exception.MLException;
@@ -315,13 +316,20 @@ class ProductsDAO {
 		
 		
 	}
+//	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATE =
+//			"SELECT date, time, thread, stock, id, name, "
+//			+ "subtitle, unit_price, description, photo_url, "
+//			+ "trailer_url, launch_date, category, discount, "
+//			+ "box_office, director, cast "
+//			+ "FROM vgb.session_view "
+//			+ "WHERE id = ? AND date = ? "
+//			+ "ORDER BY date,time ";
 	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATE =
-			"SELECT date, time, thread, stock, id, name, "
-			+ "subtitle, unit_price, description, photo_url, "
-			+ "trailer_url, launch_date, category, discount, "
-			+ "box_office, director, cast "
-			+ "FROM vgb.session_view "
-			+ "WHERE id = ? AND date = ? "
+			"SELECT id, date, time, thread, movie_id, stock, name, subtitle, unit_price, "
+			+ "description, photo_url, trailer_url, launch_date, category, "
+			+ "discount, box_office, director, cast, A, B, C, D, E, F, G, H, I "
+			+ "FROM session_seat_view "
+			+ "WHERE movie_id = ? AND date = ? "
 			+ "ORDER BY date,time ";
 	public List<MovieSession> selectSessionsByMovieIdDate(String id, String date) throws MLException {
 		List<MovieSession> list= new ArrayList<>();//查詢list
@@ -344,6 +352,7 @@ class ProductsDAO {
 						continue;
 					}
 					MovieSession s = new MovieSession();
+					s.setId(rs.getInt("id"));
 					s.setDate(rs.getString("date"));
 					s.setTime(rs.getString("time"));
 					s.setThread(rs.getInt("thread"));
@@ -357,7 +366,7 @@ class ProductsDAO {
 					}else{
 						m = new Movie();
 					}
-					m.setId(rs.getInt("id"));
+					m.setId(rs.getInt("movie_id"));
 					m.setName(rs.getString("name"));
 					m.setUnitPrice(rs.getDouble("unit_price"));
 					m.setCategory(rs.getString("category"));
@@ -371,13 +380,105 @@ class ProductsDAO {
 					m.setTrailerUrl(rs.getString("trailer_url"));
 					//加入MovieSession
 					s.setMovie(m);
+					
+					//Seat
+					Seat seat = new Seat();
+					seat.setRowA(rs.getInt("A"));
+					seat.setRowB(rs.getInt("B"));
+					seat.setRowC(rs.getInt("C"));
+					seat.setRowD(rs.getInt("D"));
+					seat.setRowE(rs.getInt("E"));
+					seat.setRowF(rs.getInt("F"));
+					seat.setRowG(rs.getInt("G"));
+					seat.setRowH(rs.getInt("H"));
+					seat.setRowI(rs.getInt("I"));
+					//加入MovieSession
+					s.setSeat(seat);
 					//加入查詢清單
 					list.add(s);
 				}
 				return list;
 			}
 		} catch (SQLException e) {
-			throw new MLException("[用電影編號日期查詢session]失敗",e);
+			throw new MLException("[用電影編號,日期查詢session]失敗",e);
+		}
+	}
+	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATETIME =
+			"SELECT id, date, time, thread, movie_id, stock, name, subtitle, unit_price, "
+			+ "description, photo_url, trailer_url, launch_date, category, "
+			+ "discount, box_office, director, cast, A, B, C, D, E, F, G, H, I "
+			+ "FROM session_seat_view "
+			+ "WHERE movie_id = ? AND date = ? AND time = ? "
+			+ "ORDER BY date,time ";
+	public MovieSession selectSessionsByMovieIdDatetime(String id, String date, String time) throws MLException {
+		MovieSession s = null;//查詢單筆
+		try (
+			Connection connection = MySQLConnection.getConnection();//1,2
+			PreparedStatement pstmt = connection.prepareStatement(SELECT_SESSIONS_BY_MOVIE_ID_AND_DATETIME);//3
+			){
+			//3.1 傳入?的值
+			pstmt.setString(1, id);
+			pstmt.setString(2, date);
+			pstmt.setString(3, time);
+			
+			try(
+				//4.執行指令
+				ResultSet rs = pstmt.executeQuery();
+				){
+				//5.處理rs
+				while (rs.next()) {
+					//沒庫存就不要查到
+					if(rs.getInt("stock")==0) {
+						continue;
+					}
+					s = new MovieSession();
+					s.setId(rs.getInt("id"));
+					s.setDate(rs.getString("date"));
+					s.setTime(rs.getString("time"));
+					s.setThread(rs.getInt("thread"));
+					s.setStock(rs.getInt("stock"));
+					//MOVIE
+					Movie m = null;
+					int discount = rs.getInt("discount");
+					if(discount>0) {
+						m = new Outlet();
+						((Outlet)m).setDiscount(discount);
+					}else{
+						m = new Movie();
+					}
+					m.setId(rs.getInt("movie_id"));
+					m.setName(rs.getString("name"));
+					m.setUnitPrice(rs.getDouble("unit_price"));
+					m.setCategory(rs.getString("category"));
+					m.setDescription(rs.getString("description"));
+					m.setPhotoUrl(rs.getString("photo_url"));
+					m.setLaunchDate(LocalDate.parse(rs.getString("launch_date")));
+					m.setBoxOffice(rs.getInt("box_office"));
+					m.setDirector(rs.getString("director"));
+					m.setCast(rs.getString("cast"));
+					m.setSubtitle(rs.getString("subtitle"));
+					m.setTrailerUrl(rs.getString("trailer_url"));
+					//加入MovieSession
+					s.setMovie(m);
+					
+					//Seat
+					Seat seat = new Seat();
+					seat.setRowA(rs.getInt("A"));
+					seat.setRowB(rs.getInt("B"));
+					seat.setRowC(rs.getInt("C"));
+					seat.setRowD(rs.getInt("D"));
+					seat.setRowE(rs.getInt("E"));
+					seat.setRowF(rs.getInt("F"));
+					seat.setRowG(rs.getInt("G"));
+					seat.setRowH(rs.getInt("H"));
+					seat.setRowI(rs.getInt("I"));
+					//加入MovieSession
+					s.setSeat(seat);
+				}
+				return s;
+			}
+		} catch (SQLException e) {
+			throw new MLException("[用電影編號,日期,時間查詢session]失敗",e);
 		}
 	}
 }

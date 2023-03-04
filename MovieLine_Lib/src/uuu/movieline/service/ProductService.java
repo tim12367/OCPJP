@@ -30,4 +30,7 @@ public class ProductService {
 	public List<MovieSession> getSessionsByMovieIdDate(String id,String date) throws MLException{
 		return dao.selectSessionsByMovieIdDate(id,date);
 	}
+	public MovieSession getSessionsByMovieIdDatetime(String id,String date,String time) throws MLException{
+		return dao.selectSessionsByMovieIdDatetime(id,date,time);
+	}
 }
