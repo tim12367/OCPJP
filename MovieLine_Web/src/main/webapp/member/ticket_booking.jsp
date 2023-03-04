@@ -1,4 +1,7 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
+<%@page import="uuu.movieline.entity.Seat"%>
+<%@page import="org.apache.catalina.Service"%>
+<%@page import="uuu.movieline.entity.MovieSession"%>
 <%@page import="uuu.movieline.service.ProductService"%>
 <%@page import="uuu.movieline.entity.Movie"%>
 <%@page import="java.util.List"%>
@@ -9,10 +12,13 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>一線影院 訂票系統</title>
-<%
+<%	//獲取上一個網頁傳的查詢條件
 	String movieId = request.getParameter("movieId");
 	String date = request.getParameter("date");
 	String time = request.getParameter("time");
+	
+	ProductService service = new ProductService();
+	MovieSession movieSession = service.getSessionsByMovieIdDatetime(movieId, date, time);
 %>
 <link rel="icon" type="image/x-icon" href="../source/title_icon.png" />
 <link href="../css/global.css" type="text/css" rel="stylesheet" />
@@ -81,7 +87,7 @@
 				$("#quantity").val(Number($("#quantity").val()) + 1);
 				
 				//每按一個座位多一行詳情
-				$("#booking_detail_body").append("<div>"+seatRow+"排"+seatNumber+"位"+"</div>");
+				$("#booking_detail_body").append("<div>"+seatRow+"排"+seatNumber+"號"+"</div>");
 				
 				//座位輸出加一
 				seatInputAdd(seatRow,seatNumber);
@@ -118,7 +124,20 @@
 		$("#rowH").val(0);
 		$("#rowI").val(0);
 		//TODO:從資料庫帶資料
-		seatRestoreByRow("I",388);//fortest
+		<%
+		if(movieSession!=null){
+		Seat seat = movieSession.getSeat();
+		%>
+		seatRestoreByRow("A",<%=seat.getRowA()%>);
+		seatRestoreByRow("B",<%=seat.getRowB()%>);
+		seatRestoreByRow("C",<%=seat.getRowC()%>);
+		seatRestoreByRow("D",<%=seat.getRowD()%>);
+		seatRestoreByRow("E",<%=seat.getRowE()%>);
+		seatRestoreByRow("F",<%=seat.getRowF()%>);
+		seatRestoreByRow("G",<%=seat.getRowG()%>);
+		seatRestoreByRow("H",<%=seat.getRowH()%>);
+		seatRestoreByRow("I",<%=seat.getRowI()%>);
+		<%}%>
 	}
 	function seatInputAdd(seatRow,seatNumber) {
 		console.log("seatInputAdd"+seatRow+seatNumber);
@@ -176,7 +195,7 @@
 		<div class="main_div">
 
 			<div class="seating_box">
-				<h1 class="movie_name">鐵達尼號 25周年重映版</h1>
+				<h1 class="movie_name"><%=movieSession!=null?movieSession.getMovie().getName():"查無電影" %></h1>
 				<img class="screan_img"
 					src="<%=request.getContextPath()%>/source/SeatScreen.png" alt="">
 
@@ -600,9 +619,8 @@
 					<select required="required" id="productId" name="productId">
 						<%
 						//1.取得所有商品
-											List<Movie> list;
-											ProductService service = new ProductService();
-											list = service.getAllProducts();
+							List<Movie> list;
+							list = service.getAllProducts();
 						%>
 						<option value="">請選擇電影</option>
 						<%
