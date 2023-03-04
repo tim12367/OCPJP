@@ -7,11 +7,19 @@ import java.time.format.DateTimeParseException;
 import uuu.movieline.exception.MLInvalidDataException;
 
 public class MovieSession {
+	private int id;
 	private LocalDate date;
 	private LocalTime time;
 	private int thread;
 	private Movie movie;
+	private Seat seat;
 	private int stock;
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public LocalDate getDate() {
 		return date;
 	}
@@ -55,6 +63,12 @@ public class MovieSession {
 	public void setMovie(Movie movie) {
 		this.movie = movie;
 	}
+	public Seat getSeat() {
+		return seat;
+	}
+	public void setSeat(Seat seat) {
+		this.seat = seat;
+	}
 	public int getStock() {
 		return stock;
 	}
@@ -68,7 +82,9 @@ public class MovieSession {
 				", 場次時間=" + time + 
 				", 影廳=" + thread + 
 				"\n, 電影=" + movie + 
-				"\n, 庫存=" + stock + "]\n";
+				"\n, 庫存=" + stock + 
+				"\n, 座位=" + seat + 
+				"]\n";
 	}
 	
 }
