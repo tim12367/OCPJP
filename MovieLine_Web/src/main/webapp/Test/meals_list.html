@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .meal_form{
+            width: 150px;
+            border: 1px solid #DADCE0;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        .meal_form>p{
+            margin: 0;
+        }
+        .meal_box_img_box{
+            width: 100%;
+            height: 100px;
+        }
+        .meal_box_img{
+            width: 100%;
+            height: 100%;
+        }
+        .meal_name{
+            font-size: large;
+            margin-bottom: auto;
+        }
+        .meal_price{
+            font-size: medium;
+        }
+        .meal_price>span{
+            text-decoration:line-through;
+        }
+        .meal_discount{
+
+        }
+        .label{
+            width: 100%;
+            padding: 0 5px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: row;
+        }
+        .selector{
+            margin-left: auto;
+            max-width: 60%;
+            flex-grow: 1;
+            flex-shrink: 1;
+            cursor: pointer;
+        }
+        .quantity{
+            margin-left: auto;
+            height: 1.5em;
+            max-width: 60%;
+            box-sizing: border-box;
+            min-width: 50px;
+            flex-grow: 1;
+            flex-shrink: 1;
+        }
+        .submit_btn{
+            width: calc(100% - 10px);
+            height: 34px;
+            border: 0;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            background-color: #b7282c;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form class="meal_form">
+        <div class="meal_box_img_box">
+            <img class="meal_box_img" src="https://sales.vscinemas.com.tw/CDN/media/entity/get/ItemGraphic/10015179">
+        </div>
+        <p class="meal_name">爆米花</p>
+        <p class="meal_price">原價:<span>$55</span></p>
+        <p class="meal_discount">會員價$30</p>
+        <label class="label" for="size">尺寸
+            <select id="size" name="size" class="selector">
+                <option>中</option>
+                <option>大</option>
+            </select>
+        </label>
+        <label class="label" for="option">選項
+            <select class="selector" id="option" name="option">
+                <option>甜</option>
+                <option>鹹</option>
+            </select>
+        </label>
+        <label class="label" for="quantity"><div>數量</div>
+            <input id="quantity" class="quantity" name="quantity" type="number">
+        </label>
+        <input type="submit" class="submit_btn" value="加入購物車">
+    </form>
+</body>
+</html>
