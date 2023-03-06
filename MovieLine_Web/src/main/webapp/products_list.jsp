@@ -74,7 +74,7 @@ crossorigin="anonymous"></script>
 			}else if(category!=null && category.length()>0){
 		list = service.getMoviesByCategory(category);
 			}else{
-		list = service.getAllProducts();
+		list = service.getAllMovies();
 			}
 	%>
 	<article>
