@@ -8,6 +8,7 @@
     <style>
         .meal_form{
             width: 150px;
+            padding-bottom: 3px;
             border: 1px solid #DADCE0;
             border-radius: 4px;
             display: flex;
@@ -15,7 +16,7 @@
             align-items: center;
             font-family: 'Noto Sans TC', sans-serif;
         }
-        .meal_form>p{
+        .meal_form p{
             margin: 0;
         }
         .meal_box_img_box{
@@ -32,6 +33,7 @@
         }
         .meal_price{
             font-size: medium;
+            padding-right: auto;
         }
         .meal_price>span{
             text-decoration:line-through;
@@ -80,8 +82,16 @@
             <img class="meal_box_img" src="https://sales.vscinemas.com.tw/CDN/media/entity/get/ItemGraphic/10015179">
         </div>
         <p class="meal_name">爆米花</p>
-        <p class="meal_price">原價:<span>$55</span></p>
-        <p class="meal_discount">會員價$30</p>
+        <div class="price_box">
+            <div class="meal_price">原價</div>
+            <div>$55</div>
+        </div>
+        <div>
+            <span class="meal_discount">會員價</span>
+            <span>$30</span>
+        </div>
+            
+        
         <label class="label" for="size">尺寸
             <select id="size" name="size" class="selector">
                 <option>中</option>
@@ -95,7 +105,8 @@
             </select>
         </label>
         <label class="label" for="quantity"><div>數量</div>
-            <input id="quantity" class="quantity" name="quantity" type="number">
+            <input id="quantity" class="quantity" name="quantity" 
+            type="number" value="1">
         </label>
         <input type="submit" class="submit_btn" value="加入購物車">
     </form>
