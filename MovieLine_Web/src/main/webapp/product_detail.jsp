@@ -64,11 +64,11 @@ crossorigin="anonymous"></script>
 	<jsp:include page="/subviews/nav.jsp"/>
 	<%
 	String productId = request.getParameter("movieId");
-			ProductService service = new ProductService();
-			Movie p =null;
-			if(productId!=null && productId.length()>0){
-		p = service.getProductById(productId);
-			}
+		ProductService service = new ProductService();
+		Movie p =null;
+		if(productId!=null && productId.length()>0){
+			p = service.getMovieById(productId);
+		}
 	%>
 	<article>
 	<%if(p==null){ %>

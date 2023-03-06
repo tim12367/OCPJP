@@ -70,9 +70,9 @@ crossorigin="anonymous"></script>
 			ProductService service = new ProductService();
 			//2.呼叫商業邏輯
 			if(keyword!=null && keyword.length()>0){
-		list = service.getProductsByKeyword(keyword);
+		list = service.getMoviesByKeyword(keyword);
 			}else if(category!=null && category.length()>0){
-		list = service.getProductsByCategory(category);
+		list = service.getMoviesByCategory(category);
 			}else{
 		list = service.getAllProducts();
 			}
