@@ -9,17 +9,20 @@ import uuu.movieline.exception.MLException;
 public class ProductService {
 	private ProductsDAO dao = new ProductsDAO();
 	
-	public List<Movie> getAllProducts() throws MLException{
-		return dao.selectAllProducts();
+	public List<Movie> getAllMovies() throws MLException{
+		return dao.selectAllMovies();
 	}
-	public List<Movie> getProductsByKeyword(String keyword) throws MLException{
-		return dao.selectProductsByKeyword(keyword);
+	public List<Movie> getMoviesByKeyword(String keyword) throws MLException{
+		if(keyword==null) throw new IllegalArgumentException("依關鍵字查詢電影keyword不得為null");
+		return dao.selectMoviesByKeyword(keyword);
 	}
-	public List<Movie> getProductsByCategory(String category) throws MLException{
-		return dao.selectProductsByCategory(category);
+	public List<Movie> getMoviesByCategory(String category) throws MLException{
+		if(category==null) throw new IllegalArgumentException("依電影分類查詢電影category不得為null");
+		return dao.selectMoviesByCategory(category);
 	}
-	public Movie getProductById(String id) throws MLException{
-		return dao.selectProductById(id);
+	public Movie getMovieById(String id) throws MLException{
+		if(id==null) throw new IllegalArgumentException("依電影id查詢電影id不得為null");
+		return dao.selectMovieById(id);
 	}
 	public List<String[]> getMovieCategoryGroupByCategory() throws MLException {
 		return dao.selectMovieCategoryGroupByCategory();

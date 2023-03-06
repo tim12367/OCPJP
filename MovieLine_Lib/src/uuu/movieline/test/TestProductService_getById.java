@@ -20,7 +20,7 @@ public class TestProductService_getById {
 //		}
 		//用名子查詢
 		try {
-			Movie p = service.getProductById("1");
+			Movie p = service.getMovieById("1");
 			System.out.println(p);
 		} catch (Exception e) {
 			Logger.getLogger("測試[id查詢]").log(

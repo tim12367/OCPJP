@@ -20,7 +20,7 @@ class ProductsDAO {
 			+ "description, "
 			+ "photo_url, launch_date, category, discount, box_office "
 			+ "FROM movies";
-	List<Movie> selectAllProducts() throws MLException{
+	List<Movie> selectAllMovies() throws MLException{
 		List<Movie> list = new ArrayList<>();
 		//connection
 		try(
@@ -67,7 +67,7 @@ class ProductsDAO {
 	}
 	private static final String SELECT_MOVIES_BY_KEYWORD = SELECT_ALL_MOVIES
 			+" WHERE name LIKE ?";
-	List<Movie> selectProductsByKeyword(String keyword) throws MLException{
+	List<Movie> selectMoviesByKeyword(String keyword) throws MLException{
 		//查詢清單
 		List<Movie> list = new ArrayList<>();
 		//connection
@@ -147,7 +147,7 @@ class ProductsDAO {
 	}
 	private static final String SELECT_MOVIES_BY_CATEGORY = SELECT_ALL_MOVIES
 			+" WHERE category = ?";
-	List<Movie> selectProductsByCategory(String category) throws MLException {
+	List<Movie> selectMoviesByCategory(String category) throws MLException {
 		//查詢清單
 				List<Movie> list = new ArrayList<>();
 				//connection
@@ -204,7 +204,7 @@ class ProductsDAO {
 			 + "ORDER BY id  ";
 			 
 	
-	Movie selectProductById(String id) throws MLException{
+	Movie selectMovieById(String id) throws MLException{
 		Movie m =null;
 		try(	//connection
 				Connection connection = MySQLConnection.getConnection();

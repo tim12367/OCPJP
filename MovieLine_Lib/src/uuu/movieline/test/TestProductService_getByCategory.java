@@ -21,7 +21,7 @@ public class TestProductService_getByCategory {
 //		}
 		//用名子查詢
 		try {
-			List<Movie> list = service.getProductsByCategory("愛情");
+			List<Movie> list = service.getMoviesByCategory("愛情");
 			System.out.println(list);
 		} catch (Exception e) {
 			Logger.getLogger("測試[分類查詢]").log(
