@@ -15,9 +15,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>電影場次選擇</title>
 	<%
-		ProductService service = new ProductService();
 		String movieId = request.getParameter("movieId");
-		String date = request.getParameter("date");
+		ProductService service = new ProductService();
+// 		String date = request.getParameter("date");
 		//取得所有電影
 		List<Movie> list;
 		list = service.getAllProducts();
@@ -26,19 +26,19 @@
 		if(movieId!=null&&movieId.length()>0){
 			allSessions = service.getSessionsByMovieId(movieId);
 		}
-		//獲取日期
-		Set<LocalDate> sessionDates = null;
-		if(allSessions!=null&&!allSessions.isEmpty()){
-			sessionDates = new LinkedHashSet<>();
-			for(MovieSession s:allSessions){
-				sessionDates.add(s.getDate());
-			}
-		}
-		//獲取時間表
-		List<MovieSession> SessionTimes =null;
-		if(movieId!=null&&movieId.length()>0&&date!=null&&date.length()>0){
-			SessionTimes = service.getSessionsByMovieIdDate(movieId, date);
-		}
+// 		//獲取日期
+// 		Set<LocalDate> sessionDates = null;
+// 		if(allSessions!=null&&!allSessions.isEmpty()){
+// 			sessionDates = new LinkedHashSet<>();
+// 			for(MovieSession s:allSessions){
+// 				sessionDates.add(s.getDate());
+// 			}
+// 		}
+// 		//獲取時間表
+// 		List<MovieSession> SessionTimes =null;
+// 		if(movieId!=null&&movieId.length()>0&&date!=null&&date.length()>0){
+// 			SessionTimes = service.getSessionsByMovieIdDate(movieId, date);
+// 		}
 	%>
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/source/title_icon.png" />
 	<link href="<%=request.getContextPath()%>/css/global.css" type="text/css" rel="stylesheet">
@@ -61,8 +61,11 @@
 			//若網址有電影代號 帶入選項
 			movieSelectorInitHandlr();
 			//若網址有日期 帶入選項
-			dateSelectorInitHandlr();
-			
+			//dateSelectorInitHandlr();
+			//初始化日期選單(若有電影)
+			<%if (movieId!=null && movieId.length()>0 ){%>
+			getDateOption(<%=movieId%>);
+			<%}%>
 			//若選擇電影 則查詢場次
 			$("#movie").change(movieSelectorChangeHandlr);
 			//若選擇日期 則顯示時間
@@ -96,16 +99,47 @@
 			<%}%>
 		}
 		function movieSelectorChangeHandlr() {
-			location.href="?movieId=" + $("#movie").val();
+			//location.href="?movieId=" + $("#movie").val();
+			//更新日期
+			getDateOption($("#movie").val());
+			//更新時間
+			$("#time").empty();
+			$("#time").append('<option value="">↑請先選擇日期↑</option>');
 		}
-		function dateSelectorInitHandlr() {
-			//若movie selector有值
-			<%if(movieId!=null && movieId.length()>0 && date!=null && date.length()>0){%>
-				$("#date").val("<%=date%>");
-			<%}%>
+		function getDateOption(movieId) {
+			//console.log("AJEX查日期 電影ID"+movieId);
+			$.ajax({
+				url:'../get_movie_date.jsp?movieId='+movieId,
+				method:'GET'
+			}).done(getDateOptionDoneHandlr);
 		}
+		function getDateOptionDoneHandlr(result, textStatus, jqXHR ) {
+			//console.log("result : "+result+"\ntextStatus : "+ textStatus+"\njqXHR : "+ jqXHR);
+			$("#date").empty();
+			$("#date").append(result);			
+		}
+// 		function dateSelectorInitHandlr() {
+// 			//若movie selector有值
+<%-- 			<%if(movieId!=null && movieId.length()>0 && date!=null && date.length()>0){%> --%>
+<%-- 				$("#date").val("<%=date%>"); --%>
+<%-- 			<%}%> --%>
+// 		}
 		function dateSelectorChangeHandlr() {
-			location.href="?movieId=" + $("#movie").val() + "&date=" + $("#date").val();
+			//location.href="?movieId=" + $("#movie").val() + "&date=" + $("#date").val();
+			//console.log(typeof($("#movie").val())==="string" && $("#movie").val().length>0);
+			getTimeOption($("#movie").val(),$("#date").val());
+		}
+		function getTimeOption(movieId,date) {
+			//console.log("AJEX查時間 電影:"+movieId+"日期："+date);
+			$.ajax({
+				url:'../get_movie_time.jsp?movieId='+movieId+'&date='+date,
+				method:'GET'
+			}).done(getTimeOptionDoneHandlr);
+		}
+		function getTimeOptionDoneHandlr(result, textStatus, jqXHR ) {
+			//console.log("result : "+result+"\ntextStatus : "+ textStatus+"\njqXHR : "+ jqXHR);
+			$("#time").empty();
+			$("#time").append(result);
 		}
 	</script>
 	</head>
@@ -138,32 +172,34 @@
 						<img class="select_session_form_input_icon" alt="calendar.png" src="../source/calendar.png">
 					</label>
 					<select id="date" class="select_session_form_input" name="date" required="required">
-						<%if(sessionDates==null || sessionDates.isEmpty()){ %>
-						<option value="">查無場次</option>
-						<%}else{ %>
 						<option value="">請選擇日期</option>
-							<%for(LocalDate d:sessionDates){ %>
-							<option value="<%=d%>"><%=d%></option>
-							<%} %>
-						<%} %>
+<%-- 						<%if(sessionDates==null || sessionDates.isEmpty()){ %> --%>
+<!-- 						<option value="">查無場次</option> -->
+<%-- 						<%}else{ %> --%>
+<!-- 						<option value="">請選擇日期</option> -->
+<%-- 							<%for(LocalDate d:sessionDates){ %> --%>
+<%-- 							<option value="<%=d%>"><%=d%></option> --%>
+<%-- 							<%} %> --%>
+<%-- 						<%} %> --%>
 					</select>			
 				</div>
 				
 				<div class="select_session_form_input_box">
-					<label for="session">
+					<label for="time">
 						<img class="select_session_form_input_icon" alt="time.png" src="../source/time.png">
 					</label>
-					<select id="session" class="select_session_form_input" name="time" required="required">
-					<%if(sessionDates==null || sessionDates.isEmpty()){ %>
-						<option value="">查無場次</option>
-					<%}else if(SessionTimes==null || SessionTimes.isEmpty()){ %>
+					<select id="time" class="select_session_form_input" name="time" required="required">
 						<option value="">↑請先選擇日期↑</option>
-					<%}else{ %>
-						<option value="">請選擇時間</option>
-						<%for(MovieSession s:SessionTimes){ %>
-						<option value="<%=s.getTime()%>"><%=s.getTime()%></option>
-						<%} %>
-					<%} %>
+<%-- 					<%if(sessionDates==null || sessionDates.isEmpty()){ %> --%>
+<!-- 						<option value="">查無場次</option> -->
+<%-- 					<%}else if(SessionTimes==null || SessionTimes.isEmpty()){ %> --%>
+<!-- 						<option value="">↑請先選擇日期↑</option> -->
+<%-- 					<%}else{ %> --%>
+<!-- 						<option value="">請選擇時間</option> -->
+<%-- 						<%for(MovieSession s:SessionTimes){ %> --%>
+<%-- 						<option value="<%=s.getTime()%>"><%=s.getTime()%></option> --%>
+<%-- 						<%} %> --%>
+<%-- 					<%} %> --%>
 					</select>
 				</div>
 				<input type="submit" class="submit_button" value="前往劃位">
