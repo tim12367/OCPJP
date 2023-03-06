@@ -39,14 +39,15 @@
 			alert("不支援的瀏覽器!");
 			$("#hint").text("不支援的瀏覽器!");
 		}
-		// TODO:從資料庫放資料上去初始化位子
+
+		SelectorInitHandlr();//初始化選單
 		seatInitHandlr(); //初始化位子
 		$("td>img").attr("draggable", "false");//disable draggable
 		$("td").click(seatSelectHandlr); //點到的格子
 		//重新選電影
-		$("#movieId").change(changeMovieIdData);//movieId選單改變時
-		$("#date").change(changeDateData);//date選單改變時
-		$("#time").change(changeTimeData);//time選單改變時
+		$("#movie").change(movieSelectorChangeHandlr);//movie選單改變時
+		$("#date").change(dateSelectorChangeHandlr);//date選單改變時
+		$("#time").change(timeSelectorChangeHandlr);//time選單改變時
 	}
 	function restoreData() {
 		var getDarkModeFlag = localStorage.getItem("darkModeFlag");
@@ -186,14 +187,66 @@
 	        return $.trim($(this).text()) === seatNumber;
 	      }).siblings("img").attr("src","../source/sold.png");
 	}
-	function changeMovieIdData(){
-		console.log($('#movieId').val());
+	function SelectorInitHandlr() {
+		<%if(movieId!=null && movieId.length()>0
+				&& date!=null && date.length()>0
+				&& time!=null && time.length()>0){%>
+				getDateOption("<%=movieId%>");
+				getTimeOption("<%=movieId%>","<%=date%>");
+			$("#movie").val("<%=movieId%>");
+		<%}else{%>
+			$("#movie").val("");
+		<%}%>
+		
 	}
-	function changeDateData() {
-		console.log($('#date').val());
+	
+	function movieSelectorChangeHandlr() {
+		//location.href="?movieId=" + $("#movie").val();
+		//更新日期
+		getDateOption($("#movie").val());
+		//更新時間
+		$("#time").empty();
+		$("#time").append('<option value="">↑請先選擇日期↑</option>');
 	}
-	function changeTimeData() {
-		console.log($('#time').val());
+	function getDateOption(movieId) {
+		//console.log("AJEX查日期 電影ID"+movieId);
+		$.ajax({
+			url:'../get_movie_date.jsp?movieId='+movieId,
+			method:'GET'
+		}).done(getDateOptionDoneHandlr);
+	}
+	var initDateOptionFlag = true;
+	function getDateOptionDoneHandlr(result, textStatus, jqXHR ) {
+		//console.log("result : "+result+"\ntextStatus : "+ textStatus+"\njqXHR : "+ jqXHR);
+		$("#date").empty();
+		$("#date").append(result);
+		if(initDateOptionFlag==true){
+			$("#date").val("<%=date%>");
+			initDateOptionFlag = false;
+		}
+	}
+	function dateSelectorChangeHandlr() {
+		getTimeOption($("#movie").val(),$("#date").val());
+	}
+	function getTimeOption(movieId,date) {
+		//console.log("AJEX查時間 電影:"+movieId+"日期："+date);
+		$.ajax({
+			url:'../get_movie_time.jsp?movieId='+movieId+'&date='+date,
+			method:'GET'
+		}).done(getTimeOptionDoneHandlr);
+	}
+	var initTimeOptionFlag = true;
+	function getTimeOptionDoneHandlr(result, textStatus, jqXHR ) {
+		//console.log("result : "+result+"\ntextStatus : "+ textStatus+"\njqXHR : "+ jqXHR);
+		$("#time").empty();
+		$("#time").append(result);
+		if(initTimeOptionFlag==true){
+			$("#time").val("<%=time%>");
+			initTimeOptionFlag = false;
+		}
+	}
+	function timeSelectorChangeHandlr() {
+		location.href="?movieId=" + $("#movie").val()+"&date="+$("#date").val()+"&time="+$("#time").val();
 	}
 </script>
 </head>
@@ -628,8 +681,8 @@
 				<label for="rowI">I</label>
 				<input id="rowI" name="rowI" type="number" readonly="readonly"><br>
 				<!-- 日期選擇區Start -->
-					<label for="movieId">電影</label>
-					<select required="required" id="movieId" name="movieId">
+					<label for="movie">電影</label>
+					<select required="required" id="movie" name="movieId">
 						<%
 						//1.取得所有電影
 							List<Movie> list;
@@ -655,14 +708,14 @@
 					<label for="date">日期</label>
 					<select required="required" id="date" name="date">
 						<option value="">請選擇日期</option>
-						<option value="1999-01-01">1999-01-01</option>
-						<option value="1999-01-02">1999-01-02</option>
+<!-- 						<option value="1999-01-01">1999-01-01</option> -->
+<!-- 						<option value="1999-01-02">1999-01-02</option> -->
 					</select><br>
 					<label for="time">場次時間</label>
 					<select required="required" id="time" name="time">
-						<option value="">請選擇電影</option>
-						<option value="19:00">19:00</option>
-						<option value="20:00">20:00</option>
+						<option value="">↑請先選擇日期↑</option>
+<!-- 						<option value="19:00">19:00</option> -->
+<!-- 						<option value="20:00">20:00</option> -->
 					</select>
 					<br>
 					<!-- 日期選擇區End -->
