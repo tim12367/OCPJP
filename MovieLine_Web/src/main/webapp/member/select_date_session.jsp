@@ -96,6 +96,8 @@
 		function movieSelectorInitHandlr() {
 			<%if(movieId!=null && movieId.length()>0){%>
 				$("#movie").val("<%=movieId%>");
+			<%}else{%>
+				$("#movie").val("");
 			<%}%>
 		}
 		function movieSelectorChangeHandlr() {
