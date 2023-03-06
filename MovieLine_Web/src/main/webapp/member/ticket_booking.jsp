@@ -43,6 +43,10 @@
 		seatInitHandlr(); //初始化位子
 		$("td>img").attr("draggable", "false");//disable draggable
 		$("td").click(seatSelectHandlr); //點到的格子
+		//重新選電影
+		$("#movieId").change(changeMovieIdData);//movieId選單改變時
+		$("#date").change(changeDateData);//date選單改變時
+		$("#time").change(changeTimeData);//time選單改變時
 	}
 	function restoreData() {
 		var getDarkModeFlag = localStorage.getItem("darkModeFlag");
@@ -181,6 +185,15 @@
 		$("#"+seatRow+" >td >p:contains('"+seatNumber+"')").filter(function() {
 	        return $.trim($(this).text()) === seatNumber;
 	      }).siblings("img").attr("src","../source/sold.png");
+	}
+	function changeMovieIdData(){
+		console.log($('#movieId').val());
+	}
+	function changeDateData() {
+		console.log($('#date').val());
+	}
+	function changeTimeData() {
+		console.log($('#time').val());
 	}
 </script>
 </head>
@@ -614,13 +627,13 @@
 				
 				<label for="rowI">I</label>
 				<input id="rowI" name="rowI" type="number" readonly="readonly"><br>
-				
-					<label for="productId">目前產品id</label>
-					<select required="required" id="productId" name="productId">
+				<!-- 日期選擇區Start -->
+					<label for="movieId">電影</label>
+					<select required="required" id="movieId" name="movieId">
 						<%
-						//1.取得所有商品
+						//1.取得所有電影
 							List<Movie> list;
-							list = service.getAllProducts();
+							list = service.getAllMovies();
 						%>
 						<option value="">請選擇電影</option>
 						<%
@@ -638,11 +651,25 @@
 						<%}%>
 						<%}%>
 						
+					</select><br>
+					<label for="date">日期</label>
+					<select required="required" id="date" name="date">
+						<option value="">請選擇日期</option>
+						<option value="1999-01-01">1999-01-01</option>
+						<option value="1999-01-02">1999-01-02</option>
+					</select><br>
+					<label for="time">場次時間</label>
+					<select required="required" id="time" name="time">
+						<option value="">請選擇電影</option>
+						<option value="19:00">19:00</option>
+						<option value="20:00">20:00</option>
 					</select>
 					<br>
+					<!-- 日期選擇區End -->
 					<label for="quantity"> 目前購票數量 </label>
 					<input id="quantity" readonly="readonly"
 						type="number" name="quantity" min="1" max="20" value="0">
+					
 					 <input type="submit">
 				</form>
 				<!-- For test input -->

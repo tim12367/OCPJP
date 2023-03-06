@@ -20,7 +20,7 @@
 // 		String date = request.getParameter("date");
 		//取得所有電影
 		List<Movie> list;
-		list = service.getAllProducts();
+		list = service.getAllMovies();
 		//獲取場次
 		List<MovieSession> allSessions = null;
 		if(movieId!=null&&movieId.length()>0){
