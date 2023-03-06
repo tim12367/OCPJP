@@ -18,6 +18,27 @@
 		ProductService service = new ProductService();
 		String movieId = request.getParameter("movieId");
 		String date = request.getParameter("date");
+		//取得所有電影
+		List<Movie> list;
+		list = service.getAllProducts();
+		//獲取場次
+		List<MovieSession> allSessions = null;
+		if(movieId!=null&&movieId.length()>0){
+			allSessions = service.getSessionsByMovieId(movieId);
+		}
+		//獲取日期
+		Set<LocalDate> sessionDates = null;
+		if(allSessions!=null&&!allSessions.isEmpty()){
+			sessionDates = new LinkedHashSet<>();
+			for(MovieSession s:allSessions){
+				sessionDates.add(s.getDate());
+			}
+		}
+		//獲取時間表
+		List<MovieSession> SessionTimes =null;
+		if(movieId!=null&&movieId.length()>0&&date!=null&&date.length()>0){
+			SessionTimes = service.getSessionsByMovieIdDate(movieId, date);
+		}
 	%>
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/source/title_icon.png" />
 	<link href="<%=request.getContextPath()%>/css/global.css" type="text/css" rel="stylesheet">
@@ -101,12 +122,6 @@
 						<img class="select_session_form_input_icon" alt="vedio_cam.png" src="../source/vedio_cam.png">
 					</label>
 					<select id="movie" class="select_session_form_input" name="movieId" required="required">
-					
-					<%
-					//取得所有電影
-						List<Movie> list;
-						list = service.getAllProducts();
-					%>
 						<option value="">請選擇電影</option>
 					<%if(list==null || list.size()==0){%>
 						<option>查無電影</option>
@@ -117,26 +132,7 @@
 					<%}%>
 					</select>
 				</div>
-				<%
-					//獲取場次
-					List<MovieSession> allSessions = null;
-					if(movieId!=null&&movieId.length()>0){
-						allSessions = service.getSessionsByMovieId(movieId);
-					}
-					//獲取日期
-					Set<LocalDate> sessionDates = null;
-					if(allSessions!=null&&!allSessions.isEmpty()){
-						sessionDates = new LinkedHashSet<>();
-						for(MovieSession s:allSessions){
-							sessionDates.add(s.getDate());
-						}
-					}
-					//獲取時間表
-					List<MovieSession> SessionTimes =null;
-					if(movieId!=null&&movieId.length()>0&&date!=null&&date.length()>0){
-						SessionTimes = service.getSessionsByMovieIdDate(movieId, date);
-					}
-				%>
+				
 				<div class="select_session_form_input_box">
 					<label for="date">
 						<img class="select_session_form_input_icon" alt="calendar.png" src="../source/calendar.png">
