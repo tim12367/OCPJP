@@ -16,9 +16,14 @@
 	String movieId = request.getParameter("movieId");
 	String date = request.getParameter("date");
 	String time = request.getParameter("time");
-	
+	MovieSession movieSession = null;
+	Seat seat = null;
+
 	ProductService service = new ProductService();
-	MovieSession movieSession = service.getSessionsByMovieIdDatetime(movieId, date, time);
+	if(movieId!=null && date!=null && time!=null){
+		movieSession = service.getSessionsByMovieIdDatetime(movieId, date, time);
+		seat = movieSession.getSeat();
+	}
 %>
 <link rel="icon" type="image/x-icon" href="../source/title_icon.png" />
 <link href="../css/global.css" type="text/css" rel="stylesheet" />
@@ -131,7 +136,7 @@
 		//TODO:從資料庫帶資料
 		<%
 		if(movieSession!=null){
-		Seat seat = movieSession.getSeat();
+		seat = movieSession.getSeat();
 		%>
 		seatRestoreByRow("A",<%=seat.getRowA()%>);
 		seatRestoreByRow("B",<%=seat.getRowB()%>);
@@ -264,468 +269,66 @@
 				<h1 class="movie_name"><%=movieSession!=null?movieSession.getMovie().getName():"查無電影" %></h1>
 				<img class="screan_img"
 					src="<%=request.getContextPath()%>/source/SeatScreen.png" alt="">
-
-				<table id="seating_area" class="seating_area">
-					<tbody>
-						<tr id="A">
-							<td>
-								<p>A</p>
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>1</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>2</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>3</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>4</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>5</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>6</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>7</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>8</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>9</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>10</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>A</p>
-							</td>
-
-						</tr>
-						<tr id="B">
-							<td>
-								<p>B</p>
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>1</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>2</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>3</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>4</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>5</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>6</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>7</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>8</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>9</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>10</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>B</p>
-							</td>
-
-						</tr>
-						<tr id="C">
-							<td>
-								<p>C</p>
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>1</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>2</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>3</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>4</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>5</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>6</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>7</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>8</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>9</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>10</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>C</p>
-							</td>
-
-						</tr>
-						<tr id="D">
-							<td>
-								<p>D</p>
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>1</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>2</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>3</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>4</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>5</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>6</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>7</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>8</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>9</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>10</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>D</p>
-							</td>
-
-						</tr>
-						<tr id="E">
-							<td>
-								<p>E</p>
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>1</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>2</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>3</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>4</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>5</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>6</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>7</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>8</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>9</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>10</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>E</p>
-							</td>
-
-						</tr>
-						<tr id="F">
-							<td>
-								<p>F</p>
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>1</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>2</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>3</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>4</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>5</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>6</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>7</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>8</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>9</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>10</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>F</p>
-							</td>
-
-						</tr>
-						<tr id="G">
-							<td>
-								<p>G</p>
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>1</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>2</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>3</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>4</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>5</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>6</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>7</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>8</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>9</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>10</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>G</p>
-							</td>
-
-						</tr>
-						<tr id="H">
-							<td>
-								<p>H</p>
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>1</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>2</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>3</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>4</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>5</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>6</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>7</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>8</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>9</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td>
-								<p>10</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>H</p>
-							</td>
-
-						</tr>
-						<tr id="I">
-							<td>
-								<p>I</p>
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>1</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>2</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>4</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>5</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>6</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>7</p> <img src="../source/standard_available.png">
-							</td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td>
-								<p>10</p> <img src="../source/standard_available.png">
-							</td>
-							<td>
-								<p>I</p>
-							</td>
-
-						</tr>
-					</tbody>
-				</table>
-				<!-- TODO:假輸入 -->
-				<!-- For test input -->
-				<form action="" method="POST">
-				
-				<label for="rowA">A</label>
-				<input id="rowA" name="rowA" type="number" readonly="readonly"><br>
-				
-				<label for="rowB">B</label>
-				<input id="rowB" name="rowB" type="number" readonly="readonly"><br>
-				
-				<label for="rowC">C</label>
-				<input id="rowC" name="rowC" type="number" readonly="readonly"><br>
-				
-				<label for="rowD">D</label>
-				<input id="rowD" name="rowD" type="number" readonly="readonly"><br>
-				
-				<label for="rowE">E</label>
-				<input id="rowE" name="rowE" type="number" readonly="readonly"><br>
-				
-				<label for="rowF">F</label>
-				<input id="rowF" name="rowF" type="number" readonly="readonly"><br>
-				
-				<label for="rowG">G</label>
-				<input id="rowG" name="rowG" type="number" readonly="readonly"><br>
-				
-				<label for="rowH">H</label>
-				<input id="rowH" name="rowH" type="number" readonly="readonly"><br>
-				
-				<label for="rowI">I</label>
-				<input id="rowI" name="rowI" type="number" readonly="readonly"><br>
-				<!-- 日期選擇區Start -->
-					<label for="movie">電影</label>
-					<select required="required" id="movie" name="movieId">
-						<%
-						//1.取得所有電影
-							List<Movie> list;
-							list = service.getAllMovies();
-						%>
-						<option value="">請選擇電影</option>
-						<%
-						if(list==null || list.size()==0){
-						%>
-						<option>查無電影</option>
-						<%
-						}else{
-						%>
-						<%
-						for(int i=0; i<list.size();i++){
-											Movie p = list.get(i);
-						%>
-						<option value="<%=p.getId()%>"><%=p.getName() %></option>
-						<%}%>
-						<%}%>
-						
-					</select><br>
-					<label for="date">日期</label>
-					<select required="required" id="date" name="date">
-						<option value="">請選擇日期</option>
-<!-- 						<option value="1999-01-01">1999-01-01</option> -->
-<!-- 						<option value="1999-01-02">1999-01-02</option> -->
-					</select><br>
-					<label for="time">場次時間</label>
-					<select required="required" id="time" name="time">
-						<option value="">↑請先選擇日期↑</option>
-<!-- 						<option value="19:00">19:00</option> -->
-<!-- 						<option value="20:00">20:00</option> -->
-					</select>
-					<br>
-					<!-- 日期選擇區End -->
-					<label for="quantity"> 目前購票數量 </label>
-					<input id="quantity" readonly="readonly"
-						type="number" name="quantity" min="1" max="20" value="0">
-					
-					 <input type="submit">
+				<%@ include file="/subviews/seating_area.jsp" %>
+				<!-- form -->
+				<form class="booking_form" action="cart.jsp" method="GET" >
+					<div class = hidden_inputs>
+						<label for="rowA">A</label><input id="rowA" name="rowA" type="number" readonly="readonly"><br>
+						<label for="rowB">B</label><input id="rowB" name="rowB" type="number" readonly="readonly"><br>
+						<label for="rowC">C</label><input id="rowC" name="rowC" type="number" readonly="readonly"><br>
+						<label for="rowD">D</label><input id="rowD" name="rowD" type="number" readonly="readonly"><br>
+						<label for="rowE">E</label><input id="rowE" name="rowE" type="number" readonly="readonly"><br>
+						<label for="rowF">F</label><input id="rowF" name="rowF" type="number" readonly="readonly"><br>
+						<label for="rowG">G</label><input id="rowG" name="rowG" type="number" readonly="readonly"><br>
+						<label for="rowH">H</label><input id="rowH" name="rowH" type="number" readonly="readonly"><br>
+						<label for="rowI">I</label><input id="rowI" name="rowI" type="number" readonly="readonly"><br>
+					</div>
+					<div class="input_box">
+						<label for="movie">電影</label>
+						<select required="required" id="movie" name="movieId">
+							<%
+							//1.取得所有電影
+								List<Movie> list;
+								list = service.getAllMovies();
+							%>
+							<option value="">請選擇電影</option>
+							<%
+							if(list==null || list.size()==0){
+							%>
+							<option>查無電影</option>
+							<%
+							}else{
+							%>
+							<%
+							for(int i=0; i<list.size();i++){
+												Movie p = list.get(i);
+							%>
+							<option value="<%=p.getId()%>"><%=p.getName() %></option>
+							<%}%>
+							<%}%>
+							
+						</select>
+					</div>
+					<div class="input_box">
+						<label for="date">日期</label>
+						<select required="required" id="date" name="date">
+							<option value="">請選擇日期</option>
+						</select>
+					</div>
+					<div class="input_box">
+						<label for="time">場次時間</label>
+						<select required="required" id="time" name="time">
+							<option value="">↑請先選擇日期↑</option>
+						</select>
+					</div>
+					<div class="input_box">
+						<label for="quantity"> 目前購票數量 </label>
+						<input id="quantity" readonly="readonly"
+							type="number" name="quantity" min="1" max="20" value="0">
+					</div>
+					<input class="booking_btn" type="submit" value="確認訂購">
 				</form>
-				<!-- For test input -->
+				<!-- form -->
 			</div>
 			<div class="shopping_detail_box">
 
@@ -740,6 +343,7 @@
 							日期:<%=date%><br>
 							時間:<%=time%><br>
 						</div>
+						<hr>
 					</div>
 				</div>
 				<div class="panel">
