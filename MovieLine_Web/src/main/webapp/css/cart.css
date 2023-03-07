@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+#cart {
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 80%;
+	margin: auto;
+	margin-top: 50px;
+}
+.booking_detail{
+	font-family: Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 80%;
+	margin: auto;
+	margin-top: 50px;
+}
+#cart td, #cart th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+.booking_detail td, .booking_detail th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+.booking_detail td, #cart th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+/* #cart tr:nth-child(even) { */
+/* 	background-color: #f2f2f2; */
+/* 	background-color: #2798de; */
+/* 	color:black; */
+/* } */
+
+/* #cart tr:hover { */
+/* 	background-color: #ddd; */
+/* } */
+
+#cart tbody img {
+	width: 56px;
+	vertical-align: middle;
+}
+
+.booking_detail tbody img {
+	width: 56px;
+	vertical-align: middle;
+}
+
+#cart caption {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #04AA6D;
+	color: white;
+}
+.booking_detail caption{
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #04AA6D;
+	color: white;
+}
+#cart th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: darkgray;
+	background-color: #2798de;
+	color: white;
+}
+
+#cart tfoot td {
+	text-align: right
+}
