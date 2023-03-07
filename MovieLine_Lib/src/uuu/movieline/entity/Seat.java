@@ -1,9 +1,11 @@
 package uuu.movieline.entity;
 
+import java.util.Objects;
+
 import uuu.movieline.exception.MLInvalidDataException;
 
 public class Seat {
-	private int id ;//O
+	private int id ;//Pkey
 	private int rowA;
 	private int rowB;
 	private int rowC;
@@ -127,6 +129,21 @@ public class Seat {
 			String msg = String.format("I行座位必須大於等於0小於%s:%s 不正確",MAX_SEAT_INT_EACH_ROW,rowI);
 			throw new MLInvalidDataException(msg);
 		}
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Seat other = (Seat) obj;
+		return id == other.id;
 	}
 	@Override
 	public String toString() {
