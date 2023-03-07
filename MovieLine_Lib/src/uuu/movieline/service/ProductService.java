@@ -24,7 +24,7 @@ public class ProductService {
 		if(id==null) throw new IllegalArgumentException("依電影id查詢電影id不得為null");
 		return dao.selectMovieById(id);
 	}
-	public List<String[]> getMovieCategoryGroupByCategory() throws MLException {
+	public List<String[]> getMovieCategoryList() throws MLException {
 		return dao.selectMovieCategoryGroupByCategory();
 	}
 	public List<MovieSession> getSessionsByMovieId(String id) throws MLException{

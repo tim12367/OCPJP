@@ -21,7 +21,7 @@ public class TestProductService_getCategory {
 //		}
 		//用名子查詢
 		try {
-			List<String[]> list = service.getMovieCategoryGroupByCategory();
+			List<String[]> list = service.getMovieCategoryList();
 			for(int i =0;i<list.size();i++) {
 				System.out.println(list.get(i)[0]+list.get(i)[1]);
 			}

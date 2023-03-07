@@ -4,9 +4,9 @@
 <%@page import="uuu.movieline.entity.Customer"%>
 <!-- nav.jsp start -->
 	<%
-		Customer member = (Customer)session.getAttribute("member");
-		ProductService service = new ProductService();
-		List<String[]> categoryList = service.getMovieCategoryGroupByCategory();
+			Customer member = (Customer)session.getAttribute("member");
+			ProductService service = new ProductService();
+			List<String[]> categoryList = service.getMovieCategoryList();
 	%>
 	<nav class="nav">
 		<ul class="nav_list">
