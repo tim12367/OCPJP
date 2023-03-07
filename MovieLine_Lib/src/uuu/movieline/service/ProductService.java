@@ -28,12 +28,18 @@ public class ProductService {
 		return dao.selectMovieCategoryGroupByCategory();
 	}
 	public List<MovieSession> getSessionsByMovieId(String id) throws MLException{
+		if(id==null) throw new IllegalArgumentException("查詢電影場次時，movieId不得為null");
 		return dao.selectSessionsByMovieId(id);
 	}
 	public List<MovieSession> getSessionsByMovieIdDate(String id,String date) throws MLException{
+		if(id==null) throw new IllegalArgumentException("查詢電影場次時，movieId不得為null");
+		if(date==null) throw new IllegalArgumentException("查詢電影場次時，date不得為null");
 		return dao.selectSessionsByMovieIdDate(id,date);
 	}
 	public MovieSession getSessionsByMovieIdDatetime(String id,String date,String time) throws MLException{
+		if(id==null) throw new IllegalArgumentException("查詢電影場次時，movieId不得為null");
+		if(date==null) throw new IllegalArgumentException("查詢電影場次時，date不得為null");
+		if(time==null) throw new IllegalArgumentException("查詢電影場次時，time不得為null");		
 		return dao.selectSessionsByMovieIdDatetime(id,date,time);
 	}
 }
