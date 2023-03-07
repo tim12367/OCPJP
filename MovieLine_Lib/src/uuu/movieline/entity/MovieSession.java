@@ -3,14 +3,15 @@ package uuu.movieline.entity;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 
 import uuu.movieline.exception.MLInvalidDataException;
 
 public class MovieSession {
-	private int id;
-	private LocalDate date;
-	private LocalTime time;
-	private int thread;
+	private int id;//UQ
+	private LocalDate date;//PKey
+	private LocalTime time;//PKey
+	private int thread;//PKey
 	private Movie movie;
 	private Seat seat;
 	private int stock;
@@ -74,6 +75,22 @@ public class MovieSession {
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(date, thread, time);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MovieSession other = (MovieSession) obj;
+		return Objects.equals(date, other.date) && thread == other.thread && Objects.equals(time, other.time);
 	}
 	@Override
 	public String toString() {
