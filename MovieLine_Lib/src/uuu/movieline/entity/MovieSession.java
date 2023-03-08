@@ -3,6 +3,7 @@ package uuu.movieline.entity;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+import java.util.List;
 import java.util.Objects;
 
 import uuu.movieline.exception.MLInvalidDataException;
@@ -76,7 +77,13 @@ public class MovieSession {
 	public void setStock(int stock) {
 		this.stock = stock;
 	}
-	
+	public List<String> getSeatList(){
+		if(seat!=null) {
+			return seat.getSeatList();
+		}else {
+			return null;
+		}
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(date, thread, time);

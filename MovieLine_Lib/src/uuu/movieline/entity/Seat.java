@@ -1,6 +1,10 @@
 package uuu.movieline.entity;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Objects;
+import java.util.Stack;
 
 import uuu.movieline.exception.MLInvalidDataException;
 
@@ -129,6 +133,34 @@ public class Seat {
 			String msg = String.format("I行座位必須大於等於0小於%s:%s 不正確",MAX_SEAT_INT_EACH_ROW,rowI);
 			throw new MLInvalidDataException(msg);
 		}
+	}
+	public List<String> getSeatList (){
+		String A =Integer.toBinaryString(rowA);
+		String B =Integer.toBinaryString(rowB);
+		String C =Integer.toBinaryString(rowC);
+		String D =Integer.toBinaryString(rowD);
+		String E =Integer.toBinaryString(rowE);
+		String F =Integer.toBinaryString(rowF);
+		String G =Integer.toBinaryString(rowG);
+		String H =Integer.toBinaryString(rowH);
+		String I =Integer.toBinaryString(rowI);
+		List<String> seatList = new ArrayList<String>();
+		String[] rowNameList = new String[]{"A","B","C","D","E","F","G","H","I"};
+		String[] rowList = new String[]{A,B,C,D,E,F,G,H,I};
+		String rowName;
+		String rowString;
+		for(int i=0;i<rowList.length;i++) {
+			rowName = rowNameList[i];
+			rowString = rowList[i];
+			for(int j = 0;j<rowString.length();j++) {
+				if(rowString.indexOf("1",j)>-1) {
+					seatList.add(rowName+(rowString.length() - rowString.indexOf("1",j)));//String 與 int相反
+					j=rowString.indexOf("1",j);
+				}
+			}
+		}
+		seatList.sort(Comparator.naturalOrder());
+		return seatList;
 	}
 	@Override
 	public int hashCode() {
