@@ -8,9 +8,9 @@ public class TestProduct {
 	public static void main(String[] args) {
 		Movie p = new Movie();
 //		Customer c;
-		p.setId(-1);
-		p.setName(null);
-		p.setUnitPrice(-1);
+		p.setId(1);
+		p.setName("test");
+		p.setUnitPrice(1);
 		
 		System.out.println(p);
 		System.out.println("*************以下為p2**************");
