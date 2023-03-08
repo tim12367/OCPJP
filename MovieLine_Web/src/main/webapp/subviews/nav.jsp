@@ -37,6 +37,9 @@
 				</ul>
 			</li>
 		</ul>
+		<a class=nav_cart_a href="<%=request.getContextPath()%>/member/cart.jsp">
+			<img class="nav_cart_img" alt="cart" src="<%=request.getContextPath()%>\source\cart.png">		
+		</a>
 		<%if(member!=null){ %>
 		<a class="nav_booking_a" href="<%=request.getContextPath()%>/member/select_date_session.jsp">
 			<span class="nav_booking_text">快速訂票</span>

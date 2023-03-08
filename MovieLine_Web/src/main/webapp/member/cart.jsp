@@ -1,3 +1,6 @@
+<%@page import="uuu.movieline.entity.CartItem"%>
+<%@page import="uuu.movieline.entity.Customer"%>
+<%@page import="uuu.movieline.entity.ShoppingCart"%>
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -58,6 +61,18 @@
 	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp" />
 	<article>
+	<% 
+		ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+	    Customer member = (Customer)session.getAttribute("member");
+	     
+		if(cart!=null && member!=null){
+			cart.setMember(member);
+		}
+	%>
+	<%=cart %>
+	<%if(cart==null || cart.isEmpty()){ %>
+		<h2>尚未訂票!</h2>
+	<%}else{ %>
 		<table class="booking_detail">
 			<caption>訂票明細</caption>
 			<thead>
@@ -67,32 +82,43 @@
 					<th>時間</th>
 					<th>價格</th>
 					<th>數量</th>
+					<th>座位</th>
 					<th>小計</th>
 				</tr>
 			</thead>
+			
 			<tbody>
+			<% for(CartItem cartItem:cart.getCartItemSet()){ %>
 				<tr>
 					<td>
-						<img alt="蟻人與黃蜂女：量子狂熱" src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230116003.jpg">
-						蟻人與黃蜂女：量子狂熱
+						<img alt="<%=cartItem.getMovieName()%>" src="<%=cartItem.getPhotoUrl()%>">
+						<%=cartItem.getMovieName()%>
 					</td>
-					<td>2023-02-28</td>
-					<td>10:10:00</td>
+					<td><%=cartItem.getSessionDate()%></td>
+					<td><%=cartItem.getSessionTime()%></td>
 					<td>
-						定價:340<br>
-						優惠價:85折 300.0元<br>
+						定價:<%=cart.getListPrice(cartItem) %><br>
+						折扣:<%= cart.getDiscountString(cartItem)%><br>
+						特價:<%= cart.getUnitPrice(cartItem) %><br>
 					</td>
-					<td>2</td>
-					<td>600.0</td>
+					<td>
+						<%= cart.getQuantity(cartItem) %>
+					</td>
+					<td>
+						<%= cartItem.getSeatListString()%>		
+					</td>
+					<td><%= cart.getAmount(cartItem)%></td>
 				</tr>
+				<%} %>
 			</tbody>
 		</table>
+		<%}%>
 		<table id='cart'>
-			<caption>購物明細</caption>
+			<caption>餐點明細</caption>
 			<thead>
 				<tr>
 					<th>名稱</th>
-					<th>顏色/Size</th>
+					<th>Size/選項</th>
 					<th>價格</th>
 					<th>數量</th>
 					<th>小計</th>
@@ -101,9 +127,9 @@
 			<tbody>
 				<tr>
 					<td><img
-						src='https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/001/055/52/0010555220.jpg&w=374&h=374&v=5020f27b'>
-						Java 7 教學手冊 第五版(附光碟)</td>
-					<td></td>
+						src='https://imgs.gvm.com.tw/upload/gallery/20191023/68938_01.jpg'>
+						爆米花</td>
+					<td>L/甜</td>
 					<td>定價：650.0元<br> 優惠價：9折<br> 585.0元
 					</td>
 					<td>2</td>
@@ -111,9 +137,9 @@
 				</tr>
 				<tr>
 					<td><img
-						src='https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/N01/142/02/N011420245.jpg&w=374&h=374&v=5b9f4e22'>
-						【德國LYRA】Groove三角洞洞色鉛筆</td>
-					<td>紅</td>
+						src='https://img.tukuppt.com/png_preview/00/00/06/oa3RLHO6PS.jpg!/fw/780'>
+						飲料</td>
+					<td>M/少冰</td>
 					<td>定價：70.0元<br> 優惠價：9折<br> 63.0元
 					</td>
 					<td>1</td>
@@ -121,56 +147,18 @@
 				</tr>
 				<tr>
 					<td><img
-						src='https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/N01/142/02/N011420252.jpg&w=187&h=187&v=5b9f4e22'>
-						【德國LYRA】Groove三角洞洞色鉛筆</td>
-					<td>藍</td>
+						src='https://www.foodnext.net/dispPageBox/getFile/GetImg.aspx?FileLocation=%2FPJ-FOODNEXT%2FFiles%2F&FileName=photo-08366-i.jpg'>
+						炸雞</td>
+					<td>雞腿</td>
 					<td>定價：70.0元<br> 優惠價：9折<br> 63.0元
 					</td>
 					<td>1</td>
 					<td>63</td>
-				</tr>
-				<tr>
-					<td><img
-						src='https://www.9x9.tw/public/files/product/thumb/N90888-41314S.jpg'>
-						Pentel百點橡皮擦</td>
-					<td>白/S</td>
-					<td>定價：10元<br> 優惠價：8折<br> 8元
-					</td>
-					<td>1</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td><img
-						src='https://www.9x9.tw/public/files/product/thumb/N90888-41314S.jpg'>
-						Pentel百點橡皮擦</td>
-					<td>白/M</td>
-					<td>定價：15元<br> 優惠價：8折<br> 12元
-					</td>
-					<td>2</td>
-					<td>24</td>
-				</tr>
-				<tr>
-					<td><img
-						src='https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/N00/106/80/N001068013.jpg&w=374&h=374&v=5d005bf1'>
-						【德國LYRA】GROOVE三角洞洞色鉛筆(細) 24色</td>
-					<td>24支裝</td>
-					<td>優惠價：380元</td>
-					<td>2</td>
-					<td>380</td>
-				</tr>
-				<tr>
-					<td><img
-						src='https://im1.book.com.tw/image/getImage?i=https://www.books.com.tw/img/N00/026/84/N000268419.jpg&w=374&h=374&v=4feaab20'>
-						【德國LYRA】GROOVE三角洞洞色鉛筆(細) 24色</td>
-					<td>48支裝</td>
-					<td>優惠價：380元</td>
-					<td>1</td>
-					<td>620</td>
 				</tr>
 			</tbody>
 			<tfoot>
 				<tr>
-					<td colspan="3">共7項, 10件</td>
+					<td colspan="3">共3項, 4件</td>
 					<td colspan="2">總計: 1316元</td>
 				</tr>
 			</tfoot>
