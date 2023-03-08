@@ -273,10 +273,6 @@ class ProductsDAO {
 				){
 				//5.處理rs
 				while (rs.next()) {
-					//沒庫存就不要查到
-					if(rs.getInt("stock")==0) {
-						continue;
-					}
 					MovieSession s = new MovieSession();
 					s.setDate(rs.getString("date"));
 					s.setTime(rs.getString("time"));
@@ -347,10 +343,6 @@ class ProductsDAO {
 				){
 				//5.處理rs
 				while (rs.next()) {
-					//沒庫存就不要查到
-					if(rs.getInt("stock")==0) {
-						continue;
-					}
 					MovieSession s = new MovieSession();
 					s.setId(rs.getInt("id"));
 					s.setDate(rs.getString("date"));
@@ -427,10 +419,6 @@ class ProductsDAO {
 				){
 				//5.處理rs
 				while (rs.next()) {
-					//沒庫存就不要查到
-					if(rs.getInt("stock")==0) {
-						continue;
-					}
 					s = new MovieSession();
 					s.setId(rs.getInt("id"));
 					s.setDate(rs.getString("date"));
