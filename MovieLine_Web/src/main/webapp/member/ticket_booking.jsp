@@ -346,42 +346,42 @@
 						<hr>
 					</div>
 				</div>
-				<div class="panel">
-					<div class="panel_title">
-						<img class="panel_title_icon" alt="" src="../source/ticket_title.png">
-						<div class="panel_title_text">購物清單</div>
-					</div>
-					<div class=panel_body>
-						<hr>
-						<div class="product_box">
-						<!-- 一筆購物 -->
-							<div class="product_name">MUCROWN單人套票2022</div>
-							<div class="product_quantity">
-								<span>X</span> 2 <span>=</span> 2,200
-							</div>
-							<hr>
-						<!-- 一筆購物 -->
-						<!-- 一筆購物 -->
-							<div class="product_name">MUCROWN單人套票2022</div>
-							<div class="product_quantity">
-								<span>X</span> 2 <span>=</span> 2,200
-							</div>
-							<hr>
-						<!-- 一筆購物 -->
-						<!-- 一筆購物 -->
-							<div class="product_name">MUCROWN單人套票2022</div>
-							<div class="product_quantity">
-								<span>X</span> 2 <span>=</span> 2,200
-							</div>
-							<hr>
-						<!-- 一筆購物 -->
-							<div class="total_price">
-								<span>合計</span> 2,200
-							</div>
-						</div><hr>
+<!-- 				<div class="panel"> -->
+<!-- 					<div class="panel_title"> -->
+<!-- 						<img class="panel_title_icon" alt="" src="../source/ticket_title.png"> -->
+<!-- 						<div class="panel_title_text">購物清單</div> -->
+<!-- 					</div> -->
+<!-- 					<div class=panel_body> -->
+<!-- 						<hr> -->
+<!-- 						<div class="product_box"> -->
+<!-- 						一筆購物 -->
+<!-- 							<div class="product_name">MUCROWN單人套票2022</div> -->
+<!-- 							<div class="product_quantity"> -->
+<!-- 								<span>X</span> 2 <span>=</span> 2,200 -->
+<!-- 							</div> -->
+<!-- 							<hr> -->
+<!-- 						一筆購物 -->
+<!-- 						一筆購物 -->
+<!-- 							<div class="product_name">MUCROWN單人套票2022</div> -->
+<!-- 							<div class="product_quantity"> -->
+<!-- 								<span>X</span> 2 <span>=</span> 2,200 -->
+<!-- 							</div> -->
+<!-- 							<hr> -->
+<!-- 						一筆購物 -->
+<!-- 						一筆購物 -->
+<!-- 							<div class="product_name">MUCROWN單人套票2022</div> -->
+<!-- 							<div class="product_quantity"> -->
+<!-- 								<span>X</span> 2 <span>=</span> 2,200 -->
+<!-- 							</div> -->
+<!-- 							<hr> -->
+<!-- 						一筆購物 -->
+<!-- 							<div class="total_price"> -->
+<!-- 								<span>合計</span> 2,200 -->
+<!-- 							</div> -->
+<!-- 						</div><hr> -->
 						
-					</div>
-				</div>
+<!-- 					</div> -->
+<!-- 				</div> -->
 			</div>
 		</div>
 	</article>
