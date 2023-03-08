@@ -136,11 +136,13 @@ a{
 	background-color: #313235;
 	background-color: #2798de;
 }
-
+.nav_cart_img{
+	height: 53px;
+}
 .nav_list_last_item{
 	border-right: 1px solid white;
 }
-.nav_booking_a{
+.nav_booking_a,.nav_cart_a{
 	display:flex;
 	height:100%;
 	align-items: center;
