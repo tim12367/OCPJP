@@ -124,15 +124,15 @@
 		}
 	}
 	function seatInitHandlr() {
-		$("#rowA").val(0);
-		$("#rowB").val(0);
-		$("#rowC").val(0);
-		$("#rowD").val(0);
-		$("#rowE").val(0);
-		$("#rowF").val(0);
-		$("#rowG").val(0);
-		$("#rowH").val(0);
-		$("#rowI").val(0);
+// 		$("#rowA").val(0);
+// 		$("#rowB").val(0);
+// 		$("#rowC").val(0);
+// 		$("#rowD").val(0);
+// 		$("#rowE").val(0);
+// 		$("#rowF").val(0);
+// 		$("#rowG").val(0);
+// 		$("#rowH").val(0);
+// 		$("#rowI").val(0);
 		//TODO:從資料庫帶資料
 		<%
 		if(movieSession!=null){
@@ -271,7 +271,7 @@
 					src="<%=request.getContextPath()%>/source/SeatScreen.png" alt="">
 				<%@ include file="/subviews/seating_area.jsp" %>
 				<!-- form -->
-				<form class="booking_form" action="cart.jsp" method="GET" >
+				<form class="booking_form" action="<%=request.getContextPath()%>/add_cart.do" method="POST" >
 					<div class = hidden_inputs>
 						<label for="rowA">A</label><input id="rowA" name="rowA" type="number" readonly="readonly"><br>
 						<label for="rowB">B</label><input id="rowB" name="rowB" type="number" readonly="readonly"><br>
