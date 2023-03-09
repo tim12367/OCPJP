@@ -95,6 +95,7 @@
 					.indexOf("standard_available.png") >= 0) {
 				//每按一個座位將數量加一
 				$("#quantity").val(Number($("#quantity").val()) + 1);
+				$("#fake_input").val($("#quantity").val());
 				
 				//每按一個座位多一行詳情
 				$("#booking_detail_body").append("<div>"+seatRow+"排"+seatNumber+"號"+"</div>");
@@ -108,6 +109,8 @@
 					.indexOf("standard_selected.png") >= 0) {
 				//每按一個座位將數量減一
 				$("#quantity").val(Number($("#quantity").val()) - 1);
+				$("#fake_input").val($("#quantity").val());
+				
 				//取消選取↓
 				var rmtag = seatRow+"排"+seatNumber+"號";
 				console.log(rmtag);
@@ -282,6 +285,7 @@
 						<label for="rowG">G</label><input id="rowG" name="rowG" type="number" readonly="readonly"><br>
 						<label for="rowH">H</label><input id="rowH" name="rowH" type="number" readonly="readonly"><br>
 						<label for="rowI">I</label><input id="rowI" name="rowI" type="number" readonly="readonly"><br>
+						
 					</div>
 					<div class="input_box">
 						<label for="movie">電影</label>
@@ -322,9 +326,13 @@
 						</select>
 					</div>
 					<div class="input_box">
+						<div>目前購票數量</div>
+						<input id="fake_input" type="number" name="" min="1" max="4" value="0">
+					</div>
+					<div class="input_box" style="display: none">
 						<label for="quantity"> 目前購票數量 </label>
-						<input id="quantity" readonly="readonly"
-							type="number" name="quantity" min="1" max="20" value="0">
+						<input id="quantity"
+							type="number" name="quantity" min="1" max="4" value="0">
 					</div>
 					<input class="booking_btn" type="submit" value="確認訂購">
 				</form>
