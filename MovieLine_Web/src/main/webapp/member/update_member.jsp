@@ -118,8 +118,7 @@ crossorigin="anonymous"></script>
 		$("#gender").val("<%=request.getParameter("gender")%>");
 		$("#address").val("<%=request.getParameter("address")%>");
 		$("#phone").val("<%=request.getParameter("phone")%>");
-		<%String oldSubscribed = request.getParameter("subscribed");%>
-		$("#subscribed").prop("checked",<%=(oldSubscribed!=null?oldSubscribed:"").equals("1")%>);
+		$("#subscribed").prop("checked",<%=request.getParameter("subscribed")!=null%>);
 	}
 		//alert("資料錯誤請修改錯誤欄位再修改");
 	<%}else if(member==null){%>
