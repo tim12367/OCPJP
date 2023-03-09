@@ -149,12 +149,15 @@ public class Seat {
 		String[] rowList = new String[]{A,B,C,D,E,F,G,H,I};
 		String rowName;
 		String rowString;
+		int seatNumber;
+		
 		for(int i=0;i<rowList.length;i++) {
 			rowName = rowNameList[i];
 			rowString = rowList[i];
 			for(int j = 0;j<rowString.length();j++) {
 				if(rowString.indexOf("1",j)>-1) {
-					seatList.add(rowName+(rowString.length() - rowString.indexOf("1",j)));//String 與 int相反
+					seatNumber = (rowString.length() - rowString.indexOf("1",j));
+					seatList.add(rowName +(seatNumber<10?"0":"")+ seatNumber);//String 與 int相反
 					j=rowString.indexOf("1",j);
 				}
 			}
