@@ -90,6 +90,16 @@ public class ShoppingCart {
 		}
 		return sum;
 	}
+	//TODO:從訂票頁帶回並修改
+	public void updateCartItem(CartItem currentItem, int quantity) {
+		Integer prevQty = cartMap.get(currentItem);//找出之前加入的購買數量
+		if(prevQty!=null) {//有才修改
+			cartMap.put(currentItem, prevQty);
+		}
+	}
+	public void removeCartItem(CartItem currentItem) {
+		cartMap.remove(currentItem);//刪除不用判斷直接刪除 因為不必判斷
+	}
 	public void addCartItem(MovieSession s,int quantity) {
 		if(s==null) throw new IllegalArgumentException("加入購物車時，場次不得為null");
 		if(s.getMovie()==null) throw new IllegalArgumentException("加入購物車時，電影不得為null");
