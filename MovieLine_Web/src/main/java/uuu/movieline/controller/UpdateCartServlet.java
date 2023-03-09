@@ -42,9 +42,11 @@ public class UpdateCartServlet extends HttpServlet {
 			for(CartItem cartItem:cart.getCartItemSet()) {
 				String quantity = request.getParameter("quantity"+ cartItem.hashCode());
 				String delete = request.getParameter("delete"+cartItem.hashCode());
-				if(delete == null && quantity!=null && quantity.matches("\\d+")) {
-					cart.updateCartItem(cartItem,Integer.parseInt(quantity));
-				}else if(delete!=null){
+//				//修改座位直接在AddCartServlet進行
+//				if(delete == null && quantity!=null && quantity.matches("\\d+")) {
+//					//cart.updateCartItem(cartItem,Integer.parseInt(quantity));
+//				}else 
+				if(delete!=null){
 					cart.removeCartItem(cartItem);//若回傳正本會出現java.util.ConcurrentModificationException
 				}else {
 					errorsList.add("查無購物車!");

@@ -72,23 +72,27 @@ public class AddCartServlet extends HttpServlet {
 					if(rowG!=null&&rowG.length()>0&&rowG.matches("\\d+")) {bookingSeat.setRowG(Integer.parseInt(rowG));}//else{bookingSeat.setRowG(0);};
 					if(rowH!=null&&rowH.length()>0&&rowH.matches("\\d+")) {bookingSeat.setRowH(Integer.parseInt(rowH));}//else{bookingSeat.setRowH(0);};
 					if(rowI!=null&&rowI.length()>0&&rowI.matches("\\d+")) {bookingSeat.setRowI(Integer.parseInt(rowI));}//else{bookingSeat.setRowI(0);};
-					s.setSeat(bookingSeat);
-					ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
-					if(cart==null) {
-						cart = new ShoppingCart();
-						session.setAttribute("cart", cart);
-					}					
-					cart.addCartItem(s, Integer.parseInt(quantity));
+					
+					if(bookingSeat.getQuantity()!=0){
+						ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+						if(cart==null) {
+							cart = new ShoppingCart();
+							session.setAttribute("cart", cart);
+						}					
+						cart.addCartItem(s, bookingSeat);
+					}else {
+						errorList.add("加入購物車失敗!quantity必須為正整數!");
+					};
 				}
 				
 			}catch (MLException e) {
-				this.log("加入購物車失敗 or quantity必須為正整數",e);
+				this.log("加入購物車失敗",e);
 				errorList.add(e.getMessage());
 			}
 		}else {
 			errorList.add("MovieId不得為null");
 		}
-		if(errorList!=null&&errorList.size()>0) System.out.println(errorList);
+		if(errorList!=null&&errorList.size()>0) System.err.println(errorList);
 		//3.外部轉址 /member/cart.jsp
 		response.sendRedirect(request.getContextPath()+"/member/cart.jsp");
 		return;

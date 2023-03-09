@@ -1,13 +1,15 @@
 package uuu.movieline.entity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 public class ShoppingCart {
 	private Customer member;
-	private Map<CartItem, Integer> cartMap = new HashMap<>();
+	private Map<CartItem, Seat> cartMap = new HashMap<>();
 	
 	public Customer getMember() {
 		return member;
@@ -30,11 +32,11 @@ public class ShoppingCart {
 	 */
 	public int getQuantity(CartItem item) {
 		if(item==null) throw new IllegalArgumentException("取得明細購買數量時，cartitem物件不得為null");
-		Integer qty = cartMap.get(item);
+		Integer qty = cartMap.get(item).getQuantity();
 		return qty!=null?qty:0;
 	}
 	public Integer get(Object key) {
-		return cartMap.get(key);
+		return cartMap.get(key).getQuantity();
 	}
 	public Double getListPrice(CartItem item) {
 		if(item.getMovie() instanceof Outlet) {
@@ -72,6 +74,18 @@ public class ShoppingCart {
 		double amount = this.getUnitPrice(item) * getQuantity(item);
 		return amount;
 	}
+	public String getSeatListString(CartItem item) {
+		String seatListString = "";
+		if(cartMap.get(item)!=null) {
+			for(String seatString:cartMap.get(item).getSeatList()) {
+				seatListString+=(seatString+",");
+			}
+		}
+		if(cartMap.get(item).getSeatList().size()>1) {
+			return seatListString.substring(0,seatListString.length()-1);			
+		}
+		return seatListString;
+	}
 	public double getTotalAmount() { //計算總金額
 		double sum = 0;
 		if (cartMap!=null && size()>0) {
@@ -83,37 +97,54 @@ public class ShoppingCart {
 	}
 	public int getTotalQuantity() { //計算總購買數量
 		int sum = 0;
+		Integer qty;
 		if (cartMap!=null && size()>0) {
-			for(Integer qty:cartMap.values()) {
+			for(Seat seatTabel:cartMap.values()) {
+				qty = seatTabel.getQuantity();
 				sum+=(qty!=null?qty:0);
 			}
 		}
 		return sum;
 	}
+	
 	//TODO:從訂票頁帶回並修改
-	public void updateCartItem(CartItem currentItem, int quantity) {
-		Integer prevQty = cartMap.get(currentItem);//找出之前加入的購買數量
-		if(prevQty!=null) {//有才修改
-			cartMap.put(currentItem, prevQty);
+	public void updateCartItem(CartItem currentItem, Seat newSeat) {
+		Seat prevSeat = cartMap.get(currentItem);//找出之前加入的購買數量
+		if(prevSeat!=null) {//有才修改
+			cartMap.put(currentItem, prevSeat);
 		}
 	}
 	public void removeCartItem(CartItem currentItem) {
 		cartMap.remove(currentItem);//刪除不用判斷直接刪除 因為不必判斷
 	}
-	public void addCartItem(MovieSession s,int quantity) {
+	public void addCartItem(MovieSession s,Seat newSeat) {
+		List<String> errList = new ArrayList<>();
 		if(s==null) throw new IllegalArgumentException("加入購物車時，場次不得為null");
 		if(s.getMovie()==null) throw new IllegalArgumentException("加入購物車時，電影不得為null");
-		if(s.getSeat()==null) throw new IllegalArgumentException("加入購物車時，座位不得為null");
-		if(quantity<=0) throw new IllegalArgumentException("加入購物車時數量必須>0");
-		if(quantity != s.getSeatList().size())throw new IllegalArgumentException("加入購物車時，座位與數量不符");;
+		if(newSeat==null) throw new IllegalArgumentException("加入購物車時，座位不得為null");
 		CartItem item = new CartItem();
 		item.setMovieSession(s);
 		
-		Integer prevQty = cartMap.get(item);
-		if(prevQty!=null) {
-			quantity += prevQty;
+		Seat soldSeat = item.getSeat();
+		if(soldSeat!=null) {
+			if((soldSeat.getRowA()&newSeat.getRowA())>0) errList.add("A重複劃位!");
+			if((soldSeat.getRowB()&newSeat.getRowB())>0) errList.add("B重複劃位!");
+			if((soldSeat.getRowC()&newSeat.getRowC())>0) errList.add("C重複劃位!");
+			if((soldSeat.getRowD()&newSeat.getRowD())>0) errList.add("D重複劃位!");
+			if((soldSeat.getRowE()&newSeat.getRowE())>0) errList.add("E重複劃位!");
+			if((soldSeat.getRowF()&newSeat.getRowF())>0) errList.add("F重複劃位!");
+			if((soldSeat.getRowG()&newSeat.getRowG())>0) errList.add("G重複劃位!");
+			if((soldSeat.getRowH()&newSeat.getRowH())>0) errList.add("H重複劃位!");
+			if((soldSeat.getRowI()&newSeat.getRowI())>0) errList.add("I重複劃位!");
+		}else {
+			errList.add("無法獲取座位表!");
 		}
-		cartMap.put(item, quantity);
+		if(errList!=null&&errList.isEmpty()) {
+			cartMap.put(item, newSeat);
+		}else {
+			System.out.println(errList);
+		}
+		
 	}
 	@Override
 	public String toString() {

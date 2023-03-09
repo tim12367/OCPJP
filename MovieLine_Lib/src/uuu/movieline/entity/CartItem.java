@@ -30,6 +30,9 @@ public class CartItem {
 	public LocalTime getSessionTime() {
 		return movieSession.getTime();
 	}
+	public Seat getSeat() {
+		return movieSession.getSeat();
+	}
 	public Double getListPrice() {
 		if(movieSession.getMovie() instanceof Outlet) {
 			return ((Outlet)movieSession.getMovie()).getListPrice();
@@ -53,15 +56,15 @@ public class CartItem {
 		
 	}
 	*/
-	public String getSeatListString() {
-		String seatListString = "";
-		if(movieSession.getSeatList()!=null) {
-			for(String seatString:movieSession.getSeatList()) {
-				seatListString+=(seatString+",");
-			}
-		}
-		return seatListString.substring(0,seatListString.length()-1);
-	}
+//	public String getSeatListString() {
+//		String seatListString = "";
+//		if(movieSession.getSeatList()!=null) {
+//			for(String seatString:movieSession.getSeatList()) {
+//				seatListString+=(seatString+",");
+//			}
+//		}
+//		return seatListString.substring(0,seatListString.length()-1);
+//	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(movieSession);
@@ -87,8 +90,8 @@ public class CartItem {
 		+ "\n, 時間=" + getSessionTime() 
 		+ "\n, 定價" + getListPrice()
 		+ "\n, 折數" + getDiscountString() 
-		+ "\n, 優惠價" + getUnitPrice()
-		+ "\n, 座位" + getSeatListString() + "]";
+		+ "\n, 優惠價" + getUnitPrice() + "]";
+		//+ "\n, 座位" + getSeatListString() + "]";
 	}
 
 	

@@ -165,6 +165,9 @@ public class Seat {
 		seatList.sort(Comparator.naturalOrder());
 		return seatList;
 	}
+	public int getQuantity() {
+		return getSeatList().size();
+	}
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -193,6 +196,7 @@ public class Seat {
 				+ ",\n rowG=" + rowG 
 				+ ",\n rowH=" + rowH 
 				+ ",\n rowI=" + rowI 
+				+ ",\n getSeatList()" + getSeatList() 
 				+ "]";
 	}
 }

@@ -127,7 +127,7 @@
 						<td>
 							<div class="td_box">
 								<div>
-									<%= cartItem.getSeatListString()%>
+									<%= cart.getSeatListString(cartItem)%>
 								</div>
 							</div>	
 						</td>
