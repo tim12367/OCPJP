@@ -85,7 +85,8 @@
 						<th>數量</th>
 						<th>座位</th>
 						<th>小計</th>
-						<th>刪除</th>
+						<th></th>
+						<th></th>
 					</tr>
 				</thead>
 				
@@ -93,35 +94,73 @@
 				<% for(CartItem cartItem:cart.getCartItemSet()){ %>
 					<tr>
 						<td>
-							<img alt="<%=cartItem.getMovieName()%>" src="<%=cartItem.getPhotoUrl()%>">
-							<%=cartItem.getMovieName()%>
-
+							<div class="td_box">
+								<img alt="<%=cartItem.getMovieName()%>" src="<%=cartItem.getPhotoUrl()%>">
+								<div class="movie_name"><%=cartItem.getMovieName()%></div>
+							</div>
 							<!--TODO:<div>剩餘座位：100席</div>-->
 						</td>
-						<td><%=cartItem.getSessionDate()%></td>
-						<td><%=cartItem.getSessionTime()%></td>
 						<td>
-							定價:<%=cart.getListPrice(cartItem) %><br>
-							折扣:<%= cart.getDiscountString(cartItem)%><br>
-							特價:<%= cart.getUnitPrice(cartItem) %><br>
+							<div class="td_box">
+								<div><%=cartItem.getSessionDate()%></div>
+							</div>
 						</td>
 						<td>
-							<%= cart.getQuantity(cartItem) %>
+							<div class="td_box">
+								<div><%=cartItem.getSessionTime()%></div>
+							</div>
 						</td>
 						<td>
-							<%= cartItem.getSeatListString()%>		
+							<div class="td_box">
+								<div>
+									定價:<%=cart.getListPrice(cartItem) %><br>
+									折扣:<%= cart.getDiscountString(cartItem)%><br>
+									特價:<%= cart.getUnitPrice(cartItem) %><br>
+								</div>
+							</div>
 						</td>
-						<td><%= cart.getAmount(cartItem)%></td>
-						<td><input type="checkbox" name = "delete<%=cartItem.hashCode()%>"></td>
+						<td>
+							<div class="td_box">
+								<div><%= cart.getQuantity(cartItem) %></div>
+							</div>
+						</td>
+						<td>
+							<div class="td_box">
+								<div>
+									<%= cartItem.getSeatListString()%>
+								</div>
+							</div>	
+						</td>
+						<td>
+							<div class="td_box">
+								<div>
+									<%= cart.getAmount(cartItem)%>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="td_box">
+								<a href="<%=request.getContextPath() %>/member/ticket_booking.jsp" class="change_seat_a">
+									修改座位
+								</a>
+							</div>
+						</td>
+						<td>
+							<div class="td_box">
+								<input type="checkbox" name = "delete<%=cartItem.hashCode()%>">
+							</div>
+						</td>
 					</tr>
 					<%} %>
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="7"></td>
+						<td colspan="8"></td>
 						<td colspan="1">
-							<input type="submit" value="確認刪除">
-							<button type="submit" name="submit" value="checkOut">我要結帳</button>
+							<div class="td_box">
+								<input type="submit" value="確認刪除">
+								<button type="submit" name="submit" value="checkOut">我要結帳</button>
+							</div>
 						</td>
 					</tr>
 				</tfoot>
