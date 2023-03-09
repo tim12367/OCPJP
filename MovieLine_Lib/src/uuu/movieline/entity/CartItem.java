@@ -47,6 +47,12 @@ public class CartItem {
 	public Double getUnitPrice() {
 		return movieSession.getMovie().getUnitPrice();
 	}
+	/*
+	 * //TODO:getStock
+	public int getStock() {
+		
+	}
+	*/
 	public String getSeatListString() {
 		String seatListString = "";
 		if(movieSession.getSeatList()!=null) {
