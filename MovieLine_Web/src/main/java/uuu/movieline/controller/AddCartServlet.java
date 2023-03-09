@@ -88,7 +88,7 @@ public class AddCartServlet extends HttpServlet {
 		}else {
 			errorList.add("MovieId不得為null");
 		}
-		System.out.println(errorList);
+		if(errorList!=null&&errorList.size()>0) System.out.println(errorList);
 		//3.外部轉址 /member/cart.jsp
 		response.sendRedirect(request.getContextPath()+"/member/cart.jsp");
 		return;
