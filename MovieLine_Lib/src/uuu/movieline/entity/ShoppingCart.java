@@ -35,9 +35,13 @@ public class ShoppingCart {
 		Integer qty = cartMap.get(item).getQuantity();
 		return qty!=null?qty:0;
 	}
-	public Integer get(Object key) {
-		return cartMap.get(key).getQuantity();
-	}
+	public Seat get(Object key) {
+			return cartMap.get(key);
+		}
+//	public Integer get(Object key) {
+//		return cartMap.get(key).getQuantity();
+//	}
+	
 	public Double getListPrice(CartItem item) {
 		if(item.getMovie() instanceof Outlet) {
 			return item.getListPrice();
