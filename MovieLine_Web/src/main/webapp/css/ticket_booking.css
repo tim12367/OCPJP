@@ -34,7 +34,31 @@
 .input_box{
 	display: flex;
 }
-.input_box > select,input:not([type="submit"]){
+.fake_input_box{
+	position: relative;
+	margin-left: auto;
+	width: 60%;
+	box-sizing: border-box;
+	text-align: right;
+	border-radius: 6px;
+}
+#fake_input{
+	position: absolute;
+    top: 0;
+    left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-appearance: none;
+	-moz-appearance: textfield;
+}
+.fake_input_protect_div{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+.input_box > select, input:not([type="submit"], [type="search"]){
 	margin-left: auto;
 	width: 60%;
 	box-sizing: border-box;

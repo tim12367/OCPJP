@@ -136,8 +136,26 @@ a{
 	background-color: #313235;
 	background-color: #2798de;
 }
+
+.nav_cart_a{
+	position:relative;
+}
 .nav_cart_img{
 	height: 53px;
+}
+.nav_cart_counter{
+	width: 24px;
+	height: 24px;
+	border-radius: 50%;
+	position:absolute;
+	right:0;
+	top:0;
+	background-color: red;
+	color:white;
+	text-align: center;
+	font-size: 0.8em;
+	line-height: 24px;
+	font-weight: bold;
 }
 .nav_list_last_item{
 	border-right: 1px solid white;
