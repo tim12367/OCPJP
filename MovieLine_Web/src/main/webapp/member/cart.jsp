@@ -1,3 +1,7 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.NumberFormat"%>
+<%@page import="uuu.movieline.entity.Movie"%>
+<%@page import="uuu.movieline.entity.MovieSession"%>
 <%@page import="uuu.movieline.entity.CartItem"%>
 <%@page import="uuu.movieline.entity.Customer"%>
 <%@page import="uuu.movieline.entity.ShoppingCart"%>
@@ -69,7 +73,6 @@
 			cart.setMember(member);
 		}
 	%>
-	<%=cart %>
 	<%if(cart==null || cart.isEmpty()){ %>
 		<h2>尚未訂票!</h2>
 	<%}else{ %>
@@ -113,9 +116,10 @@
 						<td>
 							<div class="td_box">
 								<div>
-									定價:<%=cart.getListPrice(cartItem) %><br>
+									<%NumberFormat nf = NumberFormat.getInstance(Locale.TAIWAN); %>
+									定價:<%=nf.format(cart.getListPrice(cartItem))%><br>
 									折扣:<%= cart.getDiscountString(cartItem)%><br>
-									特價:<%= cart.getUnitPrice(cartItem) %><br>
+									特價:<%=nf.format(cart.getUnitPrice(cartItem))  %><br>
 								</div>
 							</div>
 						</td>
@@ -134,13 +138,13 @@
 						<td>
 							<div class="td_box">
 								<div>
-									<%= cart.getAmount(cartItem)%>
+									<%=nf.format(cart.getAmount(cartItem)) %>
 								</div>
 							</div>
 						</td>
 						<td>
 							<div class="td_box">
-								<a href="<%=request.getContextPath() %>/member/ticket_booking.jsp" class="change_seat_a">
+								<a href="<%=request.getContextPath() %>/member/ticket_booking.jsp?movieId=<%=cartItem.getMovieId()%>&date=<%=cartItem.getSessionDate()%>&time=<%=cartItem.getSessionTime()%>" class="change_seat_a">
 									修改座位
 								</a>
 							</div>

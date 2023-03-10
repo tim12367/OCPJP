@@ -1,3 +1,4 @@
+<%@page import="uuu.movieline.entity.ShoppingCart"%>
 <%@page import="java.util.List"%>
 <%@page import="uuu.movieline.service.ProductService"%>
 <%@page pageEncoding="UTF-8"%>
@@ -37,8 +38,14 @@
 				</ul>
 			</li>
 		</ul>
+		<% ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");%>
 		<a class=nav_cart_a href="<%=request.getContextPath()%>/member/cart.jsp">
-			<img class="nav_cart_img" alt="cart" src="<%=request.getContextPath()%>\source\cart.png">		
+			<img class="nav_cart_img" alt="cart" src="<%=request.getContextPath()%>\source\cart.png">
+		<%if(cart!=null&&cart.getTotalQuantity()>0){ %>
+			<div class="nav_cart_counter">
+				${sessionScope.cart.getTotalQuantity()}
+			</div>		
+		<%} %>
 		</a>
 		<%if(member!=null){ %>
 		<a class="nav_booking_a" href="<%=request.getContextPath()%>/member/select_date_session.jsp">
@@ -53,8 +60,8 @@
 			<li class="nav_user_item nav_user_item_first"><a href="<%=request.getContextPath()%>/login.jsp" class="nav_user_a">登入</a></li>
 			<li class="nav_user_item"><a href="<%=request.getContextPath()%>/register.jsp" class="nav_user_a">註冊</a></li>
 			<%}else{%>
-			<!-- 已經登入 -->
 			<li class="nav_user_item nav_user_item_first"><a href="<%=request.getContextPath()%>/member/update_member.jsp" class="nav_user_a">會員修改</a></li>
+			<!-- 已經登入 -->
 			<li class="nav_user_item"><a href=# class="nav_user_a">歷史訂單</a></li>
 			<!-- http://localhost:8080/ML/ -->
 			<li class="nav_user_item"><a href="<%=request.getContextPath()%>/logout.do" class="nav_user_a">登出</a></li>
