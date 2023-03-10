@@ -40,6 +40,7 @@ public class UpdateCartServlet extends HttpServlet {
 		if(cart!=null && cart.size()>0) {
 		//1.取得request中的form data
 			for(CartItem cartItem:cart.getCartItemSet()) {
+				//抓取所有Item的Hashcode然後刪除購物車中的物件
 				String quantity = request.getParameter("quantity"+ cartItem.hashCode());
 				String delete = request.getParameter("delete"+cartItem.hashCode());
 //				//修改座位直接在AddCartServlet進行
@@ -48,12 +49,10 @@ public class UpdateCartServlet extends HttpServlet {
 //				}else 
 				if(delete!=null){
 					cart.removeCartItem(cartItem);//若回傳正本會出現java.util.ConcurrentModificationException
-				}else {
-					errorsList.add("查無購物車!");
 				}
 			}
 		}
-		this.log(errorsList.toString());
+		
 		//3.外部轉址回cart.jsp
 		//或轉到結帳畫面
 		String submit = request.getParameter("submit");
