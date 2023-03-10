@@ -1,4 +1,6 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
+<%@page import="uuu.movieline.entity.CartItem"%>
+<%@page import="uuu.movieline.entity.ShoppingCart"%>
 <%@page import="uuu.movieline.entity.Seat"%>
 <%@page import="org.apache.catalina.Service"%>
 <%@page import="uuu.movieline.entity.MovieSession"%>
@@ -16,13 +18,25 @@
 	String movieId = request.getParameter("movieId");
 	String date = request.getParameter("date");
 	String time = request.getParameter("time");
+	ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
 	MovieSession movieSession = null;
 	Seat seat = null;
-
+	CartItem item = null;
 	ProductService service = new ProductService();
 	if(movieId!=null && date!=null && time!=null){
 		movieSession = service.getSessionsByMovieIdDatetime(movieId, date, time);
-		seat = movieSession.getSeat();
+		//若查詢成功
+		if(movieSession!=null){
+			//查座位
+			seat = movieSession.getSeat();
+			//若已經訂票則帶回座位
+			item = new CartItem();
+			item.setMovieSession(movieSession);
+		}
+	}
+	Seat restoreSeat = null;
+	if(cart!=null){
+		restoreSeat = cart.get(item);
 	}
 %>
 <link rel="icon" type="image/x-icon" href="../source/title_icon.png" />
@@ -127,16 +141,31 @@
 		}
 	}
 	function seatInitHandlr() {
-// 		$("#rowA").val(0);
-// 		$("#rowB").val(0);
-// 		$("#rowC").val(0);
-// 		$("#rowD").val(0);
-// 		$("#rowE").val(0);
-// 		$("#rowF").val(0);
-// 		$("#rowG").val(0);
-// 		$("#rowH").val(0);
-// 		$("#rowI").val(0);
-		//TODO:從資料庫帶資料
+		//若有訂位帶回座位
+		<%if(restoreSeat!=null){%>
+		$("#rowA").val(<%=restoreSeat.getRowA()%>);
+		$("#rowB").val(<%=restoreSeat.getRowB()%>);
+		$("#rowC").val(<%=restoreSeat.getRowC()%>);
+		$("#rowD").val(<%=restoreSeat.getRowD()%>);
+		$("#rowE").val(<%=restoreSeat.getRowE()%>);
+		$("#rowF").val(<%=restoreSeat.getRowF()%>);
+		$("#rowG").val(<%=restoreSeat.getRowG()%>);
+		$("#rowH").val(<%=restoreSeat.getRowH()%>);
+		$("#rowI").val(<%=restoreSeat.getRowI()%>);
+		$("#fake_input").val(<%=restoreSeat.getQuantity()%>);
+		$("#quantity").val(<%=restoreSeat.getQuantity()%>);
+		
+		seatRestoreByRow("A",<%=restoreSeat.getRowA()%>,"r");
+		seatRestoreByRow("B",<%=restoreSeat.getRowB()%>,"r");
+		seatRestoreByRow("C",<%=restoreSeat.getRowC()%>,"r");
+		seatRestoreByRow("D",<%=restoreSeat.getRowD()%>,"r");
+		seatRestoreByRow("E",<%=restoreSeat.getRowE()%>,"r");
+		seatRestoreByRow("F",<%=restoreSeat.getRowF()%>,"r");
+		seatRestoreByRow("G",<%=restoreSeat.getRowG()%>,"r");
+		seatRestoreByRow("H",<%=restoreSeat.getRowH()%>,"r");
+		seatRestoreByRow("I",<%=restoreSeat.getRowI()%>,"r");
+		
+		<%}%>
 		<%
 		if(movieSession!=null){
 		seat = movieSession.getSeat();
@@ -167,7 +196,7 @@
 		$(jqueryString).val(newSeatNumber);
 	}
 
-	function seatRestoreByRow(rowName,rowBinary){
+	function seatRestoreByRow(rowName,rowBinary,mode){
 		//輸入測試
 		console.log("第"+rowName+"行:"+rowBinary);
 		//數字to二進位字串轉換
@@ -183,17 +212,21 @@
 			}
 		}
 		console.log("座位號碼為:"+seatNumber);
-		//將座位陣列帶上畫面 function seatSold()
+		//將座位陣列帶上畫面 function seatPaint()
 		for(var i in seatNumber){
-			seatSold(rowName,seatNumber[i]);
+			seatPaint(rowName,seatNumber[i],mode);
 		}
 	}	
-	function seatSold(seatRow,seatNumber){
+	function seatPaint(seatRow,seatNumber,mode){
 		seatNumber = String(seatNumber);//toString 輸入可能是數字
 		//selector 選擇完全符合的文字in p 再選擇兄弟img
+		imgString = "../source/sold.png";
+		if(mode==="r"){
+			imgString = "../source/standard_selected.png"
+		}
 		$("#"+seatRow+" >td >p:contains('"+seatNumber+"')").filter(function() {
 	        return $.trim($(this).text()) === seatNumber;
-	      }).siblings("img").attr("src","../source/sold.png");
+	      }).siblings("img").attr("src",imgString);
 	}
 	function SelectorInitHandlr() {
 		<%if(movieId!=null && movieId.length()>0
@@ -266,8 +299,10 @@
 	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp" />
 	<article>
+<%if(movieSession==null||seat==null){ %>
+		<h1 class="movie_name">查無電影</h1>
+<%}else{ %>
 		<div class="main_div">
-
 			<div class="seating_box">
 				<h1 class="movie_name"><%=movieSession!=null?movieSession.getMovie().getName():"查無電影" %></h1>
 				<img class="screan_img"
@@ -327,8 +362,12 @@
 					</div>
 					<div class="input_box">
 						<div>目前購票數量</div>
-						<input id="fake_input" type="number" name="" min="1" max="4" value="0">
+						<div class="fake_input_box">
+							<input id="fake_input" type="number" name="" min="1" max="4" value="0">
+							<div class="fake_input_protect_div"></div>
+						</div>
 					</div>
+					<!-- 真實輸出 display none -->
 					<div class="input_box" style="display: none">
 						<label for="quantity"> 目前購票數量 </label>
 						<input id="quantity"
@@ -392,6 +431,7 @@
 <!-- 				</div> -->
 			</div>
 		</div>
+<%} %>
 	</article>
 </body>
 </html>
