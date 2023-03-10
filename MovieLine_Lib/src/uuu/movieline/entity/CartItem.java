@@ -24,6 +24,9 @@ public class CartItem {
 	public String getMovieName() {
 		return movieSession.getMovie().getName();
 	}
+	public int getMovieId() {
+		return movieSession.getMovie().getId();
+	}
 	public LocalDate getSessionDate() {
 		return movieSession.getDate();
 	}
