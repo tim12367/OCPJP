@@ -66,6 +66,30 @@ crossorigin="anonymous"></script>
         width: calc(1300 * 5px);/*1300*5*/
         left: -1300px;
     }
+	.prev_btn,.next_btn{
+		background-color: rgba(0, 0, 0, 0.5);
+		/* opacity: 0.5; */
+		color: white;
+		position: absolute;
+		font-size: 50px;
+		font-weight: bolder;
+		/* top:calc(50% - 50px); */
+		width: 100px;
+		height: 100%;
+		line-height: 600px;
+		text-align: center;
+		cursor: pointer;
+   		user-select: none;
+	}
+	.prev_btn:hover,.next_btn:hover{
+		background-color: rgba(255,255,255,0.5)
+	}
+	.prev_btn{
+		left: 0;
+	}
+	.next_btn{
+		right: 0;
+	}
     .slideshow_img{
         height: 600px;
         width: 1300px;
@@ -73,50 +97,39 @@ crossorigin="anonymous"></script>
         object-fit:fill;
         user-select: none;
     }
+
 </style>
 <script>
-    var startMouseX = 0;
-    var left = -1300;
-    var myInterval =null;
+	var coordinate = -1300;
     $(document).ready(init2);
-    function init2(){
-        $("#slideshow_box").mousedown(startSlidePicHandlr);
-        $("#slideshow_box").mouseup(endSlidePicHandlr);
-        $("#slideshow_box").mouseleave(endSlidePicHandlr);
-        setTimeoutHandlr();
-    }
-	function setTimeoutHandlr(){
-		myInterval = setTimeout(moveHandler, 1000);//initial timer
+	function init2(){
+		$("#next_btn").click(nextPicHandlr);
+		$("#prev_btn").click(prevPicHandlr);
+		myInterval = setTimeout(intervalHandler, 4000);
 	}
-    function moveHandler(){
-		left-=1300;
-		borderHandlr();
-		console.log(left);
-		$("#slideshow_box").stop().animate({"left":left+"px"},1000,setTimeoutHandlr);
-    }
-    function startSlidePicHandlr(e){
-        startMouseX = e.pageX;
-        $("#slideshow_box").on("mousemove",slidePicHandlr);
-		clearTimeout(myInterval);
-    }
-    function slidePicHandlr(e){
-        left+=(e.pageX-startMouseX);
-        
-        $("#slideshow_box").css("left",left+"px");
-        console.log(left);
-        startMouseX = e.pageX;
-    }
-    function endSlidePicHandlr(e){
-        borderHandlr();
-		$("#slideshow_box").css("left",left+"px");
-        $("#slideshow_box").off("mousemove");
-    }
-	function positionHandlr(){
-
+	function intervalHandler(){
+		moveHandlr(1);
 	}
-    function borderHandlr(){
-		if(left>(-1300)){left-=1300*5 ;}
-        if(left<(-1300*5)){left+=1300*5;} 
+	function nextPicHandlr(){
+		moveHandlr(1);
+	}
+	function prevPicHandlr(){
+		moveHandlr(-1);
+	}
+	function moveHandlr(moveDirection){
+		clearInterval(myInterval);
+		myInterval = setTimeout(intervalHandler, 5000);//set timeer
+		console.log(coordinate);
+		if(coordinate<=-6500){
+			coordinate=(0)
+			$("#slideshow_box").stop().animate({"left":(coordinate)+"px"},0);
+		}else if(coordinate>=0){
+			coordinate=(-6500)
+			$("#slideshow_box").stop().animate({"left":(coordinate)+"px"},0);
+		}
+		coordinate = coordinate-moveDirection*1300
+		$("#slideshow_box").stop().animate({"left":(coordinate)+"px"},1000);
+		console.log($("#slideshow_box").css("left"));
 	}
 </script>
 </head>
@@ -211,15 +224,21 @@ crossorigin="anonymous"></script>
 <!-- nav.jsp end -->
 	<article>
         <div class="slideshow_view">
-            <div id="slideshow_box" class="slideshow_box">
-                <a draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/AntMan_slide.jpg" draggable="false"></a>
-                <a draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/Avatar_slide.jpg" draggable="false"></a>
-                <a draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/slam_dunk_slide.jpg" draggable="false"></a>
-                <a draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/otto_slide.jpg" draggable="false"></a>
-                <a draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/titanic_slide.jpg" draggable="false"></a>
-                <a draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/AntMan_slide.jpg" draggable="false"></a>
-                <a draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/Avatar_slide.jpg" draggable="false"></a>
+			<div id="slideshow_box" class="slideshow_box">
+                <a href="product_detail.jsp?movieId=5" draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/titanic_slide.jpg" draggable="false"></a>
+                <a href="product_detail.jsp?movieId=1" draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/AntMan_slide.jpg" draggable="false"></a>
+                <a href="product_detail.jsp?movieId=2" draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/slam_dunk_slide.jpg" draggable="false"></a>
+                <a href="product_detail.jsp?movieId=3" draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/Avatar_slide.jpg" draggable="false"></a>
+                <a href="product_detail.jsp?movieId=4" draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/otto_slide.jpg" draggable="false"></a>
+                <a href="product_detail.jsp?movieId=5" draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/titanic_slide.jpg" draggable="false"></a>
+                <a href="product_detail.jsp?movieId=1" draggable="false"><img class="slideshow_img" alt="slideshow" src="../source/AntMan_slide.jpg" draggable="false"></a>
             </div>
+			<div id ="prev_btn" class="prev_btn">
+				&lt;
+			</div>
+			<div id ="next_btn" class="next_btn">
+				&gt;
+			</div>
         </div>
 	</article>
 	
