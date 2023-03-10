@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="uuu.movieline.entity.Movie"%>
@@ -116,10 +117,10 @@
 						<td>
 							<div class="td_box">
 								<div>
-									<%NumberFormat nf = NumberFormat.getInstance(Locale.TAIWAN); %>
-									定價:<%=nf.format(cart.getListPrice(cartItem))%><br>
+									<%DecimalFormat df = new DecimalFormat("#.##"); %>
+									定價:<%=df.format(cart.getListPrice(cartItem))%><br>
 									折扣:<%= cart.getDiscountString(cartItem)%><br>
-									特價:<%=nf.format(cart.getUnitPrice(cartItem))  %><br>
+									特價:<%=df.format(cart.getUnitPrice(cartItem))  %><br>
 								</div>
 							</div>
 						</td>
@@ -138,7 +139,7 @@
 						<td>
 							<div class="td_box">
 								<div>
-									<%=nf.format(cart.getAmount(cartItem)) %>
+									<%=df.format(cart.getAmount(cartItem)) %>
 								</div>
 							</div>
 						</td>
