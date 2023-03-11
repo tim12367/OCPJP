@@ -3,6 +3,37 @@
 <%@page import="uuu.movieline.service.ProductService"%>
 <%@page pageEncoding="UTF-8"%>
 <%@page import="uuu.movieline.entity.Customer"%>
+<link rel='stylesheet' type='text/css' href='./fancybox3/jquery.fancybox.css'>
+<script src='./fancybox3/jquery.fancybox.js'></script>
+<script>
+	$(document).ready(initL);
+	function initL() {
+		$("#login_btn").click(getLogin_fancybox);
+	}
+	function getLogin_fancybox(){
+		//ajax送非同步GET請求
+		$.ajax({
+			url:"<%=request.getContextPath()%>/login_data.jsp",
+			method: 'GET'					
+		}).done(getLogin_fancyboxHandler);
+	}
+	
+	function getLogin_fancyboxHandler(result, txtStatus, xhr){
+		//用fancybox來顯示
+		$("#fancyDialog").html(result);
+		$.fancybox.open({
+		    src  : '#fancyDialog',
+			'width':720,
+	        'height':560,
+		    type : 'inline',
+		    opts : {
+		      afterShow : function( instance, current ) {
+		        console.info('done!');
+	          }
+	        }
+	    });
+	}
+</script>
 <!-- nav.jsp start -->
 	<%
 			Customer member = (Customer)session.getAttribute("member");
@@ -57,16 +88,20 @@
 			<%=member!=null?(member.getName()+" 你好"):"尚未登入" %>
 			<%if(member==null){%>
 			<!-- 尚未登入 -->
-			<li class="nav_user_item nav_user_item_first"><a href="<%=request.getContextPath()%>/login.jsp" class="nav_user_a">登入</a></li>
+			<li class="nav_user_item nav_user_item_first">
+				<a href="<%=request.getContextPath()%>/login.jsp" class="nav_user_a">登入</a>
+<!-- 				<a id="login_btn" href=# class="nav_user_a">登入</a> -->
+			</li>
 			<li class="nav_user_item"><a href="<%=request.getContextPath()%>/register.jsp" class="nav_user_a">註冊</a></li>
 			<%}else{%>
 			<li class="nav_user_item nav_user_item_first"><a href="<%=request.getContextPath()%>/member/update_member.jsp" class="nav_user_a">會員修改</a></li>
 			<!-- 已經登入 -->
-			<li class="nav_user_item"><a href=# class="nav_user_a">歷史訂單</a></li>
+			<li class="nav_user_item"><a href="" class="nav_user_a">歷史訂單</a></li>
 			<!-- http://localhost:8080/ML/ -->
 			<li class="nav_user_item"><a href="<%=request.getContextPath()%>/logout.do" class="nav_user_a">登出</a></li>
 			
 			<%}%>
 		</ul>
 	</nav>
+	<div id='fancyDialog'></div>
 <!-- nav.jsp end -->
