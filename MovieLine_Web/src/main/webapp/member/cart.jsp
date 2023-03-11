@@ -172,58 +172,58 @@
 			</table>
 		</form>
 		<%}%>
-		<form action="">
-			<table id='cart'>
-				<caption>餐點明細</caption>
-				<thead>
-					<tr>
-						<th>名稱</th>
-						<th>Size/選項</th>
-						<th>價格</th>
-						<th>數量</th>
-						<th>小計</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><img
-							src='https://imgs.gvm.com.tw/upload/gallery/20191023/68938_01.jpg'>
-							爆米花</td>
-						<td>L/甜</td>
-						<td>定價：650.0元<br> 優惠價：9折<br> 585.0元
-						</td>
-						<td><input type="number" name="quantity" required max="TODO" value="TODO:Quantity"></td>
-						<td>1170.0</td>
-					</tr>
-					<tr>
-						<td><img
-							src='https://img.tukuppt.com/png_preview/00/00/06/oa3RLHO6PS.jpg!/fw/780'>
-							飲料</td>
-						<td>M/少冰</td>
-						<td>定價：70.0元<br> 優惠價：9折<br> 63.0元
-						</td>
-						<td>1</td>
-						<td>63</td>
-					</tr>
-					<tr>
-						<td><img
-							src='https://www.foodnext.net/dispPageBox/getFile/GetImg.aspx?FileLocation=%2FPJ-FOODNEXT%2FFiles%2F&FileName=photo-08366-i.jpg'>
-							炸雞</td>
-						<td>雞腿</td>
-						<td>定價：70.0元<br> 優惠價：9折<br> 63.0元
-						</td>
-						<td>1</td>
-						<td>63</td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="3">共3項, 4件</td>
-						<td colspan="2">總計: 1316元</td>
-					</tr>
-				</tfoot>
-			</table>
-		</form>
+<!-- 		<form action=""> -->
+<!-- 			<table id='cart'> -->
+<!-- 				<caption>餐點明細</caption> -->
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th>名稱</th> -->
+<!-- 						<th>Size/選項</th> -->
+<!-- 						<th>價格</th> -->
+<!-- 						<th>數量</th> -->
+<!-- 						<th>小計</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 				<tbody> -->
+<!-- 					<tr> -->
+<!-- 						<td><img -->
+<!-- 							src='https://imgs.gvm.com.tw/upload/gallery/20191023/68938_01.jpg'> -->
+<!-- 							爆米花</td> -->
+<!-- 						<td>L/甜</td> -->
+<!-- 						<td>定價：650.0元<br> 優惠價：9折<br> 585.0元 -->
+<!-- 						</td> -->
+<!-- 						<td><input type="number" name="quantity" required max="TODO" value="TODO:Quantity"></td> -->
+<!-- 						<td>1170.0</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td><img -->
+<!-- 							src='https://img.tukuppt.com/png_preview/00/00/06/oa3RLHO6PS.jpg!/fw/780'> -->
+<!-- 							飲料</td> -->
+<!-- 						<td>M/少冰</td> -->
+<!-- 						<td>定價：70.0元<br> 優惠價：9折<br> 63.0元 -->
+<!-- 						</td> -->
+<!-- 						<td>1</td> -->
+<!-- 						<td>63</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td><img -->
+<!-- 							src='https://www.foodnext.net/dispPageBox/getFile/GetImg.aspx?FileLocation=%2FPJ-FOODNEXT%2FFiles%2F&FileName=photo-08366-i.jpg'> -->
+<!-- 							炸雞</td> -->
+<!-- 						<td>雞腿</td> -->
+<!-- 						<td>定價：70.0元<br> 優惠價：9折<br> 63.0元 -->
+<!-- 						</td> -->
+<!-- 						<td>1</td> -->
+<!-- 						<td>63</td> -->
+<!-- 					</tr> -->
+<!-- 				</tbody> -->
+<!-- 				<tfoot> -->
+<!-- 					<tr> -->
+<!-- 						<td colspan="3">共3項, 4件</td> -->
+<!-- 						<td colspan="2">總計: 1316元</td> -->
+<!-- 					</tr> -->
+<!-- 				</tfoot> -->
+<!-- 			</table> -->
+<!-- 		</form> -->
 	</article>
 	<%@ include file="/subviews/footer.jsp"%>
 </body>
