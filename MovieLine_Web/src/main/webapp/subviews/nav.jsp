@@ -3,8 +3,8 @@
 <%@page import="uuu.movieline.service.ProductService"%>
 <%@page pageEncoding="UTF-8"%>
 <%@page import="uuu.movieline.entity.Customer"%>
-<link rel='stylesheet' type='text/css' href='./fancybox3/jquery.fancybox.css'>
-<script src='./fancybox3/jquery.fancybox.js'></script>
+<link rel='stylesheet' type='text/css' href='<%=request.getContextPath()%>/fancybox3/jquery.fancybox.css'>
+<script src='<%=request.getContextPath()%>/fancybox3/jquery.fancybox.js'></script>
 <script>
 	$(document).ready(initL);
 	function initL() {
@@ -71,7 +71,7 @@
 		</ul>
 		<% ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");%>
 		<a class=nav_cart_a href="<%=request.getContextPath()%>/member/cart.jsp">
-			<img class="nav_cart_img" alt="cart" src="<%=request.getContextPath()%>\source\cart.png">
+			<img class="nav_cart_img" alt="cart" src="<%=request.getContextPath()%>/source/cart.png">
 		<%if(cart!=null&&cart.getTotalQuantity()>0){ %>
 			<div class="nav_cart_counter">
 				${sessionScope.cart.getTotalQuantity()}
