@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一線影院 HOME</title>
+<link rel="icon" type="image/x-icon" href="../source/title_icon.png" />
+<link href="../css/global.css" type="text/css" rel="stylesheet">
+<link href="../css/home.css" type="text/css" rel="stylesheet">
+<style>
+	.booking_detail caption{
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #04AA6D;
+	border-radius: 8px 8px 0 0;
+	color: white;
+	}
+	.booking_detail{
+	border-collapse: collapse;
+	border-radius: 8px;
+	width: 900px;
+	margin: auto;
+	margin-top: 50px;
+	}
+	.booking_detail td, .booking_detail th {
+	border: 1px solid #ddd;
+	padding: 8px;
+	}
+	.td_box{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	justify-content:space-around;
+	}
+	.movie_name{
+		min-width: 280px;
+	}
+	.booking_detail tbody img {
+	width: 56px;
+	vertical-align: middle;
+	}
+</style>
+<link href="../css/global_dark.css" type="text/css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.0.0.js" 
+integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo=" 
+crossorigin="anonymous"></script>
+<script>
+	var darkModeFlag = true;
+	$(document).ready(init);
+	function init() {
+		if (localStorage) {
+			restoreData();
+			$("#dark_mode_button").click(darkModeHandler);
+		} else {
+			alert("不支援的瀏覽器!");
+			$("#hint").text("不支援的瀏覽器!");
+		}
+	}
+	function restoreData() {
+		var getDarkModeFlag = localStorage.getItem("darkModeFlag");
+		//記住深色模式
+		if (getDarkModeFlag == "true") {
+			darkModeFlag = getDarkModeFlag;
+			darkModeHandler();
+		}
+	}
+
+	function darkModeHandler() {
+		if (darkModeFlag) {
+			$("body").addClass("body--darkmode");
+			$("#dark_mode_button").attr("src",
+					"../source/light_mode_FILL0_wght400_GRAD0_opsz48.svg");
+		} else {
+			$("body").removeClass("body--darkmode");
+			$("#dark_mode_button").attr("src",
+					"../source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg");
+		}
+		localStorage.setItem("darkModeFlag", darkModeFlag);
+		darkModeFlag = !darkModeFlag;
+	}
+</script>
+<style>
+	.cart_counter_box{
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	}
+	.cart_counter{
+		
+	}
+	.cart_total_price_box{
+		display: flex;
+		flex-direction: row;
+		justify-content: end;
+	}
+	.pay_and_ship_box{
+		display: flex;
+		justify-content: space-around;
+	}
+	.paytype_box,.shipping_method_box{
+		display: flex;
+		min-width: 250px;
+		justify-content: space-between;
+	}
+	.customer_info_title{
+		background-color: #8fc31f;
+		width: fit-content;
+		padding: 5px 10px;
+		color: black;
+		border-radius: 5px 5px 0 0;
+	}
+	.customer_info_input_box{
+		padding: 20px;
+		border-top:1px #8fc31f solid;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-around;
+	}
+	.customer_name_box,.customer_email_box,
+	.customer_phone_box,.customer_addr_box{
+		margin: 10px;
+		min-width: 300px;
+		display: flex;
+	}
+	#name,#email,#phone,#address{
+		margin-left: auto;
+		flex-grow: 1;
+		max-width: 190px;
+	}
+	.shipping_price{
+		display: flex;
+		justify-content: center;
+	}
+	.selector{
+		min-width: 100px;
+		border-radius: 4px;
+    	border: 1px solid #ececec;
+	}
+	.checkOut_btn{
+		border: 0;
+		line-height: 44px;
+		height: 44px;
+		width: 80%;
+		text-align: center;
+		border-radius: 6px;
+		background-color: #2660a9;
+		color: white;
+		align-self: center;
+		cursor: pointer;
+	}
+</style>
+<script>
+    $(document).ready();
+	function init2(){
+		
+	}
+	
+</script>
+</head>
+
+<body>
+	<!-- 後端標籤 -->
+	
+<!-- header.jsp start -->
+	
+	<header id="menu" class="menu">
+		<img class="menu_logo_img" src=../source/movie_list_icon.png alt="Movie_Line_Logo" draggable="false">
+		<form id="search_form" action="/ML/products_list.jsp" method="get" class='menu_search_form'>
+			<input type='search' name="keyword" class="menu_search_input menu_search_form_items" placeholder='請輸入查詢關鍵字'>
+			<input type="submit" class="menu_search_form_button menu_search_form_items" value='搜尋'>			
+		</form>
+		<img id=dark_mode_button class="menu_dark_mode_button"
+			src="../source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg"
+			alt="dark_mode_button" draggable="false">
+	</header>
+<!-- header.jsp end -->
+	
+
+
+
+<!-- nav.jsp start -->
+	
+	<nav class="nav">
+		<ul class="nav_list">
+			<li class="nav_list_item"><a href="/ML" class="nav_list_a">Home</a></li>
+			<li class="nav_list_item"><a href="/ML/products_list.jsp" class="nav_list_a">全部電影</a></li>
+			<li class="nav_list_item nav_list_last_item">
+				<ul class = "nav_list_category_list">
+				分類清單
+				
+				<!-- TODO:從資料庫撈選項 -->
+					<li class="nav_list_category_list_item nav_list_category_list_item_first">
+						<a href="/ML/products_list.jsp?category=劇情" class="nav_user_a">
+							劇情
+						</a>
+					</li>
+					
+					<li class="nav_list_category_list_item">
+						<a href="/ML/products_list.jsp?category=動畫" class="nav_user_a">
+							動畫
+						</a>
+					</li>
+					
+					<li class="nav_list_category_list_item">
+						<a href="/ML/products_list.jsp?category=奇幻/科幻" class="nav_user_a">
+							奇幻/科幻
+						</a>
+					</li>
+					
+					<li class="nav_list_category_list_item">
+						<a href="/ML/products_list.jsp?category=溫馨" class="nav_user_a">
+							溫馨
+						</a>
+					</li>
+					
+					<li class="nav_list_category_list_item">
+						<a href="/ML/products_list.jsp?category=愛情" class="nav_user_a">
+							愛情
+						</a>
+					</li>
+					
+					<li class="nav_list_category_list_item">
+						<a href="/ML/products_list.jsp?category=動作" class="nav_user_a">
+							動作
+						</a>
+					</li>
+					
+					<li class="nav_list_category_list_item">
+						<a href="/ML/products_list.jsp?category=喜劇" class="nav_user_a">
+							喜劇
+						</a>
+					</li>
+					
+				
+				</ul>
+			</li>
+		</ul>
+		
+		<ul class = "nav_user">
+			尚未登入
+			
+			<!-- 尚未登入 -->
+			<li class="nav_user_item nav_user_item_first"><a href="/ML/login.jsp" class="nav_user_a">登入</a></li>
+			<li class="nav_user_item"><a href="/ML/register.jsp" class="nav_user_a">註冊</a></li>
+			
+		</ul>
+	</nav>
+<!-- nav.jsp end -->
+	<article>
+		<form action="update_cart.do" method="POST">
+			<table class="booking_detail">
+				<caption>訂票明細</caption>
+				<thead>
+					<tr>
+						<th>電影名稱</th>
+						<th>日期</th>
+						<th>時間</th>
+						<th>價格</th>
+						<th>數量</th>
+						<th>座位</th>
+						<th>小計</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr>
+						<td>
+							<div class="td_box">
+								<img alt="電影名稱" src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230116003.jpg">
+								<div class="movie_name">蟻人與黃蜂女：量子狂熱</div>
+							</div>
+							<!--TODO:<div>剩餘座位：100席</div>-->
+						</td>
+						<td>
+							<div class="td_box">
+								<div>2023-03-02</div>
+							</div>
+						</td>
+						<td>
+							<div class="td_box">
+								<div>13:20</div>
+							</div>
+						</td>
+						<td>
+							<div class="td_box">
+								<div>
+									定價:340<br>
+									折扣:82折<br>
+									特價:278.8<br>
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="td_box">
+								<div>
+									2
+								</div>
+							</div>
+						</td>
+						<td>
+							<div class="td_box">
+								<div>
+									H08,I07
+								</div>
+							</div>	
+						</td>
+						<td>
+							<div class="td_box">
+								<div>
+									557.6
+								</div>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="6">
+							<div class="cart_counter_box">
+								<div class="cart_counter">
+									共2場 , 7張票
+								</div>
+							</div>
+						</td>
+						<td colspan="1">
+							<div class="shipping_price">
+								<div>
+									運費 $60
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="6">
+							<div class="pay_and_ship_box">
+								<div class="paytype_box">
+									<label for="paytype">選擇付款方式</label>
+									<select id="paytype" class="selector">
+										<option>信用卡</option>
+									</select>
+								</div>
+								<div class="shipping_method_box">
+									<label for="shipping_method">選擇配送方式</label>
+									<select id="shipping_method" class="selector">
+										<option>7-11取貨</option>
+									</select>
+								</div>
+							</div>
+						</td>
+						<td colspan="1">
+							<div  class="cart_total_price_box">
+								<div>
+									總金額：1951.6 + 60
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="6">
+							<div class="customer_info_box">
+								<div class="customer_info_title">
+									訂購人資訊
+								</div>
+								<div class="customer_info_input_box">
+									<div class="customer_name_box">
+										<label for="name">姓名</label>
+										<input id="name">
+									</div>
+									<div class="customer_email_box">
+										<label for="email">Email</label>
+										<input id="email">
+									</div>
+									<div class="customer_phone_box">
+										<label for="phone">聯絡電話</label>
+										<input id="phone">
+									</div>
+									<div class="customer_addr_box">
+										<label for="address">收件地址</label>
+										<input id="address">
+									</div>
+								</div>
+							</div>
+						</td>
+						<td colspan="1">
+							<div class="td_box">
+								<button type="submit" class="checkOut_btn" name="submit" value="checkOut">送出訂單</button>
+							</div>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</form>
+	</article>
+	
+<!-- footer.jsp start -->
+	<footer>
+		<hr>
+		<div class='copyRightDiv'>一線影院&copy;2023-01~</div>
+	</footer>
+<!-- footer.jsp end -->
+</body>
+
+</html>
