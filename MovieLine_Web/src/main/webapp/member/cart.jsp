@@ -66,7 +66,7 @@
 	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp" />
 	<article>
-	<% 
+	<% 	DecimalFormat df = new DecimalFormat("#.##");
 		ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
 	    Customer member = (Customer)session.getAttribute("member");
 	     
@@ -117,7 +117,6 @@
 						<td>
 							<div class="td_box">
 								<div>
-									<%DecimalFormat df = new DecimalFormat("#.##"); %>
 									定價:<%=df.format(cart.getListPrice(cartItem))%><br>
 									折扣:<%= cart.getDiscountString(cartItem)%><br>
 									特價:<%=df.format(cart.getUnitPrice(cartItem))  %><br>
@@ -160,11 +159,27 @@
 				</tbody>
 				<tfoot>
 					<tr>
+						<td colspan="8">
+							<div class="cart_counter_box">
+								<div class="cart_counter">
+									共<%=cart.size()%>場 , <%=cart.getTotalQuantity()%>張票
+								</div>
+							</div>
+						</td>
+						<td colspan="1">
+							<div class="cart_total_price_box">
+								<div>
+									總金額：<%=df.format(cart.getTotalAmount())%>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
 						<td colspan="8"></td>
 						<td colspan="1">
-							<div class="td_box">
-								<input type="submit" value="確認刪除">
-								<button type="submit" name="submit" value="checkOut">我要結帳</button>
+							<div class="td_box delete_and_checkout">
+								<input type="submit" class="btn" value="確認刪除">
+								<button type="submit" class="btn" name="submit" value="checkOut">前往結帳</button>
 							</div>
 						</td>
 					</tr>
