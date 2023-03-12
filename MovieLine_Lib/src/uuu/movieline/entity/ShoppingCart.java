@@ -19,6 +19,10 @@ public class ShoppingCart {
 	}
 	//用accessers方法取代集合型態屬性cartMap的getters:	
 	//以下4個business方法是利用delegate method(代理人程式)來產生的
+	/**
+	 * 取得map裡面有幾筆
+	 * @return cartMap size
+	 */
 	public int size() {
 		return cartMap.size(); //有幾項
 	}
@@ -99,6 +103,10 @@ public class ShoppingCart {
 		}
 		return sum;
 	}
+	/**
+	 * 計算總購買數量
+	 * @return 總購買數量
+	 */
 	public int getTotalQuantity() { //計算總購買數量
 		int sum = 0;
 		Integer qty;
@@ -111,7 +119,6 @@ public class ShoppingCart {
 		return sum;
 	}
 	
-	//TODO:從訂票頁帶回並修改
 	public void updateCartItem(CartItem currentItem, Seat newSeat) {
 		Seat prevSeat = cartMap.get(currentItem);//找出之前加入的購買數量
 		if(prevSeat!=null) {//有才修改
