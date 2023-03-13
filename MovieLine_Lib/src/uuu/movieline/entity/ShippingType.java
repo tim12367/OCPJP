@@ -1,9 +1,9 @@
 package uuu.movieline.entity;
 
 public enum ShippingType {
-	SHOP(0, "門市付款"),
-	HOME(100, "貨到付款"),
-	STORE(65, "超商付款");
+	SHOP(0, "門市取貨"),
+	HOME(100, "宅配到府"),
+	STORE(65, "超商取貨");
 	
 	private final double fee;
 	private final String description;
