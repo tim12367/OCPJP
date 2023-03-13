@@ -1,3 +1,4 @@
+<%@page import="uuu.movieline.entity.Customer"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="uuu.movieline.entity.ShoppingCart"%>
 <%@page import="uuu.movieline.entity.CartItem"%>
@@ -12,7 +13,7 @@
 <%	
 	DecimalFormat df = new DecimalFormat("#.##");
 	ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
-	
+	Customer member = (Customer)session.getAttribute("member");
 %>
 <link rel="icon" type="image/x-icon"
 	href="<%=request.getContextPath()%>/source/title_icon.png" />
@@ -89,7 +90,8 @@
 <%if(cart==null || cart.isEmpty()){ %>
 <h1>尚未訂票</h1>
 <%}else{ %>
-		<form action="check_out.do" method="POST">
+<!-- 		<form action="check_out.do" method="POST"> -->
+		<form action="" method="POST">
 			<table class="booking_detail">
 				<caption>訂票明細</caption>
 				<thead>
@@ -169,7 +171,7 @@
 							<div class="pay_and_ship_box">
 								<div class="paytype_box">
 									<label for="paytype">選擇付款方式</label> 
-									<select id="paytype" class="selector" required>
+									<select id="paytype" name="payType" class="selector" required>
 										<option value=''>請選擇...</option>
 										<%for(ShippingType sType:ShippingType.values()){ %>
 										<option value='<%=sType.name()%>' data-fee='<%=sType.getFee()%>'><%=sType%></option>
@@ -178,8 +180,8 @@
 								</div>
 								<div class="shipping_method_box">
 									<label for="shipping_method">選擇配送方式</label> 
-									<select
-										id="shipping_method" class="selector" required>
+									<select id="shipping_method" class="selector"
+									name="shippingType" required>
 										<option value=''>請選擇...</option>
 										<%for(PaymentType pType:PaymentType.values()){ %>
 										<option value='<%=pType.name()%>' data-fee='<%=pType.getFee()%>'><%=pType%></option>
@@ -200,16 +202,16 @@
 								<div class="customer_info_title">訂購人資訊</div>
 								<div class="customer_info_input_box">
 									<div class="customer_name_box">
-										<label for="name">姓名</label> <input id="name" required>
+										<label for="name">姓名</label> <input id="name" name="name" value="<%=member.getName()%>" required>
 									</div>
 									<div class="customer_email_box">
-										<label for="email">Email</label> <input id="email" required>
+										<label for="email">Email</label> <input id="email" name="email" value="<%=member.getEmail()%>" required>
 									</div>
 									<div class="customer_phone_box">
-										<label for="phone">聯絡電話</label> <input id="phone" required>
+										<label for="phone">聯絡電話</label> <input id="phone" name="phone" value="<%=member.getPhone()%>" required>
 									</div>
 									<div class="customer_addr_box">
-										<label for="address">收件地址</label> <input id="address" required>
+										<label for="address">收件地址</label> <input id="address" name="address" value="<%=member.getAddress()%>" required>
 									</div>
 								</div>
 							</div>
@@ -217,7 +219,7 @@
 						<td colspan="1">
 							<div class="td_box">
 								<button type="submit" class="checkOut_btn" name="submit"
-									value="checkOut">送出訂單</button>
+									value="checkOutOk">送出訂單</button>
 							</div>
 						</td>
 					</tr>
