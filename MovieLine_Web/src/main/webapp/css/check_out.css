@@ -1,0 +1,118 @@
+@charset "UTF-8";
+.booking_detail caption {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	background-color: #04AA6D;
+	border-radius: 8px 8px 0 0;
+	color: white;
+}
+
+.booking_detail {
+	border-collapse: collapse;
+	border-radius: 8px;
+	width: 900px;
+	margin: auto;
+	margin-top: 50px;
+}
+
+.booking_detail td, .booking_detail th {
+	border: 1px solid #ddd;
+	padding: 8px;
+}
+
+.td_box {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.movie_name {
+/* 	min-width: 280px; */
+}
+
+.booking_detail tbody img {
+	width: 56px;
+	vertical-align: middle;
+}
+
+.cart_counter_box {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+}
+
+.cart_counter {
+	
+}
+
+.cart_total_price_box {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+}
+
+.pay_and_ship_box {
+	display: flex;
+	justify-content: space-around;
+}
+
+.paytype_box, .shipping_method_box {
+	display: flex;
+	min-width: 250px;
+	justify-content: space-between;
+}
+
+.customer_info_title {
+	background-color: #8fc31f;
+	width: fit-content;
+	padding: 5px 10px;
+	color: black;
+	border-radius: 5px 5px 0 0;
+}
+
+.customer_info_input_box {
+	padding: 20px;
+	border-top: 1px #8fc31f solid;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.customer_name_box, .customer_email_box, .customer_phone_box,
+	.customer_addr_box {
+	margin: 10px;
+	min-width: 300px;
+	display: flex;
+}
+
+#name, #email, #phone, #address {
+	margin-left: auto;
+	flex-grow: 1;
+	max-width: 190px;
+}
+
+.shipping_price {
+	display: flex;
+	justify-content: center;
+}
+
+.selector {
+	min-width: 100px;
+	border-radius: 4px;
+	border: 1px solid #ececec;
+}
+
+.checkOut_btn {
+	border: 0;
+	line-height: 44px;
+	height: 44px;
+	width: 80%;
+	text-align: center;
+	border-radius: 6px;
+	background-color: #2660a9;
+	color: white;
+	align-self: center;
+	cursor: pointer;
+}

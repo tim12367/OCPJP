@@ -9,6 +9,7 @@
 .booking_detail{
 	border-collapse: collapse;
 	width: 80%;
+	width: 1080px;
 	margin: auto;
 	margin-top: 50px;
 }
@@ -27,7 +28,7 @@
 	justify-content:space-around;
 }
 .movie_name{
-	min-width: 280px;
+/* 	min-width: 280px; */
 }
 .change_seat_a{
 /* 	border: 1px black solid; */
