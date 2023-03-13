@@ -1,9 +1,19 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="uuu.movieline.entity.ShoppingCart"%>
+<%@page import="uuu.movieline.entity.CartItem"%>
+<%@page import="uuu.movieline.entity.ShippingType"%>
+<%@page import="uuu.movieline.entity.PaymentType"%>
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>訂單</title>
+<%	
+	DecimalFormat df = new DecimalFormat("#.##");
+	ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+	
+%>
 <link rel="icon" type="image/x-icon"
 	href="<%=request.getContextPath()%>/source/title_icon.png" />
 <link href="<%=request.getContextPath()%>/css/global.css"
@@ -26,6 +36,8 @@
 				alert("不支援的瀏覽器!");
 				$("#hint").text("不支援的瀏覽器!");
 			}
+			$("#paytype").change(shippingAndPaytypeSelectHandlr);
+			$("#shipping_method").change(shippingAndPaytypeSelectHandlr);
 		}
 		function restoreData() {
 			var getDarkModeFlag = localStorage.getItem("darkModeFlag");
@@ -49,6 +61,22 @@
 			localStorage.setItem("darkModeFlag", darkModeFlag);
 			darkModeFlag = !darkModeFlag;
 		}
+		function shippingAndPaytypeSelectHandlr() {
+			var totalPrice = Number(${sessionScope.cart.getTotalAmount()});
+			var dataP = Number($('option:selected', $("#paytype")).attr('data-fee'));
+			var dataS = Number($('option:selected', $("#shipping_method")).attr('data-fee'));
+			console.log(dataP);
+			console.log(dataS);
+			console.log(dataP+dataS);
+			console.log(dataP+dataS+totalPrice);
+			if(!isNaN(dataP)&&!isNaN(dataS)&&!isNaN(totalPrice)){
+				$(".shipping_price_data").html(dataP+dataS);
+				$("#total_price_data").html(Math.round((dataP+dataS+totalPrice)*10)/10);
+			}else{
+				$(".shipping_price_data").html(0);
+				$("#total_price_data").html(Math.round(totalPrice*10)/10);
+			}
+		}
 	</script>
 </head>
 <body>
@@ -58,6 +86,9 @@
 	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp" />
 	<article>
+<%if(cart==null || cart.isEmpty()){ %>
+<h1>尚未訂票</h1>
+<%}else{ %>
 		<form action="check_out.do" method="POST">
 			<table class="booking_detail">
 				<caption>訂票明細</caption>
@@ -74,58 +105,62 @@
 				</thead>
 
 				<tbody>
+				<%for(CartItem cartItem:cart.getCartItemSet()){ %>
 					<tr>
 						<td>
-							<div class="td_box">
-								<img alt="電影名稱"
-									src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230116003.jpg">
-								<div class="movie_name">蟻人與黃蜂女：量子狂熱</div>
+							<div class="td_box movie_name_box">
+								<img alt="<%=cartItem.getMovieName()%>"
+									src="<%= cartItem.getPhotoUrl()%>">
+								<div class="movie_name"><%=cartItem.getMovieName()%></div>
 							</div> <!--TODO:<div>剩餘座位：100席</div>-->
 						</td>
 						<td>
 							<div class="td_box">
-								<div>2023-03-02</div>
+								<div><%=cartItem.getSessionDate()%></div>
 							</div>
 						</td>
 						<td>
 							<div class="td_box">
-								<div>13:20</div>
+								<div><%=cartItem.getSessionTime()%></div>
 							</div>
 						</td>
 						<td>
 							<div class="td_box">
 								<div>
-									定價:340<br> 折扣:82折<br> 特價:278.8<br>
+									定價:<%=df.format(cart.getListPrice(cartItem))%><br>
+									折扣:<%= cart.getDiscountString(cartItem)%><br>
+									特價:<%=df.format(cart.getUnitPrice(cartItem))  %><br>
 								</div>
 							</div>
 						</td>
 						<td>
 							<div class="td_box">
-								<div>2</div>
+								<div><%=cart.getQuantity(cartItem)%></div>
 							</div>
 						</td>
 						<td>
 							<div class="td_box">
-								<div>H08,I07</div>
+								<div><%=cart.getSeatListString(cartItem) %></div>
 							</div>
 						</td>
 						<td>
 							<div class="td_box">
-								<div>557.6</div>
+								<div><%=df.format(cart.getAmount(cartItem)) %></div>
 							</div>
 						</td>
 					</tr>
+					<%}%>
 				</tbody>
 				<tfoot>
 					<tr>
 						<td colspan="6">
 							<div class="cart_counter_box">
-								<div class="cart_counter">共2場 , 7張票</div>
+								<div class="cart_counter">共<%=cart.size()%>場 , <%=cart.getTotalQuantity()%>張票</div>
 							</div>
 						</td>
 						<td colspan="1">
 							<div class="shipping_price">
-								<div>運費 $60</div>
+								<div>手續費 $<span class="shipping_price_data">0</span></div>
 							</div>
 						</td>
 					</tr>
@@ -133,22 +168,29 @@
 						<td colspan="6">
 							<div class="pay_and_ship_box">
 								<div class="paytype_box">
-									<label for="paytype">選擇付款方式</label> <select id="paytype"
-										class="selector">
-										<option>信用卡</option>
+									<label for="paytype">選擇付款方式</label> 
+									<select id="paytype" class="selector" required>
+										<option value=''>請選擇...</option>
+										<%for(ShippingType sType:ShippingType.values()){ %>
+										<option value='<%=sType.name()%>' data-fee='<%=sType.getFee()%>'><%=sType%></option>
+										<%} %>
 									</select>
 								</div>
 								<div class="shipping_method_box">
-									<label for="shipping_method">選擇配送方式</label> <select
-										id="shipping_method" class="selector">
-										<option>7-11取貨</option>
+									<label for="shipping_method">選擇配送方式</label> 
+									<select
+										id="shipping_method" class="selector" required>
+										<option value=''>請選擇...</option>
+										<%for(PaymentType pType:PaymentType.values()){ %>
+										<option value='<%=pType.name()%>' data-fee='<%=pType.getFee()%>'><%=pType%></option>
+										<%}%>
 									</select>
 								</div>
 							</div>
 						</td>
 						<td colspan="1">
 							<div class="cart_total_price_box">
-								<div>總金額：1951.6 + 60</div>
+								<div class="total_price_box">總金額：<span id="total_price_data"><%=df.format(cart.getTotalAmount())%></span></div>
 							</div>
 						</td>
 					</tr>
@@ -158,16 +200,16 @@
 								<div class="customer_info_title">訂購人資訊</div>
 								<div class="customer_info_input_box">
 									<div class="customer_name_box">
-										<label for="name">姓名</label> <input id="name">
+										<label for="name">姓名</label> <input id="name" required>
 									</div>
 									<div class="customer_email_box">
-										<label for="email">Email</label> <input id="email">
+										<label for="email">Email</label> <input id="email" required>
 									</div>
 									<div class="customer_phone_box">
-										<label for="phone">聯絡電話</label> <input id="phone">
+										<label for="phone">聯絡電話</label> <input id="phone" required>
 									</div>
 									<div class="customer_addr_box">
-										<label for="address">收件地址</label> <input id="address">
+										<label for="address">收件地址</label> <input id="address" required>
 									</div>
 								</div>
 							</div>
@@ -182,6 +224,7 @@
 				</tfoot>
 			</table>
 		</form>
+<%}%>
 	</article>
 	<%@ include file="/subviews/footer.jsp"%>
 </body>
