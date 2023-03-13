@@ -13,7 +13,7 @@
 	function getLogin_fancybox(){
 		//ajax送非同步GET請求
 		$.ajax({
-			url:"<%=request.getContextPath()%>/login_data.jsp",
+			url:"<%=request.getContextPath()%>/login_ajax.jsp",
 			method: 'GET'					
 		}).done(getLogin_fancyboxHandler);
 	}
@@ -23,8 +23,8 @@
 		$("#fancyDialog").html(result);
 		$.fancybox.open({
 		    src  : '#fancyDialog',
-			'width':720,
-	        'height':560,
+			'width':570,
+	        'height':730,
 		    type : 'inline',
 		    opts : {
 		      afterShow : function( instance, current ) {
