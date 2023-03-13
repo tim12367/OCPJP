@@ -89,6 +89,8 @@
 	<article>
 <%if(cart==null || cart.isEmpty()){ %>
 <h1>尚未訂票</h1>
+<%}else if(member==null){ %>
+<h1>請重新登入<h1>
 <%}else{ %>
 <!-- 		<form action="check_out.do" method="POST"> -->
 		<form action="" method="POST">
@@ -173,9 +175,9 @@
 									<label for="paytype">選擇付款方式</label> 
 									<select id="paytype" name="payType" class="selector" required>
 										<option value=''>請選擇...</option>
-										<%for(ShippingType sType:ShippingType.values()){ %>
-										<option value='<%=sType.name()%>' data-fee='<%=sType.getFee()%>'><%=sType%></option>
-										<%} %>
+										<%for(PaymentType pType:PaymentType.values()){ %>
+										<option value='<%=pType.name()%>' data-fee='<%=pType.getFee()%>'><%=pType%></option>
+										<%}%>
 									</select>
 								</div>
 								<div class="shipping_method_box">
@@ -183,9 +185,9 @@
 									<select id="shipping_method" class="selector"
 									name="shippingType" required>
 										<option value=''>請選擇...</option>
-										<%for(PaymentType pType:PaymentType.values()){ %>
-										<option value='<%=pType.name()%>' data-fee='<%=pType.getFee()%>'><%=pType%></option>
-										<%}%>
+										<%for(ShippingType sType:ShippingType.values()){ %>
+										<option value='<%=sType.name()%>' data-fee='<%=sType.getFee()%>'><%=sType%></option>
+										<%} %>
 									</select>
 								</div>
 							</div>
