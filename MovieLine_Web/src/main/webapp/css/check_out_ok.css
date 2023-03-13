@@ -25,7 +25,9 @@
 	align-items: center;
 	justify-content: space-around;
 }
-
+.movie_name_box{
+	justify-content: space-between;
+}
 .movie_name {
 	/* 		min-width: 280px; */
 	

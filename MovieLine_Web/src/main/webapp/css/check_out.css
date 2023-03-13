@@ -15,18 +15,23 @@
 	margin-top: 50px;
 }
 
-.booking_detail td, .booking_detail th {
-	border: 1px solid #ddd;
+.booking_detail tr,.booking_detail td{
+/* 	border: 1px solid #ddd; */
+	border-bottom: 1px solid #ddd;
 	padding: 8px;
 }
-
+.booking_detail tfoot :last-child,.booking_detail tfoot :last-child td {
+	border-bottom:0;
+}
 .td_box {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-around;
 }
-
+.movie_name_box{
+	justify-content: space-between;
+}
 .movie_name {
 /* 	min-width: 280px; */
 }
@@ -53,6 +58,7 @@
 }
 
 .pay_and_ship_box {
+	padding:20px 0;
 	display: flex;
 	justify-content: space-around;
 }
@@ -102,6 +108,10 @@
 	min-width: 100px;
 	border-radius: 4px;
 	border: 1px solid #ececec;
+}
+.total_price_box{
+	width: 177px;
+	text-align: center;
 }
 
 .checkOut_btn {

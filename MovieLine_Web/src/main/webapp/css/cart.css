@@ -18,7 +18,7 @@
 	padding: 8px;
 }
 .booking_detail td, .booking_detail th {
-	border: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
 	padding: 8px;
 }
 .td_box{
@@ -26,6 +26,9 @@
 	flex-direction:row;
 	align-items:center;
 	justify-content:space-around;
+}
+.movie_name_box{
+	justify-content: space-between;
 }
 .movie_name{
 /* 	min-width: 280px; */

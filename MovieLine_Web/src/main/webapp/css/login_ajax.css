@@ -1,0 +1,86 @@
+@charset "UTF-8";
+.login_form {
+	background-color: #282a36;
+	display: flex;
+	flex-direction: column;
+/* 	border: 1px solid #E8E9EC; */
+	width: 100%;
+	height: 100%;
+/* 	height: fit-content; */
+	margin: auto;
+	border-radius: 6px;
+	padding: 48px 40px 36px 40px;
+}
+.form_input--lightmode {
+  width: 269px;
+  height: 25px;
+  border: 1px solid #DADCE0;
+  border-radius: 6px;
+  padding: 13px 15px;
+  font-size: 18px;
+  font-family: 'Noto Sans TC', sans-serif;
+}
+.form_input_box {
+	width: 100%;
+	height: 300px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-evenly;
+}
+.form_input_password_box{
+    /* 讓showpassword定位 */
+    position: relative;
+}
+.form_input_box_capcha_image{
+    width: 160px;
+    height: 75px;
+    cursor: pointer;
+}
+
+h1, h3 {
+	text-align: center;
+}
+
+.forget_and_remember_box {
+	margin-bottom: 40px;
+	display: flex;
+}
+
+.forget_and_remember_box_elememt {
+	cursor: pointer;
+	text-align: center;
+	margin: auto 0;
+}
+
+.forget_and_remember_hint {
+	cursor: default;
+	color: #d54616;
+	margin: auto;
+}
+
+.forget_and_remember_button {
+	border: 0px;
+	background-color: #ffffff;
+	color: #4056e7;
+}
+
+.submit_button {
+	width: 80%;
+	height: 44px;
+	font-size: 1.5em;
+	background-color: #693ce0;
+	background-color: #337ab7;
+	border-radius: 6px;
+	cursor: pointer;
+	border: 0px;
+	color: #ffffff;
+	font-family: 'gotham ssm';
+	margin: auto;
+}
+
+.submit_button:hover {
+	box-shadow: 2px 2px 5px black;
+}
+
+
