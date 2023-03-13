@@ -98,7 +98,7 @@
 				<% for(CartItem cartItem:cart.getCartItemSet()){ %>
 					<tr>
 						<td>
-							<div class="td_box">
+							<div class="td_box movie_name_box">
 								<img alt="<%=cartItem.getMovieName()%>" src="<%=cartItem.getPhotoUrl()%>">
 								<div class="movie_name"><%=cartItem.getMovieName()%></div>
 							</div>
