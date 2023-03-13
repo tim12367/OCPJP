@@ -165,6 +165,7 @@
 		seatRestoreByRow("H",<%=restoreSeat.getRowH()%>,"r");
 		seatRestoreByRow("I",<%=restoreSeat.getRowI()%>,"r");
 		
+		//TODO:帶回修改側攔
 		<%}%>
 		<%
 		if(movieSession!=null){
