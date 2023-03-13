@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Insert title here</title>
+<title>訂單明細</title>
 <link rel="icon" type="image/x-icon"
 	href="<%=request.getContextPath()%>/source/title_icon.png" />
 <link href="<%=request.getContextPath()%>/css/global.css"
@@ -101,8 +101,6 @@
 					<tr>
 						<td>
 							<div class="td_box">
-								<img alt="電影名稱"
-									src="https://www.vscinemas.com.tw/vsweb/upload/film/film_20230116003.jpg">
 								<div class="movie_name">蟻人與黃蜂女：量子狂熱</div>
 							</div> <!--TODO:<div>剩餘座位：100席</div>-->
 						</td>
@@ -119,7 +117,7 @@
 						<td>
 							<div class="td_box">
 								<div>
-									特價:278.8<br>
+									278.8<br>
 								</div>
 							</div>
 						</td>
