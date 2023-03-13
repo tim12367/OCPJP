@@ -224,6 +224,7 @@
 		imgString = "../source/sold.png";
 		if(mode==="r"){
 			imgString = "../source/standard_selected.png"
+			$("#booking_detail_body").append("<div>"+seatRow+"排"+seatNumber+"號"+"</div>");
 		}
 		$("#"+seatRow+" >td >p:contains('"+seatNumber+"')").filter(function() {
 	        return $.trim($(this).text()) === seatNumber;
