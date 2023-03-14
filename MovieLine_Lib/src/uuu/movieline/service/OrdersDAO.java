@@ -15,9 +15,10 @@ class OrdersDAO {
 			+ "    recipient_name, recipient_email, recipient_phone) "
 			+ "    VALUES(?,?,?,?,0, ?,?,'', ?,?,?, ?,?,?) ";
 	private static final String INSERT_order_items = 
-			"INSERT INTO orderItems "
-			+ "	(order_id, session_id, price, quantity) "
-			+ "    VALUES(?,?,?,?) ";
+			"INSERT INTO order_Items "
+			+ "	(order_id, session_date, session_time, session_thread, price, quantity, "
+			+ " A, B, C, D, E, F, G, H, I) "
+			+ "    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 	
 	public void insert(Order order) throws MLException{
 		
@@ -27,6 +28,18 @@ class OrdersDAO {
 				PreparedStatement pstmt1 = connection.prepareStatement(INSERT_orders, Statement.RETURN_GENERATED_KEYS);//3.準備指令1
 				PreparedStatement pstmt2 = connection.prepareStatement(INSERT_order_items);//3.準備指令2
 			) {
+			//TODO:庫存管理
+//			if(order.getOrderItemSet()!=null&&order.size()>0) {
+//				for(OrderItem orderItem:order.getOrderItemSet()) {
+//					PreparedStatement pstmt;
+//					if(orderItem.getSeat()!=null) {
+//						
+//					}
+//				}
+//			}else {
+//				throw new MLException("建立訂單必須有明細");
+//			}
+			
 			//3.1傳入pstmt1?的值
 			pstmt1.setInt(1, order.getId());
 			pstmt1.setString(2, order.getCustomer().getId());
@@ -58,10 +71,21 @@ class OrdersDAO {
 			if(order.getOrderItemSet()!=null&&order.size()>0) {
 				for(OrderItem orderItem:order.getOrderItemSet()) {
 					//3.1 傳入pstmt2?的值
-					pstmt2.setInt(1,orderItem.getOrderId());
-					pstmt2.setInt(2, orderItem.getMovieSession().getId());
-					pstmt2.setDouble(3, orderItem.getPrice());
-					pstmt2.setInt(4, orderItem.getQuantity());
+					pstmt2.setInt(1,order.getId());
+					pstmt2.setString(2,orderItem.getMovieSession().getDate().toString());
+					pstmt2.setString(3,orderItem.getMovieSession().getTime().toString());
+					pstmt2.setInt(4, orderItem.getMovieSession().getThread());
+					pstmt2.setDouble(5, orderItem.getPrice());
+					pstmt2.setInt(6, orderItem.getQuantity());
+					pstmt2.setInt(7, orderItem.getSeat().getRowA());
+					pstmt2.setInt(8, orderItem.getSeat().getRowB());
+					pstmt2.setInt(9, orderItem.getSeat().getRowC());
+					pstmt2.setInt(10, orderItem.getSeat().getRowD());
+					pstmt2.setInt(11, orderItem.getSeat().getRowE());
+					pstmt2.setInt(12, orderItem.getSeat().getRowF());
+					pstmt2.setInt(13, orderItem.getSeat().getRowG());
+					pstmt2.setInt(14, orderItem.getSeat().getRowH());
+					pstmt2.setInt(15, orderItem.getSeat().getRowI());
 					
 					//4.執行pstmt2
 					pstmt2.executeUpdate();
