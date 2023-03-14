@@ -8,7 +8,7 @@ import uuu.movieline.exception.MLException;
 import uuu.movieline.service.CustomerService;
 import uuu.movieline.service.ProductService;
 
-public class TestOrder {
+public class TestShoppingCart {
 	public static void main(String[] args) {
 		CustomerService cService = new CustomerService();
 		ProductService pService = new ProductService();
