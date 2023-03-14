@@ -4,6 +4,6 @@ INSERT INTO orders
     shipping_type, shippinf_fee,shipping_address, 
     recipient_name, recipient_email, recipient_phone)
     VALUES(?,?,?,?,0, ?,?,'', ?,?,?, ?,?,?);
-INSERT INTO orderItems
-	(order_id, session_id, price, quantity)
-    VALUES(?,?,?,?)
+INSERT INTO order_Items
+	(order_id, session_date, session_time, session_thread, price, quantity, A, B, C, D, E, F, G, H, I)
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
