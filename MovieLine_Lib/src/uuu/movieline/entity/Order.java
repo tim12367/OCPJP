@@ -64,7 +64,7 @@ public class Order {//人事時地物
 		orderItemSet.add(orderItem);
 	}
 	public void add(ShoppingCart cart) {
-		if(cart!=null || cart.isEmpty()) throw new IllegalArgumentException("建立訂單時cart物件不得為空");
+		if(cart==null || cart.isEmpty()) throw new IllegalArgumentException("建立訂單時cart物件不得為空");
 		for (CartItem cartItem:cart.getCartItemSet()) {
 			OrderItem orderItem = new OrderItem();
 			
@@ -72,7 +72,7 @@ public class Order {//人事時地物
 			
 			orderItem.setPrice(cart.getUnitPrice(cartItem));
 			orderItem.setQuantity(cart.getQuantity(cartItem));
-			
+			orderItem.setSeat(cart.get(cartItem));
 			orderItemSet.add(orderItem);
 			
 		}
@@ -175,24 +175,24 @@ public class Order {//人事時地物
 	@Override
 	public String toString() {
 		return this.getClass().getName() +
-				"Order [id=" + id + 
-				", customer=" + customer + 
-				", orderDate=" + orderDate + 
-				", orderTime=" + orderTime + 
-				", status=" + status + 
-				", paymentType=" + paymentType + 
-				", paymentFee=" + paymentFee+
-				 ", paymentNote=" + paymentNote + 
-				", shippingType=" + shippingType + 
-				", shippingFee=" + shippingFee+
-				 ", shippingNote=" + shippingNote + 
-				", shippingAddress=" + shippingAddress + 
-				", recipientName=" + recipientName + 
-				", recipientEmail=" + recipientEmail + 
-				", recipientPhone=" + recipientPhone
-				+ ", orderItemSet=" + orderItemSet + 
-				", getTotalQuantity()=" + getTotalQuantity()
-				+ ", getTotalAmount()=" + getTotalAmount() + "]";
+				"[訂單編號=" + id + 
+				"\n, 客戶=" + customer + 
+				"\n, 訂購日期=" + orderDate + 
+				"\n, 訂購時間=" + orderTime + 
+				"\n, 訂單狀態=" + status + 
+				"\n, 付款方式=" + paymentType + 
+				"\n, 付款手續費=" + paymentFee+
+				"\n, paymentNote=" + paymentNote + 
+				"\n, 運送方式=" + shippingType + 
+				"\n, 運費=" + shippingFee+
+				"\n, shippingNote=" + shippingNote + 
+				"\n, 收貨地址=" + shippingAddress + 
+				"\n, 收件人姓名=" + recipientName + 
+				"\n, 收件人Email=" + recipientEmail + 
+				"\n, 收件人電話=" + recipientPhone + 
+				"\n, 訂購品項=" + getOrderItemSet() + 
+				"\n, 總數量=" + getTotalQuantity() +
+				"\n, 總價錢=" + getTotalAmount() + "]";
 	}
 	
 }
