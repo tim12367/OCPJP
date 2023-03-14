@@ -19,6 +19,7 @@ public class Order {//人事時地物
 	private String shippingType;//SHOP, Home, STORE
 	private double shippingFee;
 	private String shippingNote;//信用卡資訊
+	private String shippingAddress;//信用卡資訊
 	
 	private String recipientName;
 	private String recipientEmail;
@@ -143,6 +144,14 @@ public class Order {//人事時地物
 	public void setShippingNote(String shippingNote) {
 		this.shippingNote = shippingNote;
 	}
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+
 	public String getRecipientName() {
 		return recipientName;
 	}
@@ -152,6 +161,7 @@ public class Order {//人事時地物
 	public String getRecipientEmail() {
 		return recipientEmail;
 	}
+
 	public void setRecipientEmail(String recipientEmail) {
 		this.recipientEmail = recipientEmail;
 	}
@@ -162,5 +172,27 @@ public class Order {//人事時地物
 		this.recipientPhone = recipientPhone;
 	}
 	
+	@Override
+	public String toString() {
+		return this.getClass().getName() +
+				"Order [id=" + id + 
+				", customer=" + customer + 
+				", orderDate=" + orderDate + 
+				", orderTime=" + orderTime + 
+				", status=" + status + 
+				", paymentType=" + paymentType + 
+				", paymentFee=" + paymentFee+
+				 ", paymentNote=" + paymentNote + 
+				", shippingType=" + shippingType + 
+				", shippingFee=" + shippingFee+
+				 ", shippingNote=" + shippingNote + 
+				", shippingAddress=" + shippingAddress + 
+				", recipientName=" + recipientName + 
+				", recipientEmail=" + recipientEmail + 
+				", recipientPhone=" + recipientPhone
+				+ ", orderItemSet=" + orderItemSet + 
+				", getTotalQuantity()=" + getTotalQuantity()
+				+ ", getTotalAmount()=" + getTotalAmount() + "]";
+	}
 	
 }
