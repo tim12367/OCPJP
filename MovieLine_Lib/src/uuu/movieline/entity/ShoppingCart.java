@@ -39,12 +39,9 @@ public class ShoppingCart {
 		Integer qty = cartMap.get(item).getQuantity();
 		return qty!=null?qty:0;
 	}
-	public Seat get(Object key) {
+	public Seat get(CartItem key) {
 			return cartMap.get(key);
 		}
-//	public Integer get(Object key) {
-//		return cartMap.get(key).getQuantity();
-//	}
 	
 	public Double getListPrice(CartItem item) {
 		if(item.getMovie() instanceof Outlet) {
@@ -159,7 +156,8 @@ public class ShoppingCart {
 	}
 	@Override
 	public String toString() {
-		return "購物車[訂購人:" + member + "\n, 內容:" + cartMap 
+		return "購物車[訂購人:" + member + 
+				"\n, 內容:" + cartMap 
 				+ "\n, 共" + size() 
 				+ "項, " + getTotalQuantity() 
 				+ "件, 總金額" + getTotalAmount()
