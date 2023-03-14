@@ -18,6 +18,7 @@ public class TestSeat {
 		for(String seat :s.getSeatList()) {
 			System.out.println(seat);
 		}
+		System.out.println(s.getSeatList().toString().substring(1,s.getSeatList().toString().length()-1));
 	}
 
 }
