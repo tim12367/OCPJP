@@ -10,6 +10,7 @@ public class OrderItem {
 	
 	private double price;//交易時價格, 所以不是從產品來
 	private int quantity;//交易時數量
+	private Seat seat;//訂座位
 	
 	public int getOrderId() {
 		return orderId;
@@ -49,7 +50,13 @@ public class OrderItem {
 		return movieSession.getMovie().getUnitPrice();
 	}
 	public List<String> getSeatList(){
-		return movieSession.getSeat().getSeatList();
+		return seat.getSeatList();
+	}
+	public Seat getSeat() {
+		return seat;
+	}
+	public void setSeat(Seat seat) {
+		this.seat = seat;
 	}
 	@Override
 	public int hashCode() {
@@ -76,6 +83,16 @@ public class OrderItem {
 		if (orderId != other.orderId)
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return this.getClass().getName() + 
+				" [訂單序號=" + orderId + 
+				", 電影場次=" + movieSession + 
+				", 交易價格=" + price + 
+				", 交易數量="+ quantity + 
+				", 座位表=" + seat + "]";
 	}
 	
 }
