@@ -141,6 +141,15 @@
 		}
 	}
 	function seatInitHandlr() {
+		$("#rowA").val(0);
+		$("#rowB").val(0);
+		$("#rowC").val(0);
+		$("#rowD").val(0);
+		$("#rowE").val(0);
+		$("#rowF").val(0);
+		$("#rowG").val(0);
+		$("#rowH").val(0);
+		$("#rowI").val(0);
 		//若有訂位帶回座位
 		<%if(restoreSeat!=null){%>
 		$("#rowA").val(<%=restoreSeat.getRowA()%>);
@@ -388,6 +397,7 @@
 					</div>
 					<div id="booking_detail_body" class=panel_body>
 						<div>
+							電影編號：<%=movieSession.getMovie().getId()%><br>
 							電影名稱：<%=movieSession.getMovie().getName()%><br>
 							日期：<%=seat.getSessionDate()%><br>
 							時間：<%=seat.getSessionTime()%><br>
