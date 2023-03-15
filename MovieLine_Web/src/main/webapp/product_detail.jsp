@@ -121,6 +121,59 @@ crossorigin="anonymous"></script>
 						frameborder="0" allowfullscreen="true">
 					</iframe>
 				</div>
+				<div class="session_day">週四, 2023/03/16</div>
+				<div class="movie_name">沙贊！眾神之怒</div>
+				<div class="all_sessions_box">
+					<a class="session_box">
+						<div>13:00</div>
+						<span>A廳 396席</span>
+					</a>
+					<a class="session_box">
+						<div>13:50</div>
+						<span>5廳 49席</span>
+					</a>
+					<a class="session_box">
+						<div>14:40</div>
+						<span>B廳 114席</span>
+					</a>
+					<a class="session_box">
+						<div>16:15</div>
+						<span>5廳 49席</span>
+					</a>
+					<a class="session_box">
+						<div>17:05</div>
+						<span>B廳 114席</span>
+					</a>
+					<a class="session_box">
+						<div>17:50</div>
+						<span>A廳 396席</span>
+					</a>
+					<a class="session_box">
+						<div>13:00</div>
+						<span>A廳 396席</span>
+					</a>
+					<a class="session_box">
+						<div>13:50</div>
+						<span>5廳 49席</span>
+					</a>
+					<a class="session_box">
+						<div>14:40</div>
+						<span>B廳 114席</span>
+					</a>
+					<a class="session_box">
+						<div>16:15</div>
+						<span>5廳 49席</span>
+					</a>
+					<a class="session_box">
+						<div>17:05</div>
+						<span>B廳 114席</span>
+					</a>
+					<a class="session_box">
+						<div>17:50</div>
+						<span>A廳 396席</span>
+					</a>
+				</div>
+				
 				<hr>
 				<h2 class="describe_title">劇情簡介</h2>
 				
