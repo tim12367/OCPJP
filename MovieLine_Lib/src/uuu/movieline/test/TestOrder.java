@@ -29,27 +29,28 @@ public class TestOrder {
 			cart.setMember(member);
 			{ //product Id 1
 				
-				String movieId = "6"; //request.getParameter("productId")
+				String movieId = "10"; //request.getParameter("productId")
 				String date = "2023-02-28"; //request.getParameter("color")
-				String time = "18:10:00"; //request.getParameter("sizeName")				
+				String time = "19:30"; //request.getParameter("sizeName")				
 				
 				MovieSession p = pService.getSessionsByMovieIdDatetime(movieId,date,time);
 				Seat s = new Seat();
-				s.setRowA(8);
-				s.setRowB(3);
+				s.setRowE(8);
+				s.setRowF(24);
 				//System.out.println(p); //for test
 				cart.addCartItem(p, s);				
 			}
 			
 			{ //product Id 1
 				
-				String movieId = "9"; //request.getParameter("productId")
+				String movieId = "7"; //request.getParameter("productId")
 				String date = "2023-02-28"; //request.getParameter("color")
-				String time = "21:30:00"; //request.getParameter("sizeName")				
+				String time = "12:50"; //request.getParameter("sizeName")				
 				
 				MovieSession p = pService.getSessionsByMovieIdDatetime(movieId,date,time);
 				Seat s = new Seat();
-				s.setRowB(6);
+				s.setRowF(128);
+				s.setRowH(64);
 //				System.out.println("測試2"+s);
 				//System.out.println(p); //for test
 				cart.addCartItem(p, s);		
