@@ -388,9 +388,10 @@
 					</div>
 					<div id="booking_detail_body" class=panel_body>
 						<div>
-							電影編號:<%=movieId%><br>
-							日期:<%=date%><br>
-							時間:<%=time%><br>
+							電影名稱：<%=movieSession.getMovie().getName()%><br>
+							日期：<%=seat.getSessionDate()%><br>
+							時間：<%=seat.getSessionTime()%><br>
+							廳號：<%=seat.getSessionThread()%>
 						</div>
 						<hr>
 					</div>
