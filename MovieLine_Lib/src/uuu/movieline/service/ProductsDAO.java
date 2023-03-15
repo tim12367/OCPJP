@@ -312,6 +312,34 @@ class ProductsDAO {
 		
 		
 	}
+	private static final String SELECT_SESSION_DATE_LIST_BY_MOVIE_ID =
+			"SELECT date FROM session_view "
+			+ "WHERE id = ? "
+			+ "GROUP BY date;";
+	List<String> selectSessionDateListByMovieId(String id) throws MLException{
+		List<String> list = new ArrayList<>();//查詢list
+		try (
+				Connection connection = MySQLConnection.getConnection();//1,2
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_SESSION_DATE_LIST_BY_MOVIE_ID);//3
+				){
+			//3.1 傳入?的值
+			pstmt.setString(1, id);
+			try(
+					//4.執行指令
+					ResultSet rs = pstmt.executeQuery();
+					){
+				//5.處理rs
+				while (rs.next()) {
+					list.add(rs.getString("date"));
+				}
+				return list;
+			}
+		} catch (SQLException e) {
+			throw new MLException("[用電影編號查詢場次日期]失敗",e);
+		}
+		
+		
+	}
 
 	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATE =
 			"SELECT date, time, thread, movie_id, stock, name, subtitle, unit_price, "
