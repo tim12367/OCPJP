@@ -312,16 +312,9 @@ class ProductsDAO {
 		
 		
 	}
-//	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATE =
-//			"SELECT date, time, thread, stock, id, name, "
-//			+ "subtitle, unit_price, description, photo_url, "
-//			+ "trailer_url, launch_date, category, discount, "
-//			+ "box_office, director, cast "
-//			+ "FROM vgb.session_view "
-//			+ "WHERE id = ? AND date = ? "
-//			+ "ORDER BY date,time ";
+
 	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATE =
-			"SELECT id, date, time, thread, movie_id, stock, name, subtitle, unit_price, "
+			"SELECT date, time, thread, movie_id, stock, name, subtitle, unit_price, "
 			+ "description, photo_url, trailer_url, launch_date, category, "
 			+ "discount, box_office, director, cast, A, B, C, D, E, F, G, H, I "
 			+ "FROM session_seat_view "
@@ -344,7 +337,6 @@ class ProductsDAO {
 				//5.處理rs
 				while (rs.next()) {
 					MovieSession s = new MovieSession();
-					s.setId(rs.getInt("id"));
 					s.setDate(rs.getString("date"));
 					s.setTime(rs.getString("time"));
 					s.setThread(rs.getInt("thread"));
@@ -375,6 +367,9 @@ class ProductsDAO {
 					
 					//Seat
 					Seat seat = new Seat();
+					seat.setSessionDate(rs.getString("date"));
+					seat.setSessionTime(rs.getString("time"));
+					seat.setSessionThread(rs.getInt("thread"));
 					seat.setRowA(rs.getInt("A"));
 					seat.setRowB(rs.getInt("B"));
 					seat.setRowC(rs.getInt("C"));
@@ -396,7 +391,7 @@ class ProductsDAO {
 		}
 	}
 	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATETIME =
-			"SELECT id, date, time, thread, movie_id, stock, name, subtitle, unit_price, "
+			"SELECT date, time, thread, movie_id, stock, name, subtitle, unit_price, "
 			+ "description, photo_url, trailer_url, launch_date, category, "
 			+ "discount, box_office, director, cast, A, B, C, D, E, F, G, H, I "
 			+ "FROM session_seat_view "
@@ -420,7 +415,6 @@ class ProductsDAO {
 				//5.處理rs
 				while (rs.next()) {
 					s = new MovieSession();
-					s.setId(rs.getInt("id"));
 					s.setDate(rs.getString("date"));
 					s.setTime(rs.getString("time"));
 					s.setThread(rs.getInt("thread"));
@@ -451,6 +445,9 @@ class ProductsDAO {
 					
 					//Seat
 					Seat seat = new Seat();
+					seat.setSessionDate(rs.getString("date"));
+					seat.setSessionTime(rs.getString("time"));
+					seat.setSessionThread(rs.getInt("thread"));
 					seat.setRowA(rs.getInt("A"));
 					seat.setRowB(rs.getInt("B"));
 					seat.setRowC(rs.getInt("C"));

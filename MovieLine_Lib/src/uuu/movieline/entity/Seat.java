@@ -1,5 +1,8 @@
 package uuu.movieline.entity;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -9,7 +12,10 @@ import java.util.Stack;
 import uuu.movieline.exception.MLInvalidDataException;
 
 public class Seat {
-	private int id ;//Pkey
+	private LocalDate sessionDate;
+	private LocalTime sessionTime;
+	private int sessionThread;
+	
 	private int rowA;
 	private int rowB;
 	private int rowC;
@@ -20,16 +26,42 @@ public class Seat {
 	private int rowH;
 	private int rowI;
 	public static final int MAX_SEAT_INT_EACH_ROW = 0b11_1111_1111;
-	public int getId() {
-		return id;
+	
+	public LocalDate getSessionDate() {
+		return sessionDate;
 	}
-	public void setId(int id) {
-		if (id > 0) {
-			this.id = id;
-		} else {
-			String msg = String.format("產品編號必須大於0:%s 不正確",id);
-			throw new MLInvalidDataException(msg);
+	public void setSessionDate(LocalDate sessionDate) {
+		this.sessionDate = sessionDate;
+	}
+	public void setSessionDate(String dateString) {
+		try {
+			LocalDate date = LocalDate.parse(dateString);
+			setSessionDate(date);
+		}catch (DateTimeParseException ex) {
+			String msg = String.format("日期不符合iso8601 :%s",dateString)  ;
+			throw new MLInvalidDataException(msg,ex);
 		}
+	}
+	public LocalTime getSessionTime() {
+		return sessionTime;
+	}
+	public void setSessionTime(LocalTime sessionTime) {
+		this.sessionTime = sessionTime;
+	}
+	public void setSessionTime(String timeString) {
+		try {
+			LocalTime time = LocalTime.parse(timeString);
+			setSessionTime(time);
+		} catch (DateTimeParseException ex) {
+			String msg = String.format("時間不符合iso8601 :%s",timeString)  ;
+			throw new MLInvalidDataException(msg,ex);
+		}
+	}
+	public int getSessionThread() {
+		return sessionThread;
+	}
+	public void setSessionThread(int sessionThread) {
+		this.sessionThread = sessionThread;
 	}
 	public int getRowA() {
 		return rowA;
@@ -170,7 +202,12 @@ public class Seat {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((sessionDate == null) ? 0 : sessionDate.hashCode());
+		result = prime * result + sessionThread;
+		result = prime * result + ((sessionTime == null) ? 0 : sessionTime.hashCode());
+		return result;
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -181,22 +218,36 @@ public class Seat {
 		if (getClass() != obj.getClass())
 			return false;
 		Seat other = (Seat) obj;
-		return id == other.id;
+		if (sessionDate == null) {
+			if (other.sessionDate != null)
+				return false;
+		} else if (!sessionDate.equals(other.sessionDate))
+			return false;
+		if (sessionThread != other.sessionThread)
+			return false;
+		if (sessionTime == null) {
+			if (other.sessionTime != null)
+				return false;
+		} else if (!sessionTime.equals(other.sessionTime))
+			return false;
+		return true;
 	}
 	@Override
 	public String toString() {
-		return this.getClass().getName()+ 
-				"[session_id=" + id 
-				+ ",\n rowA=" + rowA 
-				+ ",\n rowB=" + rowB 
-				+ ",\n rowC=" + rowC 
-				+ ",\n rowD=" + rowD 
-				+ ",\n rowE=" + rowE 
-				+ ",\n rowF=" + rowF 
-				+ ",\n rowG=" + rowG 
-				+ ",\n rowH=" + rowH 
-				+ ",\n rowI=" + rowI 
-				+ ",\n getSeatList()" + getSeatList() 
-				+ "]";
-	}
+		return this.getClass().getName()+
+				"[sessionDate=" + sessionDate + 
+				",\n sessionTime=" + sessionTime + 
+				",\n sessionThread=" + sessionThread +
+				", rowA=" + rowA + 
+				", rowB=" + rowB + 
+				", rowC=" + rowC + 
+				", rowD=" + rowD + 
+				", rowE=" + rowE +
+				", rowF=" + rowF + 
+				", rowG=" + rowG + 
+				", rowH=" + rowH + 
+				", rowI=" + rowI +
+				"\n, getSeatList()=" + getSeatList() +
+				"]";
+	}	
 }

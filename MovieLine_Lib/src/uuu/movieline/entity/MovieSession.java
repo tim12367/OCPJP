@@ -9,19 +9,13 @@ import java.util.Objects;
 import uuu.movieline.exception.MLInvalidDataException;
 
 public class MovieSession {
-	private int id;//UQ
 	private LocalDate date;//PKey
 	private LocalTime time;//PKey
 	private int thread;//PKey
 	private Movie movie;
 	private Seat seat;
 	private int stock;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	
 	public LocalDate getDate() {
 		return date;
 	}
