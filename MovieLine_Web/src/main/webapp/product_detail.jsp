@@ -1,6 +1,14 @@
 <!--<%@ page pageEncoding="UTF-8"%>-->
 <!DOCTYPE html>
 
+<%@page import="java.time.format.FormatStyle"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="java.util.Locale"%>
+<%@page import="java.time.format.TextStyle"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.util.Set"%>
+<%@page import="uuu.movieline.entity.MovieSession"%>
 <%@page import="java.util.List"%>
 <%@page import="uuu.movieline.entity.Movie"%>
 <%@page import="uuu.movieline.service.ProductService"%>
@@ -63,21 +71,25 @@ crossorigin="anonymous"></script>
 	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp"/>
 	<%
-	String productId = request.getParameter("movieId");
+	String movieId = request.getParameter("movieId");
 		ProductService service = new ProductService();
-		Movie p =null;
-		if(productId!=null && productId.length()>0){
-			p = service.getMovieById(productId);
+		Movie m = null;
+		List<String> sessionDateList = null;
+		if(movieId!=null && movieId.length()>0){
+			m = service.getMovieById(movieId);
+		}
+		if(m!=null){
+			sessionDateList = service.getSessionDateListByMovieId(movieId);
 		}
 	%>
 	<article>
-	<%if(p==null){ %>
-	<p>查無此產品</p>
+	<%if(m==null){ %>
+	<p>查無電影</p>
 	<%}else{ %>
 	
 		<div class="article_content">
 			<div class="detail_box">
-				<img class="detail_box_preview_pic" src="<%=p.getPhotoUrl()%>">
+				<img class="detail_box_preview_pic" src="<%=m.getPhotoUrl()%>">
 				<a class="detail_box_booking_btn" 
 					href="<%=request.getContextPath()%>
 					/member/select_date_session.jsp?movieId=
@@ -87,23 +99,23 @@ crossorigin="anonymous"></script>
 				
 				<div>
 					<div class="detail_box_subtitle">上映 RELEASE DATE</div>
-					<div class="detail_box_font"><%=p.getLaunchDate()%></div>
+					<div class="detail_box_font"><%=m.getLaunchDate()%></div>
 				</div>
 				
 				<div>
 					<div class="detail_box_subtitle">類型 GENRE</div>
-					<div class="detail_box_font"><%=p.getCategory() %></div>
+					<div class="detail_box_font"><%=m.getCategory() %></div>
 				</div>
 				
 				<div>
 					<div class="detail_box_subtitle">導演 DIRECTOR</div>
-					<div class="detail_box_font"><%=p.getDirector()%></div>
+					<div class="detail_box_font"><%=m.getDirector()%></div>
 				</div>
 				
 				<div>
 					<div class="detail_box_subtitle">演員 CAST</div>
 					<div class="detail_box_font">
-						<%String[] castList = p.getCast().split("、"); %>
+						<%String[] castList = m.getCast().split("、"); %>
 						<%for(String cast: castList){ %>
 							<%=cast %><br>
 						<%} %>
@@ -112,72 +124,49 @@ crossorigin="anonymous"></script>
 				
 			</div>
 			<div class="trailer_describe_box">
-				<h1><%=p.getName()%></h1>
-				<h2><%=p.getSubtitle()%></h2>
+				<h1><%=m.getName()%></h1>
+				<h2><%=m.getSubtitle()%></h2>
 				<hr>
 				<div class="youtube_vediobox">
 					<iframe class="youtube"
-						src="<%=p.getTrailerUrl()%>" 
+						src="<%=m.getTrailerUrl()%>" 
 						frameborder="0" allowfullscreen="true">
 					</iframe>
 				</div>
-				<div class="session_day">週四, 2023/03/16</div>
-				<div class="movie_name">沙贊！眾神之怒</div>
+<%
+if(sessionDateList!=null&&sessionDateList.size()>0){ 
+	for(String d:sessionDateList){
+		LocalDate date = LocalDate.parse(d);
+%>
+				<hr>
+				<div class="session_day"><%=date.getDayOfWeek().getDisplayName(TextStyle.SHORT,Locale.TAIWAN)%>, <%=date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))%></div>
+				<div class="movie_name"><%=m.getName()%></div>
 				<div class="all_sessions_box">
-					<a class="session_box">
-						<div>13:00</div>
-						<span>A廳 396席</span>
+		<%
+			List<MovieSession> sessionList = null;
+			sessionList = service.getSessionsByMovieIdDate(movieId, d);
+			if(sessionList!=null&& sessionList.size()>0){
+				for(MovieSession s:sessionList){
+		%>
+					<a class="session_box" href=
+					"<%=request.getContextPath()%>/member/ticket_booking.jsp
+					?movieId=<%=s.getMovie().getId()%>
+					&date=<%=s.getDate()%>
+					&time=<%=s.getTime()%>">
+						<div class="session_time"><%=s.getTime()%></div>
+						<span class="session_stock"><%=s.getThread()%>廳 <%=87-(s.getSeatList().size())%>席</span>
 					</a>
-					<a class="session_box">
-						<div>13:50</div>
-						<span>5廳 49席</span>
-					</a>
-					<a class="session_box">
-						<div>14:40</div>
-						<span>B廳 114席</span>
-					</a>
-					<a class="session_box">
-						<div>16:15</div>
-						<span>5廳 49席</span>
-					</a>
-					<a class="session_box">
-						<div>17:05</div>
-						<span>B廳 114席</span>
-					</a>
-					<a class="session_box">
-						<div>17:50</div>
-						<span>A廳 396席</span>
-					</a>
-					<a class="session_box">
-						<div>13:00</div>
-						<span>A廳 396席</span>
-					</a>
-					<a class="session_box">
-						<div>13:50</div>
-						<span>5廳 49席</span>
-					</a>
-					<a class="session_box">
-						<div>14:40</div>
-						<span>B廳 114席</span>
-					</a>
-					<a class="session_box">
-						<div>16:15</div>
-						<span>5廳 49席</span>
-					</a>
-					<a class="session_box">
-						<div>17:05</div>
-						<span>B廳 114席</span>
-					</a>
-					<a class="session_box">
-						<div>17:50</div>
-						<span>A廳 396席</span>
-					</a>
+				<%} %>
+<%}else{ %>
+<h2>目前無場次</h2>
+<%} %>
 				</div>
-				
+<%} %>
+<%} %>
 				<hr>
 				<h2 class="describe_title">劇情簡介</h2>
 				
-				<%=p.getDescription() %>
+				<%=m.getDescription() %>
 			</div>
 		</div>
 		<%} %>
