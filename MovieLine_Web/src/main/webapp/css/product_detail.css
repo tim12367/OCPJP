@@ -68,6 +68,28 @@ p{
     height: fit-content;
     padding-bottom: 56.25%;
 }
+.session_day{
+	font-size: 32px;
+	margin-bottom: 8px;
+}
+.movie_name{
+	font-size: 15px;
+	color: #0ff;
+	margin-bottom: 16px;
+}
+.all_sessions_box{
+	display: flex;
+	flex-wrap: wrap;
+/* 	padding: 0px 40px; */
+}
+.session_box{
+	min-width:168px;
+	min-height: 45px;
+	margin: 0 4px 8px 4px;
+	padding: 4px 10px;
+	border: 1px solid hsla(0,0%,84%,.3);
+	box-sizing: border-box;
+}
 .youtube{
     position: absolute;
     top: 0;
