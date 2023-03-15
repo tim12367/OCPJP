@@ -13,6 +13,7 @@
     .slideshow_view{
         position: relative;
         margin: auto;
+        margin-top: 100px;
         height: 600px;
         width: 1300px;
         overflow: hidden;
