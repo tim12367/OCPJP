@@ -14,7 +14,10 @@
 	margin: auto;
 	margin-top: 50px;
 }
-
+.paytype_label,.shippingtype_label{
+	line-height: 35px;
+	margin-right: 25px;
+}
 .booking_detail tr,.booking_detail td{
 /* 	border: 1px solid #ddd; */
 	border-bottom: 1px solid #ddd;
@@ -105,9 +108,13 @@
 }
 
 .selector {
+	padding: 6px 4px;
+	height: fit-content;
 	min-width: 100px;
+	max-width:170px;
 	border-radius: 4px;
 	border: 1px solid #ececec;
+	
 }
 .total_price_box{
 	width: 177px;
