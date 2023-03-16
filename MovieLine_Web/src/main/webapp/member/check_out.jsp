@@ -37,6 +37,7 @@
 				alert("不支援的瀏覽器!");
 				$("#hint").text("不支援的瀏覽器!");
 			}
+			shippingAndPaytypeSelectHandlr();
 			$("#paytype").change(shippingAndPaytypeSelectHandlr);
 			$("#shipping_method").change(shippingAndPaytypeSelectHandlr);
 		}
@@ -53,11 +54,13 @@
 			if (darkModeFlag) {
 				$("body").addClass("body--darkmode");
 				$(".form_select--lightmode").addClass("form_input--darkmode");
+				$(".form_input--lightmode").addClass("form_input--darkmode");
 				$("#dark_mode_button").attr("src",
 						"<%=request.getContextPath()%>/source/light_mode_FILL0_wght400_GRAD0_opsz48.svg");
 			} else {
 				$("body").removeClass("body--darkmode");
 				$(".form_select--lightmode").removeClass("form_input--darkmode");
+				$(".form_input--lightmode").removeClass("form_input--darkmode");
 				$("#dark_mode_button").attr("src",
 						"<%=request.getContextPath()%>/source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg");
 			}
@@ -94,8 +97,9 @@
 <%}else if(member==null){ %>
 <h1>請重新登入<h1>
 <%}else{ %>
+${requestScope.errorList}
 <!-- 		<form action="check_out.do" method="POST"> -->
-		<form action="/member/checkout.do" method="POST">
+		<form action="<%=request.getContextPath()%>/member/check_out.do" method="POST">
 			<table class="booking_detail">
 				<caption>訂票明細</caption>
 				<thead>
@@ -175,7 +179,7 @@
 							<div class="pay_and_ship_box">
 								<div class="paytype_box">
 									<label class="paytype_label" for="paytype">選擇付款方式</label> 
-									<select id="paytype" name="payType" class="selector form_select--lightmode" required>
+									<select id="paytype" name="paymentType" class="selector form_select--lightmode" required>
 										<option value=''>請選擇...</option>
 										<%for(PaymentType pType:PaymentType.values()){ %>
 										<option value='<%=pType.name()%>' data-fee='<%=pType.getFee()%>'><%=pType%></option>
@@ -206,16 +210,16 @@
 								<div class="customer_info_title">訂購人資訊</div>
 								<div class="customer_info_input_box">
 									<div class="customer_name_box">
-										<label for="name">姓名</label> <input id="name" name="name" value="<%=member.getName()%>" required>
+										<label class="input_label" for="name">姓名</label> <input id="name" name="name" class="form_input--lightmode" value="<%=member.getName()%>" required>
 									</div>
 									<div class="customer_email_box">
-										<label for="email">Email</label> <input id="email" name="email" value="<%=member.getEmail()%>" required>
+										<label class="input_label" for="email">Email</label> <input id="email" class="form_input--lightmode" name="email" value="<%=member.getEmail()%>" required>
 									</div>
 									<div class="customer_phone_box">
-										<label for="phone">聯絡電話</label> <input id="phone" name="phone" value="<%=member.getPhone()%>" required>
+										<label class="input_label" for="phone">聯絡電話</label> <input id="phone" class="form_input--lightmode" name="phone" value="<%=member.getPhone()%>" required>
 									</div>
 									<div class="customer_addr_box">
-										<label for="address">收件地址</label> <input id="address" name="address" value="<%=member.getAddress()%>" required>
+										<label class="input_label" for="address">收件地址</label> <input id="address" class="form_input--lightmode" name="address" value="<%=member.getAddress()%>" required>
 									</div>
 								</div>
 							</div>

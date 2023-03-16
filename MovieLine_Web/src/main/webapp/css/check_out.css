@@ -92,14 +92,18 @@
 .customer_name_box, .customer_email_box, .customer_phone_box,
 	.customer_addr_box {
 	margin: 10px;
-	min-width: 300px;
+	min-width: 466px;
 	display: flex;
+	justify-content: space-between;
+}
+.input_label{
+	line-height: 38px;
 }
 
 #name, #email, #phone, #address {
-	margin-left: auto;
 	flex-grow: 1;
-	max-width: 190px;
+	max-width: 353px;
+	padding: 6px 4px;
 }
 
 .shipping_price {
