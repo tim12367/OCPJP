@@ -52,10 +52,12 @@
 		function darkModeHandler() {
 			if (darkModeFlag) {
 				$("body").addClass("body--darkmode");
+				$(".form_select--lightmode").addClass("form_input--darkmode");
 				$("#dark_mode_button").attr("src",
 						"<%=request.getContextPath()%>/source/light_mode_FILL0_wght400_GRAD0_opsz48.svg");
 			} else {
 				$("body").removeClass("body--darkmode");
+				$(".form_select--lightmode").removeClass("form_input--darkmode");
 				$("#dark_mode_button").attr("src",
 						"<%=request.getContextPath()%>/source/dark_mode_FILL0_wght400_GRAD0_opsz48.svg");
 			}
@@ -93,7 +95,7 @@
 <h1>請重新登入<h1>
 <%}else{ %>
 <!-- 		<form action="check_out.do" method="POST"> -->
-		<form action="" method="POST">
+		<form action="/member/checkout.do" method="POST">
 			<table class="booking_detail">
 				<caption>訂票明細</caption>
 				<thead>
@@ -172,8 +174,8 @@
 						<td colspan="6">
 							<div class="pay_and_ship_box">
 								<div class="paytype_box">
-									<label for="paytype">選擇付款方式</label> 
-									<select id="paytype" name="payType" class="selector" required>
+									<label class="paytype_label" for="paytype">選擇付款方式</label> 
+									<select id="paytype" name="payType" class="selector form_select--lightmode" required>
 										<option value=''>請選擇...</option>
 										<%for(PaymentType pType:PaymentType.values()){ %>
 										<option value='<%=pType.name()%>' data-fee='<%=pType.getFee()%>'><%=pType%></option>
@@ -181,8 +183,8 @@
 									</select>
 								</div>
 								<div class="shipping_method_box">
-									<label for="shipping_method">選擇配送方式</label> 
-									<select id="shipping_method" class="selector"
+									<label class="shippingtype_label" for="shipping_method">選擇配送方式</label> 
+									<select id="shipping_method" class="selector form_select--lightmode"
 									name="shippingType" required>
 										<option value=''>請選擇...</option>
 										<%for(ShippingType sType:ShippingType.values()){ %>

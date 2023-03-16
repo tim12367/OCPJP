@@ -90,12 +90,12 @@ crossorigin="anonymous"></script>
 		<div class="article_content">
 			<div class="detail_box">
 				<img class="detail_box_preview_pic" src="<%=m.getPhotoUrl()%>">
-				<a class="detail_box_booking_btn" 
-					href="<%=request.getContextPath()%>
-					/member/select_date_session.jsp?movieId=
-					<%=request.getParameter("movieId")%>">
-					前往訂票
-				</a>
+<!-- 				<a class="detail_box_booking_btn"  -->
+<%-- 					href="<%=request.getContextPath()%> --%>
+<!-- 					/member/select_date_session.jsp?movieId= -->
+<%-- 					<%=request.getParameter("movieId")%>"> --%>
+<!-- 					前往訂票 -->
+<!-- 				</a> -->
 				
 				<div>
 					<div class="detail_box_subtitle">上映 RELEASE DATE</div>
