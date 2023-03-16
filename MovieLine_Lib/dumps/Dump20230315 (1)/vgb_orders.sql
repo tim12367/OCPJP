@@ -32,7 +32,7 @@ CREATE TABLE `orders` (
   `payment_fee` double NOT NULL,
   `payment_note` varchar(100) NOT NULL DEFAULT '',
   `shipping_type` varchar(12) NOT NULL,
-  `shippinf_fee` double NOT NULL,
+  `shipping_fee` double NOT NULL,
   `shipping_note` varchar(100) NOT NULL DEFAULT '',
   `shipping_address` varchar(100) NOT NULL,
   `recipient_name` varchar(20) NOT NULL,
