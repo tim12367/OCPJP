@@ -97,9 +97,9 @@
 <%}else if(member==null){ %>
 <h1>請重新登入<h1>
 <%}else{ %>
-${requestScope.errorList}
-<!-- 		<form action="check_out.do" method="POST"> -->
-		<form action="<%=request.getContextPath()%>/member/check_out.do" method="POST">
+<div>${requestScope.errorList}</div>
+<!-- 	callback需要這個form 有id 才能帶回表單 -->
+		<form id="cartForm" action="<%=request.getContextPath()%>/member/check_out.do" method="POST">
 			<table class="booking_detail">
 				<caption>訂票明細</caption>
 				<thead>
