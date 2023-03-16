@@ -19,7 +19,7 @@ import uuu.movieline.entity.Customer;
 /**
  * Servlet Filter implementation class LoginCheckFilter
  */
-//@WebFilter("/member/*")
+@WebFilter("/member/*")
 public class LoginCheckFilter extends HttpFilter implements Filter {
        
     /**
