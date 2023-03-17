@@ -44,7 +44,7 @@ public class LoginCheckFilter extends HttpFilter implements Filter {
 		HttpSession session = request.getSession();
 		Customer member = (Customer)session.getAttribute("member");
 		if(member!=null) {
-			System.out.println("test");
+//			System.out.println("test");
 			chain.doFilter(request, response);
 			return;
 		}else {
