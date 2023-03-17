@@ -51,16 +51,24 @@ public class Order {//人事時地物
 		}
 		return sum;
 	}
-	public int getTotalAmount() {
-		int sum = 0;
+	private double totalAmount;
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+	public double getTotalAmount() {
+		double sum = 0;
 		if(orderItemSet!=null && orderItemSet.size()>0) {
 			for(OrderItem item:orderItemSet) {
 				sum+= item.getPrice() * item.getQuantity();
-			}
+			}			
+		}else {
+			sum = this.totalAmount;
 		}
 		return sum;
 	}
-	
+	public double getTotalAmountWithFee() {
+		return getTotalAmount() + paymentFee + shippingFee;
+	}
 	//mutater(s)取代setter
 	public void addOrderItem(OrderItem orderItem) {//for DAO類別將資料庫訂單明細對應建立為orderItem，並加入order
 		if(orderItem==null) throw new IllegalArgumentException("加入明細時orderItem物件不得為空");
