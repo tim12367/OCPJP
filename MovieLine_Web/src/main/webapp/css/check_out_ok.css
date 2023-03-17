@@ -52,7 +52,10 @@
 	text-align: center;
 	color: #ececec;
 }
-
+.delivery_status--display{
+	border: 2px #70ffd0 solid;
+	border-radius: 14px;
+}
 .order_box {
 	margin: 0 auto;
 	margin-top: 50px;
