@@ -49,6 +49,9 @@ public class OrderItem {
 	public int getSessionThread() {
 		return movieSession.getThread();
 	}
+	public double getAmount() {
+		return this.getPrice()*this.getQuantity();
+	}
 	public Double getUnitPrice() {
 		return movieSession.getMovie().getUnitPrice();
 	}
