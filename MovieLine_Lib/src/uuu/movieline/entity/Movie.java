@@ -1,6 +1,7 @@
 package uuu.movieline.entity;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 import uuu.movieline.exception.MLInvalidDataException;
@@ -149,7 +150,15 @@ public class Movie {
 	public void setLaunchDate(LocalDate launchDate) {
 		this.launchDate = launchDate;
 	}
-
+	public void setLaunchDate(String dateString) {
+		try {
+			LocalDate date = LocalDate.parse(dateString);
+			setLaunchDate(date);
+		}catch (DateTimeParseException ex) {
+			String msg = String.format("日期不符合iso8601 :%s",dateString)  ;
+			throw new MLInvalidDataException(msg,ex);
+		}
+	}
 	public String getCategory() {
 		return category;
 	}

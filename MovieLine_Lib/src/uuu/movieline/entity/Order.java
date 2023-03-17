@@ -2,8 +2,11 @@ package uuu.movieline.entity;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 import java.util.Set;
+
+import uuu.movieline.exception.MLInvalidDataException;
 
 public class Order {//人事時地物
 	private int id;//Pkey, Auto-Increment
@@ -60,7 +63,7 @@ public class Order {//人事時地物
 	
 	//mutater(s)取代setter
 	public void addOrderItem(OrderItem orderItem) {//for DAO類別將資料庫訂單明細對應建立為orderItem，並加入order
-		if(orderItem!=null) throw new IllegalArgumentException("查詢訂單時cart物件不得為空");
+		if(orderItem==null) throw new IllegalArgumentException("加入明細時orderItem物件不得為空");
 		orderItemSet.add(orderItem);
 	}
 	public void add(ShoppingCart cart) {
@@ -96,11 +99,29 @@ public class Order {//人事時地物
 	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
+	public void setOrderDate(String dateString) {
+		try {
+			LocalDate date = LocalDate.parse(dateString);
+			setOrderDate(date);
+		}catch (DateTimeParseException ex) {
+			String msg = String.format("日期不符合iso8601 :%s",dateString)  ;
+			throw new MLInvalidDataException(msg,ex);
+		}
+	}
 	public LocalTime getOrderTime() {
 		return orderTime;
 	}
 	public void setOrderTime(LocalTime orderTime) {
 		this.orderTime = orderTime;
+	}
+	public void setOrderTime(String timeString) {
+		try {
+			LocalTime time = LocalTime.parse(timeString);
+			setOrderTime(time);
+		} catch (DateTimeParseException ex) {
+			String msg = String.format("時間不符合iso8601 :%s",timeString)  ;
+			throw new MLInvalidDataException(msg,ex);
+		}
 	}
 	public int getStatus() {
 		return status;
