@@ -123,8 +123,8 @@ public class CheckOutServlet extends HttpServlet {
 				//結帳成功要記得移除session中的購物車 不然如果按refresh會一直送出訂單
 				session.removeAttribute("cart");
 				//3.1內部轉只給check_out_ok.jsp
-//				request.setAttribute("theOrder",order);
-				session.setAttribute("theOrder",order);//for test
+				request.setAttribute("theOrder",order);
+//				session.setAttribute("theOrder",order);//for test
 				request.getRequestDispatcher("check_out_ok.jsp").forward(request, response);
 				return;
 				
