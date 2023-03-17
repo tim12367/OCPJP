@@ -1,0 +1,137 @@
+@charset "UTF-8";
+
+.ticket_list {
+	width: fit-content;
+	margin: auto;
+}
+
+.checkout_date {
+	font-size: 50px;
+}
+
+.ticket {
+	display: flex;
+	border: 10px #1b1b1b double;
+	width: 800px;
+	height: 168px;
+	background-color: #d9d9d9;
+	color: #171717;
+}
+
+.movie_title {
+	height: 80px;
+	border-bottom: 1px #1b1b1b solid;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.movie_title_data {
+	width: fit-content;
+	font-size: 30px;
+	font-weight: 900;
+	letter-spacing: 4px;
+}
+
+.movie_subtitle {
+	height: 50px;
+	display: flex;
+	border-bottom: 1px #1b1b1b solid;
+	justify-content: center;
+	align-items: center;
+}
+
+.movie_subtitle_data {
+	width: fit-content;
+	font-size: 20px;
+	letter-spacing: 2px;
+}
+
+.price_time_date_box {
+	flex-grow: 1;
+}
+
+.session_detail_box {
+	width: 650px;
+	display: flex;
+	flex-direction: column;
+}
+
+.seat_detail_box {
+	width: 150px;
+	border-left: 1px #1b1b1b dotted;
+	display: flex;
+	flex-direction: column;
+}
+
+.price_time_date_box {
+	display: flex;
+}
+
+.price {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-grow: 1;
+	border-right: 1px #1b1b1b solid;
+}
+
+.date {
+	display: flex;
+	align-items: center;
+	flex-grow: 1;
+	justify-content: center;
+	border-right: 1px #1b1b1b solid;
+}
+
+.time {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+}
+
+.thread_box {
+	height: 100px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.thread_label {
+	font-size: 18px;
+	font-weight: bolder;
+	letter-spacing: 2px;
+	width: fit-content;
+}
+
+.thread_data {
+	font-size: 43px;
+	width: fit-content;
+	font-family: Menlo;
+}
+
+.row_col_box {
+	flex-grow: 1;
+	display: flex;
+}
+
+.row, .col {
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.row_label, .col_label {
+	font-weight: bolder;
+}
+
+.row_data, .col_data {
+	width: fit-content;
+}
+
+.qrcode {
+	height: 100%;
+}
