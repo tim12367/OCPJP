@@ -1,7 +1,11 @@
 package uuu.movieline.service;
 
+import uuu.movieline.entity.Movie;
+import uuu.movieline.entity.MovieSession;
 import uuu.movieline.entity.Order;
 import uuu.movieline.entity.OrderItem;
+import uuu.movieline.entity.Outlet;
+import uuu.movieline.entity.Seat;
 import uuu.movieline.exception.MLException;
 import uuu.movieline.exception.MLStockSortageException;
 
@@ -13,7 +17,7 @@ class OrdersDAO {
 			"INSERT INTO orders "
 			+ "	(id, customer_id, order_date, order_time, status, "
 			+ "    payment_type, payment_fee, payment_note, "
-			+ "    shipping_type, shippinf_fee,shipping_address, "
+			+ "    shipping_type, shipping_fee,shipping_address, "
 			+ "    recipient_name, recipient_email, recipient_phone) "
 			+ "    VALUES(?,?,?,?,0, ?,?,'', ?,?,?, ?,?,?) ";
 	private static final String INSERT_order_items = 
@@ -144,6 +148,109 @@ class OrdersDAO {
 			throw new MLException("建立訂單失敗",e);
 		}
 		
+	}
+	private static final String SELECT_Order_ByOrderId_And_CustomerId = 
+			"SELECT orders.id, customer_id, order_date, order_time,  "
+			+ "status, payment_type, payment_fee, payment_note,  "
+			+ "shipping_type, shipping_fee, shipping_note, shipping_address,  "
+			+ "recipient_name, recipient_email, recipient_phone , "
+			+ "session_date, session_time, session_thread, price, quantity, A, B, C, D, E, F, G, H, I, "
+			+ "movie_id,stock,  "
+			+ " name, subtitle, unit_price, description, photo_url, trailer_url, "
+			+ " launch_date, category, discount, box_office, director, cast "
+			+ "FROM orders  "
+			+ "LEFT JOIN order_items ON orders.id = order_items.order_id "
+			+ "LEFT JOIN sessions ON (session_date = date AND session_time = time AND session_thread=thread) "
+			+ "LEFT JOIN movies ON movie_id = movies.id "
+			+ "WHERE orders.id = ? AND customer_id = ? ";
+	public Order selectOrderByOrderIdAndCustomerId(String orderId, String customerId) throws MLException {
+		Order o =null;
+		try(
+				Connection connection = MySQLConnection.getConnection();//1,2
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_Order_ByOrderId_And_CustomerId);//3,
+			) {
+			//3.1傳入?值
+			pstmt.setString(1, orderId);
+			pstmt.setString(2, customerId);
+			try(
+				ResultSet rs = pstmt.executeQuery();
+				){
+				while (rs.next()) {
+					if(o==null) {
+						o = new Order();
+						o.setId(rs.getInt("id"));
+						o.setOrderDate(rs.getString("order_date"));
+						o.setOrderTime(rs.getString("order_time"));
+						o.setStatus(rs.getInt("status"));
+						
+						o.setPaymentType(rs.getString("payment_type"));
+						o.setPaymentFee(rs.getDouble("payment_fee"));
+						o.setPaymentNote(rs.getString("payment_note"));
+						
+						o.setShippingType(rs.getString("shipping_type"));
+						o.setShippingFee(rs.getDouble("shipping_fee"));
+						o.setShippingNote(rs.getString("shipping_note"));
+						o.setShippingAddress(rs.getString("shipping_address"));
+						
+						o.setRecipientName(rs.getString("recipient_name"));
+						o.setRecipientEmail(rs.getString("recipient_email"));
+						o.setRecipientPhone(rs.getString("recipient_phone"));
+					}
+					OrderItem oItem = new OrderItem();
+					MovieSession mSession = new MovieSession();
+					int discount = rs.getInt("discount");
+					
+					Movie m = null;
+					if(discount>0) {
+						m = new Outlet();
+						((Outlet)m).setDiscount(discount);						
+					}else m = new Movie();
+					
+					Seat seat = new Seat();
+					//場次資訊
+					oItem.setPrice(rs.getDouble("price"));
+					oItem.setQuantity(rs.getInt("quantity"));
+					mSession.setDate(rs.getString("session_date"));
+					mSession.setTime(rs.getString("session_time"));
+					mSession.setThread(rs.getInt("session_thread"));
+					mSession.setStock(rs.getInt("stock"));
+					
+					//座位資訊
+					seat.setRowA(rs.getInt("A"));
+					seat.setRowB(rs.getInt("B"));
+					seat.setRowC(rs.getInt("C"));
+					seat.setRowD(rs.getInt("D"));
+					seat.setRowE(rs.getInt("E"));
+					seat.setRowF(rs.getInt("F"));
+					seat.setRowG(rs.getInt("G"));
+					seat.setRowH(rs.getInt("H"));
+					seat.setRowI(rs.getInt("I"));
+					
+					m.setId(rs.getInt("movie_id"));
+					m.setName(rs.getString("name"));
+					m.setSubtitle(rs.getString("subtitle"));
+					m.setUnitPrice(rs.getDouble("unit_price"));
+					m.setDescription(rs.getString("description"));
+					m.setPhotoUrl(rs.getString("photo_url"));
+					m.setTrailerUrl(rs.getString("trailer_url"));
+					m.setLaunchDate(rs.getString("launch_date"));
+					m.setCategory(rs.getString("category"));
+					m.setBoxOffice(rs.getInt("box_office"));
+					m.setDirector(rs.getString("director"));
+					m.setCast(rs.getString("cast"));
+					//將電影加入Session
+					mSession.setMovie(m);
+					//將座位,場次加入明細
+					oItem.setMovieSession(mSession);
+					oItem.setSeat(seat);
+					//將明細加入訂單
+					o.addOrderItem(oItem);
+				}
+			}
+		} catch (SQLException e) {
+			throw new MLException("[用訂單編號與客戶ID查詢訂單]失敗");
+		}
+		return o;
 	}
 
 }
