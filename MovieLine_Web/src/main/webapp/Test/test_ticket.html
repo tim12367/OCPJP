@@ -9,7 +9,120 @@
 <link href="../css/global.css" type="text/css" rel="stylesheet">
 <link href="../css/home.css" type="text/css" rel="stylesheet">
 <style>
-    
+	.ticket_list{
+		width: fit-content;
+		margin: auto;
+	}
+	.checkout_date{
+		font-size: 50px;
+	}
+    .ticket{
+		display: flex;
+		border: 10px #1b1b1b double;
+		width: 800px;
+		height: 168px;
+		background-color: #d9d9d9;
+		color: #171717;
+	}
+	.movie_title{
+		height: 80px;
+		border-bottom:1px #1b1b1b solid;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.movie_title_data{
+		width: fit-content;
+		font-size: 30px;
+		font-weight: 900;
+		letter-spacing: 4px;
+	}
+	.movie_subtitle{
+		height: 50px;
+		display: flex;
+		border-bottom:1px #1b1b1b solid;
+		justify-content: center;
+		align-items: center;
+	}
+	.movie_subtitle_data{
+		width: fit-content;
+		font-size: 20px;
+		letter-spacing: 2px;
+	}
+	.price_time_date_box{
+		flex-grow: 1;
+	}
+	.session_detail_box{
+		width: 650px;
+		display: flex;
+		flex-direction: column;
+	}
+	.seat_detail_box{
+		width: 150px;
+		border-left:1px #1b1b1b dotted;
+		display: flex;
+		flex-direction: column;
+	}
+	.price_time_date_box{
+		display: flex;
+	}
+	.price{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-grow: 1;
+		border-right:1px #1b1b1b solid;
+	}
+	.date{
+		display: flex;
+		align-items: center;
+		flex-grow: 1;
+		justify-content: center;
+		border-right:1px #1b1b1b solid;
+	}
+	.time{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-grow: 1;
+	}
+	.thread_box{
+		height: 100px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: center;
+	}
+	.thread_label{
+		font-size: 18px;
+		font-weight: bolder;
+		letter-spacing: 2px;
+		width: fit-content;
+	}
+	.thread_data{
+		font-size: 43px;
+		width: fit-content;
+		font-family: Menlo;
+	}
+	.row_col_box{
+		flex-grow: 1;
+		display: flex;
+	}
+	.row,.col{
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.row_label,.col_label{
+		font-weight: bolder;
+	}
+	.row_data,.col_data{
+		width: fit-content;
+	}
+	.qrcode{
+		height: 100%;
+	}
 </style>
 <link href="../css/global_dark.css" type="text/css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.0.0.js"
@@ -159,7 +272,92 @@
 	<div id='fancyDialog'></div>
 <!-- nav.jsp end -->
 	<article>
-		
+		<div class="ticket_list">
+			<div class="checkout_date">3/8</div>
+			<hr>
+			<div class="ticket">
+				<div class="session_detail_box">
+					<div class="movie_title">
+						<div class="movie_title_data">鐵達尼號 25周年重映版</div>
+					</div>
+					<div class="movie_subtitle">
+						<div class="movie_subtitle_data">TITANIC 25TH ANNIVERSARY</div>
+					</div>
+					<div class="price_time_date_box">
+						<div class="price">
+							<div class="price_data">PRICE:&emsp;$ 278.8</div>
+						</div>
+						<div class="date">
+							<div class="date_data">DATE:&emsp;2023-02-28</div>
+						</div>
+						<div class="time">
+							<div class="time_data">TIME:&emsp;12:50</div>
+						</div>
+					</div>
+				</div>
+				<div class="seat_detail_box">
+					<div class="thread_box">
+						<div class="thread_label">THEATER</div>
+						<div class="thread">
+							<div class="thread_data">3</div>
+						</div>
+					</div>
+					<div class="row_col_box">
+						
+						<div class="row">
+							<div class="row_label">ROW</div>
+							<div class="row_data">I</div>
+						</div>
+						<div class="col">
+							<div class="col_label">COL</div>
+							<div class="col_data">1</div>
+						</div>
+					</div>
+				</div>
+				<img class="qrcode" src="http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSh-wrQu254qFaRcoYktJ5QmUhmuUedlbeMaQeaozAVD4lh4ICsGdBNubZ8UlMvWjKC" alt="QRcode">
+			</div>
+			<div class="ticket">
+				<div class="session_detail_box">
+					<div class="movie_title">
+						<div class="movie_title_data">鐵達尼號 25周年重映版</div>
+					</div>
+					<div class="movie_subtitle">
+						<div class="movie_subtitle_data">TITANIC 25TH ANNIVERSARY</div>
+					</div>
+					<div class="price_time_date_box">
+						<div class="price">
+							<div class="price_data">PRICE:&emsp;$ 278.8</div>
+						</div>
+						<div class="date">
+							<div class="date_data">DATE:&emsp;2023-02-28</div>
+						</div>
+						<div class="time">
+							<div class="time_data">TIME:&emsp;12:50</div>
+						</div>
+					</div>
+				</div>
+				<div class="seat_detail_box">
+					<div class="thread_box">
+						<div class="thread_label">THEATER</div>
+						<div class="thread">
+							<div class="thread_data">3</div>
+						</div>
+					</div>
+					<div class="row_col_box">
+						
+						<div class="row">
+							<div class="row_label">ROW</div>
+							<div class="row_data">I</div>
+						</div>
+						<div class="col">
+							<div class="col_label">COL</div>
+							<div class="col_data">1</div>
+						</div>
+					</div>
+				</div>
+				<img class="qrcode" src="http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSh-wrQu254qFaRcoYktJ5QmUhmuUedlbeMaQeaozAVD4lh4ICsGdBNubZ8UlMvWjKC" alt="QRcode">
+			</div>
+		</div>
 	</article>
 	
 <!-- footer.jsp start -->
