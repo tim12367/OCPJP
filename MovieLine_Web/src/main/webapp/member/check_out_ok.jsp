@@ -1,9 +1,16 @@
+<%@page import="uuu.movieline.entity.OrderItem"%>
+<%@page import="uuu.movieline.entity.ShippingType"%>
+<%@page import="uuu.movieline.entity.PaymentType"%>
+<%@page import="java.time.format.FormatStyle"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+<%@page import="uuu.movieline.entity.Order"%>
 <%@ page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>訂單明細</title>
+<%Order order = (Order)request.getAttribute("theOrder"); %>
 <link rel="icon" type="image/x-icon"
 	href="<%=request.getContextPath()%>/source/title_icon.png" />
 <link href="<%=request.getContextPath()%>/css/global.css"
@@ -26,6 +33,10 @@
 				alert("不支援的瀏覽器!");
 				$("#hint").text("不支援的瀏覽器!");
 			}
+			//初始化訂單狀態
+			var status = Number(${requestScope.order.getStatus()})+1;
+			console.log("status : "+status-1);
+			$(".delivery_status_bar :nth-child("+status+")").addClass("delivery_status--display");
 		}
 		function restoreData() {
 			var getDarkModeFlag = localStorage.getItem("darkModeFlag");
@@ -58,102 +69,114 @@
 	</jsp:include>
 	<jsp:include page="/subviews/nav.jsp" />
 	<article>
+<%if(order==null||order.isEmpty()){ %>
+<h1>查無訂單</h1>
+<%}else{%>
+<%-- 		<div>${sessionScope.theOrder}</div> --%>
 		<div class="order_box">
 			<div class="delivery_status_bar">
 				<div class="delivery_status_bar_item">新訂單</div>
 				<div class="delivery_status_bar_item">已付款</div>
-				<div class="delivery_status_bar_item">已出貨</div>
-				<div class="delivery_status_bar_item">已簽收</div>
+				<div class="delivery_status_bar_item">已開票</div>
+				<div class="delivery_status_bar_item">已寄送</div>
 				<div class="delivery_status_bar_item">已完成</div>
 			</div>
 			<div class="order_info_box">
 				<div class="order_detail_box">
-					<div>訂單編號. <span class="order_data">ML0210MBPGAH5A</span>&emsp;|&emsp;<span class="order_data">訂單已完成</span></div>
-					<div>訂購日期時間：<span class="order_data">2023-03-10 12:35</span></div>
-					<div>付款方式：<span class="order_data">貨到付款</span></div>
-					<div>運費：<span class="order_data">$45</span></div>
+				<%	
+					String dateString = order.getOrderDate().toString().replace("-", "");
+					String orderNumberString = "ML"+dateString+String.format("%05d", order.getId()); 
+				%>
+					<div>訂單編號. <span class="order_data"><%=orderNumberString%></span>
+<!-- 					&emsp;|&emsp;<span class="order_data">訂單已完成</span> -->
+					</div>
+					<div>訂購日期時間：<span class="order_data"><%=order.getOrderDate()%> <%=order.getOrderTime().format(DateTimeFormatter.ofPattern("HH:mm"))%></span></div>
+					<div>付款方式：<span class="order_data"><%=PaymentType.valueOf(order.getPaymentType())%></span></div>
+					<div>運費：<span class="order_data"><%=ShippingType.valueOf(order.getShippingType())%></span></div>
 				</div>
 				<div class="customer_pay_info_box">
 					<div>收件人資訊</div>
-					<div>姓名：<span class="customer_data">郭良銘</span></div>
-					<div>電話：<span class="customer_data">032868789</span></div>
-					<div>Email：<span class="customer_data">test730@uuu.com</span></div>
-					<div>收件地址：<span class="customer_data">篤勝門市 基隆市七堵區大德路103號</span></div>
+					<div>姓名：<span class="customer_data"><%=order.getRecipientName()%></span></div>
+					<div>電話：<span class="customer_data"><%=order.getRecipientPhone()%></span></div>
+					<div>Email：<span class="customer_data"><%=order.getRecipientEmail()%></span></div>
+					<div>收件地址：<span class="customer_data"><%=order.getShippingAddress()%></span></div>
 				</div>
 			</div>
 		</div>
-		<form action="update_cart.do" method="POST">
-			<table class="booking_detail">
-				<caption>訂票明細</caption>
-				<thead>
-					<tr>
-						<th>電影名稱</th>
-						<th>日期</th>
-						<th>時間</th>
-						<th>價格</th>
-						<th>數量</th>
-						<th>座位</th>
-						<th>小計</th>
-					</tr>
-				</thead>
 
-				<tbody>
-					<tr>
-						<td>
-							<div class="td_box">
-								<div class="movie_name">蟻人與黃蜂女：量子狂熱</div>
-							</div> <!--TODO:<div>剩餘座位：100席</div>-->
-						</td>
-						<td>
-							<div class="td_box">
-								<div>2023-03-02</div>
+		<table class="booking_detail">
+			<caption>訂票明細</caption>
+			<thead>
+				<tr>
+					<th>電影名稱</th>
+					<th>日期</th>
+					<th>時間</th>
+					<th>價格</th>
+					<th>數量</th>
+					<th>座位</th>
+					<th>小計</th>
+				</tr>
+			</thead>
+
+			<tbody>
+			<%for(OrderItem oItem:order.getOrderItemSet()){ %>
+				<tr>
+					<td>
+						<div class="td_box">
+							<div class="movie_name"><%=oItem.getMovieName()%></div>
+						</div> <!--TODO:<div>剩餘座位：100席</div>-->
+					</td>
+					<td>
+						<div class="td_box">
+							<div><%=oItem.getSessionDate()%></div>
+						</div>
+					</td>
+					<td>
+						<div class="td_box">
+							<div><%=oItem.getSessionTime()%></div>
+						</div>
+					</td>
+					<td>
+						<div class="td_box">
+							<div>
+								<%=oItem.getPrice()%>
 							</div>
-						</td>
-						<td>
-							<div class="td_box">
-								<div>13:20</div>
-							</div>
-						</td>
-						<td>
-							<div class="td_box">
-								<div>
-									278.8<br>
-								</div>
-							</div>
-						</td>
-						<td>
-							<div class="td_box">
-								<div>2</div>
-							</div>
-						</td>
-						<td>
-							<div class="td_box">
-								<div>H08,I07</div>
-							</div>
-						</td>
-						<td>
-							<div class="td_box">
-								<div>557.6</div>
-							</div>
-						</td>
-					</tr>
-				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="6">
-							<div class="cart_counter_box">
-								<div class="cart_counter">共2場 , 7張票</div>
-							</div>
-						</td>
-						<td colspan="1">
-							<div class="cart_total_price_box">
-								<div>總金額：2011.6</div>
-							</div>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
-		</form>
+						</div>
+					</td>
+					<td>
+						<div class="td_box">
+							<div><%=oItem.getQuantity()%></div>
+						</div>
+					</td>
+					<td>
+						<div class="td_box">
+							<div><%=oItem.getSeatList()%></div>
+						</div>
+					</td>
+					<td>
+						<div class="td_box">
+							<div><%=oItem.getAmount()%></div>
+						</div>
+					</td>
+				</tr>
+			<%}%>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="6">
+						<div class="cart_counter_box">
+							<div class="cart_counter">共<%=order.size()%>場 , <%=order.getTotalQuantity()%>張票</div>
+						</div>
+					</td>
+					<td colspan="1">
+						<div class="cart_total_price_box">
+							<div>手續費/運費：<%=order.getPaymentFee()%>/<%=order.getShippingFee() %>總金額：<%=order.getTotalAmount()+order.getShippingFee()+order.getPaymentFee()%></div>
+						</div>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+<%}%>
 	</article>
 	<%@ include file="/subviews/footer.jsp"%>
 </body>
