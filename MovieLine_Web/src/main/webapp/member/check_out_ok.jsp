@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="uuu.movieline.entity.OrderItem"%>
 <%@page import="uuu.movieline.entity.ShippingType"%>
 <%@page import="uuu.movieline.entity.PaymentType"%>
@@ -10,7 +11,10 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>訂單明細</title>
-<%Order order = (Order)request.getAttribute("theOrder"); %>
+<%
+	Order order = (Order)request.getAttribute("theOrder");
+	DecimalFormat df = new DecimalFormat("0.00");
+%>
 <link rel="icon" type="image/x-icon"
 	href="<%=request.getContextPath()%>/source/title_icon.png" />
 <link href="<%=request.getContextPath()%>/css/global.css"
@@ -139,7 +143,7 @@
 					<td>
 						<div class="td_box">
 							<div>
-								<%=oItem.getPrice()%>
+								<%=df.format(oItem.getPrice())%>
 							</div>
 						</div>
 					</td>
@@ -170,7 +174,7 @@
 					</td>
 					<td colspan="1">
 						<div class="cart_total_price_box">
-							<div>手續費/運費：<%=order.getPaymentFee()%>/<%=order.getShippingFee() %>總金額：<%=order.getTotalAmount()+order.getShippingFee()+order.getPaymentFee()%></div>
+							<div>手續費/運費：<%=df.format(order.getPaymentFee())%>/<%=df.format(order.getShippingFee())%>總金額：<%=df.format(order.getTotalAmountWithFee())%></div>
 						</div>
 					</td>
 				</tr>
