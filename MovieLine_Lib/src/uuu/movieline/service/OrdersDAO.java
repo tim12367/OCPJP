@@ -10,6 +10,8 @@ import uuu.movieline.exception.MLException;
 import uuu.movieline.exception.MLStockSortageException;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 class OrdersDAO {
 	
@@ -34,7 +36,7 @@ class OrdersDAO {
 			+ "((A&?)=0) AND ((B&?)=0) AND ((C&?)=0) AND ((D&?)=0) AND  "
 			+ "((E&?)=0) AND ((F&?)=0) AND ((G&?)=0) AND ((H&?)=0) AND ((I&?)=0) AND  "
 			+ "(session_date = ? AND session_time = ? AND session_theater = ?)";
-	public void insert(Order order) throws MLException{
+	void insert(Order order) throws MLException{
 		
 		try(
 				Connection connection = MySQLConnection.getConnection();//1,2取得連線
@@ -163,7 +165,7 @@ class OrdersDAO {
 			+ "LEFT JOIN sessions ON (session_date = date AND session_time = time AND session_theater=theater) "
 			+ "LEFT JOIN movies ON movie_id = movies.id "
 			+ "WHERE orders.id = ? AND customer_id = ? ";
-	public Order selectOrderByOrderIdAndCustomerId(String orderId, String customerId) throws MLException {
+	Order selectOrderByOrderIdAndCustomerId(String orderId, String customerId) throws MLException {
 		Order o =null;
 		try(
 				Connection connection = MySQLConnection.getConnection();//1,2
@@ -251,6 +253,131 @@ class OrdersDAO {
 			throw new MLException("[用訂單編號與客戶ID查詢訂單]失敗");
 		}
 		return o;
+	}
+	private static final String SELECT_Order_ByCustomerId = 
+			"SELECT id, customer_id, order_date, order_time, status, payment_type, payment_fee, payment_note,  "
+			+ "shipping_type, shipping_fee, shipping_note, shipping_address,  "
+			+ "recipient_name, recipient_email, recipient_phone, session_date, session_time, session_theater, price, quantity,  "
+			+ "A, B, C, D, E, F, G, H, I, movie_id, stock, name, subtitle, unit_price,  "
+			+ "description, photo_url, trailer_url, launch_date, category, discount, box_office, director, cast  "
+			+ "FROM vgb.orders_orderitems_sessions_movies_view  "
+			+ "WHERE customer_id = ? ORDER BY order_date DESC,order_time DESC";
+	List<Order> selectOrdersByCustomerId(String customerId) throws MLException {
+		List<Order> list = new ArrayList<>();
+		Order o = null;
+		try(
+				Connection connection = MySQLConnection.getConnection();//1,2
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_Order_ByCustomerId);//3,
+				) {
+			//3.1傳入?值
+			pstmt.setString(1, customerId);
+			try(
+					ResultSet rs = pstmt.executeQuery();
+					){
+				while (rs.next()) {
+					if(o==null) {
+						o = new Order();
+						o.setId(rs.getInt("id"));
+						o.setOrderDate(rs.getString("order_date"));
+						o.setOrderTime(rs.getString("order_time"));
+						o.setStatus(rs.getInt("status"));
+						
+						o.setPaymentType(rs.getString("payment_type"));
+						o.setPaymentFee(rs.getDouble("payment_fee"));
+						o.setPaymentNote(rs.getString("payment_note"));
+						
+						o.setShippingType(rs.getString("shipping_type"));
+						o.setShippingFee(rs.getDouble("shipping_fee"));
+						o.setShippingNote(rs.getString("shipping_note"));
+						o.setShippingAddress(rs.getString("shipping_address"));
+						
+						o.setRecipientName(rs.getString("recipient_name"));
+						o.setRecipientEmail(rs.getString("recipient_email"));
+						o.setRecipientPhone(rs.getString("recipient_phone"));
+					}else if(o.getId()!=rs.getInt("id")){
+						//若是不同訂單
+						list.add(o);
+						o = new Order();
+						o.setId(rs.getInt("id"));
+						o.setOrderDate(rs.getString("order_date"));
+						o.setOrderTime(rs.getString("order_time"));
+						o.setStatus(rs.getInt("status"));
+						
+						o.setPaymentType(rs.getString("payment_type"));
+						o.setPaymentFee(rs.getDouble("payment_fee"));
+						o.setPaymentNote(rs.getString("payment_note"));
+						
+						o.setShippingType(rs.getString("shipping_type"));
+						o.setShippingFee(rs.getDouble("shipping_fee"));
+						o.setShippingNote(rs.getString("shipping_note"));
+						o.setShippingAddress(rs.getString("shipping_address"));
+						
+						o.setRecipientName(rs.getString("recipient_name"));
+						o.setRecipientEmail(rs.getString("recipient_email"));
+						o.setRecipientPhone(rs.getString("recipient_phone"));
+					}
+					OrderItem oItem = new OrderItem();
+					MovieSession mSession = new MovieSession();
+					int discount = rs.getInt("discount");
+					
+					Movie m = null;
+					if(discount>0) {
+						m = new Outlet();
+						((Outlet)m).setDiscount(discount);						
+					}else m = new Movie();
+					
+					Seat seat = new Seat();
+					//場次資訊
+					oItem.setOrderId(rs.getInt("id"));
+					oItem.setPrice(rs.getDouble("price"));
+					oItem.setQuantity(rs.getInt("quantity"));
+					mSession.setDate(rs.getString("session_date"));
+					mSession.setTime(rs.getString("session_time"));
+					mSession.setTheater(rs.getInt("session_theater"));
+					mSession.setStock(rs.getInt("stock"));
+					
+					//座位資訊
+					seat.setSessionDate(rs.getString("session_date"));
+					seat.setSessionTime(rs.getString("session_time"));
+					seat.setSessionTheater(rs.getInt("session_theater"));
+					seat.setRowA(rs.getInt("A"));
+					seat.setRowB(rs.getInt("B"));
+					seat.setRowC(rs.getInt("C"));
+					seat.setRowD(rs.getInt("D"));
+					seat.setRowE(rs.getInt("E"));
+					seat.setRowF(rs.getInt("F"));
+					seat.setRowG(rs.getInt("G"));
+					seat.setRowH(rs.getInt("H"));
+					seat.setRowI(rs.getInt("I"));
+					
+					m.setId(rs.getInt("movie_id"));
+					m.setName(rs.getString("name"));
+					m.setSubtitle(rs.getString("subtitle"));
+					m.setUnitPrice(rs.getDouble("unit_price"));
+					m.setDescription(rs.getString("description"));
+					m.setPhotoUrl(rs.getString("photo_url"));
+					m.setTrailerUrl(rs.getString("trailer_url"));
+					m.setLaunchDate(rs.getString("launch_date"));
+					m.setCategory(rs.getString("category"));
+					m.setBoxOffice(rs.getInt("box_office"));
+					m.setDirector(rs.getString("director"));
+					m.setCast(rs.getString("cast"));
+					//將電影加入Session
+					mSession.setMovie(m);
+					//將座位,場次加入明細
+					oItem.setMovieSession(mSession);
+					oItem.setSeat(seat);
+					//將明細加入訂單
+					o.addOrderItem(oItem);
+					if(rs.isLast()) {
+						list.add(o);
+					}
+				}
+			}
+		} catch (SQLException e) {
+			throw new MLException("[客戶ID查詢訂單]失敗");
+		}
+		return list;
 	}
 
 }
