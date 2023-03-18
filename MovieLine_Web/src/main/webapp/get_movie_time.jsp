@@ -35,6 +35,6 @@
 <%}else{ %>
 	<option value="">請選擇時間</option>
 <%for(MovieSession s:SessionTimes){ %>
-	<option value="<%=s.getTime()%>"><%=s.getTime()%>&emsp;<%=s.getThread()%>廳</option>
+	<option value="<%=s.getTime()%>"><%=s.getTime()%>&emsp;<%=s.getTheater()%>廳</option>
 <%} %>
 <%} %>

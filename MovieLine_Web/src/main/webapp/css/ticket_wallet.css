@@ -91,7 +91,7 @@
 	flex-grow: 1;
 }
 
-.thread_box {
+.theater_box {
 	height: 100px;
 	display: flex;
 	flex-direction: column;
@@ -99,14 +99,14 @@
 	align-items: center;
 }
 
-.thread_label {
+.theater_label {
 	font-size: 18px;
 	font-weight: bolder;
 	letter-spacing: 2px;
 	width: fit-content;
 }
 
-.thread_data {
+.theater_data {
 	font-size: 43px;
 	width: fit-content;
 	font-family: Menlo;

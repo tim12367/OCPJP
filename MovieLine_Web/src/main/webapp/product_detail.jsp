@@ -154,7 +154,7 @@ if(sessionDateList!=null&&sessionDateList.size()>0){
 					&date=<%=s.getDate()%>
 					&time=<%=s.getTime()%>">
 						<div class="session_time"><%=s.getTime()%></div>
-						<span class="session_stock"><%=s.getThread()%>廳 <%=87-(s.getSeatList().size())%>席</span>
+						<span class="session_stock"><%=s.getTheater()%>廳 <%=87-(s.getSeatList().size())%>席</span>
 					</a>
 				<%} %>
 <%}else{ %>

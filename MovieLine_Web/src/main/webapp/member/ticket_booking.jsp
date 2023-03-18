@@ -401,7 +401,7 @@
 							電影名稱：<%=movieSession.getMovie().getName()%><br>
 							日期：<%=seat.getSessionDate()%><br>
 							時間：<%=seat.getSessionTime()%><br>
-							廳號：<%=seat.getSessionThread()%>
+							廳號：<%=seat.getSessionTheater()%>
 						</div>
 						<hr>
 					</div>
