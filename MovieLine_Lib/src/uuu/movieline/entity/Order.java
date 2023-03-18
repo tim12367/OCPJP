@@ -204,7 +204,7 @@ public class Order {//人事時地物
 	@Override
 	public String toString() {
 		return this.getClass().getName() +
-				"[訂單編號=" + id + 
+				"\n[訂單編號=" + id + 
 				"\n, 客戶=" + customer + 
 				"\n, 訂購日期=" + orderDate + 
 				"\n, 訂購時間=" + orderTime + 
@@ -221,7 +221,7 @@ public class Order {//人事時地物
 				"\n, 收件人電話=" + recipientPhone + 
 				"\n, 訂購品項=" + getOrderItemSet() + 
 				"\n, 總數量=" + getTotalQuantity() +
-				"\n, 總價錢=" + getTotalAmount() + "]";
+				"\n, 總價錢=" + getTotalAmount() + "]\n";
 	}
 	
 }
