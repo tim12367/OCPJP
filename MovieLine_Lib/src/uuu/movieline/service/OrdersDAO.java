@@ -22,7 +22,7 @@ class OrdersDAO {
 			+ "    VALUES(?,?,?,?,0, ?,?,'', ?,?,?, ?,?,?) ";
 	private static final String INSERT_order_items = 
 			"INSERT INTO order_Items "
-			+ "	(order_id, session_date, session_time, session_thread, price, quantity, "
+			+ "	(order_id, session_date, session_time, session_theater, price, quantity, "
 			+ " A, B, C, D, E, F, G, H, I) "
 			+ "    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
 	private static final String UPDATE_seats_stock=
@@ -33,7 +33,7 @@ class OrdersDAO {
 			+ "E<=1023 AND F<=1023 AND G<=1023 AND H<=1023 AND I<=1023 AND "
 			+ "((A&?)=0) AND ((B&?)=0) AND ((C&?)=0) AND ((D&?)=0) AND  "
 			+ "((E&?)=0) AND ((F&?)=0) AND ((G&?)=0) AND ((H&?)=0) AND ((I&?)=0) AND  "
-			+ "(session_date = ? AND session_time = ? AND session_thread = ?)";
+			+ "(session_date = ? AND session_time = ? AND session_theater = ?)";
 	public void insert(Order order) throws MLException{
 		
 		try(
@@ -74,7 +74,7 @@ class OrdersDAO {
 						
 						pstmt.setString(19, orderItem.getSessionDate().toString());
 						pstmt.setString(20, orderItem.getSessionTime().toString());
-						pstmt.setInt(21, orderItem.getSessionThread());
+						pstmt.setInt(21, orderItem.getSessionTheater());
 						
 						//4.執行修改庫存的指令
 						int rows = pstmt.executeUpdate();
@@ -120,7 +120,7 @@ class OrdersDAO {
 						pstmt2.setInt(1,order.getId());
 						pstmt2.setString(2,orderItem.getMovieSession().getDate().toString());
 						pstmt2.setString(3,orderItem.getMovieSession().getTime().toString());
-						pstmt2.setInt(4, orderItem.getMovieSession().getThread());
+						pstmt2.setInt(4, orderItem.getMovieSession().getTheater());
 						pstmt2.setDouble(5, orderItem.getPrice());
 						pstmt2.setInt(6, orderItem.getQuantity());
 						pstmt2.setInt(7, orderItem.getSeat().getRowA());
@@ -154,13 +154,13 @@ class OrdersDAO {
 			+ "status, payment_type, payment_fee, payment_note,  "
 			+ "shipping_type, shipping_fee, shipping_note, shipping_address,  "
 			+ "recipient_name, recipient_email, recipient_phone , "
-			+ "session_date, session_time, session_thread, price, quantity, A, B, C, D, E, F, G, H, I, "
+			+ "session_date, session_time, session_theater, price, quantity, A, B, C, D, E, F, G, H, I, "
 			+ "movie_id,stock,  "
 			+ " name, subtitle, unit_price, description, photo_url, trailer_url, "
 			+ " launch_date, category, discount, box_office, director, cast "
 			+ "FROM orders  "
 			+ "LEFT JOIN order_items ON orders.id = order_items.order_id "
-			+ "LEFT JOIN sessions ON (session_date = date AND session_time = time AND session_thread=thread) "
+			+ "LEFT JOIN sessions ON (session_date = date AND session_time = time AND session_theater=theater) "
 			+ "LEFT JOIN movies ON movie_id = movies.id "
 			+ "WHERE orders.id = ? AND customer_id = ? ";
 	public Order selectOrderByOrderIdAndCustomerId(String orderId, String customerId) throws MLException {
@@ -212,7 +212,7 @@ class OrdersDAO {
 					oItem.setQuantity(rs.getInt("quantity"));
 					mSession.setDate(rs.getString("session_date"));
 					mSession.setTime(rs.getString("session_time"));
-					mSession.setThread(rs.getInt("session_thread"));
+					mSession.setTheater(rs.getInt("session_theater"));
 					mSession.setStock(rs.getInt("stock"));
 					
 					//座位資訊

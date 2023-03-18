@@ -11,7 +11,7 @@ import uuu.movieline.exception.MLInvalidDataException;
 public class MovieSession {
 	private LocalDate date;//PKey
 	private LocalTime time;//PKey
-	private int thread;//PKey
+	private int theater;//PKey
 	private Movie movie;
 	private Seat seat;
 	private int stock;
@@ -46,11 +46,11 @@ public class MovieSession {
 			throw new MLInvalidDataException(msg,ex);
 		}
 	}
-	public int getThread() {
-		return thread;
+	public int getTheater() {
+		return theater;
 	}
-	public void setThread(int thread) {
-		this.thread = thread;
+	public void setTheater(int theater) {
+		this.theater = theater;
 	}
 	
 	public Movie getMovie() {
@@ -80,7 +80,7 @@ public class MovieSession {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(date, thread, time);
+		return Objects.hash(date, theater, time);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -91,14 +91,14 @@ public class MovieSession {
 		if (getClass() != obj.getClass())
 			return false;
 		MovieSession other = (MovieSession) obj;
-		return Objects.equals(date, other.date) && thread == other.thread && Objects.equals(time, other.time);
+		return Objects.equals(date, other.date) && theater == other.theater && Objects.equals(time, other.time);
 	}
 	@Override
 	public String toString() {
 		return this.getClass().getName()
 				+ "\n[場次日期=" + date + 
 				", 場次時間=" + time + 
-				", 影廳=" + thread + 
+				", 影廳=" + theater + 
 				"\n, 電影=" + movie + 
 				"\n, 庫存=" + stock + 
 				"\n, 座位=" + seat + 

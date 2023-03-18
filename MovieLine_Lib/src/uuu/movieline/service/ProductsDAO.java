@@ -194,7 +194,7 @@ class ProductsDAO {
 	}
 
 	private static final String SELECT_MOVIES_BY_ID = 
-			 "SELECT date, time, thread, stock, id, name, "
+			 "SELECT date, time, theater, stock, id, name, "
 			 + "subtitle, unit_price, description, photo_url, "
 			 + "trailer_url, launch_date, category, discount, "
 			 + "box_office, director, cast "
@@ -252,7 +252,7 @@ class ProductsDAO {
 		
 	}
 	private static final String SELECT_SESSIONS_BY_MOVIE_ID =
-			"SELECT date, time, thread, stock, id, name, "
+			"SELECT date, time, theater, stock, id, name, "
 			+ "subtitle, unit_price, description, photo_url, "
 			+ "trailer_url, launch_date, category, discount, "
 			+ "box_office, director, cast "
@@ -276,7 +276,7 @@ class ProductsDAO {
 					MovieSession s = new MovieSession();
 					s.setDate(rs.getString("date"));
 					s.setTime(rs.getString("time"));
-					s.setThread(rs.getInt("thread"));
+					s.setTheater(rs.getInt("theater"));
 					s.setStock(rs.getInt("stock"));
 					//MOVIE
 					Movie m = null;
@@ -342,7 +342,7 @@ class ProductsDAO {
 	}
 
 	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATE =
-			"SELECT date, time, thread, movie_id, stock, name, subtitle, unit_price, "
+			"SELECT date, time, theater, movie_id, stock, name, subtitle, unit_price, "
 			+ "description, photo_url, trailer_url, launch_date, category, "
 			+ "discount, box_office, director, cast, A, B, C, D, E, F, G, H, I "
 			+ "FROM session_seat_view "
@@ -367,7 +367,7 @@ class ProductsDAO {
 					MovieSession s = new MovieSession();
 					s.setDate(rs.getString("date"));
 					s.setTime(rs.getString("time"));
-					s.setThread(rs.getInt("thread"));
+					s.setTheater(rs.getInt("theater"));
 					s.setStock(rs.getInt("stock"));
 					//MOVIE
 					Movie m = null;
@@ -397,7 +397,7 @@ class ProductsDAO {
 					Seat seat = new Seat();
 					seat.setSessionDate(rs.getString("date"));
 					seat.setSessionTime(rs.getString("time"));
-					seat.setSessionThread(rs.getInt("thread"));
+					seat.setSessionTheater(rs.getInt("theater"));
 					seat.setRowA(rs.getInt("A"));
 					seat.setRowB(rs.getInt("B"));
 					seat.setRowC(rs.getInt("C"));
@@ -419,7 +419,7 @@ class ProductsDAO {
 		}
 	}
 	private static final String SELECT_SESSIONS_BY_MOVIE_ID_AND_DATETIME =
-			"SELECT date, time, thread, movie_id, stock, name, subtitle, unit_price, "
+			"SELECT date, time, theater, movie_id, stock, name, subtitle, unit_price, "
 			+ "description, photo_url, trailer_url, launch_date, category, "
 			+ "discount, box_office, director, cast, A, B, C, D, E, F, G, H, I "
 			+ "FROM session_seat_view "
@@ -445,7 +445,7 @@ class ProductsDAO {
 					s = new MovieSession();
 					s.setDate(rs.getString("date"));
 					s.setTime(rs.getString("time"));
-					s.setThread(rs.getInt("thread"));
+					s.setTheater(rs.getInt("theater"));
 					s.setStock(rs.getInt("stock"));
 					//MOVIE
 					Movie m = null;
@@ -475,7 +475,7 @@ class ProductsDAO {
 					Seat seat = new Seat();
 					seat.setSessionDate(rs.getString("date"));
 					seat.setSessionTime(rs.getString("time"));
-					seat.setSessionThread(rs.getInt("thread"));
+					seat.setSessionTheater(rs.getInt("theater"));
 					seat.setRowA(rs.getInt("A"));
 					seat.setRowB(rs.getInt("B"));
 					seat.setRowC(rs.getInt("C"));

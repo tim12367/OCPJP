@@ -46,8 +46,8 @@ public class OrderItem {
 	public LocalTime getSessionTime() {
 		return movieSession.getTime();
 	}
-	public int getSessionThread() {
-		return movieSession.getThread();
+	public int getSessionTheater() {
+		return movieSession.getTheater();
 	}
 	public double getAmount() {
 		return this.getPrice()*this.getQuantity();

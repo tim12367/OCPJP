@@ -14,7 +14,7 @@ import uuu.movieline.exception.MLInvalidDataException;
 public class Seat {
 	private LocalDate sessionDate;
 	private LocalTime sessionTime;
-	private int sessionThread;
+	private int sessionTheater;
 	
 	private int rowA;
 	private int rowB;
@@ -57,11 +57,11 @@ public class Seat {
 			throw new MLInvalidDataException(msg,ex);
 		}
 	}
-	public int getSessionThread() {
-		return sessionThread;
+	public int getSessionTheater() {
+		return sessionTheater;
 	}
-	public void setSessionThread(int sessionThread) {
-		this.sessionThread = sessionThread;
+	public void setSessionTheater(int sessionTheater) {
+		this.sessionTheater = sessionTheater;
 	}
 	public int getRowA() {
 		return rowA;
@@ -205,7 +205,7 @@ public class Seat {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((sessionDate == null) ? 0 : sessionDate.hashCode());
-		result = prime * result + sessionThread;
+		result = prime * result + sessionTheater;
 		result = prime * result + ((sessionTime == null) ? 0 : sessionTime.hashCode());
 		return result;
 	}
@@ -223,7 +223,7 @@ public class Seat {
 				return false;
 		} else if (!sessionDate.equals(other.sessionDate))
 			return false;
-		if (sessionThread != other.sessionThread)
+		if (sessionTheater!= other.sessionTheater)
 			return false;
 		if (sessionTime == null) {
 			if (other.sessionTime != null)
@@ -237,7 +237,7 @@ public class Seat {
 		return this.getClass().getName()+
 				"[sessionDate=" + sessionDate + 
 				",\n sessionTime=" + sessionTime + 
-				",\n sessionThread=" + sessionThread +
+				",\n sessionTheater=" + sessionTheater +
 				", rowA=" + rowA + 
 				", rowB=" + rowB + 
 				", rowC=" + rowC + 
