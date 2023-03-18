@@ -159,7 +159,7 @@
 					</td>
 					<td>
 						<div class="td_box">
-							<div><%=oItem.getAmount()%></div>
+							<div><%=df.format(oItem.getAmount())%></div>
 						</div>
 					</td>
 				</tr>
