@@ -125,7 +125,11 @@ if(c!=null){
 					</div>
 				</div>
 				<img class="qrcode"
-					src="http://t3.gstatic.com/licensed-image?q=tbn:ANd9GcSh-wrQu254qFaRcoYktJ5QmUhmuUedlbeMaQeaozAVD4lh4ICsGdBNubZ8UlMvWjKC"
+					src="http://localhost:8080/ML/images/qrcode.png
+					?date=<%=oItem.getSessionDate()%>
+					&time=<%=oItem.getSessionTime()%>
+					&theater=<%=oItem.getSessionTheater()%>
+					&seat=<%=seatString%>"
 					alt="QRcode">
 			</div>
 <%}%>
