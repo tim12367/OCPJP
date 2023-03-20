@@ -36,25 +36,21 @@ public class QRcodeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String movieNameString = request.getParameter("movieName");
 		String dateString = request.getParameter("date");
 		String timeString = request.getParameter("time");
 		String theaterString = request.getParameter("theater");
 		String seatString = request.getParameter("seat");
-		HttpSession session = request.getSession();
-		Customer member = (Customer) session.getAttribute("member");
-		String memberId = "0000000000";
-		if(member!=null) {
-			memberId = member.getId();
-		}
-		String data = dateString+"_"+timeString+"_"+theaterString+"_"+seatString+"_"+memberId;
+		String data = movieNameString+"_"+dateString+"_"+timeString+"_"+theaterString+"_"+seatString;
 //		System.out.println(data);//for test
+
 		try {
 			BitMatrix matrix = new MultiFormatWriter()
-					.encode(data, BarcodeFormat.QR_CODE, 500, 500);
+					.encode(new String(data.getBytes("utf-8"),"ISO-8859-1") , BarcodeFormat.QR_CODE, 500, 500);
 			ServletOutputStream outStream = response.getOutputStream();
 			MatrixToImageWriter.writeToStream(matrix, "png", outStream);
 		} catch (WriterException e) {
-			this.log("QRcode產生失敗!",e);
+			this.log("QRcode產生失敗!zxing.Writer發生問題!",e);
 		} catch (Exception e) {
 			this.log("QRcode產生失敗!發生未預期錯誤",e);
 		}
