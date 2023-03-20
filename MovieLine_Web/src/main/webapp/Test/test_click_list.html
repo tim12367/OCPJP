@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="icon" type="image/x-icon"
+	href="../source/title_icon.png" />
+<link href="../css/global.css"
+	type="text/css" rel="stylesheet">
+<link href="../css/ticket_wallet.css"
+	type="text/css" rel="stylesheet">
+<style>
+    .checkout_date{
+        position: relative;
+        width: 820px;
+    }
+    .show_ticket_btn{
+        position: absolute;
+        padding: 22px;
+        right: 0px;
+        top: 0px;
+        width: 72px;
+        height: 72px;
+        box-sizing: border-box;
+        background-origin:content-box;
+        background-image: url("../source/triangle.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        transform: rotate(90deg);
+    }
+    .show_ticket_btn--show{
+        transform: rotate(0deg);
+    }
+    .ticket{
+        
+    }
+</style>
+<link href="../css/global_dark.css"
+	type="text/css" rel="stylesheet">
+    <script
+      src="https://code.jquery.com/jquery-3.0.0.js"
+      integrity="sha256-jrPLZ+8vDxt2FnE1zvZXCkCcebI/C8Dt5xyaQBjxQIo="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+        $(document).ready(init2);
+        function init2(){
+            $(".ticket").hide();
+            $(".show_ticket_btn").click(showTicketBtnHanglr);
+        }
+        function showTicketBtnHanglr(){
+            $(this).toggleClass("show_ticket_btn--show");
+            console.log( $(this).parent().parent().find(".ticket"));
+            $(this).parent().parent().find(".ticket").slideToggle();
+        }
+    </script>
+  </head>
+  <body>
+    <div class="ticket_list">
+      <div class="checkout_date"><div>訂票時間：2023-03-20 11:36:36</div><div class="show_ticket_btn"></div></div>
+      <hr />
+
+      <div class="ticket">
+        <div class="session_detail_box">
+          <div class="movie_title">
+            <div class="movie_title_data">鐵達尼號 25周年重映版</div>
+          </div>
+          <div class="movie_subtitle">
+            <div class="movie_subtitle_data">TITANIC 25TH ANNIVERSARY</div>
+          </div>
+          <div class="price_time_date_box">
+            <div class="price">
+              <div class="price_data">PRICE:&emsp;$ 278.8</div>
+            </div>
+            <div class="date">
+              <div class="date_data">DATE:&emsp;2023-03-06</div>
+            </div>
+            <div class="time">
+              <div class="time_data">TIME:&emsp;17:45</div>
+            </div>
+          </div>
+        </div>
+        <div class="seat_detail_box">
+          <div class="theater_box">
+            <div class="theater_label">THEATER</div>
+            <div class="theater">
+              <div class="theater_data">1</div>
+            </div>
+          </div>
+          <div class="row_col_box">
+            <div class="row">
+              <div class="row_label">ROW</div>
+              <div class="row_data">G</div>
+            </div>
+            <div class="col">
+              <div class="col_label">COL</div>
+              <div class="col_data">08</div>
+            </div>
+          </div>
+        </div>
+        <img
+          class="qrcode"
+          src="http://localhost:8080/ML/images/qrcode.png
+                ?movieName=鐵達尼號 25周年重映版
+                &date=2023-03-06
+                &time=17:45
+                &theater=1
+                &seat=G08"
+          alt="QRcode"
+        />
+      </div>
+
+      <div class="ticket">
+        <div class="session_detail_box">
+          <div class="movie_title">
+            <div class="movie_title_data">鐵達尼號 25周年重映版</div>
+          </div>
+          <div class="movie_subtitle">
+            <div class="movie_subtitle_data">TITANIC 25TH ANNIVERSARY</div>
+          </div>
+          <div class="price_time_date_box">
+            <div class="price">
+              <div class="price_data">PRICE:&emsp;$ 278.8</div>
+            </div>
+            <div class="date">
+              <div class="date_data">DATE:&emsp;2023-03-06</div>
+            </div>
+            <div class="time">
+              <div class="time_data">TIME:&emsp;17:45</div>
+            </div>
+          </div>
+        </div>
+        <div class="seat_detail_box">
+          <div class="theater_box">
+            <div class="theater_label">THEATER</div>
+            <div class="theater">
+              <div class="theater_data">1</div>
+            </div>
+          </div>
+          <div class="row_col_box">
+            <div class="row">
+              <div class="row_label">ROW</div>
+              <div class="row_data">G</div>
+            </div>
+            <div class="col">
+              <div class="col_label">COL</div>
+              <div class="col_data">09</div>
+            </div>
+          </div>
+        </div>
+        <img
+          class="qrcode"
+          src="http://localhost:8080/ML/images/qrcode.png
+                ?movieName=鐵達尼號 25周年重映版
+                &date=2023-03-06
+                &time=17:45
+                &theater=1
+                &seat=G09"
+          alt="QRcode"
+        />
+      </div>
+    </div>
+
+    <div class="ticket_list">
+      <div class="checkout_date"><div>訂票時間：2023-03-20 10:43:27</div><div class="show_ticket_btn"></div></div>
+      <hr />
+
+      <div class="ticket">
+        <div class="session_detail_box">
+          <div class="movie_title">
+            <div class="movie_title_data">灌籃高手 THE FIRST SLAM DUNK</div>
+          </div>
+          <div class="movie_subtitle">
+            <div class="movie_subtitle_data">THE FIRST SLAM DUNK</div>
+          </div>
+          <div class="price_time_date_box">
+            <div class="price">
+              <div class="price_data">PRICE:&emsp;$ 278.8</div>
+            </div>
+            <div class="date">
+              <div class="date_data">DATE:&emsp;2023-03-01</div>
+            </div>
+            <div class="time">
+              <div class="time_data">TIME:&emsp;09:40</div>
+            </div>
+          </div>
+        </div>
+        <div class="seat_detail_box">
+          <div class="theater_box">
+            <div class="theater_label">THEATER</div>
+            <div class="theater">
+              <div class="theater_data">3</div>
+            </div>
+          </div>
+          <div class="row_col_box">
+            <div class="row">
+              <div class="row_label">ROW</div>
+              <div class="row_data">F</div>
+            </div>
+            <div class="col">
+              <div class="col_label">COL</div>
+              <div class="col_data">04</div>
+            </div>
+          </div>
+        </div>
+        <img
+          class="qrcode"
+          src="http://localhost:8080/ML/images/qrcode.png
+                ?movieName=灌籃高手 THE FIRST SLAM DUNK
+                &date=2023-03-01
+                &time=09:40
+                &theater=3
+                &seat=F04"
+          alt="QRcode"
+        />
+      </div>
+
+      <div class="ticket">
+        <div class="session_detail_box">
+          <div class="movie_title">
+            <div class="movie_title_data">灌籃高手 THE FIRST SLAM DUNK</div>
+          </div>
+          <div class="movie_subtitle">
+            <div class="movie_subtitle_data">THE FIRST SLAM DUNK</div>
+          </div>
+          <div class="price_time_date_box">
+            <div class="price">
+              <div class="price_data">PRICE:&emsp;$ 278.8</div>
+            </div>
+            <div class="date">
+              <div class="date_data">DATE:&emsp;2023-03-01</div>
+            </div>
+            <div class="time">
+              <div class="time_data">TIME:&emsp;09:40</div>
+            </div>
+          </div>
+        </div>
+        <div class="seat_detail_box">
+          <div class="theater_box">
+            <div class="theater_label">THEATER</div>
+            <div class="theater">
+              <div class="theater_data">3</div>
+            </div>
+          </div>
+          <div class="row_col_box">
+            <div class="row">
+              <div class="row_label">ROW</div>
+              <div class="row_data">F</div>
+            </div>
+            <div class="col">
+              <div class="col_label">COL</div>
+              <div class="col_data">05</div>
+            </div>
+          </div>
+        </div>
+        <img
+          class="qrcode"
+          src="http://localhost:8080/ML/images/qrcode.png
+                ?movieName=灌籃高手 THE FIRST SLAM DUNK
+                &date=2023-03-01
+                &time=09:40
+                &theater=3
+                &seat=F05"
+          alt="QRcode"
+        />
+      </div>
+
+      <div class="ticket">
+        <div class="session_detail_box">
+          <div class="movie_title">
+            <div class="movie_title_data">灌籃高手 THE FIRST SLAM DUNK</div>
+          </div>
+          <div class="movie_subtitle">
+            <div class="movie_subtitle_data">THE FIRST SLAM DUNK</div>
+          </div>
+          <div class="price_time_date_box">
+            <div class="price">
+              <div class="price_data">PRICE:&emsp;$ 278.8</div>
+            </div>
+            <div class="date">
+              <div class="date_data">DATE:&emsp;2023-03-01</div>
+            </div>
+            <div class="time">
+              <div class="time_data">TIME:&emsp;09:40</div>
+            </div>
+          </div>
+        </div>
+        <div class="seat_detail_box">
+          <div class="theater_box">
+            <div class="theater_label">THEATER</div>
+            <div class="theater">
+              <div class="theater_data">3</div>
+            </div>
+          </div>
+          <div class="row_col_box">
+            <div class="row">
+              <div class="row_label">ROW</div>
+              <div class="row_data">F</div>
+            </div>
+            <div class="col">
+              <div class="col_label">COL</div>
+              <div class="col_data">06</div>
+            </div>
+          </div>
+        </div>
+        <img
+          class="qrcode"
+          src="http://localhost:8080/ML/images/qrcode.png
+                ?movieName=灌籃高手 THE FIRST SLAM DUNK
+                &date=2023-03-01
+                &time=09:40
+                &theater=3
+                &seat=F06"
+          alt="QRcode"
+        />
+      </div>
+    </div>
+  </body>
+</html>

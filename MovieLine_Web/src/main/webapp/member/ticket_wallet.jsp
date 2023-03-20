@@ -37,6 +37,8 @@
 				alert("不支援的瀏覽器!");
 				$("#hint").text("不支援的瀏覽器!");
 			}
+			 $(".ticket").hide();
+	         $(".show_ticket_btn").click(showTicketBtnHanglr);
 		}
 		function restoreData() {
 			var getDarkModeFlag = localStorage.getItem("darkModeFlag");
@@ -58,6 +60,11 @@
 		}
 		localStorage.setItem("darkModeFlag", darkModeFlag);
 		darkModeFlag = !darkModeFlag;
+	}
+	function showTicketBtnHanglr(){
+		$(this).toggleClass("show_ticket_btn--show");
+		console.log( $(this).parent().parent().find(".ticket"));
+		$(this).parent().parent().find(".ticket").slideToggle();
 	}
 </script>
 </head>
@@ -81,7 +88,7 @@ if(c!=null){
 <%for(Order o:oList){%>
 
 		<div class="ticket_list">
-			<div class="checkout_date">訂票時間：<%=o.getOrderDate()%> <%=o.getOrderTime()%></div>
+			<div class="checkout_date"><div>訂票時間：<%=o.getOrderDate()%> <%=o.getOrderTime()%></div><div class="show_ticket_btn"></div></div>
 			<hr>
 <%for(OrderItem oItem:o.getOrderItemSet()){ %>
 <%for(String seatString:oItem.getSeatList()){%>
@@ -126,7 +133,8 @@ if(c!=null){
 				</div>
 				<img class="qrcode"
 					src="http://localhost:8080/ML/images/qrcode.png
-					?date=<%=oItem.getSessionDate()%>
+					?movieName=<%=oItem.getMovieName()%>
+					&date=<%=oItem.getSessionDate()%>
 					&time=<%=oItem.getSessionTime()%>
 					&theater=<%=oItem.getSessionTheater()%>
 					&seat=<%=seatString%>"
