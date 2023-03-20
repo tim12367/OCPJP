@@ -133,7 +133,7 @@ if(c!=null){
 						</div>
 					</div>
 				</div>
-				<%if(o.getStatus()!=0&&o.getShippingType().equals(ShippingType.E_TICKET.name())){%>
+				<%if(o.getStatus()>=2&&o.getShippingType().equals(ShippingType.E_TICKET.name())){%>
 				<img class="qrcode"
 					src="http://localhost:8080/ML/images/qrcode.png
 					?movieName=<%=oItem.getMovieName()%>
@@ -143,12 +143,13 @@ if(c!=null){
 					&seat=<%=seatString%>"
 					alt="QRcode">
 				<%}else if(o.getStatus()==0){%>
-				<div class="qrcode">尚未付款</div>
+				<div class="qrcode">未付款，新訂單</div>
 				<%}else if(o.getStatus()==1){%>
-				<div class="qrcode">訂單已確認</div>
-				<%}else if(o.getShippingType().equals(ShippingType.SHOP.name())){%>
-				<div class="qrcode">現場取票</div>
-				<%} %>
+				<div class="qrcode">已付款，尚未取票</div>
+				<%}else if(o.getStatus()>=2&&o.getShippingType().equals(ShippingType.SHOP.name())){%>
+				<div class="qrcode">已現場取票</div>
+				<%}%>
+
 			</div>
 <%}%>
 <%}%>
