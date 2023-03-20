@@ -1,3 +1,5 @@
+<%@page import="uuu.movieline.entity.ShippingType"%>
+<%@page import="uuu.movieline.entity.PaymentType"%>
 <%@page import="uuu.movieline.entity.OrderItem"%>
 <%@page import="java.lang.reflect.Member"%>
 <%@page import="uuu.movieline.entity.Customer"%>
@@ -131,6 +133,7 @@ if(c!=null){
 						</div>
 					</div>
 				</div>
+				<%if(o.getStatus()!=0&&o.getShippingType().equals(ShippingType.E_TICKET.name())){%>
 				<img class="qrcode"
 					src="http://localhost:8080/ML/images/qrcode.png
 					?movieName=<%=oItem.getMovieName()%>
@@ -139,6 +142,13 @@ if(c!=null){
 					&theater=<%=oItem.getSessionTheater()%>
 					&seat=<%=seatString%>"
 					alt="QRcode">
+				<%}else if(o.getStatus()==0){%>
+				<div class="qrcode">尚未付款</div>
+				<%}else if(o.getStatus()==1){%>
+				<div class="qrcode">訂單已確認</div>
+				<%}else if(o.getShippingType().equals(ShippingType.SHOP.name())){%>
+				<div class="qrcode">現場取票</div>
+				<%} %>
 			</div>
 <%}%>
 <%}%>
