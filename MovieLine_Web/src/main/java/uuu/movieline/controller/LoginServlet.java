@@ -82,10 +82,9 @@ public class LoginServlet extends HttpServlet {
 				String loginRedirectUrl = (String) session.getAttribute("loginRedirectUrl");
 				if(loginRedirectUrl!=null) {
 					session.removeAttribute("loginRedirectUrl");
-					response.sendRedirect(loginRedirectUrl);
-				}else {
-					dispatcher.forward(request, response);
+					request.setAttribute("loginRedirectUrl", loginRedirectUrl);
 				}
+				dispatcher.forward(request, response);
 				return;//成功就跳掉，失敗繼續向下執行
 			} catch (LoginFailException e) {
 				this.log(e.getMessage());

@@ -3,11 +3,14 @@
 <%@page import="uuu.movieline.entity.Customer"%>
 <!DOCTYPE html>
 <html>
+<%
+	String loginRedirectUrl = (String)request.getAttribute("loginRedirectUrl");
+%>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>會員登入成功</title>
 	<link rel="icon" type="image/x-icon" href="source/title_icon.png" />
-	<meta http-equiv="refresh" content="5; url=./">
+	<meta http-equiv="refresh" content="5; url=<%=loginRedirectUrl!=null?loginRedirectUrl:"./"%>">
 	<style type="text/css">
 		body {
 			background-color: #282a36;
@@ -53,7 +56,7 @@
 	%>
 	<article>		
 		<h2><%= member==null?"尚未登入":member.getName() %><%=msg==null?"":msg %><%=errors==null?"":errors %></h2>
-		<p><span id="count_down">5</span>秒後將自動跳轉<a href='index.jsp'>首頁</a></p>
+		<p><span id="count_down">5</span>秒後將自動跳轉<a href='<%=loginRedirectUrl!=null?loginRedirectUrl:"index.jsp"%>'><%=loginRedirectUrl!=null?"上一頁":"首頁"%></a></p>
 	</article>
 	<footer>
 		<hr>
