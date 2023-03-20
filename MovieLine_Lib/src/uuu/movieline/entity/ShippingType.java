@@ -1,9 +1,8 @@
 package uuu.movieline.entity;
 
 public enum ShippingType {
-	SHOP(0, "門市取貨"),
-	HOME(100, "宅配到府"),
-	STORE(65, "超商取貨");
+	SHOP(0, "現場取票"),
+	E_TICKET(0, "線上取票");
 	
 	private final double fee;
 	private final String description;
