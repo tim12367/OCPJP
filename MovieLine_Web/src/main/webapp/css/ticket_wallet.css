@@ -155,5 +155,8 @@
 }
 
 .qrcode {
+	min-width: 168px;
 	height: 100%;
+	line-height:168px;
+	text-align: center;
 }
