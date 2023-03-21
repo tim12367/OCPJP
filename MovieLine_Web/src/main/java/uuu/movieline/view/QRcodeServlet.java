@@ -37,9 +37,9 @@ public class QRcodeServlet extends HttpServlet {
 		String timeString = request.getParameter("time");
 		String theaterString = request.getParameter("theater");
 		String seatString = request.getParameter("seat");
-		String data = movieNameString+"_"+dateString+"_"+timeString+"_"+theaterString+"_"+seatString;
-//		System.out.println(data);//for test
+		String data ="電影名稱："+ movieNameString+"\n日期："+dateString+"_時間："+timeString+"\n廳號："+theaterString+"_座位："+seatString;
 		response.setContentType("image/png");
+		System.out.println(data);//for test
 		try {
 			BitMatrix matrix = new MultiFormatWriter()
 					.encode(new String(data.getBytes("utf-8"),"ISO-8859-1") , BarcodeFormat.QR_CODE, 500, 500);

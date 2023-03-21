@@ -135,7 +135,7 @@ if(c!=null){
 				</div>
 				<%if(o.getStatus()>=2&&o.getShippingType().equals(ShippingType.E_TICKET.name())){%>
 				<img class="qrcode"
-					src="http://localhost:8080/ML/images/qrcode.png
+					src="<%=request.getContextPath()%>/images/qrcode.png
 					?movieName=<%=oItem.getMovieName()%>
 					&date=<%=oItem.getSessionDate()%>
 					&time=<%=oItem.getSessionTime()%>
