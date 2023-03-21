@@ -19,13 +19,15 @@ class ProductsDAO {
 			"SELECT id, name, unit_price, "
 			+ "description, "
 			+ "photo_url, launch_date, category, discount, box_office "
-			+ "FROM movies";
+			+ "FROM movies ";
+	private static final String SELECT_ALL_MOVIES_ORDER_BY = SELECT_ALL_MOVIES
+			+ "ORDER BY launch_date DESC ";
 	List<Movie> selectAllMovies() throws MLException{
 		List<Movie> list = new ArrayList<>();
 		//connection
 		try(
 				Connection connection = MySQLConnection.getConnection();
-				PreparedStatement pstmt = connection.prepareStatement(SELECT_ALL_MOVIES);
+				PreparedStatement pstmt = connection.prepareStatement(SELECT_ALL_MOVIES_ORDER_BY);
 			) {
 			//3.1 傳入?(無)的值
 			
@@ -194,14 +196,11 @@ class ProductsDAO {
 	}
 
 	private static final String SELECT_MOVIES_BY_ID = 
-			 "SELECT date, time, theater, stock, id, name, "
-			 + "subtitle, unit_price, description, photo_url, "
-			 + "trailer_url, launch_date, category, discount, "
-			 + "box_office, director, cast "
-			 + "FROM session_view "
-			 + "WHERE id = ? "
-			 + "GROUP BY id "
-			 + "ORDER BY id  ";
+			 "SELECT id, name, subtitle, unit_price,  "
+			 + "description, photo_url, trailer_url, launch_date,  "
+			 + "category, discount, box_office, director, cast  "
+			 + "FROM vgb.movies "
+			 + "WHERE id = ? ";
 			 
 	
 	Movie selectMovieById(String id) throws MLException{
