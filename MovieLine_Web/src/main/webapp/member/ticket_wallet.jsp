@@ -142,8 +142,10 @@ if(c!=null){
 					&theater=<%=oItem.getSessionTheater()%>
 					&seat=<%=seatString%>"
 					alt="QRcode">
+				<%}else if(o.getStatus()==0&&o.getPaymentType().equals(PaymentType.CARD.name())){%>
+				<div class="qrcode">未付款，信用卡付款</div>
 				<%}else if(o.getStatus()==0){%>
-				<div class="qrcode">未付款，新訂單</div>
+				<div class="qrcode">未付款，現場付款</div>
 				<%}else if(o.getStatus()==1){%>
 				<div class="qrcode">已付款，尚未取票</div>
 				<%}else if(o.getStatus()>=2&&o.getShippingType().equals(ShippingType.SHOP.name())){%>

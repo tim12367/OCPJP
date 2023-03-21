@@ -137,9 +137,9 @@
 						<td>
 							<div class="td_box">
 								<div>
-									定價:<%=df.format(cart.getListPrice(cartItem))%><br>
-									折扣:<%= cart.getDiscountString(cartItem)%><br>
-									特價:<%=df.format(cart.getUnitPrice(cartItem))  %><br>
+<%-- 									定價:<%=df.format(cart.getListPrice(cartItem))%><br> --%>
+<%-- 									折扣:<%= cart.getDiscountString(cartItem)%><br> --%>
+									價格:<%=df.format(cart.getUnitPrice(cartItem))  %><br>
 								</div>
 							</div>
 						</td>

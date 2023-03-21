@@ -174,7 +174,8 @@
 					</td>
 					<td colspan="1">
 						<div class="cart_total_price_box">
-							<div>手續費/運費：<%=df.format(order.getPaymentFee())%>/<%=df.format(order.getShippingFee())%>總金額：<%=df.format(order.getTotalAmountWithFee())%></div>
+							<div>手續費/運費：<%=df.format(order.getPaymentFee())%>/<%=df.format(order.getShippingFee())%><br>
+							總金額：<%=df.format(order.getTotalAmountWithFee())%></div>
 						</div>
 					</td>
 				</tr>
