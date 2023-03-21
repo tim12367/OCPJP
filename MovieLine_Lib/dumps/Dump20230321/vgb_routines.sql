@@ -44,43 +44,6 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
--- Temporary view structure for view `session_seat_view`
---
-
-DROP TABLE IF EXISTS `session_seat_view`;
-/*!50001 DROP VIEW IF EXISTS `session_seat_view`*/;
-SET @saved_cs_client     = @@character_set_client;
-/*!50503 SET character_set_client = utf8mb4 */;
-/*!50001 CREATE VIEW `session_seat_view` AS SELECT 
- 1 AS `date`,
- 1 AS `time`,
- 1 AS `theater`,
- 1 AS `movie_id`,
- 1 AS `stock`,
- 1 AS `name`,
- 1 AS `subtitle`,
- 1 AS `unit_price`,
- 1 AS `description`,
- 1 AS `photo_url`,
- 1 AS `trailer_url`,
- 1 AS `launch_date`,
- 1 AS `category`,
- 1 AS `discount`,
- 1 AS `box_office`,
- 1 AS `director`,
- 1 AS `cast`,
- 1 AS `A`,
- 1 AS `B`,
- 1 AS `C`,
- 1 AS `D`,
- 1 AS `E`,
- 1 AS `F`,
- 1 AS `G`,
- 1 AS `H`,
- 1 AS `I`*/;
-SET character_set_client = @saved_cs_client;
-
---
 -- Temporary view structure for view `orders_orderitems_sessions_movies_view`
 --
 
@@ -135,6 +98,43 @@ SET @saved_cs_client     = @@character_set_client;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `session_seat_view`
+--
+
+DROP TABLE IF EXISTS `session_seat_view`;
+/*!50001 DROP VIEW IF EXISTS `session_seat_view`*/;
+SET @saved_cs_client     = @@character_set_client;
+/*!50503 SET character_set_client = utf8mb4 */;
+/*!50001 CREATE VIEW `session_seat_view` AS SELECT 
+ 1 AS `date`,
+ 1 AS `time`,
+ 1 AS `theater`,
+ 1 AS `movie_id`,
+ 1 AS `stock`,
+ 1 AS `name`,
+ 1 AS `subtitle`,
+ 1 AS `unit_price`,
+ 1 AS `description`,
+ 1 AS `photo_url`,
+ 1 AS `trailer_url`,
+ 1 AS `launch_date`,
+ 1 AS `category`,
+ 1 AS `discount`,
+ 1 AS `box_office`,
+ 1 AS `director`,
+ 1 AS `cast`,
+ 1 AS `A`,
+ 1 AS `B`,
+ 1 AS `C`,
+ 1 AS `D`,
+ 1 AS `E`,
+ 1 AS `F`,
+ 1 AS `G`,
+ 1 AS `H`,
+ 1 AS `I`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Final view structure for view `session_view`
 --
 
@@ -148,24 +148,6 @@ SET character_set_client = @saved_cs_client;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `session_view` AS select `sessions`.`date` AS `date`,`sessions`.`time` AS `time`,`sessions`.`theater` AS `theater`,`sessions`.`stock` AS `stock`,`movies`.`id` AS `id`,`movies`.`name` AS `name`,`movies`.`subtitle` AS `subtitle`,`movies`.`unit_price` AS `unit_price`,`movies`.`description` AS `description`,`movies`.`photo_url` AS `photo_url`,`movies`.`trailer_url` AS `trailer_url`,`movies`.`launch_date` AS `launch_date`,`movies`.`category` AS `category`,`movies`.`discount` AS `discount`,`movies`.`box_office` AS `box_office`,`movies`.`director` AS `director`,`movies`.`cast` AS `cast` from (`sessions` left join `movies` on((`movies`.`id` = `sessions`.`movie_id`))) order by `sessions`.`date`,`sessions`.`time` */;
-/*!50001 SET character_set_client      = @saved_cs_client */;
-/*!50001 SET character_set_results     = @saved_cs_results */;
-/*!50001 SET collation_connection      = @saved_col_connection */;
-
---
--- Final view structure for view `session_seat_view`
---
-
-/*!50001 DROP VIEW IF EXISTS `session_seat_view`*/;
-/*!50001 SET @saved_cs_client          = @@character_set_client */;
-/*!50001 SET @saved_cs_results         = @@character_set_results */;
-/*!50001 SET @saved_col_connection     = @@collation_connection */;
-/*!50001 SET character_set_client      = utf8mb4 */;
-/*!50001 SET character_set_results     = utf8mb4 */;
-/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
-/*!50001 CREATE ALGORITHM=UNDEFINED */
-/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `session_seat_view` AS select `sessions`.`date` AS `date`,`sessions`.`time` AS `time`,`sessions`.`theater` AS `theater`,`sessions`.`movie_id` AS `movie_id`,`sessions`.`stock` AS `stock`,`movies`.`name` AS `name`,`movies`.`subtitle` AS `subtitle`,`movies`.`unit_price` AS `unit_price`,`movies`.`description` AS `description`,`movies`.`photo_url` AS `photo_url`,`movies`.`trailer_url` AS `trailer_url`,`movies`.`launch_date` AS `launch_date`,`movies`.`category` AS `category`,`movies`.`discount` AS `discount`,`movies`.`box_office` AS `box_office`,`movies`.`director` AS `director`,`movies`.`cast` AS `cast`,`seats`.`A` AS `A`,`seats`.`B` AS `B`,`seats`.`C` AS `C`,`seats`.`D` AS `D`,`seats`.`E` AS `E`,`seats`.`F` AS `F`,`seats`.`G` AS `G`,`seats`.`H` AS `H`,`seats`.`I` AS `I` from ((`sessions` left join `movies` on((`sessions`.`movie_id` = `movies`.`id`))) left join `seats` on(((`seats`.`session_date` = `sessions`.`date`) and (`seats`.`session_time` = `sessions`.`time`) and (`seats`.`session_theater` = `sessions`.`theater`)))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -187,6 +169,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `session_seat_view`
+--
+
+/*!50001 DROP VIEW IF EXISTS `session_seat_view`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb4 */;
+/*!50001 SET character_set_results     = utf8mb4 */;
+/*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `session_seat_view` AS select `sessions`.`date` AS `date`,`sessions`.`time` AS `time`,`sessions`.`theater` AS `theater`,`sessions`.`movie_id` AS `movie_id`,`sessions`.`stock` AS `stock`,`movies`.`name` AS `name`,`movies`.`subtitle` AS `subtitle`,`movies`.`unit_price` AS `unit_price`,`movies`.`description` AS `description`,`movies`.`photo_url` AS `photo_url`,`movies`.`trailer_url` AS `trailer_url`,`movies`.`launch_date` AS `launch_date`,`movies`.`category` AS `category`,`movies`.`discount` AS `discount`,`movies`.`box_office` AS `box_office`,`movies`.`director` AS `director`,`movies`.`cast` AS `cast`,`seats`.`A` AS `A`,`seats`.`B` AS `B`,`seats`.`C` AS `C`,`seats`.`D` AS `D`,`seats`.`E` AS `E`,`seats`.`F` AS `F`,`seats`.`G` AS `G`,`seats`.`H` AS `H`,`seats`.`I` AS `I` from ((`sessions` left join `movies` on((`sessions`.`movie_id` = `movies`.`id`))) left join `seats` on(((`seats`.`session_date` = `sessions`.`date`) and (`seats`.`session_time` = `sessions`.`time`) and (`seats`.`session_theater` = `sessions`.`theater`)))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -197,4 +197,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-03-16 20:51:35
+-- Dump completed on 2023-03-21 12:02:57
