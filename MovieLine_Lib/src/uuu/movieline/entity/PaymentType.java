@@ -1,8 +1,8 @@
 package uuu.movieline.entity;
 
 public enum PaymentType {
-	SHOP(0, "現場付款"),
-	CARD(0, "信用卡");
+	CARD(0, "信用卡"),
+	SHOP(0, "現場付款");
 	
 	private final double fee;
 	private final String description;

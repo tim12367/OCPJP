@@ -86,7 +86,7 @@ public class ShoppingCart {
 				seatListString+=(seatString+",");
 			}
 		}
-		if(cartMap.get(item).getSeatList().size()>1) {
+		if(cartMap.get(item).getSeatList().size()>0) {
 			return seatListString.substring(0,seatListString.length()-1);			
 		}
 		return seatListString;

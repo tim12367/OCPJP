@@ -5,6 +5,7 @@ import uuu.movieline.entity.MovieSession;
 import uuu.movieline.entity.Order;
 import uuu.movieline.entity.OrderItem;
 import uuu.movieline.entity.Outlet;
+import uuu.movieline.entity.PaymentType;
 import uuu.movieline.entity.Seat;
 import uuu.movieline.exception.MLException;
 import uuu.movieline.exception.MLStockSortageException;
@@ -380,4 +381,25 @@ class OrdersDAO {
 		return list;
 	}
 
+	   private static final String UPDATE_STATUS_TO_PAID = 
+			   "UPDATE orders"
+			   + " SET status=2"   //狀態設定為已付款
+			   + ", payment_note=? WHERE customer_id=? AND id=?"
+	           + " AND status=0" + " AND payment_type='" + PaymentType.CARD.name() + "'";
+	   void updateOrderStatusToPAID(String memberId, int orderId, String paymentNote) throws MLException {
+
+	        try (Connection connection = MySQLConnection.getConnection(); //2. 建立連線
+	             PreparedStatement pstmt = connection.prepareStatement(UPDATE_STATUS_TO_PAID) //3. 準備指令
+	        ) {
+	            //3.1 傳入?的值
+	            pstmt.setString(1, paymentNote);
+	            pstmt.setString(2, memberId);
+	            pstmt.setInt(3, orderId);
+	            //4. 執行指令
+	            pstmt.executeUpdate();
+	        } catch (SQLException ex) {
+	            System.out.println("修改信用卡付款入帳狀態失敗-" + ex);
+	            throw new MLException("修改信用卡付款入帳狀態失敗!", ex);
+	        }
+	    }
 }
