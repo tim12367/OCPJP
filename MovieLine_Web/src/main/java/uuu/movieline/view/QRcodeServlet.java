@@ -7,15 +7,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
-
-import uuu.movieline.entity.Customer;
 
 /**
  * Servlet implementation class QRcodeServlet
@@ -43,7 +39,7 @@ public class QRcodeServlet extends HttpServlet {
 		String seatString = request.getParameter("seat");
 		String data = movieNameString+"_"+dateString+"_"+timeString+"_"+theaterString+"_"+seatString;
 //		System.out.println(data);//for test
-
+		response.setContentType("image/png");
 		try {
 			BitMatrix matrix = new MultiFormatWriter()
 					.encode(new String(data.getBytes("utf-8"),"ISO-8859-1") , BarcodeFormat.QR_CODE, 500, 500);
